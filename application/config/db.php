@@ -1,10 +1,8 @@
 <?php
-// dd($_SERVER);
+
 return [
-	'host' => $_SERVER['SERVER_ADDR'],
-
-
-	'name' => 'leosnew',
-	'user' => 'LeosNew',
-	'password' => 'LeosNew',
+	'host' => 'localhost',
+	'name' => 'Magazin',
+	'user' => 'Magazin',
+	'password' => 'Password)',
 ];

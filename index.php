@@ -18,14 +18,14 @@ function dd($str)
 	echo '<pre>';
 	var_dump($str);
 	echo '</pre>';
-	exit;
+	//exit;
 }
-function ddd($str)
+function debug($str)
 {
 	echo '<pre>';
 	var_dump($str);
 	echo '</pre>';
-	//exit;
+	exit;
 }
 
 function true_array_rand($array = [], $num = 1)
@@ -49,13 +49,6 @@ spl_autoload_register(function ($class) {
 		require $path;
 	}
 });
-/**
- * @param string full classname
- * @return string min classname
- */
-function getClassName($class)
-{
-	return substr(strrchr($class, '\\'), 1);
-}
+
 $router = new Router;
 $router->run();

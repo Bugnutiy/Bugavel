@@ -1,78 +1,22 @@
-$xs: 0;
-$sm: 576px;
-$md: 768px;
-$lg: 992px;
-$xl: 1200px;
+@import'icons/icons';
 
-body {
-    background: rgb(233, 233, 233);
-}
+$danger: #f44336;
 
-$background: #494949;
-$border_color: #303030;
-
-.left {
-    background: $background;
-
-    .logo {
-        img {
-            filter: invert(1);
-        }
+table {
+    tr[onclick] {
+        cursor: pointer;
     }
 
-    * {
-        color: #fff;
-    }
+    .danger {
+        background-color: $danger;
+        color: #FFF;
 
-    #lnav {
-        a {
-            line-height: 2;
-            text-decoration: none;
-            color: #fff;
-            background: rgba(#fff, 0.1);
-            border-radius: 10px;
-            margin-bottom: 10px;
-
-            &:hover {
-                background: $border_color;
-            }
-
-            &.active {
-                background-color: $border_color;
-            }
-        }
-    }
-
-    @media(min-width: $md) {
-        min-height: 100vh;
-
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        z-index: 1030;
-
-        #lnav {
-            a {
-                margin-bottom: 0;
-                border-radius: 0;
-                background: transparent;
-                border-top: 1px solid $border_color;
-
-                &:last-child {
-                    border-bottom: 1px solid $border_color;
-                }
-            }
-        }
     }
 }
 
-
-
-.dd {
-    background-color: rgba(#ff0000, 0.2) !important;
-}
-
-.ddd {
-    background-color: rgba(#0000ff, 0.2) !important;
+.sales_acc {
+    .order-1 {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
 }

@@ -3,19 +3,14 @@
 namespace application\core;
 
 use application\core\View;
-use application\core\Model;
 
-class Controller
+abstract class Controller
 {
 	/**
-	 * @var Model|AdminModel
+	 * @see Model
 	 */
 	public $model;
-
 	public $route;
-	/**
-	 * @var View
-	 */
 	public $view;
 	public $acl;
 
@@ -28,8 +23,7 @@ class Controller
 		}
 		$this->view = new View($route);
 		//$this->before();//вызов функции смены шаблона контроллера
-		// dd($route['controller']);
-		$this->model = $this->loadModel($route['controller'] . 'Model');
+		$this->model = $this->loadModel($route['controller']);
 	}
 
 	public function loadModel($name)

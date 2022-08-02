@@ -10,12 +10,6 @@ class View
 	public $default_vars;
 	public $layout = 'default';
 
-	/**
-	 * __construct
-	 *
-	 * @param array $route
-	 * @param array $default_vars
-	 */
 	public function __construct($route, $default_vars = [])
 	{
 		$this->route = $route;
@@ -24,14 +18,6 @@ class View
 		//debug($this->path);
 	}
 
-	/**
-	 * Отображение страницы
-	 *
-	 * @param string $title
-	 * @param array $vars
-	 * 
-	 * @return void
-	 */
 	public function render($title, $vars = [])
 	{
 		extract($this->default_vars);
@@ -48,26 +34,12 @@ class View
 		}
 	}
 
-	/**
-	 * redirect
-	 *
-	 * @param string $url
-	 * 
-	 * @return void
-	 */
 	public static function redirect($url)
 	{
 		header('location: ' . $url);
 		exit;
 	}
 
-	/**
-	 * Отображение ошибок
-	 *
-	 * @param int|string $code
-	 * 
-	 * @return void
-	 */
 	public static function errorCode($code)
 	{
 		http_response_code($code);

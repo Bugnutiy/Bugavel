@@ -3,80 +3,38 @@
 namespace application\core;
 
 use application\lib\Db;
-use application\lib\Sber\Sber;
-use application\lib\User\User;
-use application\lib\Shop\Shop;
+//use application\lib\Yk;
 
-/**
- * Родитель всех моделей, в нём подключаются библиотеки, используемые везде
- */
-class Model
+abstract class Model
 {
-	/**
-	 * @var Db
-	 */
 	public $db;
-
-	/**
-	 * @var Sber
-	 */
-	public $sber;
-
-	/**
-	 * @var User
-	 */
-	public $user;
-
-	/**
-	 * @var Shop
-	 */
-	public $shop;
-
-	public function __construct()
-	{
-		$this->db = new Db;
-		$this->sber = new Sber($this->db);
-		$this->user = new User($this->db);
-		$this->shop = new Shop($this->db);
-		// dd($_COOKIE);
-		// ddd($this->user);
-		// dd($_SERVER);
-	}
-
-	/**
-	 * Сохранятор файлов
-	 * @param int $limit_size Максимальный размер файла
-	 * @param array $valid_format Массив поддерживаемых форматов
-	 * @param string $path_file Путь сохранения
-	 * @param array $name имена файлов
-	 */
+	//public $yk;
 	public function setFiles($limit_size, $valid_format, $path_file, $name)
 	{
-		// ddd($limit_size);
 		$arr['err'] = [];
 		$error = "";
-		if (!empty(current($_FILES)['name'][0])) {
+		if (!empty($_FILES['upload_file']['name'][0])) {
 
-			foreach (current($_FILES)['name'] as $key => $fname) {
+			foreach ($_FILES['upload_file']['name'] as $key => $fname) {
 				// валидация размера файла
-				if (current($_FILES)['size'][$key] > $limit_size) {
-					$arr['err'][] = "Размер файла \"$fname\" превышает допустимый!";
+				if ($_FILES['upload_file']['size'][$key] > $limit_size) {
+					$arr['err'] = "Размер файла \"$fname\" превышает допустимый!";
 				}
 
 				// валидация формата файла
-				//$format = explode(".",current($_FILES)["name"]);
-				$format[$key] = strtolower(pathinfo(current($_FILES)["name"][$key], PATHINFO_EXTENSION));
+				//$format = explode(".",$_FILES["upload_file"]["name"]);
+				$format[$key] = strtolower(pathinfo($_FILES["upload_file"]["name"][$key], PATHINFO_EXTENSION));
 				if (!in_array($format[$key], $valid_format)) {
-					$arr['err'][] = "Формат файла \"$fname\" недопустимый!";
+					$arr['err'] = "Формат файла \"$fname\" недопустимый!";
 				}
 
 				// если не было ошибок
 				if (empty($arr['err'])) {
 					// проверяем загружен ли файл
-					if (is_uploaded_file(current($_FILES)["tmp_name"][$key])) {
+					if (is_uploaded_file($_FILES["upload_file"]["tmp_name"][$key])) {
 						// сохраняем файл
 						$arr['fname'][] = $name[$key] . '.' . $format[$key];
-						move_uploaded_file(current($_FILES)['tmp_name'][$key], $path_file . $name[$key] . "." . $format[$key]);
+						move_uploaded_file($_FILES['upload_file']['tmp_name'][$key], $path_file . $name[$key] . "." . $format[$key]);
 					} else {
 						// Если файл не загрузился
 						$arr['err'][] = "Ошибка загрузки $fname!";
@@ -92,4 +50,22 @@ class Model
 		}
 		return $arr;
 	}
+	public function __construct()
+	{
+		$this->db = new Db;
+		//$this->yk = new Yk;
+	}
 }
+
+/**
+ * 
+ */
+/*abstract class ModelYk
+{
+	public $yk;
+	public function __construct()
+	{
+		$this->Model();
+		$this->yk = new Yk;
+	}
+}//*/
