@@ -56,6 +56,8 @@ abstract class General
     public function Update($arr)
     {
         $err = [];
+        // dd($this->db->LastInsertId());
+
         // dd($arr);
         if (empty($arr)) return $err[] = 'Запрос оказался пуст';
         if (isset($arr['images'])) {
@@ -65,10 +67,10 @@ abstract class General
         if (!empty($arr['id'])) {
             $id = $arr['id'];
             if (isset($arr['images'])) {
-                $images = json_decode(current($this->getById($id))['images'], 1);
+                $exists_images = json_decode(current($this->getById($id))['images'], 1);
                 //dd($images);
-                if (!empty($images)) {
-                    foreach ($images as $image) {
+                if (!empty($exists_images)) {
+                    foreach ($exists_images as $image) {
                         if (file_exists($image)) {
                             unlink($image);
                         }
@@ -84,6 +86,7 @@ abstract class General
                 $err[] = 'Создать запись в БД не удалось';
             }
         }
+        // dd($this->db->LastInsertId());
 
         return $err;
     }

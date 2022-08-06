@@ -1,6 +1,8 @@
 <?php ob_start() ?>
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link href="" rel="stylesheet">
+<link rel="stylesheet" href="/public/styles/htmleditor/quill.snow.css">
 <?php $head = ob_get_clean(); ?>
+
 <?php if (isset($err)) : ?>
     <?php foreach ($err as $errstr) : ?>
         <div class="row justify-content-center">
@@ -10,6 +12,7 @@
         </div>
     <?php endforeach ?>
 <?php endif ?>
+
 <form method="post" action="/admin/categories/edit" enctype="multipart/form-data">
     <div class="row justify-content-center">
 
@@ -35,6 +38,13 @@
                 <input required class="form-control" type="text" name="name_en" placeholder="Категория" aria-label="Имя" aria-describedby="name" value="<?= isset($category) ? current($category)['name_en'] : '' ?>">
             </div>
 
+            <div class="input- mb-2">
+                <div class="mb-3">
+                  <label for="product_video" class="form-label">Видео</label>
+                  <textarea class="form-control" name="videos" id="product_video" rows="3" placeholder="код iframe для вставки видео"><?= isset($category) ? current($category)['videos'] : '' ?></textarea>
+                </div>
+            </div>
+
             <input type="hidden" name="description">
             <div class="card mb-2">
                 <div class="card-header">
@@ -42,8 +52,6 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="d-block" id="description">
-
-
                     </div>
                 </div>
             </div>
@@ -55,7 +63,6 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="d-block" id="description_en">
-
                     </div>
                 </div>
             </div>
@@ -79,7 +86,7 @@
 
 </form>
 <?php ob_start(); ?>
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="/public/scripts/htmleditor/quill.js"></script>
 <script>
     let quill1 = new Quill('#description', {
 
@@ -90,7 +97,7 @@
     let quill2 = new Quill('#description_en', {
 
         theme: 'snow',
-        placeholder: 'Описание'
+        placeholder: 'Description'
     });
 
 

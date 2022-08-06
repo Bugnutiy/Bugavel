@@ -100,7 +100,7 @@
             <?php endif ?>
             <div class="">
                 <label for="images">Изображения для товара</label>
-                <input type="file" name="images[]" <?= (isset($product) and !isset($copy)) ? '' : "required" ?> multiple>
+                <input type="file" name="images[]" <?= (isset($product) and !isset($copy)) ? '' : "required" ?> multiple='1'>
             </div>
 
             <button type="submit" class="btn btn-primary mb-5">Подтвердить</button>

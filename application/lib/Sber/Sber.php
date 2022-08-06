@@ -26,10 +26,10 @@ class Sber
     public function __construct(&$db)
     {
         $this->db = &$db;
-        if (!$this->db->Exists($this->tname)) {
-            $this->create_table();
-        }
-        $this->config = current($this->db->fetAll("SELECT * FROM `$this->tname`"));
+        // if (!$this->db->Exists($this->tname)) {
+        //     $this->create_table();
+        // }
+        // $this->config = current($this->db->fetAll("SELECT * FROM `$this->tname`"));
     }
 
     protected function create_table()

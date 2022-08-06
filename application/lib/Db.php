@@ -3,6 +3,7 @@
 namespace application\lib;
 
 use PDO;
+use PDOStatement;
 
 class Db
 {
@@ -21,6 +22,7 @@ class Db
 
 	public function query($sql, $params = [])
 	{
+		// dd($sql);
 		//if($sql!="SET NAMES 'utf8'")
 		//$this->query("SET NAMES 'utf8'");
 		//$query = $this->db->query($sql); //prepare заменил query
@@ -143,5 +145,19 @@ class Db
 	public function Delete($tname, $sign = '', $params = [])
 	{
 		return $this->query("DELETE FROM `$tname` WHERE ($sign)", $params);
+	}
+	/**
+	 * @param string $tname Имя таблицы
+	 * @param array  $fields Настройки поля таблицы ['поле'=>['параметр'=>'значение']]
+	 * 
+	 * @return PDOStatement
+	 */
+	public function NewTable($tname, $fields)
+	{
+		# code...
+	}
+	public function LastInsertId()
+	{
+		return $this->db->lastInsertId();
 	}
 }

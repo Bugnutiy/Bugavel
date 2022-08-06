@@ -126,13 +126,11 @@ class AdminController extends Controller
 		$vars = ['bcr' => $bcr];
 		if (!empty($_POST)) {
 			if (!empty(current($_FILES)['name'][0])) {
-
-
 				$names = [];
 				foreach (current($_FILES)['name'] as $name) {
 					$names[] = $_POST['name_en'] . ' ' . uniqid();
 				}
-				$file = $this->model->setFiles(20 * (2 ** 23), ['png'], $fpath, $names);
+				$file = $this->model->setFiles(20 * (2 ** 23), ['png','jpg'], $fpath, $names);
 			}
 			if (!empty($file['err'])) {
 				$vars = array_merge($vars, ['err' => $file['err']]);
@@ -140,8 +138,8 @@ class AdminController extends Controller
 
 				if (!empty($file)) {
 					foreach ($file['fname'] as $fname) {
+						$_POST['images'][] = $fpath . $fname;
 					}
-					$_POST['images'][] = $fpath . $fname;
 				}
 
 				$err = $this->model->shop->products->Update($_POST);

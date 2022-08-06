@@ -5,6 +5,6 @@ return [
 
 
 	'name' => 'leosnew',
-	'user' => 'LeosNew',
-	'password' => 'LeosNew',
+	'user' => 'leosnew',
+	'password' => 'poilka170196',
 ];

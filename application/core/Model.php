@@ -90,6 +90,7 @@ class Model
 		} else if ($_FILES) {
 			$arr['err'] = 0;
 		}
+		// dd($arr);
 		return $arr;
 	}
 }
