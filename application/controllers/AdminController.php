@@ -46,7 +46,7 @@ class AdminController extends Controller
 				foreach (current($_FILES)['name'] as $name) {
 					$names[] = $_POST['name_en'] . ' ' . uniqid();
 				}
-				$file = $this->model->setFiles(20 * (2 ** 23), ['png'], $fpath, $names);
+				$file = $this->model->setFiles(20 * (2 ** 23), ['png','jpg'], $fpath, $names);
 			}
 			if (!empty($file['err'])) {
 				$vars = array_merge($vars, ['err' => $file['err']]);

@@ -72,7 +72,7 @@ class Db
 	/**
 	 * Добавить запись в таблицу
 	 * @param string $tname имя таблицы
-	 * @param array $fields свойство=>значение
+	 * @param array $fields поле=>значение
 	 * @return 1|0 Успешность операции
 	 */
 	public function insert($tname, $fields)
@@ -84,9 +84,9 @@ class Db
 		foreach ($fields as $field => $value) {
 			$fieldstr .= '`' . $field . '`, ';
 
-			$valuestr .= ':' . $i . ', ';
+			$valuestr .= ':f' . $i . ', ';
 
-			$valuearr[':' . $i] = $value;
+			$valuearr[':f' . $i] = $value;
 			$i++;
 		}
 		$fieldstr = substr($fieldstr, 0, -2);
@@ -110,8 +110,8 @@ class Db
 		$valuearr = [];
 		$i = 0;
 		foreach ($fields as $field => $value) {
-			$set .= "`$field` = :$i, ";
-			$valuearr[':' . $i] = $value;
+			$set .= "`$field` = :f$i, ";
+			$valuearr[':f' . $i] = $value;
 			$i++;
 		}
 		$set = substr($set, 0, -2);
