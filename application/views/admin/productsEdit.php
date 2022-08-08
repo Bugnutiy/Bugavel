@@ -12,7 +12,7 @@
     <?php endforeach ?>
 <?php endif ?>
 
-<form method="post" action="/admin/products/edit" enctype="multipart/form-data">
+<form method="post" action="/admin/products/edit<?=isset($_GET['id'])?'?id='.$_GET['id']:''?><?=isset($_GET['copy'])?'&copy=1':''?>" enctype="multipart/form-data">
     <div class="row justify-content-center">
 
         <h2><?= $header ?></h2>

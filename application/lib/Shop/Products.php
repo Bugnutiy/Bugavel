@@ -41,6 +41,7 @@ class Products extends General
             id
             product_id
             name
+            name_en
             price
             price_en
             quantity
@@ -65,8 +66,26 @@ class Products extends General
 
         if (!empty($arr['id'])) {
             $id = $arr['id'];
+            $exist = current($this->getById($id));
+            unset($arr['id']);
+            // ddd($exist);
+            // ddd("----------------------------");
+            // dd($arr);
+            $matcher = [];
+            foreach ($arr as $key => $value) {
+                if (isset($exist[$key]))
+                    $matcher[$key] = $exist[$key];
+                else {
+                    $err[] = 'В таблице ' . $this->table . ' не настроены поля под запрос';
+                    return $err;
+                }
+            }
+            if ($matcher == $arr) {
+                $err[] = 'Поменяйте хотя бы одно значение';
+                return $err;
+            }
             if (isset($arr['images'])) {
-                $exists_images = json_decode(current($this->getById($id))['images'], 1);
+                $exists_images = json_decode($exist['images'], 1);
                 //dd($images);
                 if (!empty($exists_images)) {
                     foreach ($exists_images as $image) {
@@ -76,46 +95,47 @@ class Products extends General
                     }
                 }
             }
-            unset($arr['id']);
             if (!$this->db->update($this->table, $arr, "`id` = $id")) {
                 $err[] = 'Обновить запись в БД не удалось';
             }
         } else {
-            // dd($arr);
-            //  arr
-            //      name            t
-            //      name_en         t
-            //      category_id     t
-            //      description     t
-            //      description_en  t
-            //      price           yt  average_price           ///
-            //      price_en        yt  average_price_en        ///
-            //      quantity        y                           ///
-            //      images          t
-            //  property
-            //      id
-            //      product_id                                  ///
-            //      name                                        ///
-            //      price                                       /// 
-            //      price_en                                    ///
-            //      quantity                                    ///
-            //  product
-            //      id
-            //      category_id
-            //      name
-            //      name_en
-            //      description
-            //      description_en
-            //      images
-            //      min_price
-            //      min_price_en
-            //      max_price
-            //      max_price_en
-            //      average_price
-            //      average_price_en
+            /* dd($arr);
+              arr
+                  name            t
+                  name_en         t
+                  category_id     t
+                  description     t
+                  description_en  t
+                  price           yt  average_price           ///
+                  price_en        yt  average_price_en        ///
+                  quantity        y                           ///
+                  images          t
+              property
+                  id
+                  product_id                                  ///
+                  name                                        ///
+                  price                                       /// 
+                  price_en                                    ///
+                  quantity                                    ///
+              product
+                  id
+                  category_id
+                  name
+                  name_en
+                  description
+                  description_en
+                  images
+                  min_price
+                  min_price_en
+                  max_price
+                  max_price_en
+                  average_price
+                  average_price_en 
+            */
             $property = [
                 'product_id' => "0",
                 'name' => $arr['name'],
+                'name_en' => $arr['name_en'],
                 'price' => $arr['price'],
                 'price_en' => $arr['price_en'],
                 'quantity' => $arr['quantity']
@@ -239,7 +259,7 @@ class Products extends General
             // dd($product_id_properties);
             if (!$this->Update($fields))
                 // dd($err[] = "Не обновились цены товара с ID = $product_id");
-            unset($product_id_properties[$product_id]);
+                unset($product_id_properties[$product_id]);
         }
         return $err;
     }

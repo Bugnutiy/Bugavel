@@ -144,9 +144,10 @@ class AdminController extends Controller
 				$err = $this->model->shop->products->Update($_POST);
 				if (empty($err)) {
 					$this->view->redirect('/admin/products');
-				} else $vars = ['err' => $err];
+				} else $vars = array_merge($vars, ['err' => $err]);
 			}
 		}
+		// dd($vars);
 
 		if (isset($_GET['id']) and !isset($_GET['copy'])) {
 			$vars = array_merge($vars,  [
@@ -234,7 +235,7 @@ class AdminController extends Controller
 				$this->view->redirect('/admin/products/properties?product_id=' . $_GET['product_id']);
 			} else {
 				// dd($err);
-				$vars = ['err' => $err];
+				$vars = array_merge($vars,['err' => $err]);
 			};
 		}
 
@@ -273,8 +274,6 @@ class AdminController extends Controller
 	public function propertiesDeleteAction()
 	{
 		$bcr = ['Товары' => '/admin/products', 'Вариации' => '/admin/products/properties?product_id=' . $_GET['product_id'], 'Удалить'];
-
-
 		if (empty($_POST['confirm'])) {
 			$vars = [
 				'bcr' => $bcr,

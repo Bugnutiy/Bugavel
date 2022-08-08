@@ -60,7 +60,7 @@ abstract class General
         // dd($arr);
         $err = [];
         // dd($this->db->LastInsertId());
-        $exists_images = [];
+        // $exists_images = [];
         // dd($arr);
         if (empty($arr)) {
             $err[] = 'Запрос оказался пуст';
@@ -75,10 +75,6 @@ abstract class General
             unset($arr['id']);
             // dd($id);
             $exist = current($this->getById($id));
-
-            if (isset($arr['images'])) {
-                $exists_images = json_decode($exist['images'], 1);
-            }
             // dd($arr);
             // ddd($exist);
             // ddd($arr);
@@ -87,25 +83,26 @@ abstract class General
                 if (isset($exist[$key]))
                     $matcher[$key] = $exist[$key];
                 else {
-                    $err[] = 'В таблице ' . $this->table . ' не созданы столбцы с такими именами';
+                    $err[] = 'В таблице ' . $this->table . ' не настроены поля под запрос';
                     return $err;
                 }
             }
             if ($matcher == $arr) {
-                // $err[] = 'Поменяйте хотя бы одно значение';
-                // dd($err);
                 $err[] = 'Поменяйте хотя бы одно значение';
                 return $err;
             }
             // dd($matcher==$arr);
-
-            // if (!empty($exists_images)) {
-            foreach ($exists_images as $image) {
-                if (file_exists($image)) {
-                    unlink($image);
+            if (isset($arr['images'])) {
+                $exists_images = json_decode($exist['images'], 1);
+                if (!empty($exists_images)) {
+                    foreach ($exists_images as $image) {
+                        if (file_exists($image)) {
+                            unlink($image);
+                        }
+                    }
                 }
             }
-            // }
+            
             if (!$this->db->update($this->table, $arr, "`id` = $id")) {
                 $err[] = 'Обновить запись в таблице ' . $this->table . ' не удалось';
             }

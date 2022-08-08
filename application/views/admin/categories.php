@@ -20,9 +20,9 @@
                                 <td><?= $id ?></td>
                                 <td><?= $node['name'] ?></td>
                                 <td>
-                                    <a href="/admin/categories/edit?id=<?= $id ?>">Редактировать</a>/
-                                    <a href="/admin/categories/delete?id=<?= $id ?>">Удалить</a>/
-                                    <a href="/admin/categories/copy?id=<?= $id ?>&copy=1">Дублировать</a>
+                                    <a class="btn btn-info" href="/admin/categories/edit?id=<?= $id ?>">Редактировать</a>
+                                    <a class="btn btn-danger" href="/admin/categories/delete?id=<?= $id ?>">Удалить</a>
+                                    <a class="btn btn-warning" href="/admin/categories/copy?id=<?= $id ?>&copy=1">Дублировать</a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
