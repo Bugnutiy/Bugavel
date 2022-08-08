@@ -1,0 +1,30 @@
+footer{
+  // padding-top: 50px;
+  // padding-bottom: 50px;
+  background-color: $c-dark-bs;
+  color: $c-light-main;
+  
+  
+  a{
+    text-decoration: none;
+    color: $c-light-main;
+    transition: .5s;
+  }
+  a:hover{
+    color: $c-white;
+  }
+  .icon:hover{
+    background-color: $c-white;
+  }
+  p{
+    font-size: 1em;
+    padding: 0;
+    // margin-bottom: 7px;
+    font-family: "Raleway-Regular";
+  }
+  // .persona{
+  //   .contacts{
+  //     // margin-top: 10px !important;
+  //   }
+  // }
+}

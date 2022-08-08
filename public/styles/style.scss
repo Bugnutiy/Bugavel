@@ -1,0 +1,58 @@
+@import "tools/_fonts.scss";
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
+$c-light-main: #cecece;
+$c-bg-light-main: #f5f5f5;
+$c-white: #fff;
+
+$c-dark-main: #32363a;
+$c-dark-bs: #212529;
+
+$c-red: #a30a0a;
+
+body {
+  background: $c-bg-light-main;
+  color: $c-dark-main;
+  font-size: 1rem;
+}
+
+.btn{
+  border-radius: 40px 40px 40px 40px;
+  h1,h2,h3,h4,h5,h6{
+    padding: 0px;
+    // line-height: 1;
+    margin: 0;
+  }
+}
+
+//general
+@import "general/_description.scss";
+@import "general/_big_logo.scss";
+@import "general/_vh_wrapper.scss";
+
+
+// Главная страница .............................
+@import "index/_index_menu.scss";
+@import "index/_index_header.scss";
+@import "index/_index_categories.scss";
+@import "index/_footer.scss";
+
+// Категории.....................................
+@import "category/_category_header.scss";
+@import "category/_category_goods.scss";
+
+// Страница товара
+@import "product/_product_header.scss";
+@import "product/_product_description.scss";
+
+// корзина
+@import "cart_page/_cart_page.scss";
+
+@import "tools/_test.scss";
+@import "tools/_tools.scss";
+
+

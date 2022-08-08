@@ -1,0 +1,109 @@
+.index_menu {
+  // color: $c-light-main;
+  background: $c-dark-bs;
+  transition: background .2s ease;
+
+  &:hover {
+    background: #101214;
+  }
+
+  .navbar-brand {
+
+    .mail,
+    .bi {
+      color: $c-light-main;
+      cursor: pointer;
+      transition: color .2s ease-in-out;
+
+      &:hover {
+        color: $c-white;
+      }
+    }
+  }
+
+  .small_logo {
+    .logo {
+      display: block;
+      height: 25px;
+      width: 140px;
+      background-color: $c-light-main;
+      mask-repeat: no-repeat;
+      mask-image: url("/public/images/diesel_bee_curves.svg");
+    }
+  }
+
+  .navbar-toggler {
+    span {
+      transition: color .2s ease-in-out;
+      color: $c-light-main;
+    }
+
+    &:hover {
+      span {
+        color: $c-white;
+      }
+    }
+  }
+
+  .navbar-nav {
+    .nav-item .nav-link {
+      transition: color .2s ease-in-out;
+      color: $c-light-main;
+
+      &:hover {
+        color: $c-white;
+      }
+    }
+
+    .nav-item.active .nav-link {
+      color: $c-white;
+    }
+  }
+
+  .right {
+    .bi {
+      transition: color .2s ease-in-out;
+      color: $c-light-main;
+      &:hover{
+        color: $c-white;
+      }
+    }
+    .cart{
+      .quantity {
+        font-size: 0.6em;
+        position: absolute;
+        display: inline-block;
+        background: $c-red;
+        color: $c-light-main;
+        text-align: center;
+        border-radius: 50%;
+        padding: 0.02em 0;
+        // vertical-align: middle;
+        vertical-align: 0;
+        line-height: 1.25;
+        width: 1.4em;
+        height: 1.4em;
+        top: -0.3em;
+        left: 1.8em;
+      }
+    }
+    .language {
+      // font-size: 1.5em;
+      text-align: center;
+      align-self: center;
+
+      .dropdown-menu {
+        .dropdown-item {
+          cursor: pointer;
+
+          img {
+            vertical-align: 0;
+            margin-right: 0.5em;
+          }
+        }
+      }
+    }
+  }
+
+
+}

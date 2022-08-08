@@ -1,0 +1,11 @@
+.description_block > .row > .col {
+  // background-color: $c-white;
+  // border-radius: 1.4em;
+  // margin-bottom: 1em;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 5px #ddd;
+  text-align: justify;
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
