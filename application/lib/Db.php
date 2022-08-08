@@ -2,6 +2,7 @@
 
 namespace application\lib;
 
+use application\core\View;
 use PDO;
 use PDOStatement;
 
@@ -17,7 +18,12 @@ class Db
 	{
 		$config = require 'application/config/db.php';
 		$this->config = $config;
-		$this->db = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['name'] . ';charset=utf8', $config['user'], $config['password']);
+		try {
+			$this->db = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['name'] . ';charset=utf8', $config['user'], $config['password']);
+		} catch (\Exception $th) {
+			// throw $th;
+			View::errorCode(502);
+		}
 	}
 
 	public function query($sql, $params = [])

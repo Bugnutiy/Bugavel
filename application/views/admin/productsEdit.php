@@ -1,5 +1,5 @@
 <?php ob_start() ?>
-<link href="/public/styles/htmleditor/quill.snow.css" rel="stylesheet">
+<link href="/public/admin/styles/htmleditor/quill.snow.css" rel="stylesheet">
 <?php $head = ob_get_clean(); ?>
 
 <?php if (isset($err)) : ?>
@@ -111,7 +111,7 @@
 
 </form>
 <?php ob_start(); ?>
-<script src="/public/scripts/htmleditor/quill.js"></script>
+<script src="/public/admin/scripts/htmleditor/quill.js"></script>
 <script>
     let quill1 = new Quill('#description', {
 

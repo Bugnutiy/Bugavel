@@ -9,7 +9,7 @@
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="/public/styles/admin.css">
+    <link rel="stylesheet" href="/public/admin/styles/admin.css">
     <?= isset($head) ? $head : '' ?>
 </head>
 
@@ -19,7 +19,7 @@
             <div class="d-none d-md-block col-12 col-md-4 col-lg-3 col-xl-2"></div>
             <div class="col-12 col-md-4 col-lg-3 col-xl-2 left">
                 <div class="row logo">
-                    <div class="col-12 p-md-3"><img src="/public/images/logo/logo.png" class="img-fluid" alt=""></div>
+                    <div class="col-12 p-md-3"><img src="/public/admin/images/logo/logo.png" class="img-fluid" alt=""></div>
                 </div>
                 <div class="row justify-content-end">
                     <div class="col-auto pb-2">
