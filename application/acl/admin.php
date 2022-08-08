@@ -2,6 +2,7 @@
 
 return
     [
+        // Todo all to admin
         'all' => [
             'test',
             'main',
@@ -11,6 +12,9 @@ return
             'products',
             'productsEdit',
             'productsDelete',
+            'properties',
+            'propertiesEdit',
+            'propertiesDelete',
             'sber',
         ],
 

@@ -46,7 +46,7 @@ class AdminController extends Controller
 				foreach (current($_FILES)['name'] as $name) {
 					$names[] = $_POST['name_en'] . ' ' . uniqid();
 				}
-				$file = $this->model->setFiles(20 * (2 ** 23), ['png','jpg'], $fpath, $names);
+				$file = $this->model->setFiles(20 * (2 ** 23), ['png', 'jpg'], $fpath, $names);
 			}
 			if (!empty($file['err'])) {
 				$vars = array_merge($vars, ['err' => $file['err']]);
@@ -110,7 +110,6 @@ class AdminController extends Controller
 	public function productsAction()
 	{
 		$bcr = ['Товары'];
-
 		$vars = [
 			'bcr' => $bcr,
 			'products' => $this->model->shop->products->getAll(),
@@ -130,7 +129,7 @@ class AdminController extends Controller
 				foreach (current($_FILES)['name'] as $name) {
 					$names[] = $_POST['name_en'] . ' ' . uniqid();
 				}
-				$file = $this->model->setFiles(20 * (2 ** 23), ['png','jpg'], $fpath, $names);
+				$file = $this->model->setFiles(20 * (2 ** 23), ['png', 'jpg'], $fpath, $names);
 			}
 			if (!empty($file['err'])) {
 				$vars = array_merge($vars, ['err' => $file['err']]);
@@ -151,8 +150,9 @@ class AdminController extends Controller
 
 		if (isset($_GET['id']) and !isset($_GET['copy'])) {
 			$vars = array_merge($vars,  [
-				'categories' => $this->model->shop->categories->getAll(),
 				'header' => 'Редактировать',
+				//////////////////////////////<<<<< Редактировать
+				'categories' => $this->model->shop->categories->getAll(),
 				'product' => $this->model->shop->products->getById($_GET['id']),
 			]);
 			// dd($vars);
@@ -160,16 +160,16 @@ class AdminController extends Controller
 		} else if (empty($_GET)) {
 
 			$vars = array_merge($vars, [
-				'categories' => $this->model->shop->categories->getAll(),
-
 				'header' => 'Новый товар',
+				///////////////////////////////////////<<<<< Новый
+				'categories' => $this->model->shop->categories->getAll(),
 			]);
 			$this->view->render('Новый товар', $vars);
 		} else {
 			$vars = array_merge($vars, [
-				'categories' => $this->model->shop->categories->getAll(),
-
 				'header' => 'Дублировать товар',
+				'categories' => $this->model->shop->categories->getAll(),
+				///////////////////////////////<<<<<<< Дублировать
 				'product' => $this->model->shop->products->getById($_GET['id']),
 				'copy' => true
 			]);
@@ -195,6 +195,100 @@ class AdminController extends Controller
 			if ($_POST['confirm']) {
 				$this->model->shop->products->delete($_POST['id']);
 				$this->view->redirect("/admin/products");
+			}
+		}
+	}
+	/////////////////////////////////////////////properties///////////////////////////////////////
+	public function propertiesAction()
+	{
+		if (isset($_GET['product_id'])) {
+			$bcr = ['Товары' => '/admin/products', 'Вариации'];
+			$vars = [
+				'bcr' => $bcr,
+				'product' => $this->model->shop->products->getById($_GET['product_id']),
+				'properties' => $this->model->shop->products_properties->getByProductId($_GET['product_id']),
+			];
+			// dd($vars);
+			$this->view->render('Вариации', $vars);
+			exit;
+		}
+		// $this->view->redirect('/admin/products/');
+	}
+	public function propertiesEditAction()
+	{
+		// $this->model->shop->products->UpdatePrice(8);
+		// $property
+		$bcr = ['Товары' => '/admin/products', 'Вариации' => '/admin/products/properties?product_id=' . $_GET['product_id'], 'Изменить'];
+
+		// $fpath = 'public/images/products/';
+		$vars = ['bcr' => $bcr];
+		if (!empty($_POST)) {
+			// dd($_POST);
+			// $_POST['product_id']=$_GET[]
+			$err = $this->model->shop->products_properties->Update($_POST);
+			// dd($err);
+			// dd($err);
+			// dd($err);
+			if (empty($err)) {
+				$this->model->shop->products->UpdatePrice($_GET['product_id']);
+				$this->view->redirect('/admin/products/properties?product_id=' . $_GET['product_id']);
+			} else {
+				// dd($err);
+				$vars = ['err' => $err];
+			};
+		}
+
+
+		if (isset($_GET['id']) and !isset($_GET['copy'])) {
+			$vars = array_merge($vars,  [
+				'header' => 'Редактировать',
+				//////////////////////////////<<<<< Редактировать
+				// 'categories' => $this->model->shop->categories->getAll(),
+				'product' => $this->model->shop->products->getById($_GET['product_id']),
+				'property' => $this->model->shop->products_properties->getById($_GET['id'])
+			]);
+			// dd($vars);
+			$this->view->render('Редактирование товара', $vars);
+		} else if (empty($_GET['id'])) {
+
+			$vars = array_merge($vars, [
+				'header' => 'Новая вариация',
+				///////////////////////////////////////<<<<< Новый
+				'product' => $this->model->shop->products->getById($_GET['product_id']),
+			]);
+			$this->view->render('Новый товар', $vars);
+		} else {
+			$vars = array_merge($vars, [
+				'header' => 'Дублировать',
+				///////////////////////////////<<<<<<< Дублировать
+				'product' => $this->model->shop->products->getById($_GET['product_id']),
+				'property' => $this->model->shop->products_properties->getById($_GET['id']),
+				'copy' => true
+			]);
+			// dd($vars);
+			$this->view->render('Дублирование товара', $vars);
+		}
+	}
+
+	public function propertiesDeleteAction()
+	{
+		$bcr = ['Товары' => '/admin/products', 'Вариации' => '/admin/products/properties?product_id=' . $_GET['product_id'], 'Удалить'];
+
+
+		if (empty($_POST['confirm'])) {
+			$vars = [
+				'bcr' => $bcr,
+				'property' => $this->model->shop->products_properties->getById($_GET['id'])
+			];
+			//dd($vars['category']);
+			$this->view->render("Удалить вариацию", $vars);
+		} else {
+
+			if ($_POST['confirm']) {
+
+				if ($this->model->shop->products_properties->delete($_POST['id']))
+					$this->model->shop->products->UpdatePrice($_GET['product_id']);
+				$this->view->redirect('/admin/products/properties?product_id=' . $_GET['product_id']);
 			}
 		}
 	}

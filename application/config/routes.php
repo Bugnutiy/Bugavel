@@ -47,6 +47,19 @@ return [
 		'controller' => 'admin',
 		'action' => 'productsEdit',
 	],
+	////////////////////////////Properties//////////////////////
+	'admin/products/properties' => [
+		'controller' => 'admin',
+		'action' => 'properties',
+	],
+	'admin/products/properties/edit' => [
+		'controller' => 'admin',
+		'action' => 'propertiesEdit',
+	],
+	'admin/products/properties/delete' => [
+		'controller' => 'admin',
+		'action' => 'propertiesDelete',
+	],
 	/////////////////////////////SBER////////////////////////////
 	'admin/sber' => [
 		'controller' => 'admin',

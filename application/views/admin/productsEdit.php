@@ -1,5 +1,5 @@
 <?php ob_start() ?>
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link href="/public/styles/htmleditor/quill.snow.css" rel="stylesheet">
 <?php $head = ob_get_clean(); ?>
 
 <?php if (isset($err)) : ?>
@@ -18,16 +18,16 @@
         <h2><?= $header ?></h2>
         <div class="w-100"></div>
 
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6"><!-- Редактировать -->
             <?php if (isset($product) and !isset($copy)) : ?>
-                <input type="hidden" name="id" value="<?= key($product) ?>">
-            <?php endif ?>
+                <input type="hidden" name="id" value="<?= key($product) ?>">  
+            <?php endif ?><!-- --Редактировать -->
 
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="name">Название товара RU</span>
                 </div>
-                <input required class="form-control" type="text" name="name" placeholder="Товар" aria-label="Имя" aria-describedby="name" value="<?= isset($product) ? current($product)['name'] : '' ?>">
+                <input required class="form-control" type="text" name="name" placeholder="Товар" aria-label="Имя" aria-describedby="name" value="<?= isset($product) ? current($product)['name'] : '' ?>"> 
             </div>
 
             <div class="input-group mb-2">
@@ -75,21 +75,22 @@
                 </div>
             </div>
 
-
+            <? if (!isset($product) or isset($copy)) :?>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Цена товара</span>
                 </div>
-                <input type="number" class="form-control" placeholder="Стоимость RU" name="price" required value="<?= isset($product) ? current($product)['price'] : '' ?>">
-                <input type="number" class="form-control" placeholder="Стоимость EN" name="price_en" required value="<?= isset($product) ? current($product)['price_en'] : '' ?>">
+                <input type="number" class="form-control" placeholder="Стоимость RU" name="price" required value="">
+                <input type="number" class="form-control" placeholder="Стоимость EN" name="price_en" required value="">
 
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Количество на складе</span>
                 </div>
-                <input type="number" class="form-control" placeholder="Количество" name="quantity" required value="<?= isset($product) ? current($product)['quantity'] : '' ?>">
+                <input type="number" class="form-control" placeholder="Количество" name="quantity" required value="">
             </div>
+            <? endif ?>
             <?php if (isset($product) and !isset($copy)) : ?>
                 <div class="row">
                     <div class="col-12">
@@ -110,7 +111,7 @@
 
 </form>
 <?php ob_start(); ?>
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="/public/scripts/htmleditor/quill.js"></script>
 <script>
     let quill1 = new Quill('#description', {
 

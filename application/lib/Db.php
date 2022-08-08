@@ -118,6 +118,8 @@ class Db
 		//dd($set);
 		if (is_string($sign)) {
 			$q = "UPDATE `$tname` SET $set WHERE ($sign)";
+			// ddd($q);
+			// dd($valuearr);
 			return $this->query($q, $valuearr)->rowCount();
 		}
 
@@ -125,15 +127,26 @@ class Db
 	}
 	/**
 	 * @param string $tname Имя таблицы
-	 * @param string|NULL $sign Условие поиска,
-	 * @param array|NULL $params PDO:prepare params
+	 * @param string|NULL $sign Условие поиска, WHERE писать не нужно
+	 * @param array|NULL $params PDO:prepare params Параметры для поиска, без них не работает
+	 * @param array|NULL $page [Страница => количество записей на странице] [1=>10]
 	 */
-	public function fetAllLite($tname, $sign = '', $params = [])
+	public function fetAllLite($tname, $sign = '', $params = [], $page = [])
 	{
-		if (empty($sign))
-			return $this->fetAll("SELECT * FROM `$tname`");
-		else
-			return $this->fetAll("SELECT * FROM `$tname` WHERE ($sign)", $params);
+		$limit = '';
+		if (!empty($page)) {
+			$n = current($page);
+			$page = key($page);
+			// $start = $n * (--$page);
+			$start = --$page * $n;
+			$limit = " LIMIT $start,$n";
+		}
+
+		if (empty($sign) and empty($params)) {
+			return $this->fetAll("SELECT * FROM `$tname`" . $limit);
+		} elseif (!empty($sign) and !empty($params)) {
+			return $this->fetAll("SELECT * FROM `$tname` WHERE ($sign)" . $limit, $params);
+		} else return NULL;
 	}
 	/**
 	 * @param string $tname Имя таблицы
@@ -147,6 +160,7 @@ class Db
 		return $this->query("DELETE FROM `$tname` WHERE ($sign)", $params);
 	}
 	/**
+	 * Создать новую таблицу (не реализовано)
 	 * @param string $tname Имя таблицы
 	 * @param array  $fields Настройки поля таблицы ['поле'=>['параметр'=>'значение']]
 	 * 

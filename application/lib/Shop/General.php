@@ -39,14 +39,16 @@ abstract class General
     /**
      * getById
      *
-     * @param int|string $id
+     * @param int|string|null $id
      * 
      * @return array
      */
-    public function getById($id)
+    public function getById($id = NULL)
     {
         // if (empty($this->entries)) {
-        return $this->db->fetAllLite($this->table, '`id` = :id', ['id' => $id]);
+        if (!empty($id))
+            return $this->db->fetAllLite($this->table, '`id` = :id', ['id' => $id]);
+        return $this->getAll();
         // }
         // return [$id => $this->$entries[$id]];
     }
@@ -55,35 +57,79 @@ abstract class General
      */
     public function Update($arr)
     {
+        // dd($arr);
         $err = [];
         // dd($this->db->LastInsertId());
-
+        $exists_images = [];
         // dd($arr);
-        if (empty($arr)) return $err[] = 'Запрос оказался пуст';
+        if (empty($arr)) {
+            $err[] = 'Запрос оказался пуст';
+            return $err;
+        }
         if (isset($arr['images'])) {
             $arr['images'] = json_encode($arr['images']);
         }
 
         if (!empty($arr['id'])) {
             $id = $arr['id'];
+            unset($arr['id']);
+            // dd($id);
+            $exist = current($this->getById($id));
+
             if (isset($arr['images'])) {
-                $exists_images = json_decode(current($this->getById($id))['images'], 1);
-                //dd($images);
-                if (!empty($exists_images)) {
-                    foreach ($exists_images as $image) {
-                        if (file_exists($image)) {
-                            unlink($image);
-                        }
+                $exists_images = json_decode($exist['images'], 1);
+            }
+            // dd($arr);
+            // ddd($exist);
+            // ddd($arr);
+            $matcher = [];
+            foreach ($arr as $key => $value) {
+                if (isset($exist[$key]))
+                    $matcher[$key] = $exist[$key];
+                else {
+                    $err[] = 'В таблице ' . $this->table . ' не созданы столбцы с такими именами';
+                    return $err;
+                }
+            }
+            if ($matcher == $arr) {
+                // $err[] = 'Поменяйте хотя бы одно значение';
+                // dd($err);
+                $err[] = 'Поменяйте хотя бы одно значение';
+                return $err;
+            }
+            // dd($matcher==$arr);
+
+            // if (!empty($exists_images)) {
+            foreach ($exists_images as $image) {
+                if (file_exists($image)) {
+                    unlink($image);
+                }
+            }
+            // }
+            if (!$this->db->update($this->table, $arr, "`id` = $id")) {
+                $err[] = 'Обновить запись в таблице ' . $this->table . ' не удалось';
+            }
+        } else {
+            $exist = current($this->db->fetAllLite($this->table, NULL, NULL, [1 => 1]));
+            // dd($exist);
+            // dd($exist);
+            // ddd($exist);
+            // ddd($arr);
+            if (!empty($exist)) {
+                $matcher = [];
+                foreach ($arr as $key => $value) {
+                    if (isset($exist[$key]))
+                        $matcher[$key] = $exist[$key];
+                    else {
+                        $err[] = 'В таблице ' . $this->table . ' не созданы столбцы с такими именами';
+                        return $err;
                     }
                 }
             }
-            unset($arr['id']);
-            if (!$this->db->update($this->table, $arr, "`id` = $id")) {
-                $err[] = 'Обновить запись в БД не удалось';
-            }
-        } else {
+            // ddd($arr);
+            // dd($matcher);
             if (!$this->db->insert($this->table, $arr)) {
-                $err[] = 'Создать запись в БД не удалось';
+                $err[] = 'Создать запись в таблице ' . $this->table . ' не удалось';
             }
         }
         // dd($this->db->LastInsertId());
@@ -95,7 +141,7 @@ abstract class General
      *
      * @param int|string $id
      * 
-     * @return PDOStatement
+     * @return 0|int Quantity
      */
     public function Delete($id)
     {
@@ -109,7 +155,7 @@ abstract class General
                 }
             }
         }
-
-        return $this->db->delete($this->table, '`id` = :id', ['id' => $id]);
+        // dd($this->db->delete($this->table, '`id` = :id', ['id' => $id])->rowCount());
+        return $this->db->delete($this->table, '`id` = :id', ['id' => $id])->rowCount();
     }
 }

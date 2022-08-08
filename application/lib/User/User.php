@@ -27,16 +27,34 @@ class User
         $this->RemoveOld();
         $_COOKIE['user'] = $this->session;
     }
-
+    protected function getUserIp()
+    {
+        $keys = [
+            'HTTP_CLIENT_IP',
+            'HTTP_X_FORWARDED_FOR',
+            'REMOTE_ADDR'
+        ];
+        foreach ($keys as $key) {
+            if (!empty($_SERVER[$key])) {
+                // ddd($key);
+                // dd($_SERVER[$key]);
+                $addr = explode(',', $_SERVER[$key]);
+                $ip = trim(end($addr));
+                if (filter_var($ip, FILTER_VALIDATE_IP)) {
+                    return $ip;
+                }
+            }
+        }
+    }
     protected function Session()
     {
 
         $exist = $this->db->fetAll("SELECT * FROM `users` WHERE `session_id`= :session_id", ['session_id' => session_id()]);
 
-        //dd($exist);
-
         if (empty($exist)) {
-            $ip = '176.101.14.187'; //todo
+            $ip = $this->getUserIp();
+            if ($ip == '127.0.0.1')
+                $ip = '176.101.14.187'; //todo
             //$ip = $_SERVER['REMOTE_ADDR'];
             $geo = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip), 1);
             // ddd($geo);

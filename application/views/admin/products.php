@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
 
-            <a class="link card-header" type="button" data-toggle="collapse" data-target="#products_collapse" aria-expanded="false" aria-controls="products_collapse">Товары</a>
+            <a class="btn card-header" type="button" data-toggle="collapse" data-target="#products_collapse" aria-expanded="false" aria-controls="products_collapse"><h1>Товары</h1></a>
 
             <div class="collapse show" id="products_collapse">
                 <table class="table table-light table-bordered table-striped mb-0">
@@ -20,9 +20,10 @@
                                 <td><?= $id ?></td>
                                 <td><?= $node['name'] ?></td>
                                 <td>
-                                    <a href="/admin/products/edit?id=<?= $id ?>">Редактировать</a>/
-                                    <a href="/admin/products/delete?id=<?= $id ?>">Удалить</a>/
-                                    <a href="/admin/products/copy?id=<?= $id ?>&copy=1">Дублировать</a>
+                                    <a class="btn btn-info" href="/admin/products/edit?id=<?= $id ?>">Редактировать</a>
+                                    <a class="btn btn-danger" href="/admin/products/delete?id=<?= $id ?>">Удалить</a>
+                                    <a class="btn btn-warning" href="/admin/products/copy?id=<?= $id ?>&copy=1">Дублировать</a>
+                                    <a class="btn btn-success" href="/admin/products/properties?product_id=<?= $id ?>">Вариации</a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
