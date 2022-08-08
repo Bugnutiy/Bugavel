@@ -76,7 +76,15 @@ class Model
 					if (is_uploaded_file(current($_FILES)["tmp_name"][$key])) {
 						// сохраняем файл
 						$arr['fname'][] = $name[$key] . '.' . $format[$key];
-						move_uploaded_file(current($_FILES)['tmp_name'][$key], $path_file . $name[$key] . "." . $format[$key]);
+						
+						if (!file_exists($path_file))
+							if (!mkdir($path_file, 0777, 1)) {
+								$arr['err'][] = "Не удалось создать директорию $path_file";
+								return $arr;
+							}
+						if (!move_uploaded_file(current($_FILES)['tmp_name'][$key], $path_file . $name[$key] . "." . $format[$key])) {
+							$arr['err'][] = "Не удалось переместить файл $name[$key] из загрузок в директорию $path_file";
+						}
 					} else {
 						// Если файл не загрузился
 						$arr['err'][] = "Ошибка загрузки $fname!";
