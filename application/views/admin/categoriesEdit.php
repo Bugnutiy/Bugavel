@@ -41,7 +41,7 @@
             <div class="input- mb-2">
                 <div class="mb-3">
                   <label for="product_video" class="form-label">Видео</label>
-                  <textarea class="form-control" name="videos" id="product_video" rows="3" placeholder="код iframe для вставки видео"><?= isset($category) ? current($category)['videos'] : '' ?></textarea>
+                  <textarea class="form-control" name="videos" id="product_video" rows="3" placeholder="html-код или iframe для вставки видео"><?= isset($category) ? current($category)['videos'] : '' ?></textarea>
                 </div>
             </div>
 
