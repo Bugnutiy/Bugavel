@@ -18,9 +18,6 @@ return
         ],
 
         'admin' => [
-            'adminindex',
-            'admincontacts',
-            'adminconfident',
-            'adminnews',
+            
         ],
     ];

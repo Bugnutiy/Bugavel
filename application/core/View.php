@@ -4,10 +4,16 @@ namespace application\core;
 
 class View
 {
-
+	public $folder = "application/views/";
 	public $path;
 	public $route;
+	/**
+	 * Массив стандартных переменных для view-шаблона
+	 *
+	 * @var array [переменная => значение]
+	 */
 	public $default_vars;
+	
 	public $layout = 'default';
 
 	/**

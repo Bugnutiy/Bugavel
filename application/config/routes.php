@@ -4,6 +4,11 @@ return [
 		'controller' => 'admin',
 		'action' => 'test'
 	],
+	/************************************MAIN**********************************************/
+	'' => [
+		'controller' => 'main',
+		'action' => 'index'
+	],
 	/***********************************Admin shop******************************************/
 	////////////////////////categories//////////////////////////
 	'admin/categories' => [
@@ -70,7 +75,7 @@ return [
 
 	'admin/orders' => [
 		'controller' => 'admin',
-		'action' => 'categories',
+		'action' => 'orders',
 	],
 
 
@@ -78,6 +83,5 @@ return [
 		'controller' => 'admin',
 		'action' => 'categories',
 	],
-
 
 ];

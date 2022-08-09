@@ -44,11 +44,11 @@ class Model
 	}
 
 	/**
-	 * Сохранятор файлов
-	 * @param int $limit_size Максимальный размер файла
-	 * @param array $valid_format Массив поддерживаемых форматов
+	 * Сохранятор файлов multipart/form-data
+	 * @param int $limit_size Максимальный размер файла в байтах
+	 * @param array $valid_format одномерный массив поддерживаемых форматов
 	 * @param string $path_file Путь сохранения
-	 * @param array $name имена файлов
+	 * @param array $name массив имен файлов
 	 */
 	public function setFiles($limit_size, $valid_format, $path_file, $name)
 	{
