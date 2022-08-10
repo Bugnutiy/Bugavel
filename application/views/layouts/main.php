@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="<?= current($user)['lang'] ?>">
 
 <head>
   <meta charset="UTF-8" />
@@ -7,6 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="shortcut icon" href="public/images/icons/cropped-гибббр1-270x270.jpg" type="image/x-icon" sizes="270x270" />
+  <!-- 
+  <link rel="icon" href="https://leosmagin.com/wp-content/uploads/2019/03/cropped-гибббр1-32x32.jpg" sizes="32x32">
+  <link rel="icon" href="https://leosmagin.com/wp-content/uploads/2019/03/cropped-гибббр1-192x192.jpg" sizes="192x192">
+  <link rel="apple-touch-icon" href="https://leosmagin.com/wp-content/uploads/2019/03/cropped-гибббр1-180x180.jpg">
+  <meta name="msapplication-TileImage"
+    content="https://leosmagin.com/wp-content/uploads/2019/03/cropped-гибббр1-270x270.jpg">
+   -->
   <!-- Splide -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/css/themes/splide-default.min.css" />
   <!-- Bootstrap -->
@@ -17,7 +24,7 @@
   <link rel="stylesheet" href="public/styles/style.css" />
 
   <!-- <title>LeoSmagin: Главная страница</title> -->
-  <title><?= $title ?></title>
+  <title><?= $title[current($user)['lang']] ?></title>
 
   <script>
     function dd($el) {
@@ -33,38 +40,37 @@
       <div class="container-lg">
         <nav class="navbar navbar-expand-sm navbar-dark">
           <div class="navbar-brand" href="#">
-            <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="Copy to clipboard" onclick="emailCpy(this)">leosmagin@gmail.com</span>
-            <!--TRANSLATE-->
+            <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= $user['lang'] == 'EN' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">leosmagin@gmail.com</span>
             <a href="#" class="bi bi-youtube"></a>
             <a href="#" class="bi bi-instagram"></a>
             <a href="#" class="bi bi-envelope"></a>
           </div>
 
-          <div class="small_logo d-md-none" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Переключить">
-            <a class="logo mx-sm-3"></a>
+          <div class="small_logo d-md-none">
+            <a class="logo mx-sm-3" href="/"></a>
           </div>
 
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Переключить">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="IndexToggleMenu">
             <span class="bi bi-list"></span>
           </button>
 
           <div class="collapse navbar-collapse" id="mainMenu">
             <ul class="navbar-nav me-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
+              <li class="nav-item <?= $route['action'] == 'index' ? 'active' : '' ?>">
+                <a class="nav-link <?= $route['action'] == 'index' ? 'disabled' : '' ?>" href="/"><?= current($user)['lang'] == 'EN' ? 'Home' : 'Главная' ?></a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
+
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="categoriesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Список</a>
+                <a class="nav-link dropdown-toggle" href="#" id="categoriesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= current($user)['lang'] == 'EN' ? 'Categories' : 'Категории' ?></a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="categoriesMenu">
-                  <a class="dropdown-item" href="#">Action 1</a>
-                  <a class="dropdown-item" href="#">Action 2</a>
+                  <!-- Категории -->
+                  <? foreach ($categories as $cat_id => $cat_node) : ?>
+                    <a class="dropdown-item" href="/catalog?category=<?= $cat_id ?>"><?= current($user)['lang'] == 'EN' ? $cat_node['name_en'] : $cat_node['name'] ?></a>
+                  <? endforeach ?>
                 </div>
               </li>
             </ul>
-
+            <!-- Корзина -->
             <div class="right d-flex my-2 my-lg-0 row justify-content-md-end justify-content-between">
               <div class="dropdown cart col-auto">
                 <a class="bi bi-cart" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -82,16 +88,16 @@
               </div>
 
               <div class="dropdown language col-auto">
-                <a class="bi bi-globe2" href="#" id="LangSwither" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="language"></a>
+                <a class="bi bi-globe2" href="#" id="LangSwither" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="<?= current($user)['lang'] == 'EN' ? 'Language' : 'Язык' ?>"></a>
                 <!-- translate language -->
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="LangSwither">
                   <h6 class="dropdown-header">Язык/Language</h6>
-                  <div class="dropdown-item" href="#">
+                  <a class="dropdown-item" href="?lang=RU">
                     <img src="public/images/icons/rus.png" alt="" />Русский
-                  </div>
-                  <div class="dropdown-item" href="#">
+                  </a>
+                  <a class="dropdown-item" href="?lang=EN">
                     <img src="public/images/icons/eng.png" alt="" />English
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>
@@ -115,21 +121,22 @@
         <div class="col-12 col-sm-4 text-center references my-3">
           <div class="row justify-content-around">
             <div class="col-auto">
-              <a href="">Гибрид</a><br />
-              <a href="">Горилла</a><br />
-              <a href="">Скат</a><br />
+              <? foreach ($categories as $cat_id => $cat_node) : ?>
+                <a href="/catalog?category=<?= $cat_id ?>"><?= current($user)['lang'] == 'EN' ? $cat_node['name_en'] : $cat_node['name'] ?></a><br />
+              <? endforeach ?>
+             
             </div>
             <div class="col-auto">
-              <a href="">Вопросы</a><br />
-              <a href="">Оплата</a><br />
-              <a href="">Доставка</a><br />
-              <a href="">Контакты</a>
+              <a href=""><?= current($user)['lang'] == 'EN' ? 'FAQ' : 'Вопросы' ?></a><br />
+              <a href=""><?= current($user)['lang'] == 'EN' ? 'Payment' : 'Оплата' ?></a><br />
+              <a href=""><?= current($user)['lang'] == 'EN' ? 'Delivery' : 'Доставка' ?></a><br />
+              <a href=""><?= current($user)['lang'] == 'EN' ? 'Contacts' : 'Контакты' ?></a>
             </div>
           </div>
         </div>
 
         <div class="col-12 col-sm-4 col-xl-4 persona text-end my-3">
-          <p class="mb-3">ИП Смагин Леонид Павлович</p>
+          <p class="mb-3"><?= current($user)['lang'] == 'EN' ? 'Leonid Smagin' : 'Смагин Леонид Павлович' ?><p>
           <a class="e-mail">xyz@gmail.com</a>
           <div class="contacts mt-3">
             <a href="#" class="bi bi-youtube"></a>

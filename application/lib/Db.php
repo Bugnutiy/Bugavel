@@ -112,6 +112,7 @@ class Db
 	 */
 	public function update($tname, $fields, $sign)
 	{
+		// dd($sign);
 		$set = '';
 		$valuearr = [];
 		$i = 0;

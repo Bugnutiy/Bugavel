@@ -20,9 +20,9 @@ class User
      */
     protected $db;
 
-    function __Construct($db)
+    function __Construct(&$db)
     {
-        $this->db = $db;
+        $this->db = &$db;
         $this->session = $this->Session();
         $this->RemoveOld();
         $_COOKIE['user'] = $this->session;
@@ -173,7 +173,7 @@ class User
      */
     public function getUserId()
     {
-        return key($this->session);
+        return (int)(key($this->session));
     }
     /**
      * @param int $user_id
@@ -181,8 +181,19 @@ class User
      */
     public function update($user_id, $fields = [])
     {
+        $id=(int)$user_id;
         $user_id = $this->db->quote($user_id);
-        $this->db->update('users', $fields, '`user_id` = ' . $user_id);
+        $dbs = $this->db->update('users', $fields, '`id` = ' . $user_id);
+        if ($dbs) {
+            foreach ($fields as $key => $value) {
+                // dd($this->session[$id]);
+                if (!empty($this->session[$id])) {
+                    // dd($this->session);
+                    $this->session[$id][$key] = $value;
+                }
+            }
+        }
+        return $dbs;
     }
     public function findLogin($login)
     {

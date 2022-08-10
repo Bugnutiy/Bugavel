@@ -142,8 +142,8 @@ body {
   background-color: #cecece;
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
-  -webkit-mask-image: url("/public/images/diesel_bee_curves.svg");
-          mask-image: url("/public/images/diesel_bee_curves.svg");
+  -webkit-mask-image: url("/public/images/logo/diesel_bee_curves.svg");
+          mask-image: url("/public/images/logo/diesel_bee_curves.svg");
 }
 .index_menu .navbar-toggler span {
   transition: color 0.2s ease-in-out;

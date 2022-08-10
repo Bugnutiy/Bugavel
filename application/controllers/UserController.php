@@ -8,7 +8,7 @@ use application\core\Controller;
 /**
  * Class AdminController
  */
-class AuthController extends Controller
+class UserController extends Controller
 {
 
 	function __construct($route)
