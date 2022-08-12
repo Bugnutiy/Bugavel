@@ -27,38 +27,69 @@
               <h1 class="mb-3"><?= current($user)['lang'] == 'RU' ? current($product)['name'] : current($product)['name_en'] ?></h1>
             </div>
             <!-- Price -->
-            <div class="col-12 mb-4 price">
-              <? ddd($properties);
-              ddd($product) ?>
+            <div class="col-12 mb-3 price">
+              <?
+              // ddd($product) 
+              ?>
               <? if (current($user)['lang'] == 'RU') : ?>
                 <? if (current($product)['min_price'] == current($product)['max_price']) : ?>
-                  <p class="mb-0" id=""><?=current($product)['min_price']?> руб.</p>
+                  <p class="mb-0" id=""><?= current($product)['min_price'] ?> руб.</p>
                 <? else : ?>
-                  <p class="mb-0" id="product_price"><?=current($product)['min_price']?> - <?=current($product)['max_price']?> руб.</p>
+                  <p class="mb-0" id="product_price"><?= current($product)['min_price'] ?> - <?= current($product)['max_price'] ?> руб.</p>
                 <? endif ?>
               <? else : ?>
                 <? if (current($product)['min_price_en'] == current($product)['max_price_en']) : ?>
-                  <p class="mb-0" id="">$<?=current($product)['min_price_en']?></p>
+                  <p class="mb-0" id="">$<?= current($product)['min_price_en'] ?></p>
                 <? else : ?>
-                  <p class="mb-0" id="product_price">$<?=current($product)['min_price_en']?> - <?=current($product)['max_price_en']?></p>
+                  <p class="mb-0" id="product_price">$<?= current($product)['min_price_en'] ?> - <?= current($product)['max_price_en'] ?></p>
                 <? endif ?>
               <? endif ?>
 
-              <span class="small text-success" id="quantity">3 pieces in stock</span>
+              <? if (current($user)['lang'] == 'RU') : ?>
+                <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="quantity"><?= current($product)['quantity'] ?> шт. в наличии</span>
+              <? else : ?>
+                <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="quantity"><?= current($product)['quantity'] ?> <?= current($product)['quantity'] > 1 ? 'pieces' : 'piece' ?> in stock</span>
+              <? endif ?>
             </div>
-            <!-- Option -->
-            <div class="col-12 options">
-              <div class="row">
-                <div class="col-auto pe-0 align-self-center"><b>МОТОР</b></div>
-                <div class="col-auto"><select class="form-select text-truncate" aria-label="Default select example ">
-                    <option value="0" selected disabled>Выбрать</option>
-                    <option value="1">Мощный мотор аналог MAXON DC MAX</option>
-                    <option value="2">Премиальный мотор MAXXON DC MAX</option>
-                  </select></div>
+            <!-- Options -->
+            <? if (count($properties) > 1) : ?>
+              <div class="col-12 mb-3 options">
+                <?
+                $class_properties = [];
+                foreach ($properties as $id => $node) {
+                  $class_properties[$node['classname_en']][$id] = $node;
+                }
+                // ddd($class_properties);
+                foreach ($class_properties as $class_nodes) : ?>
+                  <div class="row">
+                    <div class="col-auto pe-0 align-self-center"><b><?= current($user)['lang'] == 'RU' ? current($class_nodes)['classname'] : current($class_nodes)['classname_en'] ?></b></div>
+                    <div class="col">
+
+                      <select class="form-select text-truncate" aria-label="Select option" name='property_id' required onchange="select(value)">
+                        <option hidden value="0" selected disabled>Выбрать</option>
+                        <? foreach ($class_nodes as $property_id => $node) : ?>
+                          <option value="<?= $property_id ?>" <?= $node['quantity'] < 1 ? 'disabled' : '' ?>>
+                            <?= current($user)['lang'] == 'RU' ? $node['name'] : $node['name_en'] ?>
+                            <?= $node['quantity'] < 1 ? (current($user)['lang'] == 'RU' ? '(Нет в наличии)' : '(Out of stock)') : '' ?>
+                          </option>
+                        <? endforeach ?>
+                      </select>
+                      <script>
+                        var json = '<?=json_encode($properties)?>';
+                        var arr = JSON.parse(json);
+                        dd(arr);
+                        function select(property) {
+                          dd(property);
+                        }
+                      </script>
+                    </div>
+                  </div>
+                <? endforeach ?>
+
               </div>
-            </div>
+            <? endif ?>
             <!-- Количество -->
-            <div class="col-12 mt-3 quantity">
+            <div class="col-12  quantity">
               <div class="row justify-content-around">
                 <div class="col-auto ">
                   <div class="input-group ">

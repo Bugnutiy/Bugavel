@@ -22,6 +22,18 @@
         <input type="hidden" name="id" value="<?= key($property) ?>">
       <?php endif ?>
       <!-- --Редактировать -->
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="classname">Название класса RU</span>
+        </div>
+        <input required class="form-control" type="text" name="classname" placeholder="Товар" aria-label="Имя" aria-describedby="name" value="<?= isset($property) ? current($property)['classname'] : '' ?>">
+      </div>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="classname_en">Название класса EN</span>
+        </div>
+        <input required class="form-control" type="text" name="classname_en" placeholder="Товар" aria-label="Имя" aria-describedby="name" value="<?= isset($property) ? current($property)['classname_en'] : '' ?>">
+      </div>
 
       <div class="input-group mb-2">
         <div class="input-group-prepend">
