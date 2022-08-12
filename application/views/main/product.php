@@ -24,13 +24,27 @@
           <div class="row">
             <!-- Header -->
             <div class="col-12 text-center name">
-              <h1 class="mb-3"><?=current($user)['lang']=='EN'?current($product)['name_en']:current($product)['name']?></h1>
+              <h1 class="mb-3"><?= current($user)['lang'] == 'RU' ? current($product)['name'] : current($product)['name_en'] ?></h1>
             </div>
             <!-- Price -->
             <div class="col-12 mb-4 price">
-              
-              <p class="mb-0">$12000 - $13000</p>
-              <span class="small text-success">3 piece in stock</span>
+              <? ddd($properties);
+              ddd($product) ?>
+              <? if (current($user)['lang'] == 'RU') : ?>
+                <? if (current($product)['min_price'] == current($product)['max_price']) : ?>
+                  <p class="mb-0" id=""><?=current($product)['min_price']?> руб.</p>
+                <? else : ?>
+                  <p class="mb-0" id="product_price"><?=current($product)['min_price']?> - <?=current($product)['max_price']?> руб.</p>
+                <? endif ?>
+              <? else : ?>
+                <? if (current($product)['min_price_en'] == current($product)['max_price_en']) : ?>
+                  <p class="mb-0" id="">$<?=current($product)['min_price_en']?></p>
+                <? else : ?>
+                  <p class="mb-0" id="product_price">$<?=current($product)['min_price_en']?> - <?=current($product)['max_price_en']?></p>
+                <? endif ?>
+              <? endif ?>
+
+              <span class="small text-success" id="quantity">3 pieces in stock</span>
             </div>
             <!-- Option -->
             <div class="col-12 options">
