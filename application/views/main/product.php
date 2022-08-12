@@ -46,12 +46,27 @@
               <? endif ?>
 
               <? if (current($user)['lang'] == 'RU') : ?>
-                <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="quantity"><?= current($product)['quantity'] ?> шт. в наличии</span>
+                <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock"><?= current($product)['quantity'] ?> шт. в наличии</span>
               <? else : ?>
-                <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="quantity"><?= current($product)['quantity'] ?> <?= current($product)['quantity'] > 1 ? 'pieces' : 'piece' ?> in stock</span>
+                <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock"><?= current($product)['quantity'] ?> <?= current($product)['quantity'] > 1 ? 'pieces' : 'piece' ?> in stock</span>
               <? endif ?>
             </div>
             <!-- Options -->
+            <script>
+              var json = '<?= json_encode($properties) ?>';
+              var arr = JSON.parse(json);
+              var selected = 0;
+              selected = arr.reduce(function(current) {
+                return curent;
+              });
+              dd(selected);
+              if (Object.keys(arr).length == 1) {
+                selected = arr.reduce(function(current) {
+                  return curent;
+                });
+
+              }
+            </script>
             <? if (count($properties) > 1) : ?>
               <div class="col-12 mb-3 options">
                 <?
@@ -74,28 +89,31 @@
                           </option>
                         <? endforeach ?>
                       </select>
-                      <script>
-                        var json = '<?=json_encode($properties)?>';
-                        var arr = JSON.parse(json);
-                        dd(arr);
-                        function select(property) {
-                          dd(property);
-                        }
-                      </script>
+
                     </div>
                   </div>
                 <? endforeach ?>
 
               </div>
+              <script>
+                function select(property_id) {
+                  var quantity = document.getElementById('stock');
+                  // dd(arr[property_id]['quantity']);
+                  var string = <?= current($user)['lang'] == 'RU' ?
+                                  "arr[property_id]['quantity']+' шт. в наличии'" : ("arr[property_id]['quantity']>1?arr[property_id]['quantity']+' pieces in stock':arr[property_id]['quantity']+' piece in stock'") ?>;
+                  quantity.innerHTML = string;
+                  selected = property_id;
+                }
+              </script>
             <? endif ?>
             <!-- Количество -->
             <div class="col-12  quantity">
               <div class="row justify-content-around">
                 <div class="col-auto ">
                   <div class="input-group ">
-                    <a class="px-1 btn left btn-outline-secondary input-group-text">-</a>
+                    <a class="px-1 btn left btn-outline-secondary input-group-text" onclick="decrease()">-</a>
                     <input type="number " class="form-control px-0 text-center" value="1">
-                    <a class=" px-1 btn right btn-outline-secondary input-group-text">+ </a>
+                    <a class=" px-1 btn right btn-outline-secondary input-group-text" onclick="increase()">+</a>
                   </div>
                 </div>
                 <!-- Button -->
@@ -134,8 +152,8 @@
   var Sliders = document.getElementsByClassName('product_photo')
   // dd(Scrollers);
   for (var i = 0; i < Sliders.length; i++) {
-    dd('Sliders:');
-    dd(Sliders[i]);
+    // dd('Sliders:');
+    // dd(Sliders[i]);
     new Splide(Sliders[i], {
       arrows: true,
       type: "loop",
