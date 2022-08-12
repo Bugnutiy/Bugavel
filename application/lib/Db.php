@@ -122,7 +122,7 @@ class Db
 			$i++;
 		}
 		$set = substr($set, 0, -2);
-		//dd($set);
+		// dd($set);
 		if (is_string($sign)) {
 			$q = "UPDATE `$tname` SET $set WHERE ($sign)";
 			// ddd($q);

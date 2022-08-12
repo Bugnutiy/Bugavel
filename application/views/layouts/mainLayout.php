@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="shortcut icon" href="public/images/icons/cropped-гибббр1-270x270.jpg" type="image/x-icon" sizes="270x270" />
+  <link rel="shortcut icon" href="/public/images/icons/cropped-гибббр1-270x270.jpg" type="image/x-icon" sizes="270x270" />
   <!-- 
   <link rel="icon" href="https://leosmagin.com/wp-content/uploads/2019/03/cropped-гибббр1-32x32.jpg" sizes="32x32">
   <link rel="icon" href="https://leosmagin.com/wp-content/uploads/2019/03/cropped-гибббр1-192x192.jpg" sizes="192x192">
@@ -17,11 +17,11 @@
   <!-- Splide -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/css/themes/splide-default.min.css" />
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="public/bootstrap/bootstrap.min.css" />
-  <link rel="stylesheet" href="public/bootstrap/icons/bootstrap-icons.css" />
-  <script src="public/bootstrap/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="/public/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="/public/bootstrap/icons/bootstrap-icons.css" />
+  <script src="/public/bootstrap/bootstrap.bundle.min.js"></script>
 
-  <link rel="stylesheet" href="public/styles/style.css" />
+  <link rel="stylesheet" href="/public/styles/style.css" />
 
   <!-- <title>LeoSmagin: Главная страница</title> -->
   <title><?= $title[current($user)['lang']] ?></title>
@@ -40,7 +40,7 @@
       <div class="container-lg">
         <nav class="navbar navbar-expand-sm navbar-dark">
           <div class="navbar-brand" href="#">
-            <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= $user['lang'] == 'EN' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">leosmagin@gmail.com</span>
+            <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= current($user)['lang'] == 'EN' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">leosmagin@gmail.com</span>
             <a href="#" class="bi bi-youtube"></a>
             <a href="#" class="bi bi-instagram"></a>
             <a href="#" class="bi bi-envelope"></a>
@@ -100,7 +100,7 @@
                   $href_tmp=substr($href_tmp,0,-1);
                   ?>
                   <a class="dropdown-item" href="<?=$href_tmp?>">
-                    <img src="public/images/icons/rus.png" alt="" />Русский
+                    <img src="/public/images/icons/rus.png" alt="" />Русский
                   </a>
                   <? $_GET=array_merge($_GET,['lang'=>'EN']); 
                   $href_tmp='?';
@@ -110,7 +110,7 @@
                   $href_tmp=substr($href_tmp,0,-1);
                   ?>
                   <a class="dropdown-item" href="<?=$href_tmp?>">
-                    <img src="public/images/icons/eng.png" alt="" />English
+                    <img src="/public/images/icons/eng.png" alt="" />English
                   </a>
                 </div>
               </div>

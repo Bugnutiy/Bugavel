@@ -15,7 +15,7 @@
     <? endif ?>
     <a class="big_logo row align-items-center" href="/">
       <div class="col-12">
-        <img src="public/images/logo/logo.png" alt="">
+        <img src="/public/images/logo/logo.png" alt="">
       </div>
     </a>
 
@@ -26,7 +26,7 @@
       <div class="container-lg description_block g-4">
         <div class="row ">
           <div class="col py-3">
-            <h3 class="text-center"><?= current($user)['lang'] == 'EN' ? (!empty($category) ? $category['name_en'] : "Catalog") :  $category['name']?></h3>
+            <h3 class="text-center"><?= current($user)['lang'] == 'EN' ? (!empty($category) ? $category['name_en'] : "Catalog") :  $category['name'] ?></h3>
 
             <?= current($user)['lang'] == 'EN' ? (!empty($category) ? $category['description_en'] : "") : $category['description'] ?>
 
@@ -54,7 +54,7 @@
                         <div class="splide__list">
                           <? $images = json_decode($product_node['images'], 1);
                           foreach ($images as $src) : ?>
-                            <a href="/catalog/product?id=<?= $product_id ?>" class="splide__slide"><img src="<?= $src ?>" alt="<?= current($user)['lang'] == 'EN' ? "Product image" : "Изображение товара" ?>"></a>
+                            <a href="/catalog/product?id=<?= $product_id ?>" class="splide__slide"><img src="/<?= $src ?>" alt="<?= current($user)['lang'] == 'EN' ? "Product image" : "Изображение товара" ?>"></a>
                           <? endforeach ?>
                         </div>
                       </div>
@@ -68,6 +68,8 @@
                 <div class="row justify-content-center">
                   <?
                   if (!empty($_GET['lang'])) unset($_GET['lang']);
+                  if (!empty($_GET['addcart'])) unset($_GET['addcart']);
+
                   $href_tmp = '?';
                   foreach ($_GET as $key => $value) {
                     $href_tmp .= "$key=$value&";
@@ -75,9 +77,50 @@
 
                   ?>
                   <div class="col-auto align-self-center">
-                    <a href="<?= $href_tmp . "addcart=$product_id" ?>" class="btn btn-outline-success text-success  text-center">
-                      <span class="bi bi-cart-plus"></span>
-                    </a>
+                    <? if (count($product_node['properties']) > 1) : ?>
+
+                      <!-- Button trigger modal -->
+                      <a href="#" type="button" class="btn btn-outline-success text-success  text-center" data-bs-toggle="modal" data-bs-target="#propertyChoice<?= $product_id ?>">
+                        <span class="bi bi-cart-plus"></span>
+                      </a>
+
+                      <!-- Modal -->
+                      <div class="modal fade" id="propertyChoice<?= $product_id ?>" tabindex="-1" aria-labelledby="propertyChoiceLabel<?= $product_id ?>" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="propertyChoiceLabel<?= $product_id ?>"><?= current($user)['lang'] == 'EN' ? "Please select a modification" : "Пожалуйста, выберите модификацию" ?></h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="row row-cols-2 justify-content-between">
+                                
+                                <? foreach ($product_node['properties'] as $property_id => $property_node) : ?>
+                                  <div class="col align-self-center"><?= current($user)['lang'] == 'EN' ? $property_node['name_en'] : $property_node['name'] ?></div>
+                                  <div class="col-auto align-self-center"><?= current($user)['lang'] == 'EN' ? '$' . $property_node['price_en'] : $property_node['price'] . ' руб.' ?></div>
+                                  <div class="col-auto my-2">
+                                    <a href="<?= $href_tmp . "addcart=" . $property_id ?>" class="btn btn-outline-success text-success  text-center">
+                                      <span class="bi bi-cart-plus"></span>
+                                    </a>
+                                  </div>
+                                  <div class="w-100">
+                                    <hr>
+                                  </div>
+                                <? endforeach ?>
+
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+
+                    <? else : ?>
+                      <a href="<?= $href_tmp . "addcart=" . key($product_node['properties']) ?>" class="btn btn-outline-success text-success  text-center">
+                        <span class="bi bi-cart-plus"></span>
+                      </a>
+                    <? endif ?>
                     <a href="/catalog/product?id=<?= $product_id ?>" class="btn btn-outline-primary text-primary  ms-2 text-center">
                       <span class="bi bi-eye"></span>
                     </a>
@@ -234,8 +277,8 @@
     </div>
 
     <? ob_start() ?>
-    <script src="public/scripts/splide.min.js"></script>
-    <script src="public/scripts/splide.autoscroll.min.js"></script>
+    <script src="/public/scripts/splide.min.js"></script>
+    <script src="/public/scripts/splide.autoscroll.min.js"></script>
     <script>
       var Sliders = document.getElementsByClassName('goods_slider')
       // dd(Scrollers);

@@ -73,11 +73,7 @@ abstract class General
      */
     public function Update($arr)
     {
-        // dd($arr);
         $err = [];
-        // dd($this->db->LastInsertId());
-        // $exists_images = [];
-        // dd($arr);
         if (empty($arr)) {
             $err[] = 'Запрос оказался пуст';
             return $err;
@@ -89,11 +85,7 @@ abstract class General
         if (!empty($arr['id'])) {
             $id = $arr['id'];
             unset($arr['id']);
-            // dd($id);
             $exist = current($this->getById($id));
-            // dd($arr);
-            // ddd($exist);
-            // ddd($arr);
             $matcher = [];
             foreach ($arr as $key => $value) {
                 if (isset($exist[$key]))
@@ -107,7 +99,6 @@ abstract class General
                 $err[] = 'Поменяйте хотя бы одно значение';
                 return $err;
             }
-            // dd($matcher==$arr);
             if (isset($arr['images'])) {
                 $exists_images = json_decode($exist['images'], 1);
                 if (!empty($exists_images)) {
@@ -124,10 +115,6 @@ abstract class General
             }
         } else {
             $exist = current($this->db->fetAllLite($this->table, NULL, NULL, [1 => 1]));
-            // dd($exist);
-            // dd($exist);
-            // ddd($exist);
-            // ddd($arr);
             if (!empty($exist)) {
                 $matcher = [];
                 foreach ($arr as $key => $value) {
@@ -139,13 +126,10 @@ abstract class General
                     }
                 }
             }
-            // ddd($arr);
-            // dd($matcher);
             if (!$this->db->insert($this->table, $arr)) {
                 $err[] = 'Создать запись в таблице ' . $this->table . ' не удалось';
             }
         }
-        // dd($this->db->LastInsertId());
 
         return $err;
     }
@@ -161,14 +145,12 @@ abstract class General
         $exist = current($this->getById($id));
         if (isset($exist['images'])) {
             $images = json_decode($exist['images'], 1);
-            // dd($images);
             foreach ($images as $image) {
                 if (file_exists($image)) {
                     unlink($image);
                 }
             }
         }
-        // dd($this->db->delete($this->table, '`id` = :id', ['id' => $id])->rowCount());
         return $this->db->delete($this->table, '`id` = :id', ['id' => $id])->rowCount();
     }
 }

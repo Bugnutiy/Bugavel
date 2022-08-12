@@ -14,7 +14,7 @@
             <section class="splide photo_scroller">
               <div class="splide__track">
                 <ul class="splide__list">
-                  <li class="splide__slide"><img src="public/images/Carousel/DIESEL BEE/BEE1.jpg" alt="DIESEL BEE image"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/DIESEL BEE/BEE1.jpg" alt="DIESEL BEE image"></li>
                 </ul>
               </div>
             </section>
@@ -51,7 +51,7 @@
             <section class="splide photo_scroller">
               <div class="splide__track">
                 <ul class="splide__list">
-                  <li class="splide__slide"><img src="public/images/Carousel/COIL/COIL1.jpg" alt="Coil image"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/COIL/COIL1.jpg" alt="Coil image"></li>
                 </ul>
               </div>
             </section>
@@ -89,7 +89,7 @@
             <section class="splide photo_scroller">
               <div class="splide__track">
                 <ul class="splide__list">
-                  <li class="splide__slide"><img src="public/images/Carousel/GORILLA/GORILLA1.jpg" alt="Gorilla image">
+                  <li class="splide__slide"><img src="/public/images/Carousel/GORILLA/GORILLA1.jpg" alt="Gorilla image">
                   </li>
                 </ul>
               </div>
@@ -131,7 +131,7 @@
 </header>
 <a class="big_logo row align-items-center" href="/">
   <div class="col-12">
-    <img src="public/images/logo/logo.png" alt="logo image">
+    <img src="/public/images/logo/logo.png" alt="logo image">
   </div>
 </a>
 <!-- Категории -->
@@ -146,7 +146,7 @@
       <? foreach ($categories as $cat_id => $cat_node) : ?>
         <div class="card col-6 col-sm-3 col-md-3 col-xl-2 mb-4">
           <div class="text-center">
-            <a href="/catalog?category=<?= $cat_id ?>"><img class="card-img-top" src="<?= current(json_decode($cat_node['images'], 1)) ?>" alt="Category image" /></a>
+            <a href="/catalog?category=<?= $cat_id ?>"><img class="card-img-top" src="/<?= current(json_decode($cat_node['images'], 1)) ?>" alt="Category image" /></a>
             <div class="card-body p-0">
               <h4 class="card-title"><a href="/catalog?category=<?= $cat_id ?>"><?= current($user)['lang'] == 'EN' ? $cat_node['name_en'] : $cat_node['name'] ?></a></h4>
             </div>
@@ -162,8 +162,8 @@
 
 <!-- Скрипты -->
 <?php ob_start() ?>
-<script src="public/scripts/splide.min.js"></script>
-<script src="public/scripts/splide.autoscroll.min.js"></script>
+<script src="/public/scripts/splide.min.js"></script>
+<script src="/public/scripts/splide.autoscroll.min.js"></script>
 <script>
   var Scrollers = document.getElementsByClassName("photo_scroller");
   // dd(Scrollers);
