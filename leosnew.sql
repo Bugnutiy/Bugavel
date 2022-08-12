@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 08 2022 г., 12:12
+-- Время создания: Авг 12 2022 г., 10:56
 -- Версия сервера: 5.6.51-log
 -- Версия PHP: 7.4.29
 
@@ -32,7 +32,7 @@ CREATE TABLE `cart` (
   `user_id` int(11) UNSIGNED NOT NULL,
   `product_id` int(11) UNSIGNED NOT NULL,
   `property_id` int(11) UNSIGNED NOT NULL,
-  `quantity` decimal(19,3) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `changed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -103,6 +103,7 @@ CREATE TABLE `products` (
   `max_price_en` int(11) DEFAULT NULL,
   `average_price` int(11) DEFAULT NULL,
   `average_price_en` int(11) DEFAULT NULL,
+  `quantity` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `changed_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
