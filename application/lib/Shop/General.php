@@ -32,6 +32,22 @@ abstract class General
         $this->table = $tname;
         $this->db = &$db;
     }
+    /**
+     * Получить записи, соответствующие значению определенного столбца
+     *
+     * @param string $field_name Имя поля таблицы. Не давать доступ из фронтэнда! Не защищено!
+     * @param string|number $field_value 
+     * @return array Ассоциативный массив записей
+     */
+    public function getByField($field_name, $field_value)
+    {
+        return $this->db->fetAllLite($this->table, "`$field_name` = :value", [':value' => $field_value]);
+    }
+    /**
+     * Получить все записи из таблицы, соответствующей имени класса
+     *
+     * @return array Ассоциативный массив записей
+     */
     public function getAll()
     {
         return $this->db->fetAllLite($this->table);
@@ -102,7 +118,7 @@ abstract class General
                     }
                 }
             }
-            
+
             if (!$this->db->update($this->table, $arr, "`id` = $id")) {
                 $err[] = 'Обновить запись в таблице ' . $this->table . ' не удалось';
             }

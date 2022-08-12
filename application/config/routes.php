@@ -9,6 +9,14 @@ return [
 		'controller' => 'main',
 		'action' => 'index'
 	],
+	'catalog' => [
+		'controller' => 'main',
+		'action' => 'catalog'
+	],
+	'catalog/product' => [
+		'controller' => 'main',
+		'action' => 'product'
+	],
 	/***********************************Admin shop******************************************/
 	////////////////////////categories//////////////////////////
 	'admin/categories' => [

@@ -232,6 +232,8 @@ class AdminController extends Controller
 			// dd($err);
 			if (empty($err)) {
 				$this->model->shop->products->UpdatePrice($_GET['product_id']);
+				$this->model->shop->products->UpdateQuantity($_GET['product_id']);
+
 				$this->view->redirect('/admin/products/properties?product_id=' . $_GET['product_id']);
 			} else {
 				// dd($err);

@@ -168,7 +168,7 @@ class User
     }
 
     /**
-     * @method Идентификатор пользователя
+     * Идентификатор текущего пользователя
      * @return int $id
      */
     public function getUserId()
@@ -176,20 +176,24 @@ class User
         return (int)(key($this->session));
     }
     /**
+     * обновить параметры пользователя
      * @param int $user_id
      * @param array $fields = ['field_name'=>'val']
      */
     public function update($user_id, $fields = [])
     {
-        $id=(int)$user_id;
+        $id = (int)$user_id;
         $user_id = $this->db->quote($user_id);
         $dbs = $this->db->update('users', $fields, '`id` = ' . $user_id);
         if ($dbs) {
-            foreach ($fields as $key => $value) {
-                // dd($this->session[$id]);
-                if (!empty($this->session[$id])) {
-                    // dd($this->session);
-                    $this->session[$id][$key] = $value;
+            if (!empty($this->session[$id])) {
+                foreach ($fields as $field_name => $value) {
+                    $this->session[$id][$field_name] = $value;
+                    if ($field_name == 'id') {
+                        $this->session[$field_name] = $this->session[$id];
+                        unset($this->session[$id]);
+                        $id = $field_name;
+                    }
                 }
             }
         }

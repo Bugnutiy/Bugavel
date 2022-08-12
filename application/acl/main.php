@@ -4,9 +4,11 @@ return
     [
         'all' => [
             'index',
-            'contacts',
-            'news',
-            'confident',
+            // 'contacts',
+            // 'news',
+            // 'confident',
+            'catalog',
+            'product',
         ],
 
         'authorize' => [
@@ -17,7 +19,5 @@ return
             //
         ],
 
-        'admin' => [
-            
-        ],
+        'admin' => [],
     ];

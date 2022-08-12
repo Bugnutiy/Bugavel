@@ -101,7 +101,7 @@
                   <div class="col-12 col-sm-auto text-center">
                     <div class="row justify-content-center">
                       <div class="col-auto">
-                        <h1> <?= current($user)['lang'] == 'EN' ? 'THE MOST POWERFULL' : 'САМАЯ МОЩНАЯ' ?></h1>
+                        <h1> <?= current($user)['lang'] == 'EN' ? 'THE MOST POWERFULL' : 'МАКСИМАЛЬНАЯ МОЩНОСТЬ' ?></h1>
                       </div>
                       <div class="col-auto col-sm-auto text-center">
                       </div>

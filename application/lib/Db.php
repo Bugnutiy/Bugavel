@@ -107,7 +107,7 @@ class Db
 	 * Обновить запись в таблице
 	 * @param string $tname Имя таблицы
 	 * @param array $fields свойство=>значение
-	 * @param string $sign Условие поиска
+	 * @param string $sign Условие поиска WHERE не нужно (Не защищено!)
 	 * @return 1|0 Успешность операции
 	 */
 	public function update($tname, $fields, $sign)

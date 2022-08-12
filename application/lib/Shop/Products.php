@@ -22,7 +22,26 @@ class Products extends General
         parent::__construct($db, strtolower(getClassName(self::class)));
         $this->properties = &$properties;
     }
-
+    public function getByCategoryId($id)
+    {
+        return $this->getByField('category_id', $id);
+    }
+    /**
+     * Обновить общее количество товара из его вариаций
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function UpdateQuantity($id)
+    {
+        $id=intval($id);
+        $properties = $this->properties->getByProductId($id);
+        $quantity = 0;
+        foreach ($properties as $property_node) {
+            $quantity += $property_node['quantity'];
+        }
+        return $this->db->update($this->table,['quantity' => $quantity],"`id` = $id");
+    }
     public function Update($arr)
     {
         // dd($arr);
@@ -65,7 +84,7 @@ class Products extends General
         }
 
         if (!empty($arr['id'])) {
-            $id = $arr['id'];
+            $id =intval($arr['id']);
             $exist = current($this->getById($id));
             unset($arr['id']);
             // ddd($exist);
@@ -98,6 +117,7 @@ class Products extends General
             if (!$this->db->update($this->table, $arr, "`id` = $id")) {
                 $err[] = 'Обновить запись в БД не удалось';
             }
+            // dd($this->UpdateQuantity($id));
         } else {
             /* dd($arr);
               arr
@@ -140,7 +160,7 @@ class Products extends General
                 'price_en' => $arr['price_en'],
                 'quantity' => $arr['quantity']
             ];
-            unset($arr['quantity']);
+            // unset($arr['quantity']);
             $arr['average_price'] = $arr['price'];
             $arr['average_price_en'] = $arr['price_en'];
             $arr['min_price'] = $arr['price'];

@@ -92,10 +92,24 @@
                 <!-- translate language -->
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="LangSwither">
                   <h6 class="dropdown-header">Язык/Language</h6>
-                  <a class="dropdown-item" href="?lang=RU">
+                  <? $_GET=array_merge($_GET,['lang'=>'RU']); 
+                  $href_tmp='?';
+                  foreach ($_GET as $key => $value) {
+                    $href_tmp.="$key=$value&";
+                  }
+                  $href_tmp=substr($href_tmp,0,-1);
+                  ?>
+                  <a class="dropdown-item" href="<?=$href_tmp?>">
                     <img src="public/images/icons/rus.png" alt="" />Русский
                   </a>
-                  <a class="dropdown-item" href="?lang=EN">
+                  <? $_GET=array_merge($_GET,['lang'=>'EN']); 
+                  $href_tmp='?';
+                  foreach ($_GET as $key => $value) {
+                    $href_tmp.="$key=$value&";
+                  }
+                  $href_tmp=substr($href_tmp,0,-1);
+                  ?>
+                  <a class="dropdown-item" href="<?=$href_tmp?>">
                     <img src="public/images/icons/eng.png" alt="" />English
                   </a>
                 </div>
@@ -124,7 +138,7 @@
               <? foreach ($categories as $cat_id => $cat_node) : ?>
                 <a href="/catalog?category=<?= $cat_id ?>"><?= current($user)['lang'] == 'EN' ? $cat_node['name_en'] : $cat_node['name'] ?></a><br />
               <? endforeach ?>
-             
+
             </div>
             <div class="col-auto">
               <a href=""><?= current($user)['lang'] == 'EN' ? 'FAQ' : 'Вопросы' ?></a><br />
@@ -136,8 +150,9 @@
         </div>
 
         <div class="col-12 col-sm-4 col-xl-4 persona text-end my-3">
-          <p class="mb-3"><?= current($user)['lang'] == 'EN' ? 'Leonid Smagin' : 'Смагин Леонид Павлович' ?><p>
-          <a class="e-mail">xyz@gmail.com</a>
+          <p class="mb-3"><?= current($user)['lang'] == 'EN' ? 'Leonid Smagin' : 'Смагин Леонид Павлович' ?>
+          <p>
+            <a class="e-mail">xyz@gmail.com</a>
           <div class="contacts mt-3">
             <a href="#" class="bi bi-youtube"></a>
             <a href="#" class="bi bi-instagram mx-2"></a>
