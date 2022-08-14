@@ -7,6 +7,8 @@ use application\core\View;
 use application\lib\Shop\Products;
 use application\lib\Shop\Cart;
 
+use function PHPSTORM_META\type;
+
 // use application\lib\Db;
 // use application\models\AdminModel;
 /**
@@ -33,6 +35,13 @@ class MainController extends Controller
 			"user" => $this->model->user->getUser(),
 			"route" => $route
 		];
+		// $alerts = [
+		// 	0 => [
+		// 		'type'=>'danger',
+		// 		'RU'=>'',
+		// 		'EN'=>''
+		// 	]
+		// ];
 	}
 
 	public function indexAction()
@@ -51,17 +60,30 @@ class MainController extends Controller
 			// dd($this->model->shop->cart->addToCart($_GET['addcart'], $this->model->user->getUserId()));
 
 			$err = array_merge($err, $this->model->shop->cart->addToCart($_GET['addcart'], $this->model->user->getUserId()));
-			$vars = array_merge($vars, ['err' => $err]);
+			if (empty($err)) {
+				$alert[] = [
+					'type' => 'success',
+					'RU' => 'Товар добавлен в корзину',
+					'EN' => 'The product has been added to the cart'
+				];
+				$vars = array_merge($vars, ['alerts' => $alert]);
+			} else $vars = array_merge($vars, ['err' => $err]);
 		}
+		$products = [];
 		if (!empty($_GET['category'])) {
 			$products = $this->model->shop->products->getByCategoryId($_GET['category']);
-			foreach ($products as $product_id => $value) {
-				$products[$product_id]['properties'] = $this->model->shop->products_properties->getByProductId($product_id);
-			}
-			$vars = array_merge($vars, [
-				'products' => $products,
-			]);
-			// $this->model->shop->products_properties->getByProductId()
+		} else {
+			$products = $this->model->shop->products->getAll();
+		}
+		foreach ($products as $product_id => $value) {
+			$products[$product_id]['properties'] = $this->model->shop->products_properties->getByProductId($product_id, 1);
+		}
+		$vars = array_merge($vars, [
+			'products' => $products,
+		]);
+		// $_SERVER['REQUEST_URI']=str_replace($_SERVER['REDIRECT_QUERY_STRING'],'',$_SERVER['REQUEST_URI']);
+		// dd($_SERVER);
+		if (!empty($_GET['category'])) {
 			$this->view->render([
 				'RU' => 'LeoSmagin - ' . (empty($this->view->default_vars['categories'][$_GET['category']]) ? 'Каталог' : $this->view->default_vars['categories'][$_GET['category']]['name']),
 
@@ -69,31 +91,54 @@ class MainController extends Controller
 			], $vars);
 			exit;
 		} else {
-			$vars = array_merge($vars, [
-				'products' => $this->model->shop->products->getAll(),
-			]);
+			$this->view->render([
+				'RU' => 'LeoSmagin - Все товары',
+				'EN' => 'LeoSmagin - All goods',
+			], $vars);
 		}
-		// dd($vars);
-		$this->view->render(['RU' => 'LeoSmagin - Каталог', 'EN' => 'LeoSmagin - Catalog'], $vars);
 	}
 	public function productAction()
 	{
 		$vars = [];
+		$alerts = [];
+		if (!empty($_POST['property_id']) && !empty($_POST['quantity'])) {
+			// dd($_POST);
+			$err = $this->model->shop->cart->addToCart($_POST['property_id'], $this->model->user->getUserId(), $_POST['quantity']);
+			// dd($err);
+			if (empty($err)) {
+				$alerts[] = [
+					'type' => 'success',
+					'RU' => 'Товар добавлен в корзину',
+					'EN' => 'The product has been added to the cart'
+				];
+			}
+			$vars = array_merge($vars, [
+				'err' => $err,
+				'alerts' => $alerts,
+			]);
+		}
 		// $this->view->path=$this->route['controller'] . '/' .'productview';
 		if (empty($_GET['id'])) View::redirect('/');
 
 		$product = $this->model->shop->products->getById($_GET['id']);
 		if (empty($product)) View::redirect('/');
 
+		$category = $this->model->shop->categories->getById(current($product)['category_id']);
+		if (empty($category)) View::redirect('/');
+
 		$properties = $this->model->shop->products_properties->getByProductId($_GET['id']);
+		if (empty($properties)) View::redirect('/');
+
+		$avaliable_properties = $this->model->shop->products_properties->getByProductId($_GET['id'], 1);
 		if (empty($properties)) View::redirect('/');
 
 		$vars = array_merge($vars, [
 			'product' => $product,
+			'category'=> current($category),
 			'properties' => $properties,
+			'avaliable_properties' => $avaliable_properties,
 		]);
 
-		$this->view->render(['RU' => 'LeoSmagin - Каталог', 'EN' => 'LeoSmagin - Catalog'],$vars);
-
+		$this->view->render(['RU' => 'LeoSmagin - ' . current($product)['name'], 'EN' => 'LeoSmagin - ' . current($product)['name_en']], $vars);
 	}
 }

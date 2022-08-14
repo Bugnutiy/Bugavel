@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 12 2022 г., 10:56
+-- Время создания: Авг 14 2022 г., 12:01
 -- Версия сервера: 5.6.51-log
 -- Версия PHP: 7.4.29
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `cart` (
   `id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
-  `product_id` int(11) UNSIGNED NOT NULL,
+  `product_id` int(11) UNSIGNED DEFAULT NULL,
   `property_id` int(11) UNSIGNED NOT NULL,
   `quantity` int(11) NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -117,6 +117,8 @@ CREATE TABLE `products` (
 CREATE TABLE `products_properties` (
   `id` int(11) UNSIGNED NOT NULL,
   `product_id` int(11) UNSIGNED NOT NULL,
+  `classname` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `classname_en` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default',
   `name_en` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` int(11) NOT NULL,

@@ -23,7 +23,7 @@
     <!-- Блок описания -->
     <!-- <div class=""> -->
     <? if (!empty($category)) : ?>
-      <div class="container-lg description_block g-4">
+      <div class="container-lg description_block g-4 mb-3">
         <div class="row ">
           <div class="col py-3">
             <h3 class="text-center"><?= current($user)['lang'] == 'EN' ? (!empty($category) ? $category['name_en'] : "Catalog") :  $category['name'] ?></h3>

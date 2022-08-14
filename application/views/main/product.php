@@ -26,6 +26,7 @@
             <div class="col-12 text-center name">
               <h1 class="mb-3"><?= current($user)['lang'] == 'RU' ? current($product)['name'] : current($product)['name_en'] ?></h1>
             </div>
+
             <!-- Price -->
             <div class="col-12 mb-3 price">
               <?
@@ -33,15 +34,15 @@
               ?>
               <? if (current($user)['lang'] == 'RU') : ?>
                 <? if (current($product)['min_price'] == current($product)['max_price']) : ?>
-                  <p class="mb-0" id=""><?= current($product)['min_price'] ?> руб.</p>
+                  <p class="mb-0"><span id="product_price"><?= number_format(current($product)['min_price'], 0, ',', ' ') ?></span> руб.</p>
                 <? else : ?>
-                  <p class="mb-0" id="product_price"><?= current($product)['min_price'] ?> - <?= current($product)['max_price'] ?> руб.</p>
+                  <p class="mb-0"><span id="product_price"><?= number_format(current($product)['min_price'], 0, ',', ' ') ?> - <?= number_format(current($product)['max_price'], 0, ',', ' ')  ?></span> руб.</p>
                 <? endif ?>
               <? else : ?>
                 <? if (current($product)['min_price_en'] == current($product)['max_price_en']) : ?>
-                  <p class="mb-0" id="">$<?= current($product)['min_price_en'] ?></p>
+                  <p class="mb-0">$<span id="product_price"><?= number_format(current($product)['min_price_en'], 0, '.', ',') ?></span></p>
                 <? else : ?>
-                  <p class="mb-0" id="product_price">$<?= current($product)['min_price_en'] ?> - <?= current($product)['max_price_en'] ?></p>
+                  <p class="mb-0">$<span id="product_price"><?= number_format(current($product)['min_price_en'], 0, '.', ',') ?> - <?= number_format(current($product)['max_price_en'], 0, '.', ',') ?></span></p>
                 <? endif ?>
               <? endif ?>
 
@@ -51,37 +52,22 @@
                 <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock"><?= current($product)['quantity'] ?> <?= current($product)['quantity'] > 1 ? 'pieces' : 'piece' ?> in stock</span>
               <? endif ?>
             </div>
-            <!-- Options -->
-            <script>
-              var json = '<?= json_encode($properties) ?>';
-              var arr = JSON.parse(json);
-              var selected = 0;
-              selected = arr.reduce(function(current) {
-                return curent;
-              });
-              dd(selected);
-              if (Object.keys(arr).length == 1) {
-                selected = arr.reduce(function(current) {
-                  return curent;
-                });
 
-              }
-            </script>
+            <!-- Options -->
             <? if (count($properties) > 1) : ?>
               <div class="col-12 mb-3 options">
                 <?
-                $class_properties = [];
+                $properties_by_classname = [];
                 foreach ($properties as $id => $node) {
-                  $class_properties[$node['classname_en']][$id] = $node;
+                  $properties_by_classname[$node['classname_en']][$id] = $node;
                 }
-                // ddd($class_properties);
-                foreach ($class_properties as $class_nodes) : ?>
+                foreach ($properties_by_classname as $class_nodes) : ?>
                   <div class="row">
                     <div class="col-auto pe-0 align-self-center"><b><?= current($user)['lang'] == 'RU' ? current($class_nodes)['classname'] : current($class_nodes)['classname_en'] ?></b></div>
                     <div class="col">
 
                       <select class="form-select text-truncate" aria-label="Select option" name='property_id' required onchange="select(value)">
-                        <option hidden value="0" selected disabled>Выбрать</option>
+                        <option hidden value="" selected disabled><?= current($user)['lang'] == 'RU' ? 'Выбрать' : 'Select' ?></option>
                         <? foreach ($class_nodes as $property_id => $node) : ?>
                           <option value="<?= $property_id ?>" <?= $node['quantity'] < 1 ? 'disabled' : '' ?>>
                             <?= current($user)['lang'] == 'RU' ? $node['name'] : $node['name_en'] ?>
@@ -95,30 +81,22 @@
                 <? endforeach ?>
 
               </div>
-              <script>
-                function select(property_id) {
-                  var quantity = document.getElementById('stock');
-                  // dd(arr[property_id]['quantity']);
-                  var string = <?= current($user)['lang'] == 'RU' ?
-                                  "arr[property_id]['quantity']+' шт. в наличии'" : ("arr[property_id]['quantity']>1?arr[property_id]['quantity']+' pieces in stock':arr[property_id]['quantity']+' piece in stock'") ?>;
-                  quantity.innerHTML = string;
-                  selected = property_id;
-                }
-              </script>
+            <? else : ?>
+              <input type="hidden" name="property_id" value="<?= key($properties) ?>">
             <? endif ?>
             <!-- Количество -->
-            <div class="col-12  quantity">
+            <div class="col-12 quantity">
               <div class="row justify-content-around">
                 <div class="col-auto ">
                   <div class="input-group ">
                     <a class="px-1 btn left btn-outline-secondary input-group-text" onclick="decrease()">-</a>
-                    <input type="number " class="form-control px-0 text-center" value="1">
+                    <input type="number" min="1" max="1" step="1" class="form-control px-0 text-center" value="1" id="quantity_field" name="quantity" onchange="cost(this)">
                     <a class=" px-1 btn right btn-outline-secondary input-group-text" onclick="increase()">+</a>
                   </div>
                 </div>
                 <!-- Button -->
                 <div class="col-auto">
-                  <a href="#" class="btn btn-warning cart_btn px-3">Add to cart</a>
+                  <button type="submit" class="btn btn-warning cart_btn px-3">Add to cart</button>
                 </div>
               </div>
             </div>
@@ -129,17 +107,13 @@
     </div>
   </div>
 </form>
-
-<div class="container-lg product_description description_block g-4 product_actions">
+<div class="container-lg product_description description_block g-4 product_actions mb-3">
   <div class="row ">
     <div class="col py-3">
-      <h3 class="text-center">Гибрид</h3>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias ea maiores unde, suscipit at inventore est
-        eaque error deleniti ad illo non cum corporis eum eos illum dolorum quaerat hic?</p>
+      <h3 class="text-center"><?= current($user)['lang'] == 'EN' ? (!empty($category) ? $category['name_en'] : "Catalog") :  $category['name'] ?></h3>
 
-      <p>1234</p>
+      <?= current($user)['lang'] == 'EN' ? (!empty($category) ? $category['description_en'] : "") : $category['description'] ?>
 
-      <p>1234</p>
 
     </div>
   </div>
@@ -174,4 +148,66 @@
     }).mount();
   }
 </script>
+
+<script>
+  var properties = <?= json_encode($avaliable_properties) ?>;
+  var selected = 0;
+
+  function select(property_id) {
+    if (property_id == 0) {
+      return 0;
+    }
+    var stockElem = document.getElementById('stock');
+    var stock = properties[property_id]['quantity'];
+
+    var priceElem = document.getElementById('product_price');
+    var quantityElem = document.getElementById('quantity_field');
+    quantityElem.max = stock;
+    // dd(quantityElem.value);
+    var price = properties[property_id]['price<?= current($user)['lang'] == 'RU' ? '' : '_en' ?>'] * quantityElem.value;
+
+    priceElem.innerHTML = price.format(0, 3, '<?= current($user)['lang'] == 'RU' ? ' ' : ',' ?>');
+
+    var string = <?= current($user)['lang'] == 'RU' ?
+                    "stock+' шт. в наличии'" : ("stock>1?stock+' pieces in stock':stock+' piece in stock'") ?>;
+    stockElem.innerHTML = string;
+    selected = property_id;
+  }
+  if (Object.keys(properties).length == 1) {
+    selected = Object.keys(properties)[0];
+    dd(selected);
+    select(selected);
+  }
+
+  function cost(input) {
+    if (selected > 0) {
+      // dd(input.value);
+
+      var priceElem = document.getElementById('product_price');
+      var price = properties[selected]['price<?= current($user)['lang'] == 'RU' ? '' : '_en' ?>'] * input.value;
+
+      priceElem.innerHTML = price.format(0, 3, '<?= current($user)['lang'] == 'RU' ? ' ' : ',' ?>');
+    }
+  }
+
+  function increase() {
+    quantElem = document.getElementById('quantity_field');
+    quantElem.value++;
+    cost(quantElem);
+  }
+
+  function decrease() {
+    quantElem = document.getElementById('quantity_field');
+    if (quantElem.value > 1) {
+      quantElem.value--;
+      cost(quantElem);
+    }
+  }
+</script>
+<!-- <script>
+  var alertList = document.querySelectorAll('.alert')
+  var alerts = [].slice.call(alertList).map(function(element) {
+    return new bootstrap.Alert(element)
+  })
+</script> -->
 <? $script = ob_get_clean() ?>

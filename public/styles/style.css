@@ -683,6 +683,21 @@ footer p {
 .product_actions .price p {
   font-size: 1.5em;
 }
+.product_actions .quantity input[type=number]::-webkit-outer-spin-button,
+.product_actions .quantity input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.product_actions .quantity input[type=number],
+.product_actions .quantity input[type=number]:hover,
+.product_actions .quantity input[type=number]:focus {
+  -webkit-appearance: none;
+          appearance: none;
+  -moz-appearance: textfield;
+}
+.product_actions .quantity .input-group * {
+  line-height: 1;
+}
 .product_actions .quantity .input-group .btn {
   width: 2em;
   text-align: center;

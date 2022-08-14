@@ -34,13 +34,13 @@ class Products extends General
      */
     public function UpdateQuantity($id)
     {
-        $id=intval($id);
+        $id = intval($id);
         $properties = $this->properties->getByProductId($id);
         $quantity = 0;
         foreach ($properties as $property_node) {
             $quantity += $property_node['quantity'];
         }
-        return $this->db->update($this->table,['quantity' => $quantity],"`id` = $id");
+        return $this->db->update($this->table, ['quantity' => $quantity], "`id` = $id");
     }
     public function Update($arr)
     {
@@ -84,7 +84,7 @@ class Products extends General
         }
 
         if (!empty($arr['id'])) {
-            $id =intval($arr['id']);
+            $id = intval($arr['id']);
             $exist = current($this->getById($id));
             unset($arr['id']);
             // ddd($exist);
@@ -228,11 +228,11 @@ class Products extends General
         } else {
             $all_exists_properties = $this->properties->getAll();
         }
-        // dd($all_exists_properties);
 
         $product_id_properties = [];
         foreach ($all_exists_properties as $property_id => $property_node) {
-            $product_id_properties[$property_node['product_id']][$property_id]  = $property_node;
+            if ($property_node['quantity'] > 0)
+                $product_id_properties[$property_node['product_id']][$property_id]  = $property_node;
         }
         // dd($product_id_properties);
         // if (!empty($id)) {
@@ -245,26 +245,27 @@ class Products extends General
             $sum_price = 0;
             $sum_price_en = 0;
             $k = 0;
-            $max_price = -1;
-            $max_price_en = -1;
+            $max_price = current($exists_properties)['price'];
+            $max_price_en = current($exists_properties)['price_en'];
+            $min_price = current($exists_properties)['price'];
+            $min_price_en = current($exists_properties)['price_en'];
+
             foreach ($exists_properties as $property_id => $property_node) {
-                if ($property_node['price'] > $max_price) $max_price = $property_node['price'];
-                if ($property_node['price_en'] > $max_price_en) $max_price_en = $property_node['price_en'];
+                if ($property_node['price'] > $max_price)
+                    $max_price = $property_node['price'];
+                if ($property_node['price_en'] > $max_price_en)
+                    $max_price_en = $property_node['price_en'];
+                if ($property_node['price'] < $min_price)
+                    $min_price = $property_node['price'];
+                if ($property_node['price_en'] < $min_price_en)
+                    $min_price_en = $property_node['price_en'];
+
                 $sum_price += $property_node['price'];
                 $sum_price_en += $property_node['price_en'];
                 $k++;
             }
             $average_price = ($sum_price) / $k;
             $average_price_en = ($sum_price_en) / $k;
-
-            // dd($exists_properties);
-
-            $min_price = $max_price;
-            $min_price_en = $max_price_en;
-            foreach ($exists_properties as $property_id => $property_node) {
-                if ($property_node['price'] < $min_price) $min_price = $property_node['price'];
-                if ($property_node['price_en'] < $min_price_en) $min_price_en = $property_node['price_en'];
-            }
 
             $fields = [
                 'id' => $product_id,
@@ -278,8 +279,8 @@ class Products extends General
             // unset($product_id_properties[$product_id]);
             // dd($product_id_properties);
             if (!$this->Update($fields))
-                // dd($err[] = "Не обновились цены товара с ID = $product_id");
-                unset($product_id_properties[$product_id]);
+                $err[] = "Не обновились цены товара с ID = $product_id";
+            // unset($product_id_properties[$product_id]);
         }
         return $err;
     }

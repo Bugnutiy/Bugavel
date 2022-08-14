@@ -27,21 +27,25 @@ class Cart extends General
      * @param string|int $property_id
      * @param string|int $user_id
      * @param string|int $quantity
-     * @return array Errors[EN|RU][] 
+     * @return array Errors[][EN|RU] 
      */
     public function addToCart($property_id, $user_id, $quantity = 1)
     {
         $err = [];
         $property = $this->products->properties->getById($property_id);
         if (empty($property)) {
-            $err['EN'][] = "Product not found";
-            $err['RU'][] = "Товар не найден";
+            $err[] = [
+                'EN' => "Product not found",
+                'RU' => "Товар не найден"
+            ];
             return $err;
         }
         // dd($property);
         if ($quantity > current($property)['quantity']) {
-            $err['EN'][] = "The required quantity of goods is missing from the warehouse";
-            $err['RU'][] = "На складе отсутствует необходимое количество товара";
+            $err[] = [
+                'EN' => "The required quantity of goods is missing from the warehouse",
+                'RU' => "На складе отсутствует необходимое количество товара"
+            ];
             return $err;
         }
         $dbansw = $this->Update([
@@ -52,8 +56,8 @@ class Cart extends General
         ]);
         // dd($dbansw);
         if (!empty($dbansw)) {
-            $err['EN'][] = "An error occurred while writing to the database";
-            $err['RU'][] = "Во время записи в базу данных произошла ошибка";
+            $err = array_merge($err,$dbansw);
+            // dd($err)
         }
         return $err;
     }
@@ -62,7 +66,12 @@ class Cart extends General
     {
         $err = [];
         if (empty($arr)) {
-            $err[] = 'Запрос оказался пуст';
+            $err[] = [
+                'EN' => "Empty request",
+                'RU' => "Запрос оказался пуст",
+                'code' => 'U1'
+            ];
+
             return $err;
         }
 
@@ -70,18 +79,36 @@ class Cart extends General
             $id = intval($arr['id']);
             unset($arr['id']);
             $exist = current($this->getById($id));
+            if (empty($exist)) {
+                $err[] = [
+                    'EN' => "Entry not found",
+                    'RU' => "Запись не найдена",
+                    'code' => 'U2'
+                ];
+                return $err;
+            }
             $matcher = [];
             foreach ($arr as $key => $value) {
                 if (isset($exist[$key]))
                     $matcher[$key] = $exist[$key];
                 else {
-                    $err[] = 'В таблице ' . $this->table . ' не настроены поля под запрос';
+                    // $err[] = 'В таблице ' . $this->table . ' не настроены поля под запрос';
+                    $err[] = [
+                        'EN' => "Error occured!",
+                        'RU' => "Произошла ошибка!",
+                        'code' => 'U3'
+                    ];
                     return $err;
                 }
             }
 
             if (!$this->db->update($this->table, $arr, "`id` = $id")) {
-                $err[] = 'Обновить1 запись в таблице ' . $this->table . ' не удалось';
+                // $err[] = 'Обновить1 запись в таблице ' . $this->table . ' не удалось';
+                $err[] = [
+                    'EN' => "Error occured!",
+                    'RU' => "Произошла ошибка!",
+                    'code' => 'U4'
+                ];
             }
         } else {
             if (!empty($arr['user_id']) and !empty($arr['property_id'])) {
@@ -89,18 +116,58 @@ class Cart extends General
 
                 if (empty($exist)) {
                     if (!$this->db->insert($this->table, $arr)) {
-                        $err[] = 'Создать запись в таблице ' . $this->table . ' не удалось';
+                        // $err[] = 'Создать запись в таблице ' . $this->table . ' не удалось';
+                        $err[] = [
+                            'EN' => "Error occured!",
+                            'RU' => "Произошла ошибка!",
+                            'code' => 'U5'
+                        ];
                     }
                 } else {
                     $id = key($exist);
-                    $arr['quantity'] += current($exist)['quantity'];
+                    $exist = current($exist);
+                    $matcher = [];
+                    foreach ($arr as $key => $value) {
+                        if (isset($exist[$key]))
+                            $matcher[$key] = $exist[$key];
+                        else {
+                            // ddd($arr);
+                            // dd($exist);
+                            // $err[] = 'В таблице ' . $this->table . ' не настроены поля под запрос';
+                            $err[] = [
+                                'EN' => "Error occured!",
+                                'RU' => "Произошла ошибка!",
+                                'code' => 'U6'
+                            ];
+                            return $err;
+                        }
+                    }
+                    if ($matcher == $arr) {
+                        $err[] = [
+                            'EN' => "This product is already in the cart",
+                            'RU' => "Этот товар уже есть в корзине",
+                            'code' => 'U7',
+                        ];
+                        return $err;
+                    }
+                    // $arr['quantity'] += current($exist)['quantity'];
 
                     if (!$this->db->update($this->table, $arr, "`id` = $id")) {
-                        $err[] = 'Обновить запись в таблице ' . $this->table . ' не удалось';
+                        // $err[] = 'Обновить запись в таблице ' . $this->table . ' не удалось';
+                        $err[] = [
+                            'EN' => "Error occured!",
+                            'RU' => "Произошла ошибка!",
+                            'code' => 'U8'
+                        ];
                     }
                 }
             } else {
-                $err[] = "Cart: user_id или property_id пустой";
+                // $err[] = "Cart: user_id или property_id пустой";
+                $err[] = [
+                    'EN' => "Error occured!",
+                    'RU' => "Произошла ошибка!",
+                    'code' => 'U9'
+                ];
             }
         }
         // dd($this->db->LastInsertId());

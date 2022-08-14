@@ -34,8 +34,11 @@ class Products_properties extends General
    * @param int|string $product_id - id товара
    * @return array
    */
-  public function getByProductId($product_id)
+  public function getByProductId($product_id, $avaliable = false)
   {
-    return $this->db->fetAllLite($this->table, '`product_id` = :product_id', ['product_id' => $product_id]);
+    if ($avaliable) {
+      return $this->db->fetAllLite($this->table, '`product_id` = :product_id AND `quantity`', ['product_id' => $product_id]);
+    } else
+      return $this->db->fetAllLite($this->table, '`product_id` = :product_id', ['product_id' => $product_id]);
   }
 }
