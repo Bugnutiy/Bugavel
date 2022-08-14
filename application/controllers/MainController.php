@@ -33,7 +33,8 @@ class MainController extends Controller
 		$this->view->default_vars = [
 			"categories" => $this->model->shop->categories->getAll(),
 			"user" => $this->model->user->getUser(),
-			"route" => $route
+			"route" => $route,
+			"cart_total"=> $this->model->shop->cart->getTotal($this->model->user->getUserId())
 		];
 		// $alerts = [
 		// 	0 => [

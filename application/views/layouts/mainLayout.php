@@ -110,6 +110,9 @@
 
                 <div class="dropdown-menu dropdown-menu-dark dropdown-menu-sm-end" aria-labelledby="triggerId">
                   <a class="dropdown-item" href="#">Action</a>
+
+                  <h6 class="dropdown-header"><?= current($user)['lang'] == 'RU' ? 'Корзина' : 'Your cart' ?></h6>
+                  <a class="dropdown-item" href="#">Action</a>
                   <a class="dropdown-item disabled" href="#">Disabled action</a>
                   <h6 class="dropdown-header">Section header</h6>
                   <a class="dropdown-item" href="#">Action</a>
@@ -193,6 +196,20 @@
                   </a>
 
                   <div class="dropdown-menu dropdown-menu-dark dropdown-menu-sm-end" aria-labelledby="triggerId">
+                    <span class="dropdown-item-text small"><?= current($user)['lang'] == 'RU' ? 'Корзина' : 'Your cart' ?></span>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-item-text">
+                      <div class="row justify-content-between">
+                        <div class="col-auto">
+                          <?= current($user)['lang'] == 'RU' ? 'Итого:' : 'Total:' ?>
+                        </div>
+                        <div class="col-auto">
+                          123
+                        </div>
+                      </div>
+                    </div>
+
+
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item disabled" href="#">Disabled action</a>
                     <h6 class="dropdown-header">Section header</h6>

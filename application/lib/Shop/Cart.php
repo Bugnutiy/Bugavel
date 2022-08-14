@@ -56,7 +56,7 @@ class Cart extends General
         ]);
         // dd($dbansw);
         if (!empty($dbansw)) {
-            $err = array_merge($err,$dbansw);
+            $err = array_merge($err, $dbansw);
             // dd($err)
         }
         return $err;
@@ -173,5 +173,46 @@ class Cart extends General
         // dd($this->db->LastInsertId());
 
         return $err;
+    }
+    public function getTotal($user_id)
+    {
+        $cart = $this->db->fetAllLite($this->table, "`user_id` = :user_id", ['user_id' => $user_id]);
+        if (empty($cart)) {
+            // dd($cart);
+
+            return $cart;
+        } else {
+            $cart_by_product_id = [];
+            foreach ($cart as $id => $node) {
+                $cart_by_product_id[$node['product_id']][$id] = $node;
+            }
+            ddd("__________________cart_by_product________________________");
+            ddd($cart_by_product_id);
+
+            $total_quantity = 0;
+            $total_price = 0;
+            $total_price_en = 0;
+            foreach ($cart_by_product_id as $product_id => $cart_nodes) {
+                $properties = $this->products->properties->getByProductId($product_id);
+                foreach ($cart_nodes as $cart_id => $cart_node) {
+                    if (empty($properties[$cart_node['property_id']])) {
+                        $this->Delete($cart_id);
+                        continue;
+                    }
+                    $property = $properties[$cart_node['property_id']];
+                    ddd("__________________property________________________");
+                    ddd($property);
+                    $total_quantity += $cart_node['quantity'];
+                    $total_price += $property['price'] * $cart_node['quantity'];
+                    $total_price_en += $property['price_en'] * $cart_node['quantity'];
+                }
+            }
+            $total = [
+                'total_quantity' => $total_quantity,
+                'total_price' => $total_price,
+                'total_price_en' => $total_price_en,
+            ];
+            dd($total);
+        }
     }
 }
