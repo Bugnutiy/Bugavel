@@ -34,7 +34,7 @@ class MainController extends Controller
 			"categories" => $this->model->shop->categories->getAll(),
 			"user" => $this->model->user->getUser(),
 			"route" => $route,
-			"cart_total"=> $this->model->shop->cart->getTotal($this->model->user->getUserId())
+			"cart_total" => $this->model->shop->cart->getTotal($this->model->user->getUserId())
 		];
 		// $alerts = [
 		// 	0 => [
@@ -113,9 +113,13 @@ class MainController extends Controller
 					'EN' => 'The product has been added to the cart'
 				];
 			}
+			$cart_total = $this->model->shop->cart->getTotal($this->model->user->getUserId());
+			// dd($this->model->shop->cart->getByUser($this->model->user->getUserId()));
+			// dd($cart_total);
 			$vars = array_merge($vars, [
 				'err' => $err,
 				'alerts' => $alerts,
+				'cart_total' => $cart_total
 			]);
 		}
 		// $this->view->path=$this->route['controller'] . '/' .'productview';
@@ -135,7 +139,7 @@ class MainController extends Controller
 
 		$vars = array_merge($vars, [
 			'product' => $product,
-			'category'=> current($category),
+			'category' => current($category),
 			'properties' => $properties,
 			'avaliable_properties' => $avaliable_properties,
 		]);

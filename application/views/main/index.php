@@ -168,8 +168,8 @@
   var Scrollers = document.getElementsByClassName("photo_scroller");
   // dd(Scrollers);
   for (var i = 0; i < Scrollers.length; i++) {
-    dd("Scrollers:")
-    dd(Scrollers[i]);
+    // dd("Scrollers:")
+    // dd(Scrollers[i]);
     new Splide(Scrollers[i], {
       arrows: false,
       type: "loop",
@@ -192,8 +192,8 @@
   var Sliders = document.getElementsByClassName('index_wrapper_slider')
   // dd(Scrollers);
   for (var i = 0; i < Sliders.length; i++) {
-    dd('Sliders:');
-    dd(Sliders[i]);
+    // dd('Sliders:');
+    // dd(Sliders[i]);
     new Splide(Sliders[i], {
       arrows: true,
       type: "loop",

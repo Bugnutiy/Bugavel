@@ -110,9 +110,9 @@
 <div class="container-lg product_description description_block g-4 product_actions mb-3">
   <div class="row ">
     <div class="col py-3">
-      <h3 class="text-center"><?= current($user)['lang'] == 'EN' ? (!empty($category) ? $category['name_en'] : "Catalog") :  $category['name'] ?></h3>
+      <h3 class="text-center"><?= current($user)['lang'] == 'EN' ? current($product)['name_en'] :  current($product)['name'] ?></h3>
 
-      <?= current($user)['lang'] == 'EN' ? (!empty($category) ? $category['description_en'] : "") : $category['description'] ?>
+      <?= current($user)['lang'] == 'EN' ? current($product)['description_en'] : current($product)['description'] ?>
 
 
     </div>
@@ -175,7 +175,7 @@
   }
   if (Object.keys(properties).length == 1) {
     selected = Object.keys(properties)[0];
-    dd(selected);
+    // dd(selected);
     select(selected);
   }
 

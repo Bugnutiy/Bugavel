@@ -56,7 +56,10 @@ class User
             if ($ip == '127.0.0.1')
                 $ip = '176.101.14.187'; //todo
             //$ip = $_SERVER['REMOTE_ADDR'];
-            $geo = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip), 1);
+            $geo = json_decode(@file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip), 1);
+            // dd($geo);
+            if (empty($geo))
+                $geo['geoplugin_countryCode'] = 'EN';
             // ddd($geo);
             $country = $geo['geoplugin_countryCode'];
             $q = "INSERT INTO `users` (`session_id`, `country`, `lang`) VALUES (:sess, :country, :lang)";

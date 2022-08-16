@@ -176,6 +176,7 @@ class Cart extends General
     }
     public function getTotal($user_id)
     {
+        // dd(1);
         $cart = $this->db->fetAllLite($this->table, "`user_id` = :user_id", ['user_id' => $user_id]);
         if (empty($cart)) {
             // dd($cart);
@@ -186,8 +187,8 @@ class Cart extends General
             foreach ($cart as $id => $node) {
                 $cart_by_product_id[$node['product_id']][$id] = $node;
             }
-            ddd("__________________cart_by_product________________________");
-            ddd($cart_by_product_id);
+            // ddd("__________________cart_by_product________________________");
+            // ddd($cart_by_product_id);
 
             $total_quantity = 0;
             $total_price = 0;
@@ -200,8 +201,8 @@ class Cart extends General
                         continue;
                     }
                     $property = $properties[$cart_node['property_id']];
-                    ddd("__________________property________________________");
-                    ddd($property);
+                    // ddd("__________________property________________________");
+                    // ddd($property);
                     $total_quantity += $cart_node['quantity'];
                     $total_price += $property['price'] * $cart_node['quantity'];
                     $total_price_en += $property['price_en'] * $cart_node['quantity'];
@@ -212,7 +213,18 @@ class Cart extends General
                 'total_price' => $total_price,
                 'total_price_en' => $total_price_en,
             ];
-            dd($total);
+            // dd($total);
+            return $total;
         }
+    }
+    /**
+     * Получить объект корзины пользователя
+     *
+     * @param int|string $userid
+     * @return array
+     */
+    public function getByUser($user_id)
+    {
+        return $this->db->fetAllLite($this->table,'`user_id` = :user_id',[':user_id'=>$user_id]);
     }
 }

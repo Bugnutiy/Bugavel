@@ -15,7 +15,7 @@
     content="https://leosmagin.com/wp-content/uploads/2019/03/cropped-гибббр1-270x270.jpg">
    -->
   <!-- Splide -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/css/themes/splide-default.min.css" />
+  <link rel="stylesheet" href="/public/styles/vendor/splide-default.min.css" />
   <!-- Bootstrap -->
   <link rel="stylesheet" href="/public/bootstrap/bootstrap.min.css" />
   <link rel="stylesheet" href="/public/bootstrap/icons/bootstrap-icons.css" />
@@ -192,30 +192,46 @@
               <div class="right d-flex my-2 my-lg-0 row justify-content-md-end justify-content-between">
                 <div class="dropdown cart col-auto">
                   <a class="bi bi-cart" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="quantity">9+</div>
+                    <? if (!empty($cart_total)) : ?>
+                      <div class="quantity"><?= $cart_total['total_quantity'] > 9 ? '9+' : $cart_total['total_quantity'] ?></div>
+                    <? endif ?>
                   </a>
 
-                  <div class="dropdown-menu dropdown-menu-dark dropdown-menu-sm-end" aria-labelledby="triggerId">
+                  <div class="dropdown-menu dropdown-menu-dark dropdown-menu-sm-end" aria-labelledby="triggerId" style="min-width: 15em">
                     <span class="dropdown-item-text small"><?= current($user)['lang'] == 'RU' ? 'Корзина' : 'Your cart' ?></span>
                     <div class="dropdown-divider"></div>
-                    <div class="dropdown-item-text">
-                      <div class="row justify-content-between">
-                        <div class="col-auto">
-                          <?= current($user)['lang'] == 'RU' ? 'Итого:' : 'Total:' ?>
+                    <? if (!empty($cart_total)) : ?>
+                      <div class="dropdown-item-text">
+                        <div class="row justify-content-between">
+                          <div class="col-auto">
+                            <?= current($user)['lang'] == 'RU' ? 'Итого:' : 'Total:' ?>
+                          </div>
+                          <div class="col-auto"><b>
+                              <?= current($user)['lang'] == 'RU' ? number_format($cart_total['total_price'], 0, ',', ' ') . ' руб.' : '$' . number_format($cart_total['total_price_en']) ?></b>
+                          </div>
                         </div>
-                        <div class="col-auto">
-                          123
+                        <div class="row justify-content-between">
+                          <div class="col-auto">
+                            <small><?= current($user)['lang'] == 'RU' ? 'Товаров:' : 'Total items:' ?></small>
+                          </div>
+                          <div class="col-auto"><small>
+                              <b><?= $cart_total['total_quantity'] . (current($user)['lang'] == 'RU' ? ' шт.' : ' pcs') ?></b>
+                            </small>
+                          </div>
                         </div>
                       </div>
-                    </div>
-
-
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item disabled" href="#">Disabled action</a>
-                    <h6 class="dropdown-header">Section header</h6>
-                    <a class="dropdown-item" href="#">Action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">After divider action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="">
+                        <?= current($user)['lang'] == 'RU' ? 'Оформить заказ' : 'Place an order' ?>
+                      </a>
+                      <a class="dropdown-item" href="">
+                        <?= current($user)['lang'] == 'RU' ? 'Открыть корзину' : 'Open cart' ?>
+                      </a>
+                    <? else : ?>
+                      <div class="dropdown-item-text">
+                        <?= current($user)['lang'] == 'RU' ? 'Ваша корзина пуста' : 'Your cart is empty' ?>
+                      </div>
+                    <? endif ?>
                   </div>
                 </div>
 
