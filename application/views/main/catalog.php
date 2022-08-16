@@ -282,9 +282,9 @@
     <script>
       var Sliders = document.getElementsByClassName('goods_slider')
       // dd(Scrollers);
-      dd('Sliders:');
+      // dd('Sliders:');
       for (var i = 0; i < Sliders.length; i++) {
-        dd(Sliders[i]);
+        // dd(Sliders[i]);
         new Splide(Sliders[i], {
           arrows: false,
           type: "loop",
