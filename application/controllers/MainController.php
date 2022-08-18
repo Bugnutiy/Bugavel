@@ -162,7 +162,10 @@ class MainController extends Controller
 
 		$vars = array_merge($vars, [
 			'cart' => $this->model->shop->cart->getByUser($this->model->user->getUserId()),
+			'properties'=>$this->model->shop->products_properties->getAll(),
+			'products'=>$this->model->shop->products->getAll(),
 		]);
+		// dd($vars);
 		$this->view->render(
 			[
 				'RU' => 'Ваша корзина - LeoSmagin.com',
