@@ -221,10 +221,11 @@
                         </div>
                       </div>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="">
+                      <a class="dropdown-item text-center pb-2" href="">
                         <?= current($user)['lang'] == 'RU' ? 'Оформить заказ' : 'Place an order' ?>
                       </a>
-                      <a class="dropdown-item" href="">
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item text-center pb-2" href="/cart">
                         <?= current($user)['lang'] == 'RU' ? 'Открыть корзину' : 'Open cart' ?>
                       </a>
                     <? else : ?>

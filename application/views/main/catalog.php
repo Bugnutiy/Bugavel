@@ -63,7 +63,7 @@
                 </div>
                 <div class="card-body text-center pt-1 pb-1">
                   <h6 class="card-title m-0"><a href=""><b><?= current($user)['lang'] == 'EN' ? $product_node['name_en'] : $product_node['name'] ?></b></a></h6>
-                  <p class="card-text"><?= current($user)['lang'] == 'EN' ? ($product_node['min_price_en'] == $product_node['max_price_en'] ? '$' . $product_node['min_price_en'] : 'from $' . $product_node['min_price_en']) : ($product_node['min_price'] == $product_node['max_price'] ? $product_node['min_price'] . ' руб.' : 'от ' . $product_node['min_price'] . ' руб.') ?></p>
+                  <p class="card-text"><?= current($user)['lang'] == 'EN' ? ($product_node['min_price_en'] == $product_node['max_price_en'] ? '$' . number_format($product_node['min_price_en']) : 'from $' . number_format($product_node['min_price_en'])) : ($product_node['min_price'] == $product_node['max_price'] ? number_format($product_node['min_price'], 0, ',', ' ') . ' руб.' : 'от ' . number_format($product_node['min_price'], 0, ',', ' ') . ' руб.') ?></p>
                 </div>
                 <div class="row justify-content-center">
                   <?
@@ -94,10 +94,10 @@
                             </div>
                             <div class="modal-body">
                               <div class="row row-cols-2 justify-content-between">
-                                
+
                                 <? foreach ($product_node['properties'] as $property_id => $property_node) : ?>
                                   <div class="col align-self-center"><?= current($user)['lang'] == 'EN' ? $property_node['name_en'] : $property_node['name'] ?></div>
-                                  <div class="col-auto align-self-center"><?= current($user)['lang'] == 'EN' ? '$' . $property_node['price_en'] : $property_node['price'] . ' руб.' ?></div>
+                                  <div class="col-auto align-self-center"><?= current($user)['lang'] == 'EN' ? '$' . number_format($property_node['price_en']) : number_format($property_node['price'],0,',',' ') . ' руб.' ?></div>
                                   <div class="col-auto my-2">
                                     <a href="<?= $href_tmp . "addcart=" . $property_id ?>" class="btn btn-outline-success text-success  text-center">
                                       <span class="bi bi-cart-plus"></span>

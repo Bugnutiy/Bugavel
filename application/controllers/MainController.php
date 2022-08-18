@@ -62,12 +62,16 @@ class MainController extends Controller
 
 			$err = array_merge($err, $this->model->shop->cart->addToCart($_GET['addcart'], $this->model->user->getUserId()));
 			if (empty($err)) {
+				$cart_total = $this->model->shop->cart->getTotal($this->model->user->getUserId());
 				$alert[] = [
 					'type' => 'success',
 					'RU' => 'Товар добавлен в корзину',
 					'EN' => 'The product has been added to the cart'
 				];
-				$vars = array_merge($vars, ['alerts' => $alert]);
+				$vars = array_merge($vars, [
+					'alerts' => $alert,
+					'cart_total' => $cart_total,
+				]);
 			} else $vars = array_merge($vars, ['err' => $err]);
 		}
 		$products = [];
@@ -144,6 +148,28 @@ class MainController extends Controller
 			'avaliable_properties' => $avaliable_properties,
 		]);
 
-		$this->view->render(['RU' => 'LeoSmagin - ' . current($product)['name'], 'EN' => 'LeoSmagin - ' . current($product)['name_en']], $vars);
+		$this->view->render(
+			[
+				'RU' => 'LeoSmagin - ' . current($product)['name'],
+				'EN' => 'LeoSmagin - ' . current($product)['name_en']
+			],
+			$vars
+		);
+	}
+	public function cartAction()
+	{
+		$vars = [];
+
+		$vars = array_merge($vars, [
+			'cart' => $this->model->shop->cart->getByUser($this->model->user->getUserId()),
+		]);
+		$this->view->render(
+			[
+				'RU' => 'Ваша корзина - LeoSmagin.com',
+				'EN' => 'Your Shopping Cart - LeoSmagin.com'
+			],
+			$vars
+		);
+		// dd('cart');
 	}
 }

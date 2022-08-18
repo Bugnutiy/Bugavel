@@ -9,6 +9,8 @@ return
             // 'confident',
             'catalog',
             'product',
+            'cart',
+            'order'
         ],
 
         'authorize' => [

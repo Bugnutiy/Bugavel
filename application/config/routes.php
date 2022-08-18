@@ -17,6 +17,10 @@ return [
 		'controller' => 'main',
 		'action' => 'product'
 	],
+	'cart' => [
+		'controller' => 'main',
+		'action' => 'cart'
+	],
 	/***********************************Admin shop******************************************/
 	////////////////////////categories//////////////////////////
 	'admin/categories' => [
