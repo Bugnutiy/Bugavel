@@ -5,7 +5,7 @@
   <?= current($user)['lang'] == 'RU' ? 'Ваша корзина пуста' : 'Your cart is empty' ?>
 <? endif ?>
 <? foreach ($cart as $cart_id => $cart_node) : ?>
-  <div class="container-lg g-4 cart_page description_block mt-1">
+  <div class="container-lg g-4 cart_page description_block mt-2">
     <div class="row">
       <div class="col">
         <div class="row justify-content-center">
@@ -14,23 +14,32 @@
               <div class="col-12 item">
                 <div class="row">
                   <div class="col-3 cart_image g-0">
-                    <img src="<?='/'.current(json_decode($products[$cart_node['product_id']]['images'],1))?>" alt="Picture">
+                    <img src="<?= '/' . current(json_decode($products[$cart_node['product_id']]['images'], 1)) ?>" alt="Picture">
                   </div>
                   <div class="col body align-self-center">
                     <div class="row justify-content-around">
                       <div class="col-auto align-self-center">
                         <h2 class="name m-0"><a href="">Hybrid black/gold</a></h2>
-                        <span class="small">123123</span>
+                        <? if (!empty($properties[$cart_node['property_id']]['classname']) and current($user)['lang'] == 'RU') : ?>
+                          <span class="small">
+                            <?= $properties[$cart_node['property_id']]['classname'] ?>: <?= $properties[$cart_node['property_id']]['name'] ?>
+                          </span>
+                        <? endif ?>
+                        <? if (!empty($properties[$cart_node['property_id']]['classname_en']) and current($user)['lang'] == 'EN') : ?>
+                          <span class="small">
+                            <?= $properties[$cart_node['property_id']]['classname_en'] ?>: <?= $properties[$cart_node['property_id']]['name_en'] ?>
+                          </span>
+                        <? endif ?>
                       </div>
                       <div class="col-auto align-self-center">
                         <div class="input-group quantity">
-                          <div class="btn btn-outline-secondary">-</div>
-                          <input type="number" class="form-control p-0 text-center" value="1">
-                          <div class="btn btn-outline-secondary">+</div>
+                          <div class="btn btn-outline-secondary" onclick="decrease('q<?=$cart_id?>')">-</div>
+                          <input type="number" class="form-control p-0 text-center" value="<?= $cart_node['quantity'] ?>" id="q<?=$cart_id?>" name[<?=$cart_id?>]="quantity" onchange="cost(this)">
+                          <div class="btn btn-outline-secondary" onclick="increase('q<?=$cart_id?>')">+</div>
                         </div>
                       </div>
                       <div class="col-auto align-self-center">
-                        <span class="amount">$12000</span>
+                        <span class="amount" id="cq<?=$cart_id?>">$12000</span>
                       </div>
                     </div>
                   </div>
@@ -46,86 +55,6 @@
     </div>
   </div>
 <? endforeach ?>
-<div class="container-lg g-4 cart_page description_block mt-1">
-  <div class="row">
-    <div class="col">
-      <div class="row justify-content-center">
-        <div class="col-12 cart">
-          <div class="row">
-            <div class="col-12 item">
-              <div class="row">
-                <a class="col-3 cart_image g-0">
-                  <img src="<?='/'.current(json_decode($products[$cart_node['product_id']]['images'],1))?>" alt="Picture">
-                </a>
-                <div class="col body align-self-center">
-                  <div class="row justify-content-around">
-                    <div class="col-auto align-self-center">
-                      <h2 class="name"><a href="">Hybrid black/gold</a></h2>
-                    </div>
-                    <div class="col-auto align-self-center">
-                      <div class="input-group quantity">
-                        <div class="btn btn-outline-secondary">-</div>
-                        <input type="number" class="form-control p-0 text-center" value="1">
-                        <div class="btn btn-outline-secondary">+</div>
-                      </div>
-                    </div>
-                    <div class="col-auto align-self-center">
-                      <span class="amount">$12000</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-auto px-1">
-                  <a href="#" class="bi bi-x-circle text-secondary"></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container-lg g-4 cart_page description_block mt-1">
-  <div class="row">
-    <div class="col">
-      <div class="row justify-content-center">
-        <div class="col-12 cart">
-          <div class="row">
-            <div class="col-12 item">
-              <div class="row">
-                <div class="col-3 cart_image g-0">
-                  <img src="public/images/ALL/DSC02502_DxO.jpg" alt="">
-                </div>
-                <div class="col body align-self-center">
-                  <div class="row justify-content-around">
-                    <div class="col-auto align-self-center">
-                      <h2 class="name"><a href="">Hybrid black/gold</a></h2>
-                    </div>
-                    <div class="col-auto align-self-center">
-                      <div class="input-group quantity">
-                        <div class="btn btn-outline-secondary">-</div>
-                        <input type="number" class="form-control p-0 text-center" value="1">
-                        <div class="btn btn-outline-secondary">+</div>
-                      </div>
-                    </div>
-                    <div class="col-auto align-self-center">
-                      <span class="amount">$12000</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-auto px-1">
-                  <a href="#" class="bi bi-x-circle text-secondary"></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="container-lg mb-3 cart_button">
   <div class="row justify-content-end">
     <div class="col-auto align-self-center">
