@@ -158,12 +158,26 @@ class MainController extends Controller
 	}
 	public function cartAction()
 	{
+		$request = file_get_contents("php://input"); //(AJAX POST)
+		$request = json_decode($request, 1);
+		if (!empty($request) and !empty($request['id'] and !empty($request['quantity']))) {
+
+			echo json_encode([
+				'db_answ' => $this->model->shop->cart->Update($request),
+				'cart' => $this->model->shop->cart->getByUser($this->model->user->getUserId()),
+				'properties' => $this->model->shop->products_properties->getAll(),
+				'products' => $this->model->shop->products->getAll(),
+				"cart_total" => $this->model->shop->cart->getTotal($this->model->user->getUserId())
+
+			]);
+			exit;
+		}
 		$vars = [];
 
 		$vars = array_merge($vars, [
 			'cart' => $this->model->shop->cart->getByUser($this->model->user->getUserId()),
-			'properties'=>$this->model->shop->products_properties->getAll(),
-			'products'=>$this->model->shop->products->getAll(),
+			'properties' => $this->model->shop->products_properties->getAll(),
+			'products' => $this->model->shop->products->getAll(),
 		]);
 		// dd($vars);
 		$this->view->render(

@@ -5,9 +5,9 @@ namespace application\lib\User;
 use application\lib\Db;
 use PDO;
 
-//const SESSION_DEATH_TIME = (2 * 24 * 60 * 60); //2 дня
+const SESSION_DEATH_TIME = (2 * 24 * 60 * 60); //2 дня
 
-const SESSION_DEATH_TIME = (1 * 60); //1 минута
+// const SESSION_DEATH_TIME = (1 * 60); //1 минута
 
 class User
 {
