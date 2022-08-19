@@ -80,7 +80,7 @@ foreach ($cart as $cart_id => $cart_node) : ?>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= current($user)['lang'] == 'RU' ? 'Отмена' : 'Cancel' ?></button>
-          <a type="button" class="btn btn-primary"><?= current($user)['lang'] == 'RU' ? 'Удалить' : 'Remove' ?></a>
+          <a href="/cart?del=<?= $cart_id ?>" class="btn btn-primary"><?= current($user)['lang'] == 'RU' ? 'Удалить' : 'Remove' ?></a>
         </div>
       </div>
     </div>
@@ -128,8 +128,7 @@ foreach ($cart as $cart_id => $cart_node) : ?>
 
             <div class="mb-3 form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class=" form-check-label" for="exampleCheck1"><small>I agree with the current privacy policy
-                  and terms of use</small></label>
+              <label class=" form-check-label" for="exampleCheck1"><small>I agree with the current privacy policy and terms of use</small></label>
             </div>
           </div>
           <div class="modal-footer">
@@ -160,7 +159,29 @@ foreach ($cart as $cart_id => $cart_node) : ?>
       id: qelem.id,
       quantity: qelem.value,
     };
-    let xhttp = new XMLHttpRequest();
+
+    function CreateRequest() {
+      var Request = false;
+
+      if (window.XMLHttpRequest) {
+        //Gecko-совместимые браузеры, Safari, Konqueror
+        Request = new XMLHttpRequest();
+      } else if (window.ActiveXObject) {
+        //Internet explorer
+        try {
+          Request = new ActiveXObject("Microsoft.XMLHTTP");
+        } catch (CatchException) {
+          Request = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+      }
+
+      if (!Request) {
+        alert("Error! Please try to change browser");
+      }
+
+      return Request;
+    }
+    let xhttp = CreateRequest();
     xhttp.open("POST", "/cart", true);
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.send(JSON.stringify(data));

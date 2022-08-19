@@ -225,6 +225,24 @@ class Cart extends General
      */
     public function getByUser($user_id)
     {
-        return $this->db->fetAllLite($this->table,'`user_id` = :user_id',[':user_id'=>$user_id]);
+        return $this->db->fetAllLite($this->table, '`user_id` = :user_id', [':user_id' => $user_id]);
+    }
+    /**
+     * Удалить запись из корзины
+     *
+     * @param int|string $id
+     * @param int|string $user_id
+     * @return void
+     */
+    public function Delete($id, $user_id = '')
+    {
+        if (empty($user_id)) {
+            return $this->db->delete($this->table, '`id` = :id', ['id' => $id])->rowCount();
+        } else {
+            return $this->db->delete($this->table, '`id` = :id AND `user_id` = :user_id', [
+                'id' => $id,
+                'user_id' => $user_id
+            ])->rowCount();
+        }
     }
 }

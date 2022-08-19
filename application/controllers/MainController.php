@@ -158,16 +158,24 @@ class MainController extends Controller
 	}
 	public function cartAction()
 	{
-		$request = file_get_contents("php://input"); //(AJAX POST)
-		$request = json_decode($request, 1);
+		if (isset($_GET['del'])) {
+			if($this->model->shop->cart->Delete($_GET['del'],$this->model->user->getUserId())){
+				$this->view->redirect('/cart');
+			}
+			else{
+				$this->view->redirect('/');
+			}
+		}
+
+		$request = json_decode(file_get_contents("php://input"), 1); //(AJAX POST)
 		if (!empty($request) and !empty($request['id'] and !empty($request['quantity']))) {
 
 			echo json_encode([
 				'db_answ' => $this->model->shop->cart->Update($request),
 				'cart' => $this->model->shop->cart->getByUser($this->model->user->getUserId()),
 				'properties' => $this->model->shop->products_properties->getAll(),
-				'products' => $this->model->shop->products->getAll(),
-				"cart_total" => $this->model->shop->cart->getTotal($this->model->user->getUserId())
+				// 'products' => $this->model->shop->products->getAll(),
+				'cart_total' => $this->model->shop->cart->getTotal($this->model->user->getUserId())
 
 			]);
 			exit;
