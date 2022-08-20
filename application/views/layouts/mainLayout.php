@@ -311,10 +311,33 @@
 
             </div>
             <div class="col-auto">
-              <a href=""><?= current($user)['lang'] == 'EN' ? 'FAQ' : 'Вопросы' ?></a><br />
-              <a href=""><?= current($user)['lang'] == 'EN' ? 'Payment' : 'Оплата' ?></a><br />
-              <a href=""><?= current($user)['lang'] == 'EN' ? 'Delivery' : 'Доставка' ?></a><br />
-              <a href=""><?= current($user)['lang'] == 'EN' ? 'Contacts' : 'Контакты' ?></a>
+              <a href=""><?= current($user)['lang'] == 'EN' ? 'FAQ' : 'Вопросы' ?></a><br>
+              <a href=""><?= current($user)['lang'] == 'EN' ? 'Payment' : 'Оплата' ?></a><br>
+              <a href=""><?= current($user)['lang'] == 'EN' ? 'Delivery' : 'Доставка' ?></a><br>
+              <a href=""><?= current($user)['lang'] == 'EN' ? 'Contacts' : 'Контакты' ?></a><br>
+              <? if (current($user)['role']) : ?>
+                <a href="" class="mt-2 d-block"><?= current($user)['lang'] == 'EN' ? 'Account' : 'Аккаунт' ?></a>
+              <? else : ?>
+                <a type="button" class="mt-2 d-block" data-bs-toggle="modal" data-bs-target="#mainAccountModalLogin"><?= current($user)['lang'] == 'EN' ? 'Account' : 'Аккаунт' ?></a>
+
+                <div class="modal fade" id="mainAccountModalLogin" tabindex="-1" aria-labelledby="mainAccountModalLoginLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="mainAccountModalLoginLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <? endif ?>
             </div>
           </div>
         </div>

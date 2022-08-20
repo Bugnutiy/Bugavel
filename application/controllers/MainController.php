@@ -169,7 +169,7 @@ class MainController extends Controller
 
 		$request = json_decode(file_get_contents("php://input"), 1); //(AJAX POST)
 		if (!empty($request) and !empty($request['id'] and !empty($request['quantity']))) {
-
+			// sleep(1);
 			echo json_encode([
 				'db_answ' => $this->model->shop->cart->Update($request),
 				'cart' => $this->model->shop->cart->getByUser($this->model->user->getUserId()),
