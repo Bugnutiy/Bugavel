@@ -319,24 +319,6 @@
                 <a href="" class="mt-2 d-block"><?= current($user)['lang'] == 'EN' ? 'Account' : 'Аккаунт' ?></a>
               <? else : ?>
                 <a type="button" class="mt-2 d-block" data-bs-toggle="modal" data-bs-target="#mainAccountModalLogin"><?= current($user)['lang'] == 'EN' ? 'Account' : 'Аккаунт' ?></a>
-
-                <div class="modal fade" id="mainAccountModalLogin" tabindex="-1" aria-labelledby="mainAccountModalLoginLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="mainAccountModalLoginLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        ...
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               <? endif ?>
             </div>
           </div>
@@ -355,6 +337,78 @@
       </div>
     </div>
   </footer>
+  <? if (current($user)['role']) : ?>
+  <? else : ?>
+    <!-- Log in -->
+    <form action="?authorization=1" method="POST" enctype="multipart/form-data" class="modal fade" id="mainAccountModalLogin" tabindex="-1" aria-labelledby="mainAccountModalLoginLabel" aria-hidden="true">
+      <div class="modal-dialog" style="max-width: 400px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="mainAccountModalLoginLabel"><?= current($user)['lang'] == 'RU' ? 'Авторизация' : 'Authorization' ?>/<a href="#" data-bs-toggle="modal" data-bs-target="#Register"><?= current($user)['lang'] == 'RU' ? 'Регистрация' : 'Registration' ?></a></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="Login" class="form-label">E-mail</label>
+              <input type="email" class="form-control" name="email" id="Login" placeholder="example@server.com" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label"><?= current($user)['lang'] == 'RU' ? 'Пароль' : 'Password' ?></label>
+              <input type="password" class="form-control" name="password" id="password" aria-describedby="forgot" placeholder="<?= current($user)['lang'] == 'RU' ? 'Пароль' : 'Password' ?>">
+              <small id="forgot" class="form-text text-muted"><a href="#" data-bs-toggle="modal" data-bs-target="#ForgotPassword"><?= current($user)['lang'] == 'RU' ? 'Забыли пароль?' : 'Forgot your password?' ?></a></small>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= current($user)['lang'] == 'RU' ? 'Отмена' : 'Cancle' ?></button>
+            <button type="success" class="btn btn-primary"><?= current($user)['lang'] == 'RU' ? 'Войти' : 'Log in' ?></button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Reset passeword -->
+    <form action="?reset_password=1" method="POST" enctype="multipart/form-data" class="modal fade" id="ForgotPassword" tabindex="-1" role="dialog" aria-labelledby="ForgotPassword" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><?= current($user)['lang'] == 'RU' ? 'Сброс пароля' : 'Reset your password' ?></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="">
+              <label for="" class="form-label">E-mail</label>
+              <input type="email" required class="form-control" name="email" id="E-mail" placeholder="<?= current($user)['lang'] == 'RU' ? 'Введите вашу электронную почту' : 'Type your e-mail here' ?>">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= current($user)['lang'] == 'RU' ? 'Отмена' : 'Cancle' ?></button>
+            <button type="success" class="btn btn-primary"><?= current($user)['lang'] == 'RU' ? 'Сбросить пароль' : 'Reset password' ?></button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- REGISTRATION -->
+    <form action="?register=1" method="POST" enctype="multipart/form-data" class="modal fade" id="Register" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><?= current($user)['lang'] == 'RU' ? 'Регистрация' : 'Registration' ?></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="">
+              <label for="" class="form-label">E-mail</label>
+              <input type="email" required class="form-control" name="email" id="E-mail" placeholder="<?= current($user)['lang'] == 'RU' ? 'Введите вашу электронную почту' : 'Type your e-mail here' ?>">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= current($user)['lang'] == 'RU' ? 'Отмена' : 'Cancle' ?></button>
+            <button type="success" class="btn btn-primary"><?= current($user)['lang'] == 'RU' ? 'Зарегистрироваться' : 'Register' ?></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  <? endif ?>
   <script>
     // dd("hello");
     var tooltipTriggerList = [].slice.call(
