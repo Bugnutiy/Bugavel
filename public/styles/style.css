@@ -46,6 +46,15 @@
   font-style: normal;
   font-weight: normal;
 }
+.iti__flag {
+  background-image: url("/public/intltel/img/flags.png");
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag {
+    background-image: url("/public/intltel/img/flags@2x.png");
+  }
+}
 body {
   background: #f5f5f5;
   color: #32363a;
@@ -55,7 +64,12 @@ body {
 .btn {
   border-radius: 40px 40px 40px 40px;
 }
-.btn h1, .btn h2, .btn h3, .btn h4, .btn h5, .btn h6 {
+.btn h1,
+.btn h2,
+.btn h3,
+.btn h4,
+.btn h5,
+.btn h6 {
   padding: 0px;
   margin: 0;
 }

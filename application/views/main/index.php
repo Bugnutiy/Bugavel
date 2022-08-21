@@ -25,20 +25,20 @@
                   <div class="col-12 col-sm-auto text-center">
                     <div class="row justify-content-center">
                       <div class="col-auto">
-                        <h1><?= current($user)['lang'] == 'EN' ? 'NEW' : 'НОВИНКА' ?><span class="d-sm-none">!</span></h1>
+                        <h1><?= current($user)['lang'] !== 'RU'? 'NEW' : 'НОВИНКА' ?><span class="d-sm-none">!</span></h1>
                       </div>
                       <div class="col-auto col-sm-auto text-center">
-                        <h1 class="my-0"><?= current($user)['lang'] == 'EN' ? 'HYBRID' : 'ГИБРИД' ?> V3</h1>
+                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU'? 'HYBRID' : 'ГИБРИД' ?> V3</h1>
                       </div>
                       <div class="col-12 text-center">
-                        <h3>&#8222;<?= current($user)['lang'] == 'EN' ? 'DIESEL BEE' : 'ДИЗЕЛЬНАЯ ПЧЕЛА' ?>&#8221;</h3>
+                        <h3>&#8222;<?= current($user)['lang'] !== 'RU'? 'DIESEL BEE' : 'ДИЗЕЛЬНАЯ ПЧЕЛА' ?>&#8221;</h3>
                       </div>
                     </div>
                   </div>
 
                   <div class="col-12 text-center mt-1">
                     <a type="button" class="btn btn-outline-light">
-                      <?= current($user)['lang'] == 'EN' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
+                      <?= current($user)['lang'] !== 'RU'? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
                     </a>
                   </div>
 
@@ -62,20 +62,20 @@
                   <div class="col-12 col-sm-auto text-center">
                     <div class="row justify-content-center">
                       <div class="col-auto">
-                        <h1 class="my-0"><?= current($user)['lang'] == 'EN' ? 'AGELESS' : 'НЕСТАРЕЮЩАЯ' ?></h1>
+                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU'? 'AGELESS' : 'НЕСТАРЕЮЩАЯ' ?></h1>
                       </div>
                       <div class="col-auto col-sm-auto text-center">
-                        <h1 class="my-0"><?= current($user)['lang'] == 'EN' ? 'CLASSIC' : 'КЛАССИКА' ?></h1>
+                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU'? 'CLASSIC' : 'КЛАССИКА' ?></h1>
                       </div>
                       <div class="col-12 text-center">
-                        <h3>&#8222;<?= current($user)['lang'] == 'EN' ? 'COIL' : 'ИНДУКЦИЯ' ?>&#8221;</h3>
+                        <h3>&#8222;<?= current($user)['lang'] !== 'RU'? 'COIL' : 'ИНДУКЦИЯ' ?>&#8221;</h3>
                       </div>
                     </div>
                   </div>
 
                   <div class="col-12 text-center mt-1">
                     <a type="button" class="btn btn-outline-light">
-                      <?= current($user)['lang'] == 'EN' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
+                      <?= current($user)['lang'] !== 'RU'? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
                     </a>
                   </div>
 
@@ -101,19 +101,19 @@
                   <div class="col-12 col-sm-auto text-center">
                     <div class="row justify-content-center">
                       <div class="col-auto">
-                        <h1> <?= current($user)['lang'] == 'EN' ? 'THE MOST POWERFULL' : 'МАКСИМАЛЬНАЯ МОЩНОСТЬ' ?></h1>
+                        <h1> <?= current($user)['lang'] !== 'RU'? 'THE MOST POWERFULL' : 'МАКСИМАЛЬНАЯ МОЩНОСТЬ' ?></h1>
                       </div>
                       <div class="col-auto col-sm-auto text-center">
                       </div>
                       <div class="col-12 text-center">
-                        <h3>&#8222;<?= current($user)['lang'] == 'EN' ? 'GORILLA' : 'ГОРИЛЛА' ?>&#8221;</h3>
+                        <h3>&#8222;<?= current($user)['lang'] !== 'RU'? 'GORILLA' : 'ГОРИЛЛА' ?>&#8221;</h3>
                       </div>
                     </div>
                   </div>
 
                   <div class="col-12 text-center mt-1">
                     <a type="button" class="btn btn-outline-light">
-                      <?= current($user)['lang'] == 'EN' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
+                      <?= current($user)['lang'] !== 'RU'? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
                     </a>
                   </div>
 
@@ -138,7 +138,7 @@
 <div class="index_categories">
   <div class="container-lg">
     <div class="header row align-items-center justify-content-center">
-      <h1 class="col-auto my-2"><?= current($user)['lang'] == 'EN' ? 'Categories' : 'Категории' ?></h1>
+      <h1 class="col-auto my-2"><?= current($user)['lang'] !== 'RU'? 'Categories' : 'Категории' ?></h1>
     </div>
 
     <div class="cards row">
@@ -148,7 +148,7 @@
           <div class="text-center">
             <a href="/catalog?category=<?= $cat_id ?>"><img class="card-img-top" src="/<?= current(json_decode($cat_node['images'], 1)) ?>" alt="Category image" /></a>
             <div class="card-body p-0">
-              <h4 class="card-title"><a href="/catalog?category=<?= $cat_id ?>"><?= current($user)['lang'] == 'EN' ? $cat_node['name_en'] : $cat_node['name'] ?></a></h4>
+              <h4 class="card-title"><a href="/catalog?category=<?= $cat_id ?>"><?= current($user)['lang'] !== 'RU'? $cat_node['name_en'] : $cat_node['name'] ?></a></h4>
             </div>
           </div>
         </div>
