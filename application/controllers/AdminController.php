@@ -17,6 +17,51 @@ class AdminController extends Controller
 		$this->view->layout = 'admin';
 	}
 
+	public function ordersEditAction()
+	{
+		if (!empty($_POST)) {
+			// dd($_POST);
+			$order = current($this->model->shop->orders->getById($_POST['id']));
+			
+			$order['cart'] = json_decode($order['cart'], 1);
+			ddd($order);
+			// dd($_POST['cart']);
+			foreach ($order['cart'] as $cart_id => $cart_node) {
+				$order['cart'][$cart_id]['quantity']=$_POST['cart'][$cart_id]['quantity'];
+			}
+			$order['cart']=json_encode($order['cart']);
+			// dd($order);
+			$order['id']=$_POST['id'];
+			$this->model->shop->orders->Update($order);
+			$this->view->redirect('/admin/orders');
+		}
+		if (isset($_GET['id'])) {
+			$order = $this->model->shop->orders->getById($_GET['id']);
+			// dd($order);
+			if (!empty($order)) {
+				$vars = [
+					'order' => $order,
+					'orders_class' => $this->model->shop->orders,
+					'products' => $this->model->shop->products->getAll(),
+					'properties' => $this->model->shop->products_properties->getAll(),
+				];
+				$this->view->render('Заказы', $vars);
+			}
+		}
+	}
+
+	public function ordersAction()
+	{
+		$bcr = ['Заказы'];
+
+		$vars = [
+			'bcr' => $bcr,
+			'orders' => $this->model->db->fetAllLiteNW('orders', 'ORDER BY `changed_at` DESC', []),
+			'orders_class' => $this->model->shop->orders,
+		];
+		$this->view->render('Заказы', $vars);
+	}
+
 	public function mainAction()
 	{
 		//debug($_SESSION);
@@ -237,7 +282,7 @@ class AdminController extends Controller
 				$this->view->redirect('/admin/products/properties?product_id=' . $_GET['product_id']);
 			} else {
 				// dd($err);
-				$vars = array_merge($vars,['err' => $err]);
+				$vars = array_merge($vars, ['err' => $err]);
 			};
 		}
 

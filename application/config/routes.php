@@ -77,23 +77,25 @@ return [
 		'controller' => 'admin',
 		'action' => 'propertiesDelete',
 	],
-	/////////////////////////////SBER////////////////////////////
-	'admin/sber' => [
-		'controller' => 'admin',
-		'action' => 'sber',
-	],
-	/////////////////////////////=////////////////////////////
-
-
+///////////////////////////////ORDERS////////////////////////////
 	'admin/orders' => [
 		'controller' => 'admin',
 		'action' => 'orders',
 	],
-
-
-	'admin/modul' => [
+	'admin/orders/edit' => [
 		'controller' => 'admin',
-		'action' => 'categories',
+		'action' => 'ordersEdit',
 	],
+	/////////////////////////////SBER////////////////////////////
+	// 'admin/sber' => [
+	// 	'controller' => 'admin',
+	// 	'action' => 'sber',
+	// ],
+	/////////////////////////////=////////////////////////////
+
+	// 'admin/modul' => [
+	// 	'controller' => 'admin',
+	// 	'action' => 'categories',
+	// ],
 
 ];

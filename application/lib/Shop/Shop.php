@@ -7,6 +7,7 @@ use application\lib\Shop\Categories;
 use application\lib\Shop\Products;
 use application\lib\Shop\Products_properties;
 use application\lib\Shop\Cart;
+use application\lib\Shop\Orders;
 
 class Shop
 {
@@ -36,6 +37,11 @@ class Shop
     public $cart;
 
     /**
+     * @var Orders
+     */
+    public $orders;
+
+    /**
      * Constructor
      */
     function __construct(&$db)
@@ -47,6 +53,7 @@ class Shop
         $this->products = new Products($this->db, $this->products_properties);
         $this->products_properties->ProductsReg($this->products);
         $this->cart = new Cart($this->db, $this->products);
+        $this->orders = new Orders($this->db);
         // dd(memory_get_usage());
     }
 }

@@ -36,13 +36,78 @@ class MainController extends Controller
 			"route" => $route,
 			"cart_total" => $this->model->shop->cart->getTotal($this->model->user->getUserId())
 		];
-		// $alerts = [
-		// 	0 => [
-		// 		'type'=>'danger',
-		// 		'RU'=>'',
-		// 		'EN'=>''
-		// 	]
-		// ];
+		// dd($this->view->default_vars['user']);
+		/* Обработка регистрации, входа и создания заказа */
+		if (isset($_GET['register'])) {
+			// dd($this->register());
+			$this->view->default_vars = array_merge($this->view->default_vars, [
+				'alerts' => $this->register(),
+				"user" => $this->model->user->getUser(),
+
+			]);
+		}
+
+		if (isset($_GET['authorization'])) {
+			// dd($this->register());
+			$this->view->default_vars = array_merge($this->view->default_vars, [
+				'alerts' => $this->authorize(),
+				"user" => $this->model->user->getUser(),
+
+			]);
+			if(isset($_SESSION['admin'])){
+				$this->view->redirect('/admin/categories');
+			}
+		}
+
+		if (isset($_GET['order'])) {
+			// dd($this->register());
+			$this->view->default_vars = array_merge($this->view->default_vars, [
+				'alerts' => $this->makeOrder(),
+				"user" => $this->model->user->getUser(),
+			]);
+		}
+	}
+	protected function makeOrder()
+	{
+		// ddd($_POST);
+		if (isset($_POST['email'])) {
+			$this->model->user->update($this->model->user->getUserId(), $_POST);
+			$oansw = $this->model->shop->orders->makeOrder($this->model->user->getUser(), $_POST);
+			return $oansw;
+		}else{
+			return [];
+		}
+	}
+	protected function authorize()
+	{
+		if (isset($_POST['email']) && isset($_POST['password'])) {
+			// ddd($_GET);
+			// ddd($_POST);
+			return $this->model->user->Login();
+		} else {
+			$err[] = [
+				'type' => 'danger',
+				'EN' => 'An error has occurred! Please try again!',
+				'RU' => 'Произошла ошибка! Пожалуйста, попробуйте ещё раз!'
+			];
+			return $err;
+		}
+	}
+
+	protected function register()
+	{
+		if (isset($_POST['email']) && isset($_POST['password'])) {
+			// ddd($_GET);
+			// ddd($_POST);
+			return $this->model->user->Register();
+		} else {
+			$err[] = [
+				'type' => 'danger',
+				'EN' => 'An error has occurred! Please try again!',
+				'RU' => 'Произошла ошибка! Пожалуйста, попробуйте ещё раз!'
+			];
+			return $err;
+		}
 	}
 
 	public function indexAction()
@@ -159,10 +224,9 @@ class MainController extends Controller
 	public function cartAction()
 	{
 		if (isset($_GET['del'])) {
-			if($this->model->shop->cart->Delete($_GET['del'],$this->model->user->getUserId())){
+			if ($this->model->shop->cart->Delete($_GET['del'], $this->model->user->getUserId())) {
 				$this->view->redirect('/cart');
-			}
-			else{
+			} else {
 				$this->view->redirect('/');
 			}
 		}

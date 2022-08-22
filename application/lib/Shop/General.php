@@ -91,7 +91,7 @@ abstract class General
                 if (isset($exist[$key]))
                     $matcher[$key] = $exist[$key];
                 else {
-                    $err[] = 'В таблице ' . $this->table . ' не настроены поля под запрос';
+                    $err[] = 'В таблице ' . $this->table . ' не настроены поля '.$key.' под запрос';
                     return $err;
                 }
             }

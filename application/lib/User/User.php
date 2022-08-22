@@ -48,9 +48,8 @@ class User
     }
     protected function Session()
     {
-
+        // dd(1);
         $exist = $this->db->fetAll("SELECT * FROM `users` WHERE `session_id`= :session_id", ['session_id' => session_id()]);
-
         if (empty($exist)) {
             $ip = $this->getUserIp();
             if ($ip == '127.0.0.1')
@@ -70,6 +69,7 @@ class User
             $id = key($exist);
             $this->db->query("UPDATE `users` SET `changed_at`= CURRENT_TIMESTAMP WHERE `id`=:id", ['id' => $id]);
             $exist[$id]['changed_at'] = date('Y-m-d H:i:s');
+            $_SESSION[current($exist)['role']]['id'] = $id;
         }
         //debug($exist);
         return $exist;
@@ -100,59 +100,93 @@ class User
             $this->db->query("UPDATE `users` SET `session_id` = NULL WHERE `id` = :user_id", ['user_id' => $user_id]);
         }
     }
-    public function Login($phone, $email, $password)
+    public function Login($post = [])
     {
-        $password = md5($password);
+        // dd($_SESSION);
+        if (empty($post)) $post = $_POST;
+        $post['password'] = md5($post['password']);
 
-        $exist = $this->db->fetAll("SELECT * FROM `users` WHERE (`phone` = :phone OR `email` = :email) AND `password` = :pass", [
-            ':phone' => $phone,
-            ':email' => $email,
-            ':pass' => $password,
+        $exist = $this->db->fetAllLite('users', "`email` = :email AND `password` = :pass", [
+            ':email' => $post['email'],
+            ':pass' => $post['password'],
         ]);
-        //debug($exist);
+        // dd($exist);
         if (!empty($exist)) {
+            // dd(current($exist)['role']);
             $id = key($exist);
             //debug($user_id);
             $this->db->query("DELETE FROM `users` WHERE `session_id` = :session_id AND `temp` = 1", ['session_id' => session_id()]);
             $this->db->query("UPDATE `users` SET `session_id` = :session_id WHERE `id` = :id", ['session_id' => session_id(), 'id' => $id]);
-            $_SESSION['authorize']['id'] = $id;
-            return true;
-        } else
-            return false;
+            // $_SESSION['authorize']['id'] = $id;
+            $_SESSION[current($exist)['role']]['id'] = $id;
+            $err[] = [
+                'type' => 'success',
+                'EN' => 'You have successfully logged in!',
+                'RU' => 'Вы успешно вошли!'
+            ];
+            return $err;
+        } else {
+            $err[] = [
+                'type' => 'danger',
+                'EN' => 'User not found',
+                'RU' => 'Пользователь не найден'
+            ];
+            return $err;
+        }
     }
 
     /**
-     * @return false|1|0
+     * @param array $post ['поле'=>'значение']
+     * @return array|alert
      */
-    public function Register($user_name, $phone, $email, $password, $address, $apartment, $additions)
+    public function Register($post = [])
     {
+        if (empty($post)) $post = $_POST;
+        // dd($post);
+        $err = [];
         $user_id = $this->getUserId();
-        $password = md5($password);
-        $exist = $this->db->fetAll("SELECT * FROM `users` WHERE ( `phone` = :phone OR `email` = :email ) AND `password` IS NOT NULL", [
-            'phone' => $phone,
-            'email' => $email
-        ]);
-        //debug($exist);
-        if (!empty($exist)) {
-            return false;
+        if (isset($post['id'])) {
+            return [];
         }
+        $post['password'] = md5($post['password']);
+        $exist = $this->db->fetAllLite('users', '(`email` = :email) AND (`password` IS NOT NULL)', [
+            'email' => $post['email']
+        ]);
+        if (!empty($exist)) {
+            $err[] = [
+                'type' => 'warning',
+                'RU' => 'Пользователь с таким email уже существует! Попробуйте войти или восстановить пароль.',
+                'EN' => 'A user with such an email already exists! Try to log in or reset your password.',
+            ];
+            return $err;
+        }
+        $post['temp'] = 0;
+        $post['role'] = 'authorize';
 
+        // dd($post);
+        // $dbs = $this->db->update('users', $post, "`id` = :id", ['id' => $user_id]);
+        $dbs = $this->update($user_id, $post);
+        // $this->session = $this->Session();
+        if (!$dbs) {
+            $err[] = [
+                'type' => 'danger',
+                'EN' => 'An error has occurred! Please try again!',
+                'RU' => 'Произошла ошибка! Пожалуйста, попробуйте ещё раз!'
+            ];
+            return $err;
+        }
         $_SESSION['authorize']['id'] = $user_id;
-
-        return $this->db->query("UPDATE `users` SET `user_name` = :user_name, `phone` = :phone, `email` = :email, `address` = :address, `apartment` = :apartment, `additions` = :additions, `password` = :password, `temp` = '0' WHERE `id` = :user_id", [
-            'user_name' => $user_name,
-            'phone' => $phone,
-            'email' => $email,
-            'address' => $address,
-            'apartment' => $apartment,
-            'additions' => $additions,
-            'password' => $password,
-            'user_id' => $user_id
-        ])->rowCount();
+        $err[] = [
+            'type' => 'success',
+            'EN' => 'Registration was successful!',
+            'RU' => 'Регистрация прошла успешно!'
+        ];
+        return $err;
     }
     public function Logout()
     {
         $this->db->query("UPDATE `users` SET `session_id` = NULL WHERE `id` = :id", ['id' => key($this->session)]);
+        unset($_SESSION);
     }
 
     /**
@@ -183,6 +217,7 @@ class User
      * обновить параметры пользователя
      * @param int $user_id
      * @param array $fields = ['field_name'=>'val']
+     * @return PDO
      */
     public function update($user_id, $fields = [])
     {
@@ -194,9 +229,9 @@ class User
                 foreach ($fields as $field_name => $value) {
                     $this->session[$id][$field_name] = $value;
                     if ($field_name == 'id') {
-                        $this->session[$field_name] = $this->session[$id];
+                        $this->session[(int)$value] = $this->session[$id];
                         unset($this->session[$id]);
-                        $id = $field_name;
+                        $id = (int)$value;
                     }
                 }
             }

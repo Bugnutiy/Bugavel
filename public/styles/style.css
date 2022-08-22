@@ -725,7 +725,7 @@ footer p {
 }
 
 .cart_page .cart .item {
-  height: 5em;
+  min-height: 5em;
 }
 .cart_page .cart .item .row {
   height: 100%;
