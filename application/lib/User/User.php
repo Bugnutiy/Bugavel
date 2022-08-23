@@ -51,6 +51,7 @@ class User
         // dd(1);
         $exist = $this->db->fetAll("SELECT * FROM `users` WHERE `session_id`= :session_id", ['session_id' => session_id()]);
         if (empty($exist)) {
+
             $ip = $this->getUserIp();
             if ($ip == '127.0.0.1')
                 $ip = '130.31.40.42'; //todo
@@ -62,13 +63,21 @@ class User
             // ddd($geo);
             $country = $geo['geoplugin_countryCode'];
             // dd($country);
-            $q = "INSERT INTO `users` (`session_id`, `country`, `lang`) VALUES (:sess, :country, :lang)";
-            $this->db->query($q, [':sess' => session_id(), ':country' => $country, 'lang' => $country]);
+            $q = "INSERT INTO `users` (`session_id`, `country`, `lang`, `role`) VALUES (:sess, :country, :lang, :roles)";
+            $this->db->query($q, [
+                ':sess' => session_id(),
+                ':country' => $country, 
+                ':lang' => $country,
+                ':roles' => 'guest',
+            ]);
             $exist = $this->db->fetAll("SELECT * FROM `users` WHERE `session_id`= :sess", ['sess' => session_id()]);
+            unset($_SESSION['admin']);
+            $_SESSION[current($exist)['role']]['id'] = key($exist);
         } else {
             $id = key($exist);
             $this->db->query("UPDATE `users` SET `changed_at`= CURRENT_TIMESTAMP WHERE `id`=:id", ['id' => $id]);
             $exist[$id]['changed_at'] = date('Y-m-d H:i:s');
+            unset($_SESSION['admin']);
             $_SESSION[current($exist)['role']]['id'] = $id;
         }
         //debug($exist);
@@ -104,12 +113,14 @@ class User
     {
         // dd($_SESSION);
         if (empty($post)) $post = $_POST;
+        ddd($post);
         $post['password'] = md5($post['password']);
-
+        ddd($post);
         $exist = $this->db->fetAllLite('users', "`email` = :email AND `password` = :pass", [
             ':email' => $post['email'],
             ':pass' => $post['password'],
         ]);
+        ddd($exist);
         // dd($exist);
         if (!empty($exist)) {
             // dd(current($exist)['role']);

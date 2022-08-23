@@ -80,8 +80,8 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">Цена товара</span>
                 </div>
-                <input type="number" class="form-control" placeholder="Стоимость RU" name="price" required value="">
-                <input type="number" class="form-control" placeholder="Стоимость EN" name="price_en" required value="">
+                <input type="number" class="form-control" placeholder="RU" name="price" required value="">
+                <input type="number" class="form-control" placeholder="EN" name="price_en" required value="">
 
             </div>
             <div class="input-group mb-3">
