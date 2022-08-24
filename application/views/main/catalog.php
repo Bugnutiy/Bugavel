@@ -6,23 +6,23 @@
       <header class="category_header ">
         <div class="container-lg">
           <div class="row text-light">
-            <!-- <iframe src="https://www.youtube.com/embed/sM5VGcw578w" title="тату машинка HYBRAY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
             <?= $category['videos'] ?>
           </div>
 
         </div>
       </header>
     <? endif ?>
+    <? if (empty($category['videos'])) : ?>
+      <div class="mb-5"></div>
+    <? endif ?>
+
     <a class="big_logo row align-items-center" href="/">
       <div class="col-12">
         <img src="/public/images/logo/logo.png" alt="">
       </div>
     </a>
-
-
     <!-- Блок описания -->
-    <!-- <div class=""> -->
-    <? if (!empty($category)) : ?>
+    <? if (!empty($category) && strlen($category['description']) != 11) : ?>
       <div class="container-lg description_block g-4 mb-3">
         <div class="row ">
           <div class="col py-3">
@@ -38,7 +38,14 @@
     <div class="category_goods ">
       <div class="container-lg">
         <div class="header row align-items-center justify-content-center">
-          <h3 class="col-auto mt-3 mt-md-0 mb-md-4"><?= current($user)['lang'] !== 'RU' ? "Catalog" : "Каталог" ?></h3>
+          <h3 class="col-auto mt-3 mt-md-0 mb-md-4">
+            <? if (empty($category) || strlen($category['description']) != 11) : ?>
+              <?= current($user)['lang'] !== 'RU' ? "Catalog" : "Каталог" ?>
+            <? else : ?>
+              <?= current($user)['lang'] == 'RU' ? $category['name'] :  $category['name_en'] ?>
+
+            <? endif ?>
+          </h3>
         </div>
 
         <div class="row cards justify-content-center vertical_cards">
@@ -46,7 +53,18 @@
           <? $i = 0;
           foreach ($products as $product_id => $product_node) : ?>
             <? if ($product_node['quantity']) : ?>
-              <? if (1) : ?>
+              <?
+              $property_flag = [];
+              foreach ($product_node['properties'] as $property_id => $property_node) {
+                if (current($user)['country'] == 'RU') {
+                  if ($property_node['quantity'] && $property_node['price']) $property_flag[$property_id] = $property_node;
+                } else {
+                  if ($property_node['quantity'] && $property_node['price_en']) $property_flag[$property_id] = $property_node;
+                }
+              }
+              ?>
+
+              <? if (!empty($property_flag)) : ?>
                 <div class="card col-6 col-md-3 col-lg-2 mb-3">
                   <div class="slider_wrapper_1">
                     <div class="slider_wrapper_2">
@@ -64,7 +82,10 @@
                   </div>
                   <div class="card-body text-center pt-1 pb-1">
                     <h6 class="card-title m-0"><a href=""><b><?= current($user)['lang'] !== 'RU' ? $product_node['name_en'] : $product_node['name'] ?></b></a></h6>
-                    <p class="card-text"><?= current($user)['lang'] !== 'RU' ? ($product_node['min_price_en'] == $product_node['max_price_en'] ? '$' . number_format($product_node['min_price_en']) : 'from $' . number_format($product_node['min_price_en'])) : ($product_node['min_price'] == $product_node['max_price'] ? number_format($product_node['min_price'], 0, ',', ' ') . ' руб.' : 'от ' . number_format($product_node['min_price'], 0, ',', ' ') . ' руб.') ?></p>
+                    <p class="card-text"><?= current($user)['country'] !== 'RU' ?
+                                            ($product_node['min_price_en'] == $product_node['max_price_en'] ? '$' . number_format($product_node['min_price_en']) : (current($user)['lang'] == 'RU' ? 'от $' : 'from $') . number_format($product_node['min_price_en']))
+                                            : ($product_node['min_price'] == $product_node['max_price'] ? number_format($product_node['min_price'], 0, ',', ' ') . ' руб.' : (current($user)['lang'] == 'RU' ? 'от ' : 'from ') . number_format($product_node['min_price'], 0, ',', ' ') . ' руб.')
+                                          ?></p>
                   </div>
                   <div class="row justify-content-center">
                     <?
@@ -78,7 +99,7 @@
 
                     ?>
                     <div class="col-auto align-self-center">
-                      <? if (count($product_node['properties']) > 1) : ?>
+                      <? if (count($property_flag) > 1) : ?>
 
                         <!-- Button trigger modal -->
                         <a href="#" type="button" class="btn btn-outline-success text-success  text-center" data-bs-toggle="modal" data-bs-target="#propertyChoice<?= $product_id ?>">
@@ -96,9 +117,10 @@
                               <div class="modal-body">
                                 <div class="row row-cols-2 justify-content-between">
 
-                                  <? foreach ($product_node['properties'] as $property_id => $property_node) : ?>
+                                  <? foreach ($property_flag as $property_id => $property_node) : ?>
+
                                     <div class="col align-self-center"><?= current($user)['lang'] !== 'RU' ? $property_node['name_en'] : $property_node['name'] ?></div>
-                                    <div class="col-auto align-self-center"><?= current($user)['lang'] !== 'RU' ? '$' . number_format($property_node['price_en']) : number_format($property_node['price'], 0, ',', ' ') . ' руб.' ?></div>
+                                    <div class="col-auto align-self-center"><?= current($user)['country'] !== 'RU' ? '$' . number_format($property_node['price_en']) : number_format($property_node['price'], 0, ',', ' ') . ' руб.' ?></div>
                                     <div class="col-auto my-2">
                                       <a href="<?= $href_tmp . "addcart=" . $property_id ?>" class="btn btn-outline-success text-success  text-center">
                                         <span class="bi bi-cart-plus"></span>
@@ -107,6 +129,7 @@
                                     <div class="w-100">
                                       <hr>
                                     </div>
+
                                   <? endforeach ?>
 
                                 </div>
@@ -118,7 +141,7 @@
 
 
                       <? else : ?>
-                        <a href="<?= $href_tmp . "addcart=" . key($product_node['properties']) ?>" class="btn btn-outline-success text-success  text-center">
+                        <a href="<?= $href_tmp . "addcart=" . key($property_flag) ?>" class="btn btn-outline-success text-success  text-center">
                           <span class="bi bi-cart-plus"></span>
                         </a>
                       <? endif ?>

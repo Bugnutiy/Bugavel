@@ -24,7 +24,7 @@ foreach ($cart as $cart_id => $cart_node) : ?>
                   <div class="col body align-self-center">
                     <div class="row justify-content-around">
                       <div class="col-auto align-self-center">
-                        <h2 class="name m-0"><a href="/catalog/product?id=<?=$cart_node['product_id']?>">Hybrid black/gold</a></h2>
+                        <h2 class="name m-0"><a href="/catalog/product?id=<?= $cart_node['product_id'] ?>">Hybrid black/gold</a></h2>
                         <? if (!empty($properties[$cart_node['property_id']]['classname']) and current($user)['lang'] == 'RU') : ?>
                           <span class="small">
                             <?= $properties[$cart_node['property_id']]['classname'] ?>: <?= $properties[$cart_node['property_id']]['name'] ?>
@@ -47,7 +47,7 @@ foreach ($cart as $cart_id => $cart_node) : ?>
                       </div>
                       <div class="col-auto align-self-center">
                         <span class="amount" id="cost_q<?= $cart_id ?>">
-                          <? if (current($user)['lang'] == 'RU') : ?>
+                          <? if (current($user)['country'] == 'RU') : ?>
                             <? $subtotal_cost += $cart_node['quantity'] * $properties[$cart_node['property_id']]['price'] ?>
                             <?= number_format($cart_node['quantity'] * $properties[$cart_node['property_id']]['price'], 0, ',', ' ') . ' руб.' ?>
                           <? else : ?>
@@ -104,7 +104,7 @@ foreach ($cart as $cart_id => $cart_node) : ?>
       </div>
     </div>
 
-    
+
 
   </div>
 <? endif ?>
@@ -159,20 +159,20 @@ foreach ($cart as $cart_id => $cart_node) : ?>
         // Response
         var response = JSON.parse(this.responseText);
 
-        price = response['cart'][qelem.id]['quantity'] * response['properties'][response['cart'][qelem.id]['property_id']]['<?= current($user)['lang'] == 'RU' ? 'price' : 'price_en' ?>'];
+        price = response['cart'][qelem.id]['quantity'] * response['properties'][response['cart'][qelem.id]['property_id']]['<?= current($user)['country'] == 'RU' ? 'price' : 'price_en' ?>'];
         price_elem = document.getElementById('cost_q' + qelem.id);
-        <? if (current($user)['lang'] == 'RU') : ?>
+        <? if (current($user)['country'] == 'RU') : ?>
           price_elem.innerText = number_format(price, 0, ',', ' ') + ' руб.';
         <? else : ?>
           price_elem.innerText = '$' + number_format(price);
         <? endif ?>
 
-        total = response['cart_total']['<?= current($user)['lang'] == 'RU' ? 'total_price' : 'total_price_en' ?>']
+        total = response['cart_total']['<?= current($user)['country'] == 'RU' ? 'total_price' : 'total_price_en' ?>']
         total_elem = document.getElementById('subtotal');
-        <? if (current($user)['lang'] == 'RU') : ?>
-          total_elem.innerText = 'Предварительный итог: ' + number_format(total, 0, ',', ' ') + ' руб.';
+        <? if (current($user)['country'] == 'RU') : ?>
+          total_elem.innerText = '<?= current($user)['lang'] == 'RU' ? 'Предварительный итог: ' : 'Subtotal: ' ?>' + number_format(total, 0, ',', ' ') + ' руб.';
         <? else : ?>
-          total_elem.innerText = 'Subtotal: $' + number_format(total);
+          total_elem.innerText = '<?= current($user)['lang'] == 'RU' ? 'Предварительный итог: $' : 'Subtotal: $' ?>' + number_format(total);
         <? endif ?>
       }
     };

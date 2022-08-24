@@ -24,9 +24,12 @@
                 <td><?= $node['changed_at'] ?></td>
                 <td><?= $orders_class->status[$node['status']]['RU'] ?></td>
                 <td><?= $node['first_name'] . ' ' . $node['second_name'] ?></td>
-                <td><?= json_decode($node['cost'], 1)['RUB'] ?> руб.
-                <br>
-                <?= '$'.json_decode($node['cost'], 1)['USD'] ?>
+                <td>
+                  <? if ($node['ip_country']=='RU') : ?>
+                    <?= json_decode($node['cost'], 1)['RUB'] ?> руб.
+                  <? else : ?>
+                    <?= '$' . json_decode($node['cost'], 1)['USD'] ?>
+                  <? endif ?> 
                 </td>
 
 

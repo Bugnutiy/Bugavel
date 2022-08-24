@@ -253,7 +253,15 @@ class User
     {
         return $this->db->fetAll("SELECT * FROM `users` WHERE `phone` = :phone OR `email` = :email", ['phone' => $login, 'email' => $login]);
     }
-    public function getAllUsers(bool $temp = false, $order = 'id', $ASC = 'ASC')
+    /**
+     * Получить список пользователей
+     *
+     * @param boolean $temp 
+     * @param string $order
+     * @param string $ASC
+     * @return void
+     */
+    public function getAllUsers($temp = false, $order = 'id', $ASC = 'ASC')
     {
         $where = $temp ? 'WHERE `temp`' : 'WHERE NOT `temp`';
         $q = "SELECT * FROM `users` $where ORDER BY `$order` $ASC";

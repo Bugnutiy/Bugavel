@@ -9,24 +9,29 @@ use function PHPSTORM_META\type;
 
 class Orders extends General
 {
-    public $status = [
-        0 => [
-            'RU' => 'Новый',
-            'EN' => 'New'
-        ],
-        1 => [
-            'RU' => 'Обработан',
-            'EN' => 'Processed'
-        ],
-        2 => [
-            'RU' => 'Отправлен',
-            'EN' => 'Sent'
-        ],
-        3 => [
-            'RU' => 'Доставлен',
-            'EN' => 'Delivered'
-        ],
-    ];
+    public $status;
+    //= [
+    //     0 => [
+    //         'RU' => 'Отменен',
+    //         'EN' => 'Canceled'
+    //     ],
+    //     1 => [
+    //         'RU' => 'Новый',
+    //         'EN' => 'New'
+    //     ],
+    //     2 => [
+    //         'RU' => 'Обработан',
+    //         'EN' => 'Processed'
+    //     ],
+    //     3 => [
+    //         'RU' => 'Отправлен',
+    //         'EN' => 'Sent'
+    //     ],
+    //     4 => [
+    //         'RU' => 'Доставлен',
+    //         'EN' => 'Delivered'
+    //     ],
+    // ];
 
     /**
      * Class constructor.
@@ -34,6 +39,7 @@ class Orders extends General
     public function __construct(&$db)
     {
         parent::__construct($db, strtolower(getClassName(self::class)));
+        $this->status=$this->db->fetAllLite('orders_status');
     }
     /**
      * Place an order. Нужна корзина в orders в виде строки

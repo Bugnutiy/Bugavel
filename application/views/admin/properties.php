@@ -9,7 +9,7 @@
         <table class="table table-light table-bordered table-striped mb-0">
           <thead class="thead-dark">
             <tr>
-              <th>№</th>
+              <th>цены</th>
               <th>Класс</th>
               <th>Название</th>
               <th>Действия</th>
@@ -19,7 +19,7 @@
             <?php
             foreach ($properties as $id => $node) : ?>
               <tr>
-                <td><?= $id ?></td>
+                <td><?= '$'.$node['price_en'].' / '.$node['price'].' р.' ?></td>
                 <td><?= $node['classname'] ?></td>
                 <td><?= $node['name'] ?></td>
                 <td>

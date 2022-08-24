@@ -5,7 +5,22 @@
 
         <!-- Photos -->
         <div class="col-12 g-0 images col-md-4 ">
-
+          <?
+          $property_flag = [];
+          $product[key($product)]['quantity'] = 0;
+          foreach ($properties as $property_id => $property_node) {
+            if (current($user)['country'] == 'RU') {
+              if ($property_node['quantity'] && $property_node['price']) {
+                $property_flag[$property_id] = $property_node;
+                $product[key($product)]['quantity'] += $property_node['quantity'];
+              }
+            } else {
+              if ($property_node['quantity'] && $property_node['price_en']) {
+                $property_flag[$property_id] = $property_node;
+                $product[key($product)]['quantity'] += $property_node['quantity'];
+              }
+            }
+          } ?>
           <section id="main-carousel" class="splide product_photo" aria-label="My Awesome Gallery">
             <div class="splide__track">
               <ul class="splide__list">
@@ -29,10 +44,8 @@
 
             <!-- Price -->
             <div class="col-12 mb-3 price">
-              <?
-              // ddd($product) 
-              ?>
-              <? if (current($user)['lang'] == 'RU') : ?>
+
+              <? if (current($user)['country'] == 'RU') : ?>
                 <? if (current($product)['min_price'] == current($product)['max_price']) : ?>
                   <p class="mb-0"><span id="product_price"><?= number_format(current($product)['min_price'], 0, ',', ' ') ?></span> руб.</p>
                 <? else : ?>
@@ -54,11 +67,11 @@
             </div>
 
             <!-- Options -->
-            <? if (count($properties) > 1) : ?>
+            <? if (count($property_flag) > 1) : ?>
               <div class="col-12 mb-3 options">
                 <?
                 $properties_by_classname = [];
-                foreach ($properties as $id => $node) {
+                foreach ($property_flag as $id => $node) {
                   $properties_by_classname[$node['classname_en']][$id] = $node;
                 }
                 foreach ($properties_by_classname as $class_nodes) : ?>
@@ -82,7 +95,7 @@
 
               </div>
             <? else : ?>
-              <input type="hidden" name="property_id" value="<?= key($properties) ?>">
+              <input type="hidden" name="property_id" value="<?= key($property_flag) ?>">
             <? endif ?>
             <!-- Количество -->
             <div class="col-12 quantity">
@@ -110,9 +123,9 @@
 <div class="container-lg product_description description_block g-4 product_actions mb-3">
   <div class="row ">
     <div class="col py-3">
-      <h3 class="text-center"><?= current($user)['lang'] !== 'RU'? current($product)['name_en'] :  current($product)['name'] ?></h3>
+      <h3 class="text-center"><?= current($user)['lang'] !== 'RU' ? current($product)['name_en'] :  current($product)['name'] ?></h3>
 
-      <?= current($user)['lang'] !== 'RU'? current($product)['description_en'] : current($product)['description'] ?>
+      <?= current($user)['lang'] !== 'RU' ? current($product)['description_en'] : current($product)['description'] ?>
 
 
     </div>
@@ -164,9 +177,9 @@
     var quantityElem = document.getElementById('quantity_field');
     quantityElem.max = stock;
     // dd(quantityElem.value);
-    var price = properties[property_id]['price<?= current($user)['lang'] == 'RU' ? '' : '_en' ?>'] * quantityElem.value;
+    var price = properties[property_id]['price<?= current($user)['country'] == 'RU' ? '' : '_en' ?>'] * quantityElem.value;
 
-    priceElem.innerHTML = price.format(0, 3, '<?= current($user)['lang'] == 'RU' ? ' ' : ',' ?>');
+    priceElem.innerHTML = price.format(0, 3, '<?= current($user)['country'] == 'RU' ? ' ' : ',' ?>');
 
     var string = <?= current($user)['lang'] == 'RU' ?
                     "stock+' шт. в наличии'" : ("stock>1?stock+' pieces in stock':stock+' piece in stock'") ?>;
@@ -184,9 +197,9 @@
       // dd(input.value);
 
       var priceElem = document.getElementById('product_price');
-      var price = properties[selected]['price<?= current($user)['lang'] == 'RU' ? '' : '_en' ?>'] * input.value;
+      var price = properties[selected]['price<?= current($user)['country'] == 'RU' ? '' : '_en' ?>'] * input.value;
 
-      priceElem.innerHTML = price.format(0, 3, '<?= current($user)['lang'] == 'RU' ? ' ' : ',' ?>');
+      priceElem.innerHTML = price.format(0, 3, '<?= current($user)['country'] == 'RU' ? ' ' : ',' ?>');
     }
   }
 

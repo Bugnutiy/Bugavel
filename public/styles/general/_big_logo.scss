@@ -9,7 +9,9 @@
   right: 0;
   text-align: center;
   border-radius: 50%;
-  background: #{$c-bg-light-main}e3;
+  // background: #{$c-bg-light-main}e3;
+  background: $c-bg-light-main;
+  background: $c-white;
   box-shadow: 0px 5px 5px 0px #33333350;
   
   margin-top: 1em;

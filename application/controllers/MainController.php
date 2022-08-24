@@ -24,9 +24,15 @@ class MainController extends Controller
 		if (isset($_GET['lang'])) {
 			$lang = &$_GET['lang'];
 			if ($lang == "RU") {
+				if (isset($_SESSION['admin'])) {
+					$this->model->user->update($this->model->user->getUserId(), ['country' => 'RU']);
+				}
 				$this->model->user->update($this->model->user->getUserId(), ['lang' => 'RU']);
 			} elseif ($lang == "EN") {
 				$this->model->user->update($this->model->user->getUserId(), ['lang' => 'EN']);
+				if (isset($_SESSION['admin'])) {
+					$this->model->user->update($this->model->user->getUserId(), ['country' => 'EN']);
+				}
 			}
 		}
 		$this->view->layout = 'mainLayout';
@@ -54,7 +60,7 @@ class MainController extends Controller
 				"user" => $this->model->user->getUser(),
 
 			]);
-			if(isset($_SESSION['admin'])){
+			if (isset($_SESSION['admin'])) {
 				$this->view->redirect('/admin/categories');
 			}
 		}
@@ -74,7 +80,7 @@ class MainController extends Controller
 			$this->model->user->update($this->model->user->getUserId(), $_POST);
 			$oansw = $this->model->shop->orders->makeOrder($this->model->user->getUser(), $_POST);
 			return $oansw;
-		}else{
+		} else {
 			return [];
 		}
 	}

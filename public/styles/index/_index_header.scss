@@ -2,6 +2,7 @@
 
 .index_header {
   margin-bottom: -2em;
+
   @media (min-width: $sm) {
     margin-bottom: -4em;
   }
@@ -10,11 +11,9 @@
     margin-bottom: -4em;
   }
 
-  @media (min-width: $lg) {
-  }
+  @media (min-width: $lg) {}
 
-  @media (min-width: $xl) {
-  }
+  @media (min-width: $xl) {}
 
   @media (min-width: $xxl) {
     margin-bottom: -6em;
@@ -22,6 +21,7 @@
 
   background-color: transparent;
   color: $c-light-main;
+
   .carousel {
     $xsh: 14em;
     $smh: 20em;
@@ -29,67 +29,84 @@
     $lgh: 25em;
     $xlh: 25em;
     $xxlh: 35em;
+
     .splide {
       .splide__slide {
         height: $xsh;
+
         @media (min-width: $sm) {
           height: $smh;
         }
+
         @media (min-width: $md) {
           height: $mdh;
         }
+
         @media (min-width: $lg) {
           height: $lgh;
         }
+
         @media (min-width: $xl) {
           height: $xlh;
         }
+
         @media (min-width: $xxl) {
           height: $xxlh;
         }
       }
+
       .arrows_wrapper {
         height: 0px;
         position: relative;
         top: math.div($xsh, 2);
         top: calc(math.div($xsh, 2) - 8px);
+
         @media (min-width: $sm) {
           top: math.div($smh, 2);
           top: calc(math.div($smh, 2) - 16px);
         }
+
         @media (min-width: $md) {
           top: math.div($mdh, 2);
           top: calc(math.div($mdh, 2) - 16px);
         }
+
         @media (min-width: $lg) {
           top: math.div($lgh, 2);
           top: calc(math.div($lgh, 2) - 16px);
         }
+
         @media (min-width: $xl) {
           top: math.div($xlh, 2);
           top: calc(math.div($xlh, 2) - 16px);
         }
+
         @media (min-width: $xxl) {
           // top: calc(#{calc(#{-$xxlh}/ 2)} - 16px);
           top: math.div($xxlh, 2);
           top: calc(math.div($xxlh, 2) - 16px);
         }
+
         // @debug math.div(1, 2);
         .splide__arrows {
           // width: 1320px;
           position: relative;
         }
+
         .splide__arrow {
           background-color: #cccccc55;
+
           &.splide__arrow--prev {
             left: 0;
           }
+
           &.splide__arrow--next {
             right: 0;
           }
         }
       }
     }
+
     .photo_scroller {
       .splide__slide {
         img {
@@ -97,19 +114,23 @@
         }
       }
     }
+
     .content {
       //ТЕКСТ...........................
       position: relative;
       background-color: #00000050;
       text-shadow: 0px 0px 8px #000, 0px 0px 8px #000;
       color: $c-bg-light-main;
+
       &,
-      .container-lg > .row {
+      .container-lg>.row {
         height: $xsh;
         top: -$xsh;
+
         h1 {
           font-size: 2em;
         }
+
         h2 {
           font-size: 1.2em;
         }
@@ -117,6 +138,7 @@
         h3 {
           font-size: 1.5em;
         }
+
         .btn {
           &:hover {
             text-shadow: none;
@@ -126,9 +148,11 @@
         @media (min-width: $sm) {
           height: $smh;
           top: -$smh;
+
           h1 {
             font-size: 2em;
           }
+
           h2 {
             font-size: 1.2em;
           }
@@ -136,6 +160,7 @@
           h3 {
             font-size: 1.5em;
           }
+
           // .btn {
           // }
         }
@@ -143,9 +168,11 @@
         @media (min-width: $md) {
           height: $mdh;
           top: -$mdh;
+
           h1 {
             font-size: 2em;
           }
+
           h2 {
             font-size: 1.2em;
           }
@@ -153,6 +180,7 @@
           h3 {
             font-size: 1.5em;
           }
+
           // .btn {
           // }
         }
@@ -160,9 +188,11 @@
         @media (min-width: $lg) {
           height: $lgh;
           top: -$lgh;
+
           h1 {
             font-size: 2em;
           }
+
           h2 {
             font-size: 1.2em;
           }
@@ -170,6 +200,7 @@
           h3 {
             font-size: 1.5em;
           }
+
           // .btn {
           // }
         }
@@ -177,9 +208,11 @@
         @media (min-width: $xl) {
           height: $xlh;
           top: -$xlh;
+
           h1 {
             font-size: 2em;
           }
+
           h2 {
             font-size: 1.2em;
           }
@@ -187,6 +220,7 @@
           h3 {
             font-size: 1.5em;
           }
+
           // .btn {
           // }
         }
@@ -194,9 +228,11 @@
         @media (min-width: $xxl) {
           height: $xxlh;
           top: -$xxlh;
+
           h1 {
             font-size: 2em;
           }
+
           h2 {
             font-size: 1.2em;
           }
@@ -204,6 +240,7 @@
           h3 {
             font-size: 1.5em;
           }
+
           // .btn {
           // }
         }
@@ -212,17 +249,24 @@
   }
 }
 
-@media (min-width: $sm) {
+.greeting {
+  .row {
+    .col {
+      div {
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 5px #ddd;
+
+      }
+    }
+  }
 }
 
-@media (min-width: $md) {
-}
+@media (min-width: $sm) {}
 
-@media (min-width: $lg) {
-}
+@media (min-width: $md) {}
 
-@media (min-width: $xl) {
-}
+@media (min-width: $lg) {}
 
-@media (min-width: $xxl) {
-}
+@media (min-width: $xl) {}
+
+@media (min-width: $xxl) {}

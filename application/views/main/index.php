@@ -14,7 +14,8 @@
             <section class="splide photo_scroller">
               <div class="splide__track">
                 <ul class="splide__list">
-                  <li class="splide__slide"><img src="/public/images/Carousel/DIESEL BEE/BEE1.jpg" alt="DIESEL BEE image"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/DIESEL BEE/BEE1.jpg" alt="DIESEL BEE"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/DIESEL BEE/IMG_20220823_180003-c.jpg" alt="DIESEL BEE"></li>
                 </ul>
               </div>
             </section>
@@ -25,20 +26,20 @@
                   <div class="col-12 col-sm-auto text-center">
                     <div class="row justify-content-center">
                       <div class="col-auto">
-                        <h1><?= current($user)['lang'] !== 'RU'? 'NEW' : 'НОВИНКА' ?><span class="d-sm-none">!</span></h1>
+                        <h1><?= current($user)['lang'] !== 'RU' ? 'NEW' : 'НОВИНКА' ?><span class="d-sm-none">!</span></h1>
                       </div>
                       <div class="col-auto col-sm-auto text-center">
-                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU'? 'HYBRID' : 'ГИБРИД' ?> V3</h1>
+                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'HYBRID' : 'ГИБРИД' ?> V3</h1>
                       </div>
                       <div class="col-12 text-center">
-                        <h3>&#8222;<?= current($user)['lang'] !== 'RU'? 'DIESEL BEE' : 'ДИЗЕЛЬНАЯ ПЧЕЛА' ?>&#8221;</h3>
+                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'DIESEL BEE' : 'DIESEL BEE' ?>&#8221;</h3>
                       </div>
                     </div>
                   </div>
 
                   <div class="col-12 text-center mt-1">
                     <a type="button" class="btn btn-outline-light">
-                      <?= current($user)['lang'] !== 'RU'? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
+                      <?= current($user)['lang'] !== 'RU' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
                     </a>
                   </div>
 
@@ -62,20 +63,20 @@
                   <div class="col-12 col-sm-auto text-center">
                     <div class="row justify-content-center">
                       <div class="col-auto">
-                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU'? 'AGELESS' : 'НЕСТАРЕЮЩАЯ' ?></h1>
+                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'AGELESS' : 'НЕСТАРЕЮЩАЯ' ?></h1>
                       </div>
                       <div class="col-auto col-sm-auto text-center">
-                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU'? 'CLASSIC' : 'КЛАССИКА' ?></h1>
+                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'CLASSIC' : 'КЛАССИКА' ?></h1>
                       </div>
                       <div class="col-12 text-center">
-                        <h3>&#8222;<?= current($user)['lang'] !== 'RU'? 'COIL' : 'ИНДУКЦИЯ' ?>&#8221;</h3>
+                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'COIL' : 'ИНДУКЦИЯ' ?>&#8221;</h3>
                       </div>
                     </div>
                   </div>
 
                   <div class="col-12 text-center mt-1">
                     <a type="button" class="btn btn-outline-light">
-                      <?= current($user)['lang'] !== 'RU'? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
+                      <?= current($user)['lang'] !== 'RU' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
                     </a>
                   </div>
 
@@ -101,19 +102,19 @@
                   <div class="col-12 col-sm-auto text-center">
                     <div class="row justify-content-center">
                       <div class="col-auto">
-                        <h1> <?= current($user)['lang'] !== 'RU'? 'THE MOST POWERFULL' : 'МАКСИМАЛЬНАЯ МОЩНОСТЬ' ?></h1>
+                        <h1> <?= current($user)['lang'] !== 'RU' ? 'THE MOST POWERFULL' : 'МАКСИМАЛЬНАЯ МОЩНОСТЬ' ?></h1>
                       </div>
                       <div class="col-auto col-sm-auto text-center">
                       </div>
                       <div class="col-12 text-center">
-                        <h3>&#8222;<?= current($user)['lang'] !== 'RU'? 'GORILLA' : 'ГОРИЛЛА' ?>&#8221;</h3>
+                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'GORILLA' : 'ГОРИЛЛА' ?>&#8221;</h3>
                       </div>
                     </div>
                   </div>
 
                   <div class="col-12 text-center mt-1">
                     <a type="button" class="btn btn-outline-light">
-                      <?= current($user)['lang'] !== 'RU'? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
+                      <?= current($user)['lang'] !== 'RU' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
                     </a>
                   </div>
 
@@ -134,21 +135,39 @@
     <img src="/public/images/logo/logo.png" alt="logo image">
   </div>
 </a>
+<!-- Приветствие -->
+<div class="container-lg greeting ">
+  <div class="row">
+    <div class="col text-center text-black px-2">
+      <div class="bg-white px-3 pt-3 pb-4">
+        <? if (current($user)['lang'] == "RU") : ?>
+          <p>Рад приветствовать вас на моем сайте! Я занимаюсь производством тату машинок с 2003 года. За 19 лет упорной работы я создавал классические аппараты, разработал и запатентовал уникальные гибридные машинки (HYBRID V1, GORILLA HYBRID V2 , HYBRAY, DIESEL BEE HYBRID V3). Благодаря сочетанию хлесткого удара индукции и стабильности ротора, они дают по настоящему наилучшую работу в нанесении татуировки на сегодняшний день.</p>
+          <p class="mb-0">Лучшие мастера России и мира уже выбрали нас как приоритетное оборудование для себя. Я люблю создавать по настоящему особенные и уникальные машинки для татуировки.</p>
+        <? else : ?>
+          <p>I am glad to welcome you to my website! I have been producing tattoo machines since 2003 . For 19 years of hard work, I have created classic machines, developed and patented unique hybrid machines (HYBRID V1, GORILLA HYBRID V2, HYBRAY, DIESEL BEE HYBRID V3). Due to the combination of the whiplash of induction and the stability of the rotor, they provide the truly best work in tattooing for today.</p>
+          <p class="mb-0">The best masters of Russia and the world have already chosen us as a priority equipment for themselves. I love to create truly special and unique tattoo machines.</p>
+        <? endif ?>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Категории -->
-<div class="index_categories">
+<div class="index_categories mt-3">
   <div class="container-lg">
     <div class="header row align-items-center justify-content-center">
-      <h1 class="col-auto my-2"><?= current($user)['lang'] !== 'RU'? 'Categories' : 'Категории' ?></h1>
+      <h1 class="col-auto my-2"><?= current($user)['lang'] !== 'RU' ? 'Categories' : 'Категории' ?></h1>
     </div>
 
     <div class="cards row">
-      
+      <? $categories = array_reverse($categories,1) ?>
       <? foreach ($categories as $cat_id => $cat_node) : ?>
         <div class="card col-6 col-sm-3 col-md-3 col-xl-2 mb-4">
           <div class="text-center">
             <a href="/catalog?category=<?= $cat_id ?>"><img class="card-img-top" src="/<?= current(json_decode($cat_node['images'], 1)) ?>" alt="Category image" /></a>
             <div class="card-body p-0">
-              <h4 class="card-title"><a href="/catalog?category=<?= $cat_id ?>"><?= current($user)['lang'] !== 'RU'? $cat_node['name_en'] : $cat_node['name'] ?></a></h4>
+              <h4 class="card-title"><a href="/catalog?category=<?= $cat_id ?>"><?= current($user)['lang'] !== 'RU' ? $cat_node['name_en'] : $cat_node['name'] ?></a></h4>
             </div>
           </div>
         </div>

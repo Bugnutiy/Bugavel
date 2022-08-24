@@ -83,6 +83,7 @@
               if (iti.isValidNumber()) {
                 validMsg.classList.remove("d-none");
               } else {
+                // input.
                 input.classList.add("error");
                 var errorCode = iti.getValidationError();
                 errorMsg.innerHTML = errorMap[errorCode];

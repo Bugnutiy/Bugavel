@@ -3,6 +3,7 @@
 namespace application\lib\Shop;
 
 use application\lib\Db;
+use PDO;
 
 /**
  * [Class General]
@@ -86,13 +87,20 @@ abstract class General
             $id = $arr['id'];
             unset($arr['id']);
             $exist = current($this->getById($id));
+            $table = $this->table;
+            $structure = $this->db->query("DESCRIBE `$table`")->fetchAll(PDO::FETCH_GROUP);
+            // dd($structure);
             $matcher = [];
             foreach ($arr as $key => $value) {
                 if (isset($exist[$key]))
                     $matcher[$key] = $exist[$key];
                 else {
-                    $err[] = 'В таблице ' . $this->table . ' не настроены поля '.$key.' под запрос';
-                    return $err;
+                    if (!isset($structure[$key])) {
+                        $err[] = 'В таблице ' . $this->table . ' не настроены поля ' . $key . ' под запрос';
+                        return $err;
+                    } else {
+                        $matcher[$key]=NULL;
+                    }
                 }
             }
             if ($matcher == $arr) {

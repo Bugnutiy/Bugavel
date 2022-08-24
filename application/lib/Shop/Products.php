@@ -4,6 +4,7 @@ namespace application\lib\Shop;
 
 use application\lib\Shop\General;
 use application\lib\Shop\Products_properties;
+use PDO;
 
 class Products extends General
 {
@@ -90,13 +91,20 @@ class Products extends General
             // ddd($exist);
             // ddd("----------------------------");
             // dd($arr);
+            $table = $this->table;
+            $structure = $this->db->query("DESCRIBE `$table`")->fetchAll(PDO::FETCH_GROUP);
             $matcher = [];
             foreach ($arr as $key => $value) {
                 if (isset($exist[$key]))
                     $matcher[$key] = $exist[$key];
                 else {
-                    $err[] = 'В таблице ' . $this->table . ' не настроены поля под запрос';
-                    return $err;
+
+                    if (!isset($structure[$key])) {
+                        $err[] = 'В таблице ' . $this->table . ' не настроены поля ' . $key . ' под запрос';
+                        return $err;
+                    } else {
+                        $matcher[$key] = NULL;
+                    }
                 }
             }
             if ($matcher == $arr) {
@@ -245,27 +253,41 @@ class Products extends General
             $sum_price = 0;
             $sum_price_en = 0;
             $k = 0;
+            $k_en = 0;
             $max_price = current($exists_properties)['price'];
             $max_price_en = current($exists_properties)['price_en'];
-            $min_price = current($exists_properties)['price'];
-            $min_price_en = current($exists_properties)['price_en'];
+            // if (current($exists_properties)['price'])
+
 
             foreach ($exists_properties as $property_id => $property_node) {
+                ddd($property_node['price_en']);
                 if ($property_node['price'] > $max_price)
                     $max_price = $property_node['price'];
                 if ($property_node['price_en'] > $max_price_en)
                     $max_price_en = $property_node['price_en'];
-                if ($property_node['price'] < $min_price)
-                    $min_price = $property_node['price'];
-                if ($property_node['price_en'] < $min_price_en)
-                    $min_price_en = $property_node['price_en'];
 
-                $sum_price += $property_node['price'];
-                $sum_price_en += $property_node['price_en'];
-                $k++;
+                if ($property_node['price']) {
+                    $sum_price += $property_node['price'];
+                    $k++;
+                }
+                if ($property_node['price_en']) {
+                    $sum_price_en += $property_node['price_en'];
+                    $k_en++;
+                }
             }
+            ddd($max_price_en);
+            $min_price = $max_price;
+            // if (current($exists_properties)['price_en'])
+            $min_price_en = $max_price_en;
+            foreach ($exists_properties as $property_id => $property_node) {
+                if ($property_node['price'] && $property_node['price'] < $min_price)
+                    $min_price = $property_node['price'];
+                if ($property_node['price_en'] && $property_node['price_en'] < $min_price_en)
+                    $min_price_en = $property_node['price_en'];
+            }
+            // dd($min_price_en);
             $average_price = ($sum_price) / $k;
-            $average_price_en = ($sum_price_en) / $k;
+            $average_price_en = ($sum_price_en) / $k_en;
 
             $fields = [
                 'id' => $product_id,
@@ -278,9 +300,11 @@ class Products extends General
             ];
             // unset($product_id_properties[$product_id]);
             // dd($product_id_properties);
+            // dd($this->Update($fields));
             if (!$this->Update($fields))
                 $err[] = "Не обновились цены товара с ID = $product_id";
             // unset($product_id_properties[$product_id]);
+
         }
         return $err;
     }

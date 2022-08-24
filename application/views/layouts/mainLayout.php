@@ -208,7 +208,7 @@
                             <?= current($user)['lang'] == 'RU' ? 'Итого:' : 'Total:' ?>
                           </div>
                           <div class="col-auto"><b>
-                              <?= current($user)['lang'] == 'RU' ? number_format($cart_total['total_price'], 0, ',', ' ') . ' руб.' : '$' . number_format($cart_total['total_price_en']) ?></b>
+                              <?= current($user)['country'] == 'RU' ? number_format($cart_total['total_price'], 0, ',', ' ') . ' руб.' : '$' . number_format($cart_total['total_price_en']) ?></b>
                           </div>
                         </div>
                         <div class="row justify-content-between">
