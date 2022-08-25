@@ -38,7 +38,7 @@
                   </div>
 
                   <div class="col-12 text-center mt-1">
-                    <a type="button" class="btn btn-outline-light">
+                    <a href="/catalog?category=8" class="btn btn-outline-light">
                       <?= current($user)['lang'] !== 'RU' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
                     </a>
                   </div>
@@ -52,7 +52,9 @@
             <section class="splide photo_scroller">
               <div class="splide__track">
                 <ul class="splide__list">
-                  <li class="splide__slide"><img src="/public/images/Carousel/COIL/COIL1.jpg" alt="Coil image"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/ROTARY/ROTARY.jpg" alt="ROTARY"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/ROTARY/DSC02498_DxO 05 min.jpg" alt="ROTARY"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/ROTARY/IMG_20220823_180330 min.jpg" alt="ROTARY"></li>
                 </ul>
               </div>
             </section>
@@ -69,13 +71,13 @@
                         <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'CLASSIC' : 'КЛАССИКА' ?></h1>
                       </div>
                       <div class="col-12 text-center">
-                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'COIL' : 'ИНДУКЦИЯ' ?>&#8221;</h3>
+                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'DIRECT DRIVE' : 'DIRECT DRIVE' ?>&#8221;</h3>
                       </div>
                     </div>
                   </div>
 
                   <div class="col-12 text-center mt-1">
-                    <a type="button" class="btn btn-outline-light">
+                    <a href="/catalog?category=4" class="btn btn-outline-light">
                       <?= current($user)['lang'] !== 'RU' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
                     </a>
                   </div>
@@ -91,6 +93,7 @@
               <div class="splide__track">
                 <ul class="splide__list">
                   <li class="splide__slide"><img src="/public/images/Carousel/GORILLA/GORILLA1.jpg" alt="Gorilla image">
+                  <li class="splide__slide"><img src="/public/images/Carousel/GORILLA/IMG_20220221_234913_175-C.jpg" alt="Gorilla image">
                   </li>
                 </ul>
               </div>
@@ -107,13 +110,13 @@
                       <div class="col-auto col-sm-auto text-center">
                       </div>
                       <div class="col-12 text-center">
-                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'GORILLA' : 'ГОРИЛЛА' ?>&#8221;</h3>
+                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'GORILLA' : 'GORILLA' ?>&#8221;</h3>
                       </div>
                     </div>
                   </div>
 
                   <div class="col-12 text-center mt-1">
-                    <a type="button" class="btn btn-outline-light">
+                    <a href="/catalog?category=6" class="btn btn-outline-light">
                       <?= current($user)['lang'] !== 'RU' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
                     </a>
                   </div>
@@ -139,7 +142,7 @@
 <div class="container-lg greeting ">
   <div class="row">
     <div class="col text-center text-black px-2">
-      <div class="bg-white px-3 pt-3 pb-4">
+      <div class=" px-3 pt-3 pb-4">
         <? if (current($user)['lang'] == "RU") : ?>
           <p>Рад приветствовать вас на моем сайте! Я занимаюсь производством тату машинок с 2003 года. За 19 лет упорной работы я создавал классические аппараты, разработал и запатентовал уникальные гибридные машинки (HYBRID V1, GORILLA HYBRID V2 , HYBRAY, DIESEL BEE HYBRID V3). Благодаря сочетанию хлесткого удара индукции и стабильности ротора, они дают по настоящему наилучшую работу в нанесении татуировки на сегодняшний день.</p>
           <p class="mb-0">Лучшие мастера России и мира уже выбрали нас как приоритетное оборудование для себя. Я люблю создавать по настоящему особенные и уникальные машинки для татуировки.</p>
@@ -226,7 +229,7 @@
       // focus: 2,
       autoplay: 1,
       // interval: 4000,
-      interval: 3000,
+      interval: 6000,
 
       speed: 300,
       // autoScroll: false,

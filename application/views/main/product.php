@@ -109,7 +109,7 @@
                 </div>
                 <!-- Button -->
                 <div class="col-auto">
-                  <button type="submit" class="btn btn-warning cart_btn px-3">Add to cart</button>
+                  <button type="submit" class="btn btn-warning cart_btn px-3"><?= current($user)['lang'] == 'RU' ? 'В корзину' : 'Add to cart' ?></button>
                 </div>
               </div>
             </div>

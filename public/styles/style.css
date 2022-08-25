@@ -75,8 +75,6 @@ body {
 }
 
 .description_block > .row > .col {
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 5px #ddd;
   text-align: justify;
 }
 .description_block > .row > .col p:last-child {
@@ -436,7 +434,7 @@ body {
 
 .greeting .row .col div {
   border-radius: 10px;
-  box-shadow: 0px 0px 10px 5px #ddd;
+  font-size: 0.9em;
 }
 
 .index_categories .header h1 {

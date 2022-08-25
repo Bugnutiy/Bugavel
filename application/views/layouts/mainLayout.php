@@ -73,9 +73,9 @@
         <nav class="navbar navbar-expand-sm navbar-dark">
           <div class="navbar-brand" href="#">
             <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= current($user)['lang'] !== 'RU' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">leosmagin@gmail.com</span>
-            <a href="#" class="bi bi-youtube"></a>
-            <a href="#" class="bi bi-instagram"></a>
-            <a href="#" class="bi bi-envelope"></a>
+            <a href="https://www.youtube.com/channel/UCQj6BKoXZV6Adebuh4o9jOg/featured" class="bi bi-youtube"></a>
+            <a href="https://www.instagram.com/hybridtattoomachine" class="bi bi-instagram"></a>
+            <a href="mailto:info@leosmagin.com" class="bi bi-envelope"></a>
           </div>
 
           <div class="small_logo d-md-none">
@@ -160,9 +160,9 @@
           <nav class="navbar navbar-expand-sm navbar-dark">
             <div class="navbar-brand" href="#">
               <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= current($user)['lang'] !== 'RU' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">leosmagin@gmail.com</span>
-              <a href="#" class="bi bi-youtube"></a>
-              <a href="#" class="bi bi-instagram"></a>
-              <a href="#" class="bi bi-envelope"></a>
+              <a href="https://www.youtube.com/channel/UCQj6BKoXZV6Adebuh4o9jOg/featured" class="bi bi-youtube"></a>
+              <a href="https://www.instagram.com/hybridtattoomachine" class="bi bi-instagram"></a>
+              <a href="mailto:info@leosmagin.com" class="bi bi-envelope"></a>
             </div>
 
             <div class="small_logo d-md-none">
@@ -274,7 +274,7 @@
       <?php if (isset($err)) : ?>
         <?php foreach ($err as $errstr) : ?>
           <div class="container-lg my-1 alert alert-danger alert-dismissible fade show" role="alert">
-            <?= $errstr[current($user)['lang']=='RU'?'RU':'EN'] ?>
+            <?= $errstr[current($user)['lang'] == 'RU' ? 'RU' : 'EN'] ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
           </div>
@@ -319,6 +319,10 @@
               <a href=""><?= current($user)['lang'] !== 'RU' ? 'Contacts' : 'Контакты' ?></a><br>
               <? if (current($user)['role'] != 'guest') : ?>
                 <!-- <a href="" class="mt-2 d-block"><?= current($user)['lang'] !== 'RU' ? 'Account' : 'Аккаунт' ?></a> -->
+                <? if (isset($_SESSION['admin'])) : ?>
+                  <a href="/admin/orders" class="mt-2 d-block"><?= current($user)['lang'] !== 'RU' ? 'Admin' : 'Админка' ?></a>
+                <? endif ?>
+
               <? else : ?>
                 <a type="button" class="mt-2 d-block" data-bs-toggle="modal" data-bs-target="#mainAccountModalLogin"><?= current($user)['lang'] !== 'RU' ? 'Account' : 'Аккаунт' ?></a>
               <? endif ?>
@@ -1060,19 +1064,19 @@
           <div class="row">
             <div class="mb-3 col-12 col-sm">
               <label for="order_first_name" class="form-label required">First name</label>
-              <input type="text" required class="form-control" name="first_name" id="order_first_name" placeholder="<?= current($user)['lang'] == 'RU' ? 'Имя' : 'First name' ?>" value="<?=current($user)['first_name']?>">
+              <input type="text" required class="form-control" name="first_name" id="order_first_name" placeholder="<?= current($user)['lang'] == 'RU' ? 'Имя' : 'First name' ?>" value="<?= current($user)['first_name'] ?>">
             </div>
             <div class="mb-3 col-12 col-sm">
               <label for="order_second_name" class="form-label required">Second name</label>
 
-              <input type="text" required class="form-control" name="second_name" id="order_second_name" placeholder="<?= current($user)['lang'] == 'RU' ? 'Фамилия' : 'Second name' ?>" value="<?=current($user)['second_name']?>">
+              <input type="text" required class="form-control" name="second_name" id="order_second_name" placeholder="<?= current($user)['lang'] == 'RU' ? 'Фамилия' : 'Second name' ?>" value="<?= current($user)['second_name'] ?>">
             </div>
           </div>
 
           <!-- Email -->
           <div class="mb-3">
             <label for="order_email" class="form-label required">E-mail</label>
-            <input type="email" required class="form-control" name="email" id="order_email" placeholder="<?= current($user)['lang'] == 'RU' ? 'Введите вашу электронную почту' : 'Type your e-mail here' ?>" value="<?=current($user)['email']?>">
+            <input type="email" required class="form-control" name="email" id="order_email" placeholder="<?= current($user)['lang'] == 'RU' ? 'Введите вашу электронную почту' : 'Type your e-mail here' ?>" value="<?= current($user)['email'] ?>">
           </div>
 
           <!-- PHONE -->
@@ -1080,7 +1084,7 @@
             <link rel="stylesheet" href="/public/intltel/css/intlTelInput.min.css">
 
             <label for="order_phone" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Номер телефона' : 'Phone number' ?></label>
-            <input type="tel" class="form-control" name="phone" id="order_phone" required value="<?=current($user)['phone']?>">
+            <input type="tel" class="form-control" name="phone" id="order_phone" required value="<?= current($user)['phone'] ?>">
             <span id="order_valid-msg" class="d-none text-success">✓ Valid</span>
             <span id="order_error-msg" class="d-none text-danger"></span>
 
@@ -1133,7 +1137,7 @@
           <!-- Instagram -->
           <div class="mb-3">
             <label for="order_instagram" class="form-label"><?= current($user)['lang'] == 'RU' ? 'Аккаунт инстаграм (необязательно)' : 'Instagram account (optional)' ?></label>
-            <input type="text" class="form-control" name="instagram" id="order_instagram" placeholder="instagram" value="<?=current($user)['instagram']?>">
+            <input type="text" class="form-control" name="instagram" id="order_instagram" placeholder="instagram" value="<?= current($user)['instagram'] ?>">
           </div>
 
           <!-- Country -->
@@ -1142,7 +1146,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
             <? if (current($user)['lang'] == 'EN') : ?>
               <label for="billing_country" class="form-label required">Country/Region</label>
-              <select name="billing_country" required id="order_billing_country" class="form-control country_select" autocomplete="country" data-placeholder="Select a country / region…" data-label="Country/Region" tabindex="-1" aria-hidden="true" value="<?=current($user)['billing_country']?>">
+              <select name="billing_country" required id="order_billing_country" class="form-control country_select" autocomplete="country" data-placeholder="Select a country / region…" data-label="Country/Region" tabindex="-1" aria-hidden="true" value="<?= current($user)['billing_country'] ?>">
                 <option value="" hidden selected>Select a country / region…</option>
                 <option value="AF">Afghanistan</option>
                 <option value="AX">Åland Islands</option>
@@ -1396,7 +1400,7 @@
               </select>
             <? else : ?>
               <label for="order_billing_country" class="form-label required">Страна/Регион</label>
-              <select name="billing_country" required id="order_billing_country" class="form-control country_select" autocomplete="country" data-placeholder="Выберите страну/регион…" data-label="Страна/регион" tabindex="-1" aria-hidden="true" value="<?=current($user)['billing_country']?>">
+              <select name="billing_country" required id="order_billing_country" class="form-control country_select" autocomplete="country" data-placeholder="Выберите страну/регион…" data-label="Страна/регион" tabindex="-1" aria-hidden="true" value="<?= current($user)['billing_country'] ?>">
                 <option value="" hidden selected>Выберите страну/регион…</option>
                 <option value="SZ">Eswatini</option>
                 <option value="AU">Австралия</option>
@@ -1660,26 +1664,26 @@
           <!-- Address -->
           <div class="mb-3">
             <label for="order_address" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Адрес' : 'Street Address' ?></label>
-            <input type="text" required class="form-control" name="address" id="order_address" placeholder="<?= current($user)['lang'] == 'RU' ? 'Номер дома и название улицы' : 'House number and street name' ?>" value="<?=current($user)['address']?>">
-            <input type="text" class="form-control" name="apartment" id="order_apartment" placeholder="<?= current($user)['lang'] == 'RU' ? 'Крыло, подъезд, этаж и т.д. (необязательно)' : 'Apartment, suite, unit, etc. (optional)' ?>" value="<?=current($user)['apartment']?>">
+            <input type="text" required class="form-control" name="address" id="order_address" placeholder="<?= current($user)['lang'] == 'RU' ? 'Номер дома и название улицы' : 'House number and street name' ?>" value="<?= current($user)['address'] ?>">
+            <input type="text" class="form-control" name="apartment" id="order_apartment" placeholder="<?= current($user)['lang'] == 'RU' ? 'Крыло, подъезд, этаж и т.д. (необязательно)' : 'Apartment, suite, unit, etc. (optional)' ?>" value="<?= current($user)['apartment'] ?>">
           </div>
 
           <!-- City -->
           <div class="mb-3">
             <label for="order_city" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Адрес' : 'Street Address' ?></label>
-            <input type="text" class="form-control" name="city" id="order_city" placeholder="<?= current($user)['lang'] == 'RU' ? 'Город / Населенный пункт' : 'Town / City' ?>" required value="<?=current($user)['city']?>">
+            <input type="text" class="form-control" name="city" id="order_city" placeholder="<?= current($user)['lang'] == 'RU' ? 'Город / Населенный пункт' : 'Town / City' ?>" required value="<?= current($user)['city'] ?>">
 
           </div>
           <!-- Region/State -->
           <div class="mb-3">
             <label for="order_region" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Регион / Область' : 'Region / State / District' ?></label>
-            <input type="text" class="form-control" name="region" id="order_region" required placeholder="<?= current($user)['lang'] == 'RU' ? 'Регион / Область' : 'Region / State / District' ?>" value="<?=current($user)['region']?>">
+            <input type="text" class="form-control" name="region" id="order_region" required placeholder="<?= current($user)['lang'] == 'RU' ? 'Регион / Область' : 'Region / State / District' ?>" value="<?= current($user)['region'] ?>">
           </div>
 
           <!-- Postcode / ZIP (optional) -->
           <div class="mb-3">
             <label for="order_zip_code" class="form-label"><?= current($user)['lang'] == 'RU' ? 'Почтовый индекс (необязательно)' : 'Postcode / ZIP (optional)' ?></label>
-            <input type="text" class="form-control" name="zip_code" id="order_zip_code" placeholder="<?= current($user)['lang'] == 'RU' ? 'Почтовый индекс (необязательно)' : 'Postcode / ZIP (optional)' ?>" value="<?=current($user)['zip_code']?>">
+            <input type="text" class="form-control" name="zip_code" id="order_zip_code" placeholder="<?= current($user)['lang'] == 'RU' ? 'Почтовый индекс (необязательно)' : 'Postcode / ZIP (optional)' ?>" value="<?= current($user)['zip_code'] ?>">
           </div>
           <!-- Additions -->
           <div class="mb-3">

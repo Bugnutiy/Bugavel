@@ -2,6 +2,8 @@
 ?>
 <?php
 // dd($order);
+$countries = require 'application/config/countries.php';
+// dd($countries);
 ?>
 <div class="row products_main">
   <div class="col-12">
