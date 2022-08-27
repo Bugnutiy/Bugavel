@@ -136,8 +136,8 @@ class MainController extends Controller
 				$cart_total = $this->model->shop->cart->getTotal($this->model->user->getUserId());
 				$alert[] = [
 					'type' => 'success',
-					'RU' => 'Товар добавлен <a href="/cart">в корзину</a>',
-					'EN' => 'The product has been added to <a href="/cart">the cart</a>'
+					'RU' => 'Товар добавлен <a href="/cart" class="alert-link">в корзину</a>',
+					'EN' => 'The product has been added to <a href="/cart" class="alert-link">the cart</a>'
 				];
 				$vars = array_merge($vars, [
 					'alerts' => $alert,
@@ -184,8 +184,8 @@ class MainController extends Controller
 			if (empty($err)) {
 				$alerts[] = [
 					'type' => 'success',
-					'RU' => 'Товар добавлен <a href="/cart">в корзину</a>',
-					'EN' => 'The product has been added to <a href="/cart">the cart</a>'
+					'RU' => 'Товар добавлен <a href="/cart" class="alert-link">в корзину</a>',
+					'EN' => 'The product has been added to <a href="/cart" class="alert-link">the cart</a>'
 				];
 			}
 			$cart_total = $this->model->shop->cart->getTotal($this->model->user->getUserId());

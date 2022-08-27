@@ -1,26 +1,22 @@
 <? $cart = json_decode(current($order)['cart'], 1);
 ?>
-<?php
-// dd($order);
-$countries = require 'application/config/countries.php';
-// dd($countries);
-?>
+
 <div class="row products_main">
   <div class="col-12">
     <form action="/admin/orders/edit" enctype="multipart/form-data" method="POST">
-      <input type="hidden" name='id' value="<?=$_GET['id']?>">
+      <input type="hidden" name='id' value="<?= $_GET['id'] ?>">
       <h1>Корзина / Cart</h1>
       <? foreach ($cart as $cart_id => $cart_node) : ?>
         <div class="row cart mb-3">
           <div class="col-auto name">
             Товар: <b><a href="/catalog/product?id=<?= $cart_node['product_id'] ?>"><?= $products[$cart_node['product_id']]['name'] ?></a></b><br>
-            Вариация: <?=$properties[$cart_node['property_id']]['name']?>
+            Вариация: <?= $properties[$cart_node['property_id']]['name'] ?>
           </div>
           <div class="col-auto quant">
             Кол-во:<br>
-            <input type="number" name="cart[<?=$cart_id?>][quantity]" class="form-control" value="<?=$cart_node['quantity']?>">
+            <input type="number" name="cart[<?= $cart_id ?>][quantity]" class="form-control" value="<?= $cart_node['quantity'] ?>">
           </div>
-          
+
         </div>
       <? endforeach ?>
       <button type="submit">Submit</button>
@@ -107,19 +103,22 @@ $countries = require 'application/config/countries.php';
       </div>
 
       <!-- Country -->
+      <?php
+      // dd($order);
+      $countries = require 'application/config/countries.php';
+      // dd($countries);
+      ?>
       <div class="mb-3 country">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
-        <? if (current($order)['lang'] == 'EN') : ?>
-          <label for="billing_country" class="form-label required">Country/Region</label>
 
-        <? else : ?>
-          <label for="order_billing_country" class="form-label required">Страна/Регион</label>
-          <input type="text" name="billing_country" value="<?=current($order)['billing_country']?>">
-        <? endif ?>
-        <script type="text/javascript">
-         
-        </script>
+        <label for="billing_country" class="form-label required">Страна/Регион</label>
+        <select name="billing_country" id="billing_country">
+          <? foreach ($countries as $country_code => $name) : ?>
+            <option value="<?= $country_code ?>" <?= current($order)['billing_country'] == $country_code ? 'selected="1"' : '' ?>><?= $name ?></option>
+          <? endforeach ?>
+        </select>
+
       </div>
       <!-- Address -->
       <div class="mb-3">

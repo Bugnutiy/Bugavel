@@ -49,23 +49,25 @@ class Model
 	 * @param array $valid_format одномерный массив поддерживаемых форматов
 	 * @param string $path_file Путь сохранения
 	 * @param array $name массив имен файлов
+	 * @param array $FILES Часть глобального массива $_FILES
 	 */
-	public function setFiles($limit_size, $valid_format, $path_file, $name)
+	public function setFiles($limit_size, $valid_format, $path_file, $name, $FILES = [])
 	{
 		// ddd($limit_size);
+		if (empty($FILES)) $FILES = $_FILES;
 		$arr['err'] = [];
 		$error = "";
-		if (!empty(current($_FILES)['name'][0])) {
+		if (!empty(current($FILES)['name'][0])) {
 
-			foreach (current($_FILES)['name'] as $key => $fname) {
+			foreach (current($FILES)['name'] as $key => $fname) {
 				// валидация размера файла
-				if (current($_FILES)['size'][$key] > $limit_size) {
+				if (current($FILES)['size'][$key] > $limit_size) {
 					$arr['err'][] = "Размер файла \"$fname\" превышает допустимый!";
 				}
 
 				// валидация формата файла
-				//$format = explode(".",current($_FILES)["name"]);
-				$format[$key] = strtolower(pathinfo(current($_FILES)["name"][$key], PATHINFO_EXTENSION));
+				//$format = explode(".",current($FILES)["name"]);
+				$format[$key] = strtolower(pathinfo(current($FILES)["name"][$key], PATHINFO_EXTENSION));
 				if (!in_array($format[$key], $valid_format)) {
 					$arr['err'][] = "Формат файла \"$fname\" недопустимый!";
 				}
@@ -73,16 +75,16 @@ class Model
 				// если не было ошибок
 				if (empty($arr['err'])) {
 					// проверяем загружен ли файл
-					if (is_uploaded_file(current($_FILES)["tmp_name"][$key])) {
+					if (is_uploaded_file(current($FILES)["tmp_name"][$key])) {
 						// сохраняем файл
 						$arr['fname'][] = $name[$key] . '.' . $format[$key];
-						
+
 						if (!file_exists($path_file))
 							if (!mkdir($path_file, 0777, 1)) {
 								$arr['err'][] = "Не удалось создать директорию $path_file";
 								return $arr;
 							}
-						if (!move_uploaded_file(current($_FILES)['tmp_name'][$key], $path_file . $name[$key] . "." . $format[$key])) {
+						if (!move_uploaded_file(current($FILES)['tmp_name'][$key], $path_file . $name[$key] . "." . $format[$key])) {
 							$arr['err'][] = "Не удалось переместить файл $name[$key] из загрузок в директорию $path_file";
 						}
 					} else {
@@ -95,8 +97,8 @@ class Model
 			$arr['err'][] = "Файлы отсутствуют!";
 		}
 		if (!empty($arr['err'])) {
-		} else if ($_FILES) {
-			$arr['err'] = 0;
+		} else if ($FILES) {
+			$arr['err'] = [];
 		}
 		// dd($arr);
 		return $arr;

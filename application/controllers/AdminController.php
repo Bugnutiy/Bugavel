@@ -22,16 +22,16 @@ class AdminController extends Controller
 		if (!empty($_POST)) {
 			// dd($_POST);
 			$order = current($this->model->shop->orders->getById($_POST['id']));
-			
+
 			$order['cart'] = json_decode($order['cart'], 1);
 			ddd($order);
 			// dd($_POST['cart']);
 			foreach ($order['cart'] as $cart_id => $cart_node) {
-				$order['cart'][$cart_id]['quantity']=$_POST['cart'][$cart_id]['quantity'];
+				$order['cart'][$cart_id]['quantity'] = $_POST['cart'][$cart_id]['quantity'];
 			}
-			$order['cart']=json_encode($order['cart']);
+			$order['cart'] = json_encode($order['cart']);
 			// dd($order);
-			$order['id']=$_POST['id'];
+			$order['id'] = $_POST['id'];
 			$this->model->shop->orders->Update($order);
 			$this->view->redirect('/admin/orders');
 		}
@@ -157,7 +157,8 @@ class AdminController extends Controller
 		$bcr = ['Товары'];
 		$vars = [
 			'bcr' => $bcr,
-			'products' => $this->model->shop->products->getAll(),
+			'products' => isset($_GET['category']) ? $this->model->shop->products->getByCategoryId($_GET['category']) : $this->model->shop->products->getAll(),
+			'categories' => $this->model->shop->categories->getAll(),
 		];
 		$this->view->render('Администратор - товары', $vars);
 	}
@@ -168,13 +169,28 @@ class AdminController extends Controller
 
 		$fpath = 'public/images/products/';
 		$vars = ['bcr' => $bcr];
+		$file=[];
+		$file_m=[];
 		if (!empty($_POST)) {
 			if (!empty(current($_FILES)['name'][0])) {
+
 				$names = [];
 				foreach (current($_FILES)['name'] as $name) {
 					$names[] = $_POST['name_en'] . ' ' . uniqid();
 				}
-				$file = $this->model->setFiles(20 * (2 ** 23), ['png', 'jpg'], $fpath, $names);
+				$file = $this->model->setFiles(2 * (2 ** 23), ['png', 'jpg'], $fpath, $names);
+				if (count($_FILES) == 2) {
+					next($_FILES);
+					$names = [];
+					foreach (current($_FILES)['name'] as $name) {
+						$names[] = $_POST['name_en'] . ' ' . uniqid();
+					}
+					$file_m = $this->model->setFiles(2 * (2 ** 23), ['png', 'jpg'], $fpath . '/min/', $names, [
+						key($_FILES) => current($_FILES)
+					]);
+					$file['err'] = array_merge($file['err'], $file_m['err']);
+					// dd($file_m);
+				}
 			}
 			if (!empty($file['err'])) {
 				$vars = array_merge($vars, ['err' => $file['err']]);
@@ -185,6 +201,14 @@ class AdminController extends Controller
 						$_POST['images'][] = $fpath . $fname;
 					}
 				}
+				if (!empty($file_m)) {
+					// dd($file_m);
+					foreach ($file_m['fname'] as $fname) {
+						$_POST['images_min'][] = $fpath .'/min/'. $fname;
+						// $_POST['images_min']=json_encode($_POST['images_min']);
+					}
+				}
+				
 
 				$err = $this->model->shop->products->Update($_POST);
 				if (empty($err)) {

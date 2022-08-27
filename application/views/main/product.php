@@ -21,7 +21,7 @@
               }
             }
           } ?>
-          <section id="main-carousel" class="splide product_photo" aria-label="My Awesome Gallery">
+          <section id="main-carousel" class="splide product_photo" aria-label="Gallery">
             <div class="splide__track">
               <ul class="splide__list">
                 <? $images = json_decode(current($product)['images']);

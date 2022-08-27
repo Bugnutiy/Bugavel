@@ -82,7 +82,9 @@ abstract class General
         if (isset($arr['images'])) {
             $arr['images'] = json_encode($arr['images']);
         }
-
+        if (isset($arr['images_min'])) {
+            $arr['images_min'] = json_encode($arr['images_min']);
+        }
         if (!empty($arr['id'])) {
             $id = $arr['id'];
             unset($arr['id']);
@@ -111,6 +113,16 @@ abstract class General
                 $exists_images = json_decode($exist['images'], 1);
                 if (!empty($exists_images)) {
                     foreach ($exists_images as $image) {
+                        if (file_exists($image)) {
+                            unlink($image);
+                        }
+                    }
+                }
+            }
+            if (isset($arr['images_min'])) {
+                $exists_images_min = json_decode($exist['images_min'], 1);
+                if (!empty($exists_images_min)) {
+                    foreach ($exists_images_min as $image) {
                         if (file_exists($image)) {
                             unlink($image);
                         }
@@ -154,6 +166,14 @@ abstract class General
         if (isset($exist['images'])) {
             $images = json_decode($exist['images'], 1);
             foreach ($images as $image) {
+                if (file_exists($image)) {
+                    unlink($image);
+                }
+            }
+        }
+        if (isset($exist['images_min'])) {
+            $images_min = json_decode($exist['images_min'], 1);
+            foreach ($images_min as $image) {
                 if (file_exists($image)) {
                     unlink($image);
                 }

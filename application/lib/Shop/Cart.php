@@ -144,8 +144,8 @@ class Cart extends General
                     }
                     if ($matcher == $arr) {
                         $err[] = [
-                            'EN' => "This product is already <a href='/cart'>in the cart</a>",
-                            'RU' => "Этот товар уже есть <a href='/cart'>в корзине</a>",
+                            'EN' => "This product is already <a href='/cart' class='alert-link'>in the cart</a>",
+                            'RU' => "Этот товар уже есть <a href='/cart' class=\"alert-link\">в корзине</a>",
                             'code' => 'U7',
                         ];
                         return $err;

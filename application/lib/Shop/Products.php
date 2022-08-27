@@ -122,6 +122,17 @@ class Products extends General
                     }
                 }
             }
+            if (isset($arr['images_min'])) {
+                $exists_images = json_decode($exist['images_min'], 1);
+                //dd($images);
+                if (!empty($exists_images)) {
+                    foreach ($exists_images as $image) {
+                        if (file_exists($image)) {
+                            unlink($image);
+                        }
+                    }
+                }
+            }
             if (!$this->db->update($this->table, $arr, "`id` = $id")) {
                 $err[] = 'Обновить запись в БД не удалось';
             }
@@ -205,6 +216,15 @@ class Products extends General
         $exist = current($this->getById($id));
         if (isset($exist['images'])) {
             $images = json_decode($exist['images'], 1);
+            // dd($images);
+            foreach ($images as $image) {
+                if (file_exists($image)) {
+                    unlink($image);
+                }
+            }
+        }
+        if (isset($exist['images_min'])) {
+            $images = json_decode($exist['images_min'], 1);
             // dd($images);
             foreach ($images as $image) {
                 if (file_exists($image)) {
