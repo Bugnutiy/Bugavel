@@ -4,13 +4,13 @@ return
     [
         'all' => [
             'index',
-            // 'contacts',
-            // 'news',
-            // 'confident',
             'catalog',
             'product',
             'cart',
-            'order'
+            'order',
+            'policy',
+            'contacts',
+            'payment',
         ],
 
         'authorize' => [

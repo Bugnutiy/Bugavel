@@ -21,6 +21,19 @@ return [
 		'controller' => 'main',
 		'action' => 'cart'
 	],
+	/***********************************About********************************************/
+	'about/policy' => [
+		'controller' => 'main',
+		'action' => 'policy'
+	],
+	'about/payment' => [
+		'controller' => 'main',
+		'action' => 'payment'
+	],
+	'about/contacts' => [
+		'controller' => 'main',
+		'action' => 'contacts'
+	],
 	/***********************************Admin shop******************************************/
 	////////////////////////categories//////////////////////////
 	'admin/categories' => [

@@ -2,10 +2,7 @@
 
 return
     [
-        // Todo all to admin
-        'all' => [
-            
-        ],
+        'all' => [],
 
         'authorize' => [
             //

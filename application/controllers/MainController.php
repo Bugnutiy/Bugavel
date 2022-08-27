@@ -136,8 +136,8 @@ class MainController extends Controller
 				$cart_total = $this->model->shop->cart->getTotal($this->model->user->getUserId());
 				$alert[] = [
 					'type' => 'success',
-					'RU' => 'Товар добавлен в корзину',
-					'EN' => 'The product has been added to the cart'
+					'RU' => 'Товар добавлен <a href="/cart">в корзину</a>',
+					'EN' => 'The product has been added to <a href="/cart">the cart</a>'
 				];
 				$vars = array_merge($vars, [
 					'alerts' => $alert,
@@ -184,8 +184,8 @@ class MainController extends Controller
 			if (empty($err)) {
 				$alerts[] = [
 					'type' => 'success',
-					'RU' => 'Товар добавлен в корзину',
-					'EN' => 'The product has been added to the cart'
+					'RU' => 'Товар добавлен <a href="/cart">в корзину</a>',
+					'EN' => 'The product has been added to <a href="/cart">the cart</a>'
 				];
 			}
 			$cart_total = $this->model->shop->cart->getTotal($this->model->user->getUserId());
@@ -266,5 +266,21 @@ class MainController extends Controller
 			$vars
 		);
 		// dd('cart');
+	}
+	/*********************************ABOUT***************************************/
+	public function policyAction()
+	{
+		$this->view->render([
+			'RU' => 'Политика конфиденциальности и правила использования - LeoSmagin.com',
+			'EN' => 'Privacy Policy and Terms of Use - LeoSmagin.com',
+		], []);
+	}
+	public function paymentAction()
+	{
+		# code...
+	}
+	public function contactsAction()
+	{
+		# code...
 	}
 }

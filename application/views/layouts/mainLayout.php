@@ -1693,6 +1693,17 @@
           </div>
         </div>
         <div class="modal-footer">
+          <div class=" form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" required="1" checked="1">
+            <label class="form-check-label" for="exampleCheck1">
+              <? if (current($user)['lang'] == 'RU') : ?>
+              Я солгасен с <a href="/about/policy">политикой конфиденциальности и правилами пользования </a>сайтом
+              <? else : ?> 
+                 I agree with the <a href="/about/policy">privacy policy and terms of use</a> of the site
+              <? endif ?>
+            </label>
+          </div>
+          <br>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= current($user)['lang'] == 'RU' ? 'Отмена' : 'Cancle' ?></button>
           <button type="success" class="btn btn-primary"><?= current($user)['lang'] == 'RU' ? 'Оформить заказ' : 'Place order' ?></button>
         </div>

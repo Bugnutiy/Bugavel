@@ -1,5 +1,5 @@
 <?php
-require_once "application/lib/mailer/src/PHPMailer.php";
+require_once 'application/lib/mailer/src/PHPMailer.php';
 require_once 'application/lib/mailer/src/SMTP.php';
 require_once 'application/lib/mailer/src/Exception.php';
 
