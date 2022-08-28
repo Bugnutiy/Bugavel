@@ -15,6 +15,7 @@ class AdminController extends Controller
 	{
 		parent::__construct($route);
 		$this->view->layout = 'admin';
+		
 	}
 
 	public function ordersEditAction()
@@ -72,11 +73,15 @@ class AdminController extends Controller
 	public function categoriesAction()
 	{
 		$bcr = ['Категории'];
-
+		if(isset($_GET['block'])){
+			$this->model->db->update('status',['block'=>$_GET['block']],'`id` = :id',['id'=>1]);
+		}
 		$vars = [
 			'bcr' => $bcr,
 			'categories' => $this->model->shop->categories->getAll(),
+			'blocked'=>$this->model->db->fetAllLite('status'),
 		];
+		// dd($vars);
 		$this->view->render('Администратор - категории', $vars);
 	}
 	public function categoriesEditAction()
