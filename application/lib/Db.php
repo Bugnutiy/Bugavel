@@ -28,10 +28,7 @@ class Db
 
 	public function query($sql, $params = [])
 	{
-		// dd($sql);
-		//if($sql!="SET NAMES 'utf8'")
-		//$this->query("SET NAMES 'utf8'");
-		//$query = $this->db->query($sql); //prepare заменил query
+
 		if (!empty($params)) {
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute($params);
@@ -41,7 +38,6 @@ class Db
 		}
 
 		return $stmt;
-		//return $query;
 	}
 
 	public function fetAll($sql, $params = [])
@@ -58,13 +54,7 @@ class Db
 		return $result->fetchColumn();
 	}
 
-	// public function quer($sql)
-	// {
-	// 	$stmt = $this->db->query($sql);
-	// 	//$query = $this->db->query($sql); //prepare заменил query
-	// 	return $stmt;
-	// 	//return $query;
-	// }
+	
 	public function Exists($tname)
 	{
 		$dbname = $this->config['name'];

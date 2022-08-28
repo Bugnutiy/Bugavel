@@ -42,7 +42,7 @@ abstract class General
      */
     public function getByField($field_name, $field_value)
     {
-        return $this->db->fetAllLite($this->table, "`$field_name` = :value", [':value' => $field_value]);
+        return $this->db->fetAllLite($this->table, "`$field_name` = :value", [':value' => $field_value]); //TODO SECURITY
     }
     /**
      * Получить все записи из таблицы, соответствующей имени класса

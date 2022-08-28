@@ -41,7 +41,7 @@ class Products extends General
         foreach ($properties as $property_node) {
             $quantity += $property_node['quantity'];
         }
-        return $this->db->update($this->table, ['quantity' => $quantity], "`id` = $id");
+        return $this->db->update($this->table, ['quantity' => $quantity], '`id` = :id', ['id' => $id]);
     }
     public function Update($arr)
     {
@@ -96,6 +96,7 @@ class Products extends General
             // dd($arr);
             $table = $this->table;
             $structure = $this->db->query("DESCRIBE `$table`")->fetchAll(PDO::FETCH_GROUP);
+            //TODO SECURITY
             $matcher = [];
             foreach ($arr as $key => $value) {
                 if (isset($exist[$key]))
@@ -136,7 +137,7 @@ class Products extends General
                     }
                 }
             }
-            if (!$this->db->update($this->table, $arr, "`id` = $id")) {
+            if (!$this->db->update($this->table, $arr, '`id` = :id', ['id' => $id])) {
                 $err[] = 'Обновить запись в БД не удалось';
             }
             // dd($this->UpdateQuantity($id));
@@ -197,10 +198,7 @@ class Products extends General
             if (!$this->db->insert($this->table, $arr)) {
                 $err[] = 'Создать запись в таблице "товары" не удалось';
             }
-            // dd($this->db->LastInsertId());
             $property['product_id'] = $this->db->LastInsertId();
-            // dd($property);
-            // dd($this->db->insert($this->table.'_properties', $property));
             $err = array_merge($err, $this->properties->Update($property));
         }
 

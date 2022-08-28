@@ -54,7 +54,7 @@ class User
 
             $ip = $this->getUserIp();
             if ($ip == '127.0.0.1')
-                $ip = '130.31.40.42'; 
+                $ip = '130.31.40.42';
             //$ip = $_SERVER['REMOTE_ADDR'];
             $geo = json_decode(@file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip), 1);
             // dd($geo);
@@ -66,7 +66,7 @@ class User
             $q = "INSERT INTO `users` (`session_id`, `country`, `lang`, `role`) VALUES (:sess, :country, :lang, :roles)";
             $this->db->query($q, [
                 ':sess' => session_id(),
-                ':country' => $country, 
+                ':country' => $country,
                 ':lang' => $country,
                 ':roles' => 'guest',
             ]);
@@ -75,7 +75,7 @@ class User
             $_SESSION[current($exist)['role']]['id'] = key($exist);
         } else {
             $id = key($exist);
-            $this->db->query("UPDATE `users` SET `changed_at`= CURRENT_TIMESTAMP WHERE `id`=:id", ['id' => $id]);
+            $this->db->query("UPDATE `users` SET `changed_at`= CURRENT_TIMESTAMP WHERE `id` = :id", ['id' => $id]);
             $exist[$id]['changed_at'] = date('Y-m-d H:i:s');
             unset($_SESSION['admin']);
             $_SESSION[current($exist)['role']]['id'] = $id;
@@ -102,10 +102,7 @@ class User
 
         $logout = $this->db->fetAll("SELECT * FROM `users` WHERE `changed_at` <= :deathline AND `temp` = 0", ['deathline' => $death_line]);
         foreach ($logout as $user_id => $value) {
-            // debug($id);
-            //dd($id);
-            //dd($user_id);
-            // $this->db->query("DELETE FROM `cart` WHERE `user_id` = :user_id", ['user_id' => $user_id]);
+
             $this->db->query("UPDATE `users` SET `session_id` = NULL WHERE `id` = :user_id", ['user_id' => $user_id]);
         }
     }
@@ -113,14 +110,14 @@ class User
     {
         // dd($_SESSION);
         if (empty($post)) $post = $_POST;
-        ddd($post);
+        // ddd($post);
         $post['password'] = md5($post['password']);
-        ddd($post);
+        // ddd($post);
         $exist = $this->db->fetAllLite('users', "`email` = :email AND `password` = :pass", [
             ':email' => $post['email'],
             ':pass' => $post['password'],
         ]);
-        ddd($exist);
+        // ddd($exist);
         // dd($exist);
         if (!empty($exist)) {
             // dd(current($exist)['role']);
@@ -174,8 +171,6 @@ class User
         $post['temp'] = 0;
         $post['role'] = 'authorize';
 
-        // dd($post);
-        // $dbs = $this->db->update('users', $post, "`id` = :id", ['id' => $user_id]);
         $dbs = $this->update($user_id, $post);
         // $this->session = $this->Session();
         if (!$dbs) {
@@ -234,7 +229,7 @@ class User
     {
         $id = (int)$user_id;
         $user_id = $this->db->quote($user_id);
-        $dbs = $this->db->update('users', $fields, '`id` = ' . $user_id);
+        $dbs = $this->db->update('users', $fields, '`id` = :uid', ['uid' => $user_id]);
         if ($dbs) {
             if (!empty($this->session[$id])) {
                 foreach ($fields as $field_name => $value) {
@@ -265,6 +260,7 @@ class User
     {
         $where = $temp ? 'WHERE `temp`' : 'WHERE NOT `temp`';
         $q = "SELECT * FROM `users` $where ORDER BY `$order` $ASC";
+        //TODO SECURITY
         return $this->db->fetAll($q);
     }
 }

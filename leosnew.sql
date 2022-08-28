@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 28 2022 г., 12:03
+-- Время создания: Авг 28 2022 г., 13:01
 -- Версия сервера: 5.6.51-log
 -- Версия PHP: 7.4.29
 
@@ -230,7 +230,7 @@ CREATE TABLE `status` (
 --
 
 INSERT INTO `status` (`id`, `block`) VALUES
-(1, 1);
+(1, 0);
 
 -- --------------------------------------------------------
 
@@ -268,7 +268,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `session_id`, `first_name`, `second_name`, `country`, `billing_country`, `lang`, `phone`, `email`, `instagram`, `address`, `apartment`, `city`, `region`, `zip_code`, `additions`, `password`, `role`, `temp`, `orders`, `created_at`, `changed_at`) VALUES
-(1, 'mm6loff46o3i808h01ga45ktcrco0ut6', 'Леонид', 'Смагин', 'RU', 'RU', 'RU', '8 (978) 503-66-11', 'admin@leosmagin.com', '', 'Улица пушкина, дом Калатушкина', '', 'Вашингтон', 'Охайо', '', '', '813869ad63acf6888f4b3492e4a5e66a', 'admin', 0, 0, '2022-08-22 07:21:26', '2022-08-28 09:02:54'),
+(1, 'mm6loff46o3i808h01ga45ktcrco0ut6', 'Леонид', 'Смагин', 'RU', 'RU', 'RU', '8 (978) 503-66-11', 'admin@leosmagin.com', '', 'Улица пушкина, дом Калатушкина', '', 'Вашингтон', 'Охайо', '', '', '813869ad63acf6888f4b3492e4a5e66a', 'admin', 0, 0, '2022-08-22 07:21:26', '2022-08-28 10:01:17'),
 (10, NULL, 'Новый', 'Пользователь ', 'US', 'RU', 'RU', '', 'BigBag.minecrafter@gmail.com', '', '', '', '', '', '', '', '12478e7ad0e39aa9c35be4b9a694ba9b', 'authorize', 0, 0, '2022-08-24 16:11:48', '2022-08-27 11:25:26'),
 (11, 'hj0bhqbljlq19ka6j8ocrees54ql91qn', NULL, NULL, 'US', NULL, 'US', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'guest', 1, 0, '2022-08-27 11:50:24', '2022-08-27 11:50:56'),
 (12, '2p1b90h8g9bd5n21gl548fng3vut0hk6', NULL, NULL, 'US', NULL, 'US', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'guest', 1, 0, '2022-08-27 14:01:48', '2022-08-27 14:01:48'),
@@ -366,7 +366,7 @@ ALTER TABLE `users_roles`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT для таблицы `categories`
@@ -384,7 +384,7 @@ ALTER TABLE `mail_config`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `orders_status`
@@ -396,13 +396,13 @@ ALTER TABLE `orders_status`
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `products_properties`
 --
 ALTER TABLE `products_properties`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT для таблицы `sber_config`

@@ -102,7 +102,7 @@ class Cart extends General
                 }
             }
 
-            if (!$this->db->update($this->table, $arr, "`id` = $id")) {
+            if (!$this->db->update($this->table, $arr, '`id` = :id', ['id' => $id])) {
                 // $err[] = 'Обновить1 запись в таблице ' . $this->table . ' не удалось';
                 $err[] = [
                     'EN' => "Error occured!",
@@ -152,7 +152,7 @@ class Cart extends General
                     }
                     // $arr['quantity'] += current($exist)['quantity'];
 
-                    if (!$this->db->update($this->table, $arr, "`id` = $id")) {
+                    if (!$this->db->update($this->table, $arr, '`id` = :id', ['id' => $id])) {
                         // $err[] = 'Обновить запись в таблице ' . $this->table . ' не удалось';
                         $err[] = [
                             'EN' => "Error occured!",
@@ -170,7 +170,6 @@ class Cart extends General
                 ];
             }
         }
-        // dd($this->db->LastInsertId());
 
         return $err;
     }
