@@ -217,9 +217,10 @@ class Products extends General
     public function Delete($id)
     {
         $exist = current($this->getById($id));
+        // ddd($exist);
         if (isset($exist['images'])) {
             $images = json_decode($exist['images'], 1);
-            // dd($images);
+            // ddd($images);
             foreach ($images as $image) {
                 if (file_exists($image)) {
                     unlink($image);
@@ -228,7 +229,7 @@ class Products extends General
         }
         if (isset($exist['images_min'])) {
             $images = json_decode($exist['images_min'], 1);
-            // dd($images);
+            // ddd($images);
             foreach ($images as $image) {
                 if (file_exists($image)) {
                     unlink($image);
@@ -236,12 +237,13 @@ class Products extends General
             }
         }
         $properties = $this->properties->getByProductId($id);
-        // dd($properties);
-        foreach ($properties as $id => $node) {
-            $this->properties->Delete($id);
+        // ddd($properties);
+        foreach ($properties as $prid => $node) {
+            $this->properties->Delete($prid);
+            // ddd($tmp);
         }
-
-        return $this->db->delete($this->table, '`id` = :id', ['id' => $id]);
+        // ddd('properties gone!');
+        return $this->db->delete($this->table, '`id` = :id', [':id' => $id]);
     }
     /**
      * Функция для обновления минимальной и максимальной цены

@@ -7,7 +7,7 @@
                 <label for="">Удалить товар "<?= current($product)['name'] ?>"?</label>
             </div>
             <div class="form-group">
-                <input class="" type="checkbox" name="confirm" id="confirm" required value="1">
+                <input class="" type="checkbox" name="confirm" id="confirm" required value="111">
 
                 <label for="confirm">Подтвердить удаление</label>
             </div>

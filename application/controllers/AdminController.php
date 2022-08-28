@@ -206,7 +206,7 @@ class AdminController extends Controller
 					foreach (current($_FILES)['name'] as $name) {
 						$names[] = $_POST['name_en'] . ' ' . uniqid();
 					}
-					$file_m = $this->model->setFiles(2 * (2 ** 23), ['png', 'jpg'], $fpath . '/min/', $names, [
+					$file_m = $this->model->setFiles(2 * (2 ** 23), ['png', 'jpg'], $fpath . 'min/', $names, [
 						key($_FILES) => current($_FILES)
 					]);
 					$file['err'] = array_merge($file['err'], $file_m['err']);
@@ -225,7 +225,7 @@ class AdminController extends Controller
 				if (!empty($file_m)) {
 					// dd($file_m);
 					foreach ($file_m['fname'] as $fname) {
-						$_POST['images_min'][] = $fpath . '/min/' . $fname;
+						$_POST['images_min'][] = $fpath . 'min/' . $fname;
 						// $_POST['images_min']=json_encode($_POST['images_min']);
 					}
 				}
@@ -282,9 +282,11 @@ class AdminController extends Controller
 			//dd($vars['category']);
 			$this->view->render("Удалить товар", $vars);
 		} else {
+			// ddd(1);
 
 			if ($_POST['confirm']) {
-				$this->model->shop->products->delete($_POST['id']);
+				// ddd(2);
+				$tmp = $this->model->shop->products->delete($_POST['id']);
 				$this->view->redirect("/admin/products");
 			}
 		}
