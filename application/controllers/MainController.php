@@ -98,6 +98,7 @@ class MainController extends Controller
 				$message = ob_get_clean();
 
 				$this->model->sendMail($_POST['email'], ($user['lang'] == 'RU' ? 'Заказ №' : 'Order №') . current($oansw)['ID'], $message);
+
 				$properties = $this->model->shop->products_properties->getAll();
 				$products = $this->model->shop->products->getAll();
 				// ddd($user);
