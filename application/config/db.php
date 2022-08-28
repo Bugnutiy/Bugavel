@@ -1,9 +1,9 @@
 <?php
 // dd($_SERVER);
 return [
-	'host' => 'h902111921.mysql',
-	'name' => 'h902111921_leosnew',
-	'user' => 'h902111921_leonw',
-	'password' => 'y2+tSZaE',
+	'host' => 'localhost',
+	'name' => 'leosnew',
+	'user' => 'leosnew',
+	'password' => 'poilka170196',
 	'charset' => 'utf8mb4',//unicode_ci
 ];

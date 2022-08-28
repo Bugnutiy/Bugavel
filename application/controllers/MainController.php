@@ -74,7 +74,7 @@ class MainController extends Controller
 		}
 
 		$blocked = $this->model->db->fetAllLite('status')[1];
-		if ($blocked['block']) {
+		if ($blocked['block'] && !isset($_SESSION['admin'])) {
 			$this->view->layout = 'default';
 			$this->view->render('');
 			exit;
