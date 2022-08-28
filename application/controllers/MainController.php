@@ -78,7 +78,35 @@ class MainController extends Controller
 		// ddd($_POST);
 		if (isset($_POST['email'])) {
 			$this->model->user->update($this->model->user->getUserId(), $_POST);
+
 			$oansw = $this->model->shop->orders->makeOrder($this->model->user->getUser(), $_POST);
+			// $id=$this->model->shop->orders->db->LastInsertId();
+			if (isset($oansw) && current($oansw)['type'] == 'success') {
+				$user = current($this->model->user->getUser());
+				// dd($oansw);
+				$order = current($this->model->shop->orders->getById(current($oansw)['ID']));
+				// dd($order);
+				ob_start();
+				require 'application/views/mail/newOrder.php';
+				$message = ob_get_clean();
+				
+				$this->model->sendMail($_POST['email'],$user['lang']=='RU'?'Заказ №':'Order №'.current($oansw)['ID'],$message);
+				$properties=$this->model->shop->products_properties->getAll();
+				$products=$this->model->shop->products->getAll();
+				// ddd($user);
+				// ddd($oansw);
+				$cart=json_decode($order['cart'],1);
+				// ddd($cart);
+				// ddd($order);
+				// dd(1);
+				$countries=require "application/config/countries.php";
+				ob_start();
+				require 'application/views/mail/newOrderAdmin.php';
+				$message = ob_get_clean();
+
+				$this->model->sendMail('yura.mezentsev@yandex.ru','Новый Заказ №'.current($oansw)['ID'],$message);
+				
+			}
 			return $oansw;
 		} else {
 			return [];

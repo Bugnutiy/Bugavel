@@ -10,6 +10,7 @@
         <table class="table table-light table-bordered table-striped mb-0">
           <thead class="thead-dark">
             <tr>
+              <th>№</th>
               <th>Дата время</th>
               <th>Статус</th>
               <th>Имя пользователя</th>
@@ -21,15 +22,16 @@
             <?php
             foreach ($orders as $id => $node) : ?>
               <tr>
+                <td><?= $id ?></td>
                 <td><?= $node['changed_at'] ?></td>
                 <td><?= $orders_class->status[$node['status']]['RU'] ?></td>
                 <td><?= $node['first_name'] . ' ' . $node['second_name'] ?></td>
                 <td>
-                  <? if ($node['ip_country']=='RU') : ?>
+                  <? if ($node['ip_country'] == 'RU') : ?>
                     <?= json_decode($node['cost'], 1)['RUB'] ?> руб.
                   <? else : ?>
                     <?= '$' . json_decode($node['cost'], 1)['USD'] ?>
-                  <? endif ?> 
+                  <? endif ?>
                 </td>
 
 

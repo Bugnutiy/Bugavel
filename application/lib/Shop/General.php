@@ -13,7 +13,7 @@ abstract class General
     /**
      *@var Db 
      */
-    protected $db;
+    public $db;
     /**
      * @var string название таблицы
      */

@@ -71,7 +71,7 @@
                       <section class="splide goods_slider" aria-label="Splide Basic HTML Example">
                         <div class="splide__track">
                           <div class="splide__list">
-                            <? $images = json_decode($product_node['images'], 1);
+                            <? $images = json_decode($product_node['images_min'], 1);
                             foreach ($images as $src) : ?>
                               <a href="/catalog/product?id=<?= $product_id ?>" class="splide__slide"><img src="/<?= $src ?>" alt="<?= current($user)['lang'] !== 'RU' ? "Product image" : "Изображение товара" ?>"></a>
                             <? endforeach ?>

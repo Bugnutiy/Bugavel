@@ -46,7 +46,7 @@ class Orders extends General
      *
      * @param array $user
      * @param array $order
-     * @return void
+     * @return array
      */
     public function MakeOrder($user, $order = [])
     {
@@ -91,17 +91,22 @@ class Orders extends General
             'RUB' => $cost,
             'USD' => $cost_en
         ]);
-
+        // dd($user);
+        $order['ip_country']=current($user)['country'];
+        // dd($order);
         if (empty($this->Update($order))) {
+            // dd($this->db->LastInsertId());
+            $dbid=$this->db->LastInsertId();
             $err[] = [
                 'type' => 'success',
                 'EN' => 'The order has been placed successfully! Expect a response to your email',
-                'RU' => 'Заказ успешно размещен! Ожидайте ответа на вашу электронную почту'
+                'RU' => 'Заказ успешно размещен! Ожидайте ответа на вашу электронную почту',
+                'ID' => $dbid
             ];
             foreach ($cart as $id => $value) {
                 $properties[$value['property_id']]['quantity'] -= $value['quantity'];
                 $this->db->update('products_properties', $properties[$value['property_id']], '`id` = :id', ['id' => $value['property_id']]);
-                $this->db->Delete('cart', '`id` = :id', ['id' => $id]);
+                $this->db->Delete('cart', '`id` = :id', ['id' => $id]); 
             }
         } else {
             $err[] = [

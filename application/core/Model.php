@@ -6,6 +6,7 @@ use application\lib\Db;
 use application\lib\Sber\Sber;
 use application\lib\User\User;
 use application\lib\Shop\Shop;
+use PHPMailer\PHPMailer\PHPMailer;
 
 /**
  * Родитель всех моделей, в нём подключаются библиотеки, используемые везде
@@ -102,5 +103,84 @@ class Model
 		}
 		// dd($arr);
 		return $arr;
+	}
+
+	/**
+	 * Отправить письмо
+	 *
+	 * @param string $address E-Mail получателя
+	 * @param string $title	Тема письма
+	 * @param string $body	Само письмо
+	 * @param boolean $isHTML
+	 * @return array
+	 */
+	public function sendMail($address, $title, $body, $isHTML = true)
+	{
+		require_once 'application/lib/mailer/src/PHPMailer.php';
+		require_once 'application/lib/mailer/src/SMTP.php';
+		require_once 'application/lib/mailer/src/Exception.php';
+		$result='';
+		$status='';
+		$mail_config = current($this->db->fetAllLite('mail_config'));
+		$mail = new PHPMailer();
+		try {
+			$mail->isSMTP();
+			$mail->CharSet = "UTF-8";
+			$mail->SMTPAuth   = true;
+			//$mail->SMTPDebug = 2;
+			$mail->Debugoutput = function ($str, $level) {
+				$GLOBALS['status'][] = $str;
+			};
+
+			// Настройки вашей почты
+			// $mail->Host       = 'mail.nic.ru'; // SMTP сервера вашей почты
+			// $mail->Username   = 'info@leosmagin.com'; // Логин на почте
+			// $mail->Password   = 'DMZb2PuM2WF'; // Пароль на почте
+			// $mail->SMTPSecure = 'ssl';
+			// $mail->Port       = 465;
+			// $mail->setFrom('info@leosmagin.com', $name); // Адрес самой почты и имя отправителя
+
+			$mail->Host       = $mail_config['host']; // SMTP сервера вашей почты
+			$mail->Username   = $mail_config['username']; // Логин на почте
+			$mail->Password   = $mail_config['password']; // Пароль на почте
+			$mail->SMTPSecure = $mail_config['SMTPSecure'];
+			$mail->Port       = $mail_config['port'];
+			$mail->setFrom($mail_config['from_email'], $mail_config['from_name']); // Адрес самой почты и имя отправителя
+
+			// Получатель письма
+			$mail->addAddress($address);
+			// $mail->addAddress('youremail@gmail.com'); // Ещё один, если нужен
+
+			// Прикрипление файлов к письму
+			// if (!empty($file['name'][0])) {
+			// 	for ($ct = 0; $ct < count($file['tmp_name']); $ct++) {
+			// 		$uploadfile = tempnam(sys_get_temp_dir(), sha1($file['name'][$ct]));
+			// 		$filename = $file['name'][$ct];
+			// 		if (move_uploaded_file($file['tmp_name'][$ct], $uploadfile)) {
+			// 			$mail->addAttachment($uploadfile, $filename);
+			// 			$rfile[] = "Файл $filename прикреплён";
+			// 		} else {
+			// 			$rfile[] = "Не удалось прикрепить файл $filename";
+			// 		}
+			// 	}
+			// }
+			// Отправка сообщения
+			$mail->isHTML($isHTML);
+			$mail->Subject = $title;
+			$mail->Body = $body;
+
+			// Проверяем отравленность сообщения
+			if ($mail->send()) {
+				$result = "success";
+			} else {
+				$result = "error";
+			}
+		} catch (\Exception $e) {
+			$result = "error";
+			$status = "Сообщение не было отправлено. Причина ошибки: {$mail->ErrorInfo}";
+		}
+
+		return ["result" => $result, "status" => $status];
+		# code...
 	}
 }
