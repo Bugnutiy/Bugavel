@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 28 2022 г., 06:56
+-- Время создания: Авг 28 2022 г., 12:03
 -- Версия сервера: 5.6.51-log
 -- Версия PHP: 7.4.29
 
@@ -128,14 +128,6 @@ CREATE TABLE `orders` (
   `changed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Дамп данных таблицы `orders`
---
-
-INSERT INTO `orders` (`id`, `user_id`, `lang`, `currency`, `status`, `payment_status`, `canceled`, `info_method`, `delivery_method`, `delivery_time`, `first_name`, `second_name`, `phone`, `email`, `instagram`, `billing_country`, `address`, `apartment`, `city`, `region`, `zip_code`, `additions`, `cart`, `cost`, `created_at`, `changed_at`) VALUES
-(1, 1, 'RU', 'RU', 1, 0, 0, '', '', '', 'Леонид', 'Смагин', '8 (978) 503-66-11', 'admin@leosmagin.com', '', 'RU', 'Улица пушкина, дом Калатушкина', '', 'Вашингтонrefwef', 'Охайо', '', '', '{\"10\":{\"user_id\":\"1\",\"product_id\":\"5\",\"property_id\":\"6\",\"quantity\":\"2\",\"created_at\":\"2022-08-28 05:57:59\",\"changed_at\":\"2022-08-28 05:57:59\"}}', '{\"RUB\":2222,\"USD\":2222}', '2022-08-28 02:58:24', '2022-08-28 03:37:50'),
-(2, 1, 'RU', 'RU', 2, 0, 0, '', '', '', 'Леонид', 'Смагин', '8 (978) 503-66-11', 'admin@leosmagin.com', '', 'RU', 'Улица пушкина, дом Калатушкина', '', 'Вашингтон', 'Охайо', '', '', '{\"11\":{\"user_id\":\"1\",\"product_id\":\"5\",\"property_id\":\"6\",\"quantity\":\"1\",\"created_at\":\"2022-08-28 06:41:03\",\"changed_at\":\"2022-08-28 06:41:08\"}}', '{\"RUB\":1111,\"USD\":1111}', '2022-08-28 03:41:21', '2022-08-28 03:42:46');
-
 -- --------------------------------------------------------
 
 --
@@ -187,13 +179,6 @@ CREATE TABLE `products` (
   `changed_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Дамп данных таблицы `products`
---
-
-INSERT INTO `products` (`id`, `category_id`, `name`, `name_en`, `description`, `description_en`, `images`, `images_min`, `min_price`, `min_price_en`, `max_price`, `max_price_en`, `average_price`, `average_price_en`, `quantity`, `created_at`, `changed_at`) VALUES
-(5, 8, 'е1', 'е12', '<p>е1</p>', '<p>е1</p>', '[\"public\\/images\\/products\\/\\u043512 630ad99dd5190.jpg\",\"public\\/images\\/products\\/\\u043512 630ad99dd5196.jpg\"]', '[\"public\\/images\\/products\\/\\/min\\/\\u043512 630ad99dd5ab6.jpg\"]', 1111, 1111, 1111, 1111, 1111, 1111, 1104, '2022-08-28 05:50:14', '2022-08-28 05:57:33');
-
 -- --------------------------------------------------------
 
 --
@@ -213,13 +198,6 @@ CREATE TABLE `products_properties` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `changed_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Экземпляры товара с индивидуальными свойствами';
-
---
--- Дамп данных таблицы `products_properties`
---
-
-INSERT INTO `products_properties` (`id`, `product_id`, `classname`, `classname_en`, `name`, `name_en`, `price`, `price_en`, `quantity`, `created_at`, `changed_at`) VALUES
-(6, 5, '', '', 'е1', 'е1', 1111, 1111, 1101, '2022-08-28 05:50:14', '2022-08-28 05:50:14');
 
 -- --------------------------------------------------------
 
@@ -252,7 +230,7 @@ CREATE TABLE `status` (
 --
 
 INSERT INTO `status` (`id`, `block`) VALUES
-(1, 0);
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -290,12 +268,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `session_id`, `first_name`, `second_name`, `country`, `billing_country`, `lang`, `phone`, `email`, `instagram`, `address`, `apartment`, `city`, `region`, `zip_code`, `additions`, `password`, `role`, `temp`, `orders`, `created_at`, `changed_at`) VALUES
-(1, 'mm6loff46o3i808h01ga45ktcrco0ut6', 'Леонид', 'Смагин', 'RU', 'RU', 'RU', '8 (978) 503-66-11', 'admin@leosmagin.com', '', 'Улица пушкина, дом Калатушкина', '', 'Вашингтон', 'Охайо', '', '', '813869ad63acf6888f4b3492e4a5e66a', 'admin', 0, 0, '2022-08-22 07:21:26', '2022-08-28 03:42:47'),
+(1, 'mm6loff46o3i808h01ga45ktcrco0ut6', 'Леонид', 'Смагин', 'RU', 'RU', 'RU', '8 (978) 503-66-11', 'admin@leosmagin.com', '', 'Улица пушкина, дом Калатушкина', '', 'Вашингтон', 'Охайо', '', '', '813869ad63acf6888f4b3492e4a5e66a', 'admin', 0, 0, '2022-08-22 07:21:26', '2022-08-28 09:02:54'),
 (10, NULL, 'Новый', 'Пользователь ', 'US', 'RU', 'RU', '', 'BigBag.minecrafter@gmail.com', '', '', '', '', '', '', '', '12478e7ad0e39aa9c35be4b9a694ba9b', 'authorize', 0, 0, '2022-08-24 16:11:48', '2022-08-27 11:25:26'),
 (11, 'hj0bhqbljlq19ka6j8ocrees54ql91qn', NULL, NULL, 'US', NULL, 'US', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'guest', 1, 0, '2022-08-27 11:50:24', '2022-08-27 11:50:56'),
 (12, '2p1b90h8g9bd5n21gl548fng3vut0hk6', NULL, NULL, 'US', NULL, 'US', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'guest', 1, 0, '2022-08-27 14:01:48', '2022-08-27 14:01:48'),
 (14, '1lcd5pegp0108ph1o8scee75et5ji0go', NULL, NULL, 'US', NULL, 'US', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'guest', 1, 0, '2022-08-28 02:19:39', '2022-08-28 02:19:39'),
-(16, '69fo8q7do7iimc349o8f7gi87kfecc6g', NULL, NULL, 'US', NULL, 'US', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'guest', 1, 0, '2022-08-28 02:20:59', '2022-08-28 02:20:59');
+(16, '69fo8q7do7iimc349o8f7gi87kfecc6g', NULL, NULL, 'US', NULL, 'US', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'guest', 1, 0, '2022-08-28 02:20:59', '2022-08-28 02:20:59'),
+(17, '806f5ib17o2vqical47hkojm1lih4n66', NULL, NULL, 'US', NULL, 'US', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'guest', 1, 0, '2022-08-28 08:24:30', '2022-08-28 08:24:30');
 
 -- --------------------------------------------------------
 
@@ -334,8 +313,7 @@ ALTER TABLE `mail_config`
 -- Индексы таблицы `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `users` (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `orders_status`
@@ -347,8 +325,7 @@ ALTER TABLE `orders_status`
 -- Индексы таблицы `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `category` (`category_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `products_properties`
@@ -407,7 +384,7 @@ ALTER TABLE `mail_config`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `orders_status`
@@ -419,13 +396,13 @@ ALTER TABLE `orders_status`
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT для таблицы `products_properties`
 --
 ALTER TABLE `products_properties`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT для таблицы `sber_config`
@@ -443,7 +420,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT для таблицы `users_roles`
