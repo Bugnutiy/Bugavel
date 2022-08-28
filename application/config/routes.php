@@ -34,6 +34,10 @@ return [
 		'controller' => 'main',
 		'action' => 'contacts'
 	],
+	'about/delivery' => [
+		'controller' => 'main',
+		'action' => 'delivery'
+	],
 	/***********************************Admin shop******************************************/
 	////////////////////////categories//////////////////////////
 	'admin/categories' => [

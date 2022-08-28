@@ -115,7 +115,7 @@
                     <div class="col-12">
                         <p>Текущие обрезанные изображения товара</p>
 
-                        <? foreach (json_decode(current($product)['images_min']) as $path) : ?>
+                        <? foreach (json_decode(current($product)['images_min'],1) as $path) : ?>
                             <p>
                                 <img src="/<?= $path ?>" alt="Изображение товара" class="img-fluid">
                             </p>

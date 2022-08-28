@@ -11,6 +11,7 @@ return
             'policy',
             'contacts',
             'payment',
+            'delivery',
         ],
 
         'authorize' => [

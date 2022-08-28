@@ -58,7 +58,7 @@
     </thead>
     <tbody>
       <? foreach ($cart as $cart_id => $cart_node) : ?>
-        <? if ($order['ip_country'] == 'RU') : ?>
+        <? if ($order['currency'] == 'RU') : ?>
           <tr>
             <td><?= $products[$cart_node['product_id']]['name'] ?></td>
             <td><?= $cart_node['quantity'] ?></td>
@@ -75,7 +75,7 @@
     </tbody>
   </table>
 </div>
-<? if ($order['ip_country'] == 'RU') : ?>
+<? if ($order['currency'] == 'RU') : ?>
   <p><b>Сумма заказа: <?= json_decode($order['cost'], 1)['RUB'] ?> руб.</b></p>
 <? else : ?>
   <p><b>Сумма заказа: <?= json_decode($order['cost'], 1)['USD'] ?> USD.</b></p>

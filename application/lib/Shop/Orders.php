@@ -92,7 +92,7 @@ class Orders extends General
             'USD' => $cost_en
         ]);
         // dd($user);
-        $order['ip_country']=current($user)['country'];
+        $order['currency']=current($user)['country'];
         // dd($order);
         if (empty($this->Update($order))) {
             // dd($this->db->LastInsertId());

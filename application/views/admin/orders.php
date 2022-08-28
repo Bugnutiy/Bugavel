@@ -27,7 +27,7 @@
                 <td><?= $orders_class->status[$node['status']]['RU'] ?></td>
                 <td><?= $node['first_name'] . ' ' . $node['second_name'] ?></td>
                 <td>
-                  <? if ($node['ip_country'] == 'RU') : ?>
+                  <? if ($node['currency'] == 'RU') : ?>
                     <?= json_decode($node['cost'], 1)['RUB'] ?> руб.
                   <? else : ?>
                     <?= '$' . json_decode($node['cost'], 1)['USD'] ?>

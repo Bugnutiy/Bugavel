@@ -2,7 +2,7 @@
   <h1>Здравствуйте, <?= $user['first_name'] ?> <?= $user['second_name'] ?>!</h1>
   <p>Данный E-mail был указан в заказе на сайте leosmagin.com</p>
   <p>Заказ №<?= current($oansw)['ID'] ?> успешно размещен</p>
-  <? if ($order['ip_country'] == 'RU') : ?>
+  <? if ($order['currency'] == 'RU') : ?>
     <p><b>Сумма заказа: <?= json_decode($order['cost'], 1)['RUB'] ?> руб.</b></p>
   <? else : ?>
     <p><b>Сумма заказа: <?= json_decode($order['cost'], 1)['USD'] ?> USD.</b></p>
@@ -14,7 +14,7 @@
   <h1>Hello, <?= $user['first_name'] ?> <?= $user['second_name'] ?>!</h1>
   <p>This email address was specified in the order on the website leosmagin.com </p>
   <p>Order No.<?= current($oansw)['ID'] ?> successfully placed</p>
-  <? if ($order['ip_country'] == 'RU') : ?>
+  <? if ($order['currency'] == 'RU') : ?>
     <p><b>Order amount: <?= json_decode($order['cost'], 1)['RUB'] ?> rub.</b></p>
   <? else : ?>
     <p><b>Order amount: <?= json_decode($order['cost'], 1)['USD'] ?> USD.</b></p>

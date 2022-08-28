@@ -83,6 +83,9 @@ class Products extends General
         if (isset($arr['images'])) {
             $arr['images'] = json_encode($arr['images']);
         }
+        if (isset($arr['images_min'])) {
+            $arr['images_min'] = json_encode($arr['images_min']);
+        }
 
         if (!empty($arr['id'])) {
             $id = intval($arr['id']);

@@ -73,9 +73,9 @@ class MainController extends Controller
 			]);
 		}
 
-		$blocked=$this->model->db->fetAllLite('status')[1];
-		if($blocked['block']){
-			$this->view->layout='default';
+		$blocked = $this->model->db->fetAllLite('status')[1];
+		if ($blocked['block']) {
+			$this->view->layout = 'default';
 			$this->view->render('');
 			exit;
 		}
@@ -96,23 +96,22 @@ class MainController extends Controller
 				ob_start();
 				require 'application/views/mail/newOrder.php';
 				$message = ob_get_clean();
-				
-				$this->model->sendMail($_POST['email'],$user['lang']=='RU'?'Заказ №':'Order №'.current($oansw)['ID'],$message);
-				$properties=$this->model->shop->products_properties->getAll();
-				$products=$this->model->shop->products->getAll();
+
+				$this->model->sendMail($_POST['email'], $user['lang'] == 'RU' ? 'Заказ №' : 'Order №' . current($oansw)['ID'], $message);
+				$properties = $this->model->shop->products_properties->getAll();
+				$products = $this->model->shop->products->getAll();
 				// ddd($user);
 				// ddd($oansw);
-				$cart=json_decode($order['cart'],1);
+				$cart = json_decode($order['cart'], 1);
 				// ddd($cart);
 				// ddd($order);
 				// dd(1);
-				$countries=require "application/config/countries.php";
+				$countries = require "application/config/countries.php";
 				ob_start();
 				require 'application/views/mail/newOrderAdmin.php';
 				$message = ob_get_clean();
 
-				$this->model->sendMail('yura.mezentsev@yandex.ru','Новый Заказ №'.current($oansw)['ID'],$message);
-				
+				$this->model->sendMail('yura.mezentsev@yandex.ru', 'Новый Заказ №' . current($oansw)['ID'], $message);
 			}
 			return $oansw;
 		} else {
@@ -312,10 +311,23 @@ class MainController extends Controller
 	}
 	public function paymentAction()
 	{
-		# code...
+		$this->view->render([
+			'RU' => 'Способы оплаты - LeoSmagin.com',
+			'EN' => 'Payment methods - LeoSmagin.com',
+		], []);
 	}
 	public function contactsAction()
 	{
-		# code...
+		$this->view->render([
+			'RU' => 'Контакты - LeoSmagin.com',
+			'EN' => 'Contacts - LeoSmagin.com',
+		], []);
+	}
+	public function deliveryAction()
+	{
+		$this->view->render([
+			'RU' => 'Доставка - LeoSmagin.com',
+			'EN' => 'Delivery - LeoSmagin.com',
+		], []);
 	}
 }

@@ -105,6 +105,7 @@ abstract class General
                     }
                 }
             }
+            // dd($arr);   
             if ($matcher == $arr) {
                 $err[] = 'Поменяйте хотя бы одно значение';
                 return $err;

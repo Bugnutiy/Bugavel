@@ -15,25 +15,41 @@ class AdminController extends Controller
 	{
 		parent::__construct($route);
 		$this->view->layout = 'admin';
-		
 	}
 
 	public function ordersEditAction()
 	{
 		if (!empty($_POST)) {
+			$products = $this->model->shop->products->getAll();
+			$properties = $this->model->shop->products_properties->getAll();
 			// dd($_POST);
 			$order = current($this->model->shop->orders->getById($_POST['id']));
 
 			$order['cart'] = json_decode($order['cart'], 1);
-			ddd($order);
+			// ddd($order);
 			// dd($_POST['cart']);
 			foreach ($order['cart'] as $cart_id => $cart_node) {
 				$order['cart'][$cart_id]['quantity'] = $_POST['cart'][$cart_id]['quantity'];
 			}
-			$order['cart'] = json_encode($order['cart']);
+			$_POST['cart'] = $order['cart'];
+			// dd($_POST);
+			$cost = 0;
+			$cost_en = 0;
+			foreach ($_POST['cart'] as $cart_id => $cart_node) {
+				// dd($properties);
+				$cost += $cart_node['quantity'] * $properties[$cart_node['property_id']]['price'];
+				$cost_en += $cart_node['quantity'] * $properties[$cart_node['property_id']]['price_en'];
+			}
 			// dd($order);
-			$order['id'] = $_POST['id'];
-			$this->model->shop->orders->Update($order);
+			$_POST['cart'] = json_encode($order['cart']);
+			$_POST['cost'] = json_encode([
+				'RUB' => $cost,
+				'USD' => $cost_en,
+			]);
+
+			// dd($order);
+			// dd($this->model->shop->orders->Update($_POST));
+			$this->model->shop->orders->Update($_POST);
 			$this->view->redirect('/admin/orders');
 		}
 		if (isset($_GET['id'])) {
@@ -73,13 +89,13 @@ class AdminController extends Controller
 	public function categoriesAction()
 	{
 		$bcr = ['Категории'];
-		if(isset($_GET['block'])){
-			$this->model->db->update('status',['block'=>$_GET['block']],'`id` = :id',['id'=>1]);
+		if (isset($_GET['block'])) {
+			$this->model->db->update('status', ['block' => $_GET['block']], '`id` = :id', ['id' => 1]);
 		}
 		$vars = [
 			'bcr' => $bcr,
 			'categories' => $this->model->shop->categories->getAll(),
-			'blocked'=>$this->model->db->fetAllLite('status'),
+			'blocked' => $this->model->db->fetAllLite('status'),
 		];
 		// dd($vars);
 		$this->view->render('Администратор - категории', $vars);
@@ -174,8 +190,8 @@ class AdminController extends Controller
 
 		$fpath = 'public/images/products/';
 		$vars = ['bcr' => $bcr];
-		$file=[];
-		$file_m=[];
+		$file = [];
+		$file_m = [];
 		if (!empty($_POST)) {
 			if (!empty(current($_FILES)['name'][0])) {
 
@@ -209,11 +225,11 @@ class AdminController extends Controller
 				if (!empty($file_m)) {
 					// dd($file_m);
 					foreach ($file_m['fname'] as $fname) {
-						$_POST['images_min'][] = $fpath .'/min/'. $fname;
+						$_POST['images_min'][] = $fpath . '/min/' . $fname;
 						// $_POST['images_min']=json_encode($_POST['images_min']);
 					}
 				}
-				
+
 
 				$err = $this->model->shop->products->Update($_POST);
 				if (empty($err)) {

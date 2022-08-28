@@ -1,8 +1,14 @@
 <? $cart = json_decode(current($order)['cart'], 1);
+
+?>
+
+<?
+// $statuses=$orders_class->status;
+// dd($statuses)
 ?>
 
 <div class="row products_main">
-  <div class="col-12">
+  <div class="col-12 mb-5">
     <form action="/admin/orders/edit" enctype="multipart/form-data" method="POST">
       <input type="hidden" name='id' value="<?= $_GET['id'] ?>">
       <h1>Корзина / Cart</h1>
@@ -19,9 +25,20 @@
 
         </div>
       <? endforeach ?>
-      <button type="submit">Submit</button>
+      <button type="submit" class="btn btn-outline-primary">Подтвердить</button>
       <hr>
       <h1>Заказ</h1>
+      <div class="row">
+        <div class="mb-3 col-12 col-sm">
+          <label for="status" class="form-label required">Статус заказа</label>
+          <select type="text" required class="form-control" name="status" id="status">
+            <? $statuses = $orders_class->status;
+            foreach ($statuses as $key => $node) : ?>
+              <option value="<?= $key ?>" <?= current($order)['status'] == $key ? 'selected' : '' ?>><?= $node['RU'] ?></option>
+            <? endforeach ?>
+          </select>
+        </div>
+      </div>
       <div class="row">
         <div class="mb-3 col-12 col-sm">
           <label for="order_first_name" class="form-label required">Имя</label>
@@ -150,6 +167,8 @@
 
         <textarea name="additions" class="form-control" id="order_additions" cols="30" rows="10" placeholder="<?= current($order)['lang'] == 'RU' ? 'Примечания к вашему заказу, например, особые пожелания отделу доставки.' : 'Notes about your order, e.g. special notes for delivery.' ?>"></textarea>
       </div>
+      <button type="submit" class="btn btn-outline-primary">Подтвердить</button>
+
     </form>
   </div>
 </div>

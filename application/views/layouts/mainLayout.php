@@ -314,9 +314,9 @@
             </div>
             <div class="col-auto">
               <!-- <a href=""><?= current($user)['lang'] !== 'RU' ? 'FAQ' : 'Вопросы' ?></a><br> -->
-              <a href=""><?= current($user)['lang'] !== 'RU' ? 'Payment' : 'Оплата' ?></a><br>
-              <a href=""><?= current($user)['lang'] !== 'RU' ? 'Delivery' : 'Доставка' ?></a><br>
-              <a href=""><?= current($user)['lang'] !== 'RU' ? 'Contacts' : 'Контакты' ?></a><br>
+              <a href="/about/payment"><?= current($user)['lang'] !== 'RU' ? 'Payment' : 'Оплата' ?></a><br>
+              <a href="/about/delivery"><?= current($user)['lang'] !== 'RU' ? 'Delivery' : 'Доставка' ?></a><br>
+              <a href="/about/contacts"><?= current($user)['lang'] !== 'RU' ? 'Contacts' : 'Контакты' ?></a><br>
               <? if (current($user)['role'] != 'guest') : ?>
                 <!-- <a href="" class="mt-2 d-block"><?= current($user)['lang'] !== 'RU' ? 'Account' : 'Аккаунт' ?></a> -->
                 <? if (isset($_SESSION['admin'])) : ?>
@@ -1697,9 +1697,9 @@
             <input type="checkbox" class="form-check-input" id="exampleCheck1" required="1" checked="1">
             <label class="form-check-label" for="exampleCheck1">
               <? if (current($user)['lang'] == 'RU') : ?>
-              Я солгасен с <a href="/about/policy">политикой конфиденциальности и правилами пользования </a>сайтом
-              <? else : ?> 
-                 I agree with the <a href="/about/policy">privacy policy and terms of use</a> of the site
+                Я солгасен с <a href="/about/policy">политикой конфиденциальности и правилами пользования </a>сайтом
+              <? else : ?>
+                I agree with the <a href="/about/policy">privacy policy and terms of use</a> of the site
               <? endif ?>
             </label>
           </div>
