@@ -73,6 +73,8 @@ class Db
 	}
 	public function quote($string, $param = NULL)
 	{
+		if (empty($param))
+			return $this->db->quote($string);
 		return $this->db->quote($string, $param);
 	}
 	/**
@@ -107,11 +109,14 @@ class Db
 	 * Обновить запись в таблице
 	 * @param string $tname Имя таблицы
 	 * @param array $fields свойство=>значение
-	 * @param string $sign Условие поиска
+	 * @param string $sign Условие поиска WHERE не нужно (Не защищено!)
+	 * @param array $sign_params свойство=>значение для условия
+	 * 
 	 * @return 1|0 Успешность операции
 	 */
-	public function update($tname, $fields, $sign)
+	public function update($tname, $fields, $sign, $sign_params = [])
 	{
+		// dd($sign);
 		$set = '';
 		$valuearr = [];
 		$i = 0;
@@ -121,11 +126,12 @@ class Db
 			$i++;
 		}
 		$set = substr($set, 0, -2);
-		//dd($set);
+		// dd($set);
 		if (is_string($sign)) {
 			$q = "UPDATE `$tname` SET $set WHERE ($sign)";
 			// ddd($q);
 			// dd($valuearr);
+			$valuearr = array_merge($valuearr, $sign_params);
 			return $this->query($q, $valuearr)->rowCount();
 		}
 
@@ -154,6 +160,31 @@ class Db
 			return $this->fetAll("SELECT * FROM `$tname` WHERE ($sign)" . $limit, $params);
 		} else return NULL;
 	}
+
+	/**
+	 * @param string $tname Имя таблицы
+	 * @param string|NULL $sign Условие поиска, WHERE писать нужно
+	 * @param array|NULL $params PDO:prepare params Параметры для поиска, без них не работает
+	 * @param array|NULL $page [Страница => количество записей на странице] [1=>10]
+	 */
+	public function fetAllLiteNW($tname, $sign = '', $params = [], $page = [])
+	{
+		$limit = '';
+		if (!empty($page)) {
+			$n = current($page);
+			$page = key($page);
+			// $start = $n * (--$page);
+			$start = --$page * $n;
+			$limit = " LIMIT $start,$n";
+		}
+
+		if (empty($sign) and empty($params)) {
+			return $this->fetAll("SELECT * FROM `$tname`" . $limit);
+		}
+			return $this->fetAll("SELECT * FROM `$tname` $sign" . $limit, $params);
+	
+	}
+
 	/**
 	 * @param string $tname Имя таблицы
 	 * @param string|NULL $sign Условие поиска,

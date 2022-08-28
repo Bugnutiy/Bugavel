@@ -15,14 +15,14 @@ function ddstr($str)
 }
 function dd($str)
 {
-	echo '<pre>';
+	echo "<pre>\n";
 	var_dump($str);
 	echo '</pre>';
 	exit;
 }
 function ddd($str)
 {
-	echo '<pre>';
+	echo "<pre>\n";
 	var_dump($str);
 	echo '</pre>';
 	//exit;

@@ -2,21 +2,7 @@
 
 return
     [
-        // Todo all to admin
-        'all' => [
-            'test',
-            'main',
-            'categories',
-            'categoriesEdit',
-            'categoriesDelete',
-            'products',
-            'productsEdit',
-            'productsDelete',
-            'properties',
-            'propertiesEdit',
-            'propertiesDelete',
-            'sber',
-        ],
+        'all' => [],
 
         'authorize' => [
             //
@@ -28,5 +14,19 @@ return
 
         'admin' => [
             //
+            'test',
+            'main',
+            'categories',
+            'categoriesEdit',
+            'categoriesDelete',
+            'products',
+            'productsEdit',
+            'productsDelete',
+            'properties',
+            'propertiesEdit',
+            'propertiesDelete',
+            'orders',
+            'ordersEdit',
+            'sber',
         ],
     ];

@@ -19,7 +19,7 @@
             <div class="d-none d-md-block col-12 col-md-4 col-lg-3 col-xl-2"></div>
             <div class="col-12 col-md-4 col-lg-3 col-xl-2 left">
                 <div class="row logo">
-                    <div class="col-12 p-md-3"><img src="/public/admin/images/logo/logo.png" class="img-fluid" alt=""></div>
+                    <a href="/" class="col-12 p-md-3"><img src="/public/admin/images/logo/logo.png" class="img-fluid" alt=""></a>
                 </div>
                 <div class="row justify-content-end">
                     <div class="col-auto pb-2">

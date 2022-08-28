@@ -1,7 +1,9 @@
 <?php
 
 namespace application\core;
-
+/**
+ * Класс шаблонов и вывода инфы
+ */
 class View
 {
 	public $folder = "application/views/";
@@ -12,7 +14,7 @@ class View
 	 *
 	 * @var array [переменная => значение]
 	 */
-	public $default_vars;
+	public $default_vars =[];
 	
 	public $layout = 'default';
 
@@ -20,13 +22,13 @@ class View
 	 * __construct
 	 *
 	 * @param array $route
-	 * @param array $default_vars
+	 * @param array|null $default_vars
 	 */
-	public function __construct($route, $default_vars = [])
+	public function __construct($route)
 	{
 		$this->route = $route;
 		$this->path = $route['controller'] . '/' . $route['action'];
-		$this->default_vars = $default_vars;
+		// $this->default_vars = $default_vars;
 		//debug($this->path);
 	}
 

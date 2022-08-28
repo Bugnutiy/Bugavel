@@ -17,6 +17,68 @@ class AdminController extends Controller
 		$this->view->layout = 'admin';
 	}
 
+	public function ordersEditAction()
+	{
+		if (!empty($_POST)) {
+			$products = $this->model->shop->products->getAll();
+			$properties = $this->model->shop->products_properties->getAll();
+			// dd($_POST);
+			$order = current($this->model->shop->orders->getById($_POST['id']));
+
+			$order['cart'] = json_decode($order['cart'], 1);
+			// ddd($order);
+			// dd($_POST['cart']);
+			foreach ($order['cart'] as $cart_id => $cart_node) {
+				$order['cart'][$cart_id]['quantity'] = $_POST['cart'][$cart_id]['quantity'];
+			}
+			$_POST['cart'] = $order['cart'];
+			// dd($_POST);
+			$cost = 0;
+			$cost_en = 0;
+			foreach ($_POST['cart'] as $cart_id => $cart_node) {
+				// dd($properties);
+				$cost += $cart_node['quantity'] * $properties[$cart_node['property_id']]['price'];
+				$cost_en += $cart_node['quantity'] * $properties[$cart_node['property_id']]['price_en'];
+			}
+			// dd($order);
+			$_POST['cart'] = json_encode($order['cart']);
+			$_POST['cost'] = json_encode([
+				'RUB' => $cost,
+				'USD' => $cost_en,
+			]);
+
+			// dd($order);
+			// dd($this->model->shop->orders->Update($_POST));
+			$this->model->shop->orders->Update($_POST);
+			$this->view->redirect('/admin/orders');
+		}
+		if (isset($_GET['id'])) {
+			$order = $this->model->shop->orders->getById($_GET['id']);
+			// dd($order);
+			if (!empty($order)) {
+				$vars = [
+					'order' => $order,
+					'orders_class' => $this->model->shop->orders,
+					'products' => $this->model->shop->products->getAll(),
+					'properties' => $this->model->shop->products_properties->getAll(),
+				];
+				$this->view->render('Заказы', $vars);
+			}
+		}
+	}
+
+	public function ordersAction()
+	{
+		$bcr = ['Заказы'];
+
+		$vars = [
+			'bcr' => $bcr,
+			'orders' => $this->model->db->fetAllLiteNW('orders', 'ORDER BY `changed_at` DESC', []),
+			'orders_class' => $this->model->shop->orders,
+		];
+		$this->view->render('Заказы', $vars);
+	}
+
 	public function mainAction()
 	{
 		//debug($_SESSION);
@@ -27,11 +89,15 @@ class AdminController extends Controller
 	public function categoriesAction()
 	{
 		$bcr = ['Категории'];
-
+		if (isset($_GET['block'])) {
+			$this->model->db->update('status', ['block' => $_GET['block']], '`id` = :id', ['id' => 1]);
+		}
 		$vars = [
 			'bcr' => $bcr,
 			'categories' => $this->model->shop->categories->getAll(),
+			'blocked' => $this->model->db->fetAllLite('status'),
 		];
+		// dd($vars);
 		$this->view->render('Администратор - категории', $vars);
 	}
 	public function categoriesEditAction()
@@ -112,7 +178,8 @@ class AdminController extends Controller
 		$bcr = ['Товары'];
 		$vars = [
 			'bcr' => $bcr,
-			'products' => $this->model->shop->products->getAll(),
+			'products' => isset($_GET['category']) ? $this->model->shop->products->getByCategoryId($_GET['category']) : $this->model->shop->products->getAll(),
+			'categories' => $this->model->shop->categories->getAll(),
 		];
 		$this->view->render('Администратор - товары', $vars);
 	}
@@ -123,13 +190,28 @@ class AdminController extends Controller
 
 		$fpath = 'public/images/products/';
 		$vars = ['bcr' => $bcr];
+		$file = [];
+		$file_m = [];
 		if (!empty($_POST)) {
 			if (!empty(current($_FILES)['name'][0])) {
+
 				$names = [];
 				foreach (current($_FILES)['name'] as $name) {
 					$names[] = $_POST['name_en'] . ' ' . uniqid();
 				}
-				$file = $this->model->setFiles(20 * (2 ** 23), ['png', 'jpg'], $fpath, $names);
+				$file = $this->model->setFiles(2 * (2 ** 23), ['png', 'jpg'], $fpath, $names);
+				if (count($_FILES) == 2) {
+					next($_FILES);
+					$names = [];
+					foreach (current($_FILES)['name'] as $name) {
+						$names[] = $_POST['name_en'] . ' ' . uniqid();
+					}
+					$file_m = $this->model->setFiles(2 * (2 ** 23), ['png', 'jpg'], $fpath . 'min/', $names, [
+						key($_FILES) => current($_FILES)
+					]);
+					$file['err'] = array_merge($file['err'], $file_m['err']);
+					// dd($file_m);
+				}
 			}
 			if (!empty($file['err'])) {
 				$vars = array_merge($vars, ['err' => $file['err']]);
@@ -140,6 +222,14 @@ class AdminController extends Controller
 						$_POST['images'][] = $fpath . $fname;
 					}
 				}
+				if (!empty($file_m)) {
+					// dd($file_m);
+					foreach ($file_m['fname'] as $fname) {
+						$_POST['images_min'][] = $fpath . 'min/' . $fname;
+						// $_POST['images_min']=json_encode($_POST['images_min']);
+					}
+				}
+
 
 				$err = $this->model->shop->products->Update($_POST);
 				if (empty($err)) {
@@ -192,9 +282,11 @@ class AdminController extends Controller
 			//dd($vars['category']);
 			$this->view->render("Удалить товар", $vars);
 		} else {
+			// ddd(1);
 
 			if ($_POST['confirm']) {
-				$this->model->shop->products->delete($_POST['id']);
+				// ddd(2);
+				$tmp = $this->model->shop->products->delete($_POST['id']);
 				$this->view->redirect("/admin/products");
 			}
 		}
@@ -232,10 +324,12 @@ class AdminController extends Controller
 			// dd($err);
 			if (empty($err)) {
 				$this->model->shop->products->UpdatePrice($_GET['product_id']);
+				$this->model->shop->products->UpdateQuantity($_GET['product_id']);
+
 				$this->view->redirect('/admin/products/properties?product_id=' . $_GET['product_id']);
 			} else {
 				// dd($err);
-				$vars = array_merge($vars,['err' => $err]);
+				$vars = array_merge($vars, ['err' => $err]);
 			};
 		}
 

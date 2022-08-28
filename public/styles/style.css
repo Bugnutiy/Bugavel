@@ -46,8 +46,17 @@
   font-style: normal;
   font-weight: normal;
 }
+.iti__flag {
+  background-image: url("/public/intltel/img/flags.png");
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag {
+    background-image: url("/public/intltel/img/flags@2x.png");
+  }
+}
 body {
-  background: #f5f5f5;
+  background: #fafafa;
   color: #32363a;
   font-size: 1rem;
 }
@@ -55,14 +64,17 @@ body {
 .btn {
   border-radius: 40px 40px 40px 40px;
 }
-.btn h1, .btn h2, .btn h3, .btn h4, .btn h5, .btn h6 {
+.btn h1,
+.btn h2,
+.btn h3,
+.btn h4,
+.btn h5,
+.btn h6 {
   padding: 0px;
   margin: 0;
 }
 
 .description_block > .row > .col {
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 5px #ddd;
   text-align: justify;
 }
 .description_block > .row > .col p:last-child {
@@ -77,7 +89,8 @@ body {
   right: 0;
   text-align: center;
   border-radius: 50%;
-  background: #f5f5f5e3;
+  background: #fafafa;
+  background: #fff;
   box-shadow: 0px 5px 5px 0px rgba(51, 51, 51, 0.3137254902);
   margin-top: 1em;
   margin-bottom: 1em;
@@ -142,8 +155,8 @@ body {
   background-color: #cecece;
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
-  -webkit-mask-image: url("/public/images/diesel_bee_curves.svg");
-          mask-image: url("/public/images/diesel_bee_curves.svg");
+  -webkit-mask-image: url("/public/images/logo/diesel_bee_curves.svg");
+          mask-image: url("/public/images/logo/diesel_bee_curves.svg");
 }
 .index_menu .navbar-toggler span {
   transition: color 0.2s ease-in-out;
@@ -300,7 +313,7 @@ body {
   position: relative;
   background-color: rgba(0, 0, 0, 0.3137254902);
   text-shadow: 0px 0px 8px #000, 0px 0px 8px #000;
-  color: #f5f5f5;
+  color: #fafafa;
 }
 .index_header .carousel .content,
 .index_header .carousel .content .container-lg > .row {
@@ -417,6 +430,11 @@ body {
 .index_header .carousel .content .container-lg > .row h3 {
     font-size: 1.5em;
   }
+}
+
+.greeting .row .col div {
+  border-radius: 10px;
+  font-size: 0.9em;
 }
 
 .index_categories .header h1 {
@@ -683,6 +701,21 @@ footer p {
 .product_actions .price p {
   font-size: 1.5em;
 }
+.product_actions .quantity input[type=number]::-webkit-outer-spin-button,
+.product_actions .quantity input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.product_actions .quantity input[type=number],
+.product_actions .quantity input[type=number]:hover,
+.product_actions .quantity input[type=number]:focus {
+  -webkit-appearance: none;
+          appearance: none;
+  -moz-appearance: textfield;
+}
+.product_actions .quantity .input-group * {
+  line-height: 1;
+}
 .product_actions .quantity .input-group .btn {
   width: 2em;
   text-align: center;
@@ -696,7 +729,7 @@ footer p {
 }
 
 .cart_page .cart .item {
-  height: 5em;
+  min-height: 5em;
 }
 .cart_page .cart .item .row {
   height: 100%;

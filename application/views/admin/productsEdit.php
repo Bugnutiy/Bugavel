@@ -12,22 +12,24 @@
     <?php endforeach ?>
 <?php endif ?>
 
-<form method="post" action="/admin/products/edit<?=isset($_GET['id'])?'?id='.$_GET['id']:''?><?=isset($_GET['copy'])?'&copy=1':''?>" enctype="multipart/form-data">
+<form method="post" action="/admin/products/edit<?= isset($_GET['id']) ? '?id=' . $_GET['id'] : '' ?><?= isset($_GET['copy']) ? '&copy=1' : '' ?>" enctype="multipart/form-data">
     <div class="row justify-content-center">
 
         <h2><?= $header ?></h2>
         <div class="w-100"></div>
 
-        <div class="col-12 col-md-6"><!-- Редактировать -->
+        <div class="col-12 col-md-6">
+            <!-- Редактировать -->
             <?php if (isset($product) and !isset($copy)) : ?>
-                <input type="hidden" name="id" value="<?= key($product) ?>">  
-            <?php endif ?><!-- --Редактировать -->
+                <input type="hidden" name="id" value="<?= key($product) ?>">
+            <?php endif ?>
+            <!-- --Редактировать -->
 
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="name">Название товара RU</span>
                 </div>
-                <input required class="form-control" type="text" name="name" placeholder="Товар" aria-label="Имя" aria-describedby="name" value="<?= isset($product) ? current($product)['name'] : '' ?>"> 
+                <input required class="form-control" type="text" name="name" placeholder="Товар" aria-label="Имя" aria-describedby="name" value="<?= isset($product) ? current($product)['name'] : '' ?>">
             </div>
 
             <div class="input-group mb-2">
@@ -75,33 +77,55 @@
                 </div>
             </div>
 
-            <? if (!isset($product) or isset($copy)) :?>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Цена товара</span>
-                </div>
-                <input type="number" class="form-control" placeholder="Стоимость RU" name="price" required value="">
-                <input type="number" class="form-control" placeholder="Стоимость EN" name="price_en" required value="">
+            <? if (!isset($product) or isset($copy)) : ?>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Цена товара</span>
+                    </div>
+                    <input type="number" class="form-control" placeholder="RU" name="price" required value="">
+                    <input type="number" class="form-control" placeholder="EN" name="price_en" required value="">
 
-            </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Количество на складе</span>
                 </div>
-                <input type="number" class="form-control" placeholder="Количество" name="quantity" required value="">
-            </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Количество на складе</span>
+                    </div>
+                    <input type="number" class="form-control" placeholder="Количество" name="quantity" required value="">
+                </div>
             <? endif ?>
             <?php if (isset($product) and !isset($copy)) : ?>
                 <div class="row">
                     <div class="col-12">
-                        <p>Текущее изображение товара</p>
-                        <img src="/<?= current(json_decode(current($product)['images'], 1)) ?>" alt="Изображение товара" class="img-fluid">
+                        <p>Текущие изображения товара</p>
+
+                        <? foreach (json_decode(current($product)['images']) as $path) : ?>
+                            <p>
+                                <img src="/<?= $path ?>" alt="Изображение товара" class="img-fluid">
+                            </p>
+                        <? endforeach ?>
+                    </div>
+                </div>
+            <?php endif ?>
+            <div class="mb-3">
+                <label for="images">Изображения для товара</label>
+                <input type="file" name="images[]" <?= (isset($product) and !isset($copy)) ? '' : "required" ?> multiple='1'>
+            </div>
+            <?php if (isset($product) and !isset($copy)) : ?>
+                <div class="row">
+                    <div class="col-12">
+                        <p>Текущие обрезанные изображения товара</p>
+
+                        <? foreach (json_decode(current($product)['images_min'],1) as $path) : ?>
+                            <p>
+                                <img src="/<?= $path ?>" alt="Изображение товара" class="img-fluid">
+                            </p>
+                        <? endforeach ?>
                     </div>
                 </div>
             <?php endif ?>
             <div class="">
-                <label for="images">Изображения для товара</label>
-                <input type="file" name="images[]" <?= (isset($product) and !isset($copy)) ? '' : "required" ?> multiple='1'>
+                <label for="images">Изображение обрезанное</label>
+                <input type="file" name="images_min[]" <?= (isset($product) and !isset($copy)) ? '' : "required" ?>>
             </div>
 
             <button type="submit" class="btn btn-primary mb-5">Подтвердить</button>

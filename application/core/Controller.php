@@ -8,7 +8,7 @@ use application\core\Model;
 class Controller
 {
 	/**
-	 * @var Model|AdminModel
+	 * @var Model
 	 */
 	public $model;
 
@@ -26,10 +26,12 @@ class Controller
 		if (!$this->checkAcl()) {
 			View::errorCode(400);
 		}
+
+		$this->model = $this->loadModel($route['controller'] . 'Model');
+
 		$this->view = new View($route);
 		//$this->before();//вызов функции смены шаблона контроллера
 		// dd($route['controller']);
-		$this->model = $this->loadModel($route['controller'] . 'Model');
 	}
 
 	public function loadModel($name)
