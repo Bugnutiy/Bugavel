@@ -28,5 +28,6 @@ return
             'orders',
             'ordersEdit',
             'sber',
+            'coredb',
         ],
     ];

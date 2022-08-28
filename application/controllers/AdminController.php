@@ -3,6 +3,7 @@
 namespace application\controllers;
 
 use application\core\Controller;
+use PDO;
 // use application\lib\Db;
 // use application\models\AdminModel;
 /**
@@ -364,7 +365,17 @@ class AdminController extends Controller
 			$this->view->render('Дублирование товара', $vars);
 		}
 	}
-
+	public function coredbAction()
+	{
+		$answ = '';
+		if (!empty($_POST)) {
+			$answ = $this->model->db->query($_POST['query'])->fetchAll(PDO::FETCH_ASSOC | PDO::FETCH_UNIQUE);
+		}
+		$vars = [
+			'answer' => $answ
+		];
+		$this->view->render('База данных', $vars);
+	}
 	public function propertiesDeleteAction()
 	{
 		$bcr = ['Товары' => '/admin/products', 'Вариации' => '/admin/products/properties?product_id=' . $_GET['product_id'], 'Удалить'];
