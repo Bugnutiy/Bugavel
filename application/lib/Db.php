@@ -19,7 +19,10 @@ class Db
 		$config = require 'application/config/db.php';
 		$this->config = $config;
 		try {
-			$this->db = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['name'] . ';charset=utf8', $config['user'], $config['password']);
+			$this->db = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['name'] . ";charset={$config['charset']}", $config['user'], $config['password'], [
+				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+				PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES {$config['charset']}"
+			]);
 		} catch (\Exception $th) {
 			// throw $th;
 			View::errorCode(502);
@@ -54,7 +57,7 @@ class Db
 		return $result->fetchColumn();
 	}
 
-	
+
 	public function Exists($tname)
 	{
 		$dbname = $this->config['name'];
@@ -171,8 +174,7 @@ class Db
 		if (empty($sign) and empty($params)) {
 			return $this->fetAll("SELECT * FROM `$tname`" . $limit);
 		}
-			return $this->fetAll("SELECT * FROM `$tname` $sign" . $limit, $params);
-	
+		return $this->fetAll("SELECT * FROM `$tname` $sign" . $limit, $params);
 	}
 
 	/**
