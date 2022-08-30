@@ -75,6 +75,7 @@ body {
 }
 
 .description_block > .row > .col {
+  font-size: 0.8em;
   text-align: justify;
 }
 .description_block > .row > .col p:last-child {
