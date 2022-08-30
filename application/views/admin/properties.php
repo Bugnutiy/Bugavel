@@ -19,7 +19,8 @@
             <?php
             foreach ($properties as $id => $node) : ?>
               <tr>
-                <td><?= '$'.$node['price_en'].' / '.$node['price'].' р.' ?></td>
+                <!-- <td><?//= '$'.$node['price_en'].' / '.$node['price'].' р.' ?></td> -->
+                <td><?= $node['price_en'].' eur. / '.$node['price'].' р.' ?></td>
                 <td><?= $node['classname'] ?></td>
                 <td><?= $node['name'] ?></td>
                 <td>

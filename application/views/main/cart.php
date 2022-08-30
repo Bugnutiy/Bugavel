@@ -52,7 +52,10 @@ foreach ($cart as $cart_id => $cart_node) : ?>
                             <?= number_format($cart_node['quantity'] * $properties[$cart_node['property_id']]['price'], 0, ',', ' ') . ' руб.' ?>
                           <? else : ?>
                             <? $subtotal_cost += $cart_node['quantity'] * $properties[$cart_node['property_id']]['price_en'] ?>
-                            <?= '$' . number_format($cart_node['quantity'] * $properties[$cart_node['property_id']]['price_en']) ?>
+                            <? //= '$' . number_format($cart_node['quantity'] * $properties[$cart_node['property_id']]['price_en']) 
+                            ?>
+                            <?= number_format($cart_node['quantity'] * $properties[$cart_node['property_id']]['price_en']) . ' eur' ?>
+
                           <? endif ?>
                         </span>
                       </div>
@@ -96,7 +99,10 @@ foreach ($cart as $cart_id => $cart_node) : ?>
     <div class="row justify-content-end">
       <div class="col-auto align-self-center">
         <span id="subtotal">
-          <?= current($user)['lang'] == 'RU' ? 'Предварительный итог: ' . number_format($subtotal_cost, 0, ',', ' ') . ' руб.' : 'Subtotal: $' . number_format($subtotal_cost) ?>
+          <? //= current($user)['lang'] == 'RU' ? 'Предварительный итог: ' . number_format($subtotal_cost, 0, ',', ' ') . ' руб.' : 'Subtotal: $' . number_format($subtotal_cost) 
+          ?>
+          <?= current($user)['lang'] == 'RU' ? 'Предварительный итог: ' . number_format($subtotal_cost, 0, ',', ' ') . ' руб.' : 'Subtotal: ' . number_format($subtotal_cost) . ' eur' ?>
+
         </span>
       </div>
       <div class="col-auto">
@@ -164,7 +170,9 @@ foreach ($cart as $cart_id => $cart_node) : ?>
         <? if (current($user)['country'] == 'RU') : ?>
           price_elem.innerText = number_format(price, 0, ',', ' ') + ' руб.';
         <? else : ?>
-          price_elem.innerText = '$' + number_format(price);
+          // price_elem.innerText = '$' + number_format(price);
+          price_elem.innerText = number_format(price) + ' eur';
+
         <? endif ?>
 
         total = response['cart_total']['<?= current($user)['country'] == 'RU' ? 'total_price' : 'total_price_en' ?>']
@@ -172,7 +180,9 @@ foreach ($cart as $cart_id => $cart_node) : ?>
         <? if (current($user)['country'] == 'RU') : ?>
           total_elem.innerText = '<?= current($user)['lang'] == 'RU' ? 'Предварительный итог: ' : 'Subtotal: ' ?>' + number_format(total, 0, ',', ' ') + ' руб.';
         <? else : ?>
-          total_elem.innerText = '<?= current($user)['lang'] == 'RU' ? 'Предварительный итог: $' : 'Subtotal: $' ?>' + number_format(total);
+          // total_elem.innerText = '<?//= current($user)['lang'] == 'RU' ? 'Предварительный итог: $' : 'Subtotal: $' ?>' + number_format(total);
+          total_elem.innerText = '<?= current($user)['lang'] == 'RU' ? 'Предварительный итог: ' : 'Subtotal: ' ?>' + number_format(total) + ' eur';
+
         <? endif ?>
       }
     };

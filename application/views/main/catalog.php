@@ -82,8 +82,12 @@
                   </div>
                   <div class="card-body text-center pt-1 pb-1">
                     <h6 class="card-title m-0"><a href=""><b><?= current($user)['lang'] !== 'RU' ? $product_node['name_en'] : $product_node['name'] ?></b></a></h6>
-                    <p class="card-text"><?= current($user)['country'] !== 'RU' ?
+                    <!-- <p class="card-text"><?/*= current($user)['country'] !== 'RU' ?
                                             ($product_node['min_price_en'] == $product_node['max_price_en'] ? '$' . number_format($product_node['min_price_en']) : (current($user)['lang'] == 'RU' ? 'от $' : 'from $') . number_format($product_node['min_price_en']))
+                                            : ($product_node['min_price'] == $product_node['max_price'] ? number_format($product_node['min_price'], 0, ',', ' ') . ' руб.' : (current($user)['lang'] == 'RU' ? 'от ' : 'from ') . number_format($product_node['min_price'], 0, ',', ' ') . ' руб.')
+                                          */ ?></p> -->
+                    <p class="card-text"><?= current($user)['country'] !== 'RU' ?
+                                            ($product_node['min_price_en'] == $product_node['max_price_en'] ? number_format($product_node['min_price_en']) . ' eur' : (current($user)['lang'] == 'RU' ? 'от ' : 'from ') . number_format($product_node['min_price_en']) . ' eur')
                                             : ($product_node['min_price'] == $product_node['max_price'] ? number_format($product_node['min_price'], 0, ',', ' ') . ' руб.' : (current($user)['lang'] == 'RU' ? 'от ' : 'from ') . number_format($product_node['min_price'], 0, ',', ' ') . ' руб.')
                                           ?></p>
                   </div>
@@ -120,7 +124,11 @@
                                   <? foreach ($property_flag as $property_id => $property_node) : ?>
 
                                     <div class="col align-self-center"><?= current($user)['lang'] !== 'RU' ? $property_node['name_en'] : $property_node['name'] ?></div>
-                                    <div class="col-auto align-self-center"><?= current($user)['country'] !== 'RU' ? '$' . number_format($property_node['price_en']) : number_format($property_node['price'], 0, ',', ' ') . ' руб.' ?></div>
+                                    <div class="col-auto align-self-center">
+                                      <?//= current($user)['country'] !== 'RU' ? '$' . number_format($property_node['price_en']) : number_format($property_node['price'], 0, ',', ' ') . ' руб.' ?>
+                                      <?= current($user)['country'] !== 'RU' ? number_format($property_node['price_en']).' eur' : number_format($property_node['price'], 0, ',', ' ') . ' руб.' ?>
+
+                                    </div>
                                     <div class="col-auto my-2">
                                       <a href="<?= $href_tmp . "addcart=" . $property_id ?>" class="btn btn-outline-success text-success  text-center">
                                         <span class="bi bi-cart-plus"></span>
