@@ -134,11 +134,11 @@ class Model
 
 			// Настройки вашей почты
 			// $mail->Host       = 'mail.nic.ru'; // SMTP сервера вашей почты
-			// $mail->Username   = 'info@leosmagin.com'; // Логин на почте
+			// $mail->Username   = 'protattoo@mail.ru.com'; // Логин на почте
 			// $mail->Password   = 'DMZb2PuM2WF'; // Пароль на почте
 			// $mail->SMTPSecure = 'ssl';
 			// $mail->Port       = 465;
-			// $mail->setFrom('info@leosmagin.com', $name); // Адрес самой почты и имя отправителя
+			// $mail->setFrom('protattoo@mail.ru.com', $name); // Адрес самой почты и имя отправителя
 
 			$mail->Host       = $mail_config['host']; // SMTP сервера вашей почты
 			$mail->Username   = $mail_config['username']; // Логин на почте

@@ -6,7 +6,7 @@
       <div class="row justify-content-center">
         <div class="col-12 col-md-6">
           <h3>Контакты</h3>
-          <p>По всем вопросам обращайтесь по E-mail <a href="mailto:info@leosmagin.com">info@leosmagin.com</a></p>
+          <p>По всем вопросам обращайтесь по E-mail <a href="mailto:protattoo@mail.ru.com">protattoo@mail.ru.com</a></p>
 
         </div>
       </div>
@@ -17,7 +17,7 @@
         <div class="col-12 col-md-6">
 
           <h3>Contacts</h3>
-          <p>If you have any questions, please contact us by E-mail <a href="mailto:info@leosmagin.com ">info@leosmagin.com</a></p>
+          <p>If you have any questions, please contact us by E-mail <a href="mailto:protattoo@mail.ru.com ">protattoo@mail.ru.com</a></p>
         </div>
       </div>
     </div>
