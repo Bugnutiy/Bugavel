@@ -29,11 +29,11 @@ try {
 
     // Настройки вашей почты
     $mail->Host       = 'mail.nic.ru'; // SMTP сервера вашей почты
-    $mail->Username   = 'protattoo@mail.ru.com'; // Логин на почте
+    $mail->Username   = 'protattoo@mail.ru'; // Логин на почте
     $mail->Password   = 'DMZb2PuM2WF'; // Пароль на почте
     $mail->SMTPSecure = 'ssl';
     $mail->Port       = 465;
-    $mail->setFrom('protattoo@mail.ru.com', $name); // Адрес самой почты и имя отправителя
+    $mail->setFrom('protattoo@mail.ru', $name); // Адрес самой почты и имя отправителя
 
     // Получатель письма
     $mail->addAddress($email);  
