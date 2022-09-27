@@ -1,7 +1,7 @@
 <h1>Заказ №<?= current($oansw)['ID'] ?></h1>
 <p><a href="<?= $_SERVER['HTTP_ORIGIN'] ?>/admin/orders/edit?id=<?= current($oansw)['ID'] ?>">Перейти к заказу</a></p>
 <p>Заказчик: <?= $order['first_name'] ?> <?= $order['second_name'] ?></p>
-<p><a href="mailto:<?= $order['email'] ?>">Написать письмо</a></p>
+<p>E-Mail: <?= $order['email'] ?> (<a href="mailto:<?= $order['email'] ?>">Написать письмо</a>)</p>
 <p>Телефон: <a href="tel:<?= $order['phone'] ?>"><?= $order['phone'] ?></a></p>
 <style>
   table.iksweb {
