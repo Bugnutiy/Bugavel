@@ -1,2 +1,0 @@
-ALTER TABLE `categories` ADD `sequence` INT(11) UNSIGNED NOT NULL;
-ALTER TABLE `categories` DROP PRIMARY KEY, ADD PRIMARY KEY (`id`, `sequence`) USING BTREE; 
