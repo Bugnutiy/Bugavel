@@ -37,7 +37,7 @@ class MainController extends Controller
 		}
 		$this->view->layout = 'mainLayout';
 		$this->view->default_vars = [
-			"categories" => $this->model->shop->categories->getAll(),
+			"categories" => $this->model->shop->categories->getAll('', '', '', ['display_order' => 'ASC']),
 			"user" => $this->model->user->getUser(),
 			"route" => $route,
 			"cart_total" => $this->model->shop->cart->getTotal($this->model->user->getUserId())

@@ -133,10 +133,11 @@ class Db
 	/**
 	 * @param string $tname Имя таблицы
 	 * @param string|NULL $sign Условие поиска, WHERE писать не нужно
-	 * @param array|NULL $params PDO:prepare params Параметры для поиска, без них не работает
+	 * @param array|NULL $params PDO:prepare params Параметры для поиска, без них не работает sign
 	 * @param array|NULL $page [Страница => количество записей на странице] [1=>10]
+	 * @param array|NULL $order ['поле'=>'ASC/DESC']
 	 */
-	public function fetAllLite($tname, $sign = '', $params = [], $page = [])
+	public function fetAllLite($tname, $sign = '', $params = [], $page = [], $order = [])
 	{
 		$limit = '';
 		if (!empty($page)) {
@@ -146,11 +147,18 @@ class Db
 			$start = --$page * $n;
 			$limit = " LIMIT $start,$n";
 		}
+		$orderstr = '';
+		if (!empty($order)) {
+			$field = key($order);
+			$asc = current($order);
+			$orderstr = " ORDER BY `$field` $asc";
+		}
 
-		if (empty($sign) and empty($params)) {
-			return $this->fetAll("SELECT * FROM `$tname`" . $limit);
-		} elseif (!empty($sign) and !empty($params)) {
-			return $this->fetAll("SELECT * FROM `$tname` WHERE ($sign)" . $limit, $params);
+		if (empty($params)) {
+			return $this->fetAll("SELECT * FROM `$tname`" . $limit . $orderstr);
+		} else
+		if (!empty($sign)) {
+			return $this->fetAll("SELECT * FROM `$tname` WHERE ($sign)" . $limit . $orderstr, $params);
 		} else return NULL;
 	}
 
