@@ -38,7 +38,7 @@
                   </div>
 
                   <div class="col-12 text-center mt-1">
-                    <a href="/catalog?category=8" class="btn btn-outline-light">
+                    <a href="/catalog?category=10" class="btn btn-outline-light">
                       <?= current($user)['lang'] !== 'RU' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
                     </a>
                   </div>
