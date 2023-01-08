@@ -140,6 +140,7 @@ class Db
 	public function fetAllLite($tname, $sign = '', $params = [], $page = [], $order = [])
 	{
 		$limit = '';
+		$start = 0;
 		if (!empty($page)) {
 			$n = current($page);
 			$page = key($page);
@@ -147,6 +148,7 @@ class Db
 			$start = --$page * $n;
 			$limit = " LIMIT $start,$n";
 		}
+		// dd($page);
 		$orderstr = '';
 		if (!empty($order)) {
 			$field = key($order);
@@ -155,10 +157,10 @@ class Db
 		}
 
 		if (empty($params)) {
-			return $this->fetAll("SELECT * FROM `$tname`" . $limit . $orderstr);
+			return $this->fetAll("SELECT * FROM `$tname`" . $orderstr . $limit);
 		} else
 		if (!empty($sign)) {
-			return $this->fetAll("SELECT * FROM `$tname` WHERE ($sign)" . $limit . $orderstr, $params);
+			return $this->fetAll("SELECT * FROM `$tname` WHERE ($sign)" . $orderstr . $limit, $params);
 		} else return NULL;
 	}
 

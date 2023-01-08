@@ -70,11 +70,18 @@ class AdminController extends Controller
 
 	public function ordersAction()
 	{
-		$bcr = ['Заказы'];
+		$page = 1;
+		if (!empty($_GET['page']) AND (int)$_GET['page']) {
+		// dd($page);
 
+			$page = $_GET['page'];
+		}
+		// dd($page);
+		$bcr = ['Заказы'];
 		$vars = [
 			'bcr' => $bcr,
-			'orders' => $this->model->db->fetAllLiteNW('orders', 'ORDER BY `changed_at` DESC', []),
+			'orders' => $this->model->shop->orders->getAll('', [],[$page=>10], ['changed_at' => 'DESC']),
+			// 'orders' => $this->model->db->fetAllLiteNW('orders', 'ORDER BY `changed_at` DESC', []),
 			'orders_class' => $this->model->shop->orders,
 		];
 		$this->view->render('Заказы', $vars);

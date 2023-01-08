@@ -56,6 +56,7 @@ abstract class General
      */
     public function getAll($sign = '', $params = [], $page = [], $order=[])
     {
+        // dd($order);
         return $this->db->fetAllLite($this->table, $sign, $params, $page, $order);
     }
     /**
