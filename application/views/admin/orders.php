@@ -1,20 +1,63 @@
 <div class="orders">
   <div class="col-12 text-center">
-
-
     <h3>Заказы</h3>
-
-
   </div>
-  <div class="row">
-    <div class="col-12 col-lg-6 order ddd">
-      123
+
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+
+      <li class="page-item <?= $page < 2 ? 'disabled' : '' ?>">
+        <a class="page-link" href="?page=<?= $page - 1 ?>" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+
+      <? $cc = 5;
+      $mid = intdiv($cc, 2);
+      ddd($mid);
+      ddd($count_p);
+      ddd($page);
+      $n = $page-$mid+1;
+      ?>
+      <?for ($i=0; $i < $cc; $i++) :?>
+        
+      <li class="page-item">
+        <a class="page-link" href="?page=<?= $n++ ?>">
+          <?= $n ?>
+        </a>
+      </li>
+      <?endfor?>
+      
+
+      <li class="page-item <?= $page >= $count_p ? 'disabled' : '' ?>">
+        <a class="page-link" href="?page=<?= $page + 1 ?>" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- <div class="row">
+    <div class="col-12 col-lg-6 order ">
+      <div class="card">
+        <h5 class="card-header">Рекомендуемые</h5>
+        <div class="card-body">
+          <h5 class="card-title">Особое обращение с заголовком</h5>
+          <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>
+          <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
+        </div>
+      </div>
     </div>
 
-    <div class="col-12 col-lg-6 order ddd">
-      123
+    <div class=" card col-12 col-lg-6 order ">
+      <h5 class="card-header">Рекомендуемые</h5>
+      <div class="card-body">
+        <h5 class="card-title">Особое обращение с заголовком</h5>
+        <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>
+        <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
+      </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 

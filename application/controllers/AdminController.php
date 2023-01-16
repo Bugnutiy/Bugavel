@@ -3,6 +3,7 @@
 namespace application\controllers;
 
 use application\core\Controller;
+use application\core\Model;
 use PDO;
 // use application\lib\Db;
 // use application\models\AdminModel;
@@ -70,18 +71,19 @@ class AdminController extends Controller
 
 	public function ordersAction()
 	{
+		// dd(intdiv($count,10));
 		$page = 1;
-		if (!empty($_GET['page']) AND (int)$_GET['page']) {
-		// dd($page);
-
+		if (!empty($_GET['page']) and (int)$_GET['page']) {
+			// dd($page);
 			$page = $_GET['page'];
 		}
 		// dd($page);
 		$bcr = ['Заказы'];
 		$vars = [
 			'bcr' => $bcr,
-			'orders' => $this->model->shop->orders->getAll('', [],[$page=>10], ['changed_at' => 'DESC']),
-			// 'orders' => $this->model->db->fetAllLiteNW('orders', 'ORDER BY `changed_at` DESC', []),
+			'orders' => $this->model->shop->orders->getAll('', [], [$page => 2], ['changed_at' => 'DESC']),
+			'count_p' => intdiv($this->model->shop->orders->count(), 2),
+			'page' => $page,
 			'orders_class' => $this->model->shop->orders,
 		];
 		$this->view->render('Заказы', $vars);

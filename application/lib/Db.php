@@ -57,6 +57,17 @@ class Db
 		return $result->fetchColumn();
 	}
 
+	/**
+	 * Количество записей в таблице
+	 *
+	 * @param string $tname
+	 * @param string $field по какому полю считаем
+	 * @return int Количество записей в таблице
+	 */
+	public function count($tname, $field = '*')
+	{
+		return (int)$this->query("SELECT COUNT($field) FROM `$tname`")->fetch(PDO::FETCH_NUM)[0];
+	}
 
 	public function Exists($tname)
 	{
@@ -170,22 +181,22 @@ class Db
 	 * @param array|NULL $params PDO:prepare params Параметры для поиска, без них не работает
 	 * @param array|NULL $page [Страница => количество записей на странице] [1=>10]
 	 */
-	public function fetAllLiteNW($tname, $sign = '', $params = [], $page = [])
-	{
-		$limit = '';
-		if (!empty($page)) {
-			$n = current($page);
-			$page = key($page);
-			// $start = $n * (--$page);
-			$start = --$page * $n;
-			$limit = " LIMIT $start,$n";
-		}
+	// public function fetAllLiteNW($tname, $sign = '', $params = [], $page = [])
+	// {
+	// 	$limit = '';
+	// 	if (!empty($page)) {
+	// 		$n = current($page);
+	// 		$page = key($page);
+	// 		// $start = $n * (--$page);
+	// 		$start = --$page * $n;
+	// 		$limit = " LIMIT $start,$n";
+	// 	}
 
-		if (empty($sign) and empty($params)) {
-			return $this->fetAll("SELECT * FROM `$tname`" . $limit);
-		}
-		return $this->fetAll("SELECT * FROM `$tname` $sign" . $limit, $params);
-	}
+	// 	if (empty($sign) and empty($params)) {
+	// 		return $this->fetAll("SELECT * FROM `$tname`" . $limit);
+	// 	}
+	// 	return $this->fetAll("SELECT * FROM `$tname` $sign" . $limit, $params);
+	// }
 
 	/**
 	 * @param string $tname Имя таблицы
