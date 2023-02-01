@@ -75,14 +75,14 @@ class AdminController extends Controller
 		$page = 1;
 		if (!empty($_GET['page']) and (int)$_GET['page']) {
 			// dd($page);
-			$page = $_GET['page'];
+			$page = abs($_GET['page']);
 		}
 		// dd($page);
 		$bcr = ['Заказы'];
 		$vars = [
 			'bcr' => $bcr,
-			'orders' => $this->model->shop->orders->getAll('', [], [$page => 2], ['changed_at' => 'DESC']),
-			'count_p' => intdiv($this->model->shop->orders->count(), 2),
+			'orders' => $this->model->shop->orders->getAll('', [], [$page => 10], ['changed_at' => 'DESC']),
+			'count_p' => intdiv($this->model->shop->orders->count(), 10),
 			'page' => $page,
 			'orders_class' => $this->model->shop->orders,
 		];

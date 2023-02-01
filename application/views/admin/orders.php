@@ -1,41 +1,50 @@
-<div class="orders">
+<div class="orders ">
   <div class="col-12 text-center">
     <h3>Заказы</h3>
   </div>
+  <? $cc = 7;
+  $mid = intdiv($cc, 2) + 1;
+  $start = $page - $mid >= 1 ? $page - $mid + 1 : 1;
+  $end = $start + $cc;
 
-  <nav aria-label="Page navigation">
-    <ul class="pagination">
+  if ($start + $cc > $count_p) {
+    $end = $count_p + 1;
+    $start = $end - $cc;
+  }
+  if ($cc > $count_p) {
+    $start = 1;
+    $end = $count_p + 1;
+  }
+  ?>
+  <div class="row justify-content-center">
+    <nav aria-label="Page navigation" class="col-auto p-0">
+      <ul class="pagination">
 
-      <li class="page-item <?= $page < 2 ? 'disabled' : '' ?>">
-        <a class="page-link" href="?page=<?= $page - 1 ?>" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
+        <li class="page-item <?= $page < 2 ? 'disabled' : '' ?>">
+          <a class="page-link" href="?page=<?= $page - 1 ?>" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
 
-      <? $cc = 5;
-      $mid = intdiv($cc, 2);
-      ddd($mid);
-      ddd($count_p);
-      ddd($page);
-      $n = $page-$mid+1;
-      ?>
-      <?for ($i=0; $i < $cc; $i++) :?>
-        
-      <li class="page-item">
-        <a class="page-link" href="?page=<?= $n++ ?>">
-          <?= $n ?>
-        </a>
-      </li>
-      <?endfor?>
-      
 
-      <li class="page-item <?= $page >= $count_p ? 'disabled' : '' ?>">
-        <a class="page-link" href="?page=<?= $page + 1 ?>" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+        <? for ($i = $start; $i < $end; $i++) : ?>
+
+          <li class="page-item <?= $page == $i ? 'active' : '' ?>">
+            <a class="page-link" href="?page=<?= $i ?>">
+              <?= $i ?>
+            </a>
+          </li>
+        <? endfor ?>
+
+
+        <li class="page-item <?= $page >= $count_p ? 'disabled' : '' ?>">
+          <a class="page-link" href="?page=<?= $page + 1 ?>" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 
   <!-- <div class="row">
     <div class="col-12 col-lg-6 order ">
@@ -61,28 +70,19 @@
 </div>
 
 
+<div class="row px-1">
+
+  <?php
+  foreach ($orders as $id => $node) : ?>
+
+    <div class="col-12 col-md-6 col-lg-4 ddd">
+      <div class="row justify-content-between">
+        <div class="col-4">1</div>
+        <div class="col-4">2</div>
+        <div class="col-auto"><i class="bi bi-suit-club"></i></div>
+      </div>
+    </div>
 
 
-<?php
-foreach ($orders as $id => $node) : ?>
-  <tr>
-    <td><?= $id ?></td>
-    <td><?= $node['changed_at'] ?></td>
-    <td><?= $orders_class->status[$node['status']]['RU'] ?></td>
-    <td><?= $node['first_name'] . ' ' . $node['second_name'] ?></td>
-    <td>
-      <? if ($node['currency'] == 'RU') : ?>
-        <?= json_decode($node['cost'], 1)['RUB'] ?> руб.
-      <? else : ?>
-        <!-- <? //= '$' . json_decode($node['cost'], 1)['USD'] 
-              ?> -->
-        <?= json_decode($node['cost'], 1)['USD'] ?> eur
-      <? endif ?>
-    </td>
-
-
-    <td>
-      <a class="btn btn-info" href="/admin/orders/edit?id=<?= $id ?>">Редактировать</a>
-    </td>
-  </tr>
-<?php endforeach ?>
+  <?php endforeach ?>
+</div>

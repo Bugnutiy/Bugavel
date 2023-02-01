@@ -1,3 +1,5 @@
+@import "icons/icons";
+
 $xs: 0;
 $sm: 576px;
 $md: 768px;
@@ -30,8 +32,11 @@ body {
 
 .dd {
     background-color: rgba(#ff0000, 0.2) !important;
+    border: 1px solid gray;
+
 }
 
 .ddd {
     background-color: rgba(#0000ff, 0.2) !important;
+    border: 1px solid gray;
 }
