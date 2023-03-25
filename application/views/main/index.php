@@ -14,7 +14,7 @@
             <section class="splide photo_scroller">
               <div class="splide__track">
                 <ul class="splide__list">
-                  <li class="splide__slide"><img src="/public/images/Carousel/DIESEL BEE/BEE1.jpg" alt="DIESEL BEE"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/HORS/" alt="DIESEL BEE"></li>
                   <li class="splide__slide"><img src="/public/images/Carousel/DIESEL BEE/IMG_20220823_180003-c.jpg" alt="DIESEL BEE"></li>
                 </ul>
               </div>
