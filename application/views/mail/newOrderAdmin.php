@@ -1,7 +1,7 @@
 <h1>Заказ №<?= current($oansw)['ID'] ?></h1>
 <p><a href="<?= $_SERVER['HTTP_ORIGIN'] ?>/admin/orders/edit?id=<?= current($oansw)['ID'] ?>">Перейти к заказу</a></p>
 <p>Заказчик: <?= $order['first_name'] ?> <?= $order['second_name'] ?></p>
-<p><a href="mailto:<?= $order['email'] ?>">Написать письмо</a></p>
+<p>E-Mail: <?= $order['email'] ?> (<a href="mailto:<?= $order['email'] ?>">Написать письмо</a>)</p>
 <p>Телефон: <a href="tel:<?= $order['phone'] ?>"><?= $order['phone'] ?></a></p>
 <style>
   table.iksweb {
@@ -68,7 +68,9 @@
           <tr>
             <td><?= $products[$cart_node['product_id']]['name_en'] ?></td>
             <td><?= $cart_node['quantity'] ?></td>
-            <td><?= $properties[$cart_node['property_id']]['price_en'] ?> USD</td>
+            <!-- <td><?//= $properties[$cart_node['property_id']]['price_en'] ?> USD</td> -->
+            <td><?= $properties[$cart_node['property_id']]['price_en'] ?> eur</td>
+
           </tr>
         <? endif ?>
       <? endforeach ?>
@@ -78,7 +80,9 @@
 <? if ($order['currency'] == 'RU') : ?>
   <p><b>Сумма заказа: <?= json_decode($order['cost'], 1)['RUB'] ?> руб.</b></p>
 <? else : ?>
-  <p><b>Сумма заказа: <?= json_decode($order['cost'], 1)['USD'] ?> USD.</b></p>
+  <!-- <p><b>Сумма заказа: <?//= json_decode($order['cost'], 1)['USD'] ?> USD.</b></p> -->
+  <p><b>Сумма заказа: <?= json_decode($order['cost'], 1)['USD'] ?> eur.</b></p>
+
 <? endif ?>
 
 <p>Адрес доставки: </p>

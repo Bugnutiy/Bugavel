@@ -42,16 +42,21 @@ abstract class General
      */
     public function getByField($field_name, $field_value)
     {
-        return $this->db->fetAllLite($this->table, "`$field_name` = :value", [':value' => $field_value]);
+        return $this->db->fetAllLite($this->table, "`$field_name` = :value", [':value' => $field_value]); //TODO SECURITY
     }
     /**
      * Получить все записи из таблицы, соответствующей имени класса
-     *
+     * @param string|NULL $sign Условие поиска, WHERE писать не нужно
+     * @param array|NULL $params PDO:prepare params Параметры для поиска, без них не работает sign
+     * @param array|NULL $page [Страница => количество записей на странице] [1=>10]
+	 * @param array|NULL $order ['поле'=>'ASC/DESC']
+     * 
+     * 
      * @return array Ассоциативный массив записей
      */
-    public function getAll()
+    public function getAll($sign = '', $params = [], $page = [], $order=[])
     {
-        return $this->db->fetAllLite($this->table);
+        return $this->db->fetAllLite($this->table, $sign, $params, $page, $order);
     }
     /**
      * getById
@@ -101,7 +106,7 @@ abstract class General
                         $err[] = 'В таблице ' . $this->table . ' не настроены поля ' . $key . ' под запрос';
                         return $err;
                     } else {
-                        $matcher[$key]=NULL;
+                        $matcher[$key] = NULL;
                     }
                 }
             }

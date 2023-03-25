@@ -30,7 +30,7 @@
     <p>Вышеперечисленные данные далее по тексту Политики объединены общим понятием Персональные данные.</p>
     <h2>4. Цели обработки персональных данных</h2>
     <p>Цель обработки персональных данных Пользователя — заключение, исполнение и прекращение гражданско-правовых договоров; предоставление доступа Пользователю к сервисам, информации и/или материалам, содержащимся на веб-сайте https://www.leosmagin.com ; уточнение деталей заказа.</p>
-    <p>Также Оператор имеет право направлять Пользователю уведомления о новых продуктах и услугах, специальных предложениях и различных событиях. Пользователь всегда может отказаться от получения информационных сообщений, направив Оператору письмо на адрес электронной почты info@leosmagin.com с пометкой «Отказ от уведомлений о новых продуктах и услугах и специальных предложениях».</p>
+    <p>Также Оператор имеет право направлять Пользователю уведомления о новых продуктах и услугах, специальных предложениях и различных событиях. Пользователь всегда может отказаться от получения информационных сообщений, направив Оператору письмо на адрес электронной почты protattoo@mail.ru с пометкой «Отказ от уведомлений о новых продуктах и услугах и специальных предложениях».</p>
     <p>Обезличенные данные Пользователей, собираемые с помощью сервисов интернет-статистики, служат для сбора информации о действиях Пользователей на сайте, улучшения качества сайта и его содержания.</p>
     <h2>5. Правовые основания обработки персональных данных</h2>
     <p>Оператор обрабатывает персональные данные Пользователя только в случае их заполнения и/или отправки Пользователем самостоятельно через специальные формы, расположенные на сайте https://www.leosmagin.com . Заполняя соответствующие формы и/или отправляя свои персональные данные Оператору, Пользователь выражает свое согласие с данной Политикой.</p>
@@ -39,13 +39,13 @@
     <p>Безопасность персональных данных, которые обрабатываются Оператором, обеспечивается путем реализации правовых, организационных и технических мер, необходимых для выполнения в полном объеме требований действующего законодательства в области защиты персональных данных.</p>
     <p>Оператор обеспечивает сохранность персональных данных и принимает все возможные меры, исключающие доступ к персональным данным неуполномоченных лиц.</p>
     <p>Персональные данные Пользователя никогда, ни при каких условиях не будут переданы третьим лицам, за исключением случаев, связанных с исполнением действующего законодательства.</p>
-    <p>В случае выявления неточностей в персональных данных, Пользователь может актуализировать их самостоятельно, путем направления Оператору уведомление на адрес электронной почты Оператора info@leosmagin.com с пометкой «Актуализация персональных данных».</p>
-    <p>Срок обработки персональных данных является неограниченным. Пользователь может в любой момент отозвать свое согласие на обработку персональных данных, направив Оператору уведомление посредством электронной почты на электронный адрес Оператора info@leosmagin.com с пометкой «Отзыв согласия на обработку персональных данных».</p>
+    <p>В случае выявления неточностей в персональных данных, Пользователь может актуализировать их самостоятельно, путем направления Оператору уведомление на адрес электронной почты Оператора protattoo@mail.ru с пометкой «Актуализация персональных данных».</p>
+    <p>Срок обработки персональных данных является неограниченным. Пользователь может в любой момент отозвать свое согласие на обработку персональных данных, направив Оператору уведомление посредством электронной почты на электронный адрес Оператора protattoo@mail.ru с пометкой «Отзыв согласия на обработку персональных данных».</p>
     <h2>7. Трансграничная передача персональных данных</h2>
     <p>Оператор до начала осуществления трансграничной передачи персональных данных обязан убедиться в том, что иностранным государством, на территорию которого предполагается осуществлять передачу персональных данных, обеспечивается надежная защита прав субъектов персональных данных.</p>
     <p>Трансграничная передача персональных данных на территории иностранных государств, не отвечающих вышеуказанным требованиям, может осуществляться только в случае наличия согласия в письменной форме субъекта персональных данных на трансграничную передачу его персональных данных и/или исполнения договора, стороной которого является субъект персональных данных.</p>
     <h2>8. Заключительные положения</h2>
-    <p>Пользователь может получить любые разъяснения по интересующим вопросам, касающимся обработки его персональных данных, обратившись к Оператору с помощью электронной почты info@leosmagin.com</p>
+    <p>Пользователь может получить любые разъяснения по интересующим вопросам, касающимся обработки его персональных данных, обратившись к Оператору с помощью электронной почты protattoo@mail.ru</p>
     <p>В данном документе будут отражены любые изменения политики обработки персональных данных Оператором. Политика действует бессрочно до замены ее новой версией.</p>
     <p>Актуальная версия Политики в свободном доступе расположена на нашем сайте.</p>
   <? else : ?>
@@ -77,7 +77,7 @@
     <p>The above data, hereinafter referred to in the text of the Policy, are combined by the general concept of Personal Data.</p>
     <h2>4. Purposes of personal data processing</h2>
     <p>The purpose of processing the User's personal data is the conclusion, execution and termination of civil law contracts; providing the User with access to services, information and/or materials contained on the website https://www.leosmagin.com ; clarification of order details.</p>
-    <p>The Operator also has the right to send notifications to the User about new products and services, special offers and various events. The User can always refuse to receive informational messages by sending an email to the Operator info@leosmagin.com marked "Refusal of notifications about new products and services and special offers".</p>
+    <p>The Operator also has the right to send notifications to the User about new products and services, special offers and various events. The User can always refuse to receive informational messages by sending an email to the Operator protattoo@mail.ru marked "Refusal of notifications about new products and services and special offers".</p>
     <p>Depersonalized User data collected using Internet statistics services are used to collect information about User actions on the site, improve the quality of the site and its content.</p>
     <h2>5. Legal grounds for processing personal data</h2>
     <p>The Operator processes the User's personal data only if they are filled in and/or sent by the User independently through special forms located on the website https://www.leosmagin.com . By filling out the appropriate forms and/or sending their personal data to the Operator, the User agrees with this Policy.</p>
@@ -86,13 +86,13 @@
     <p>The security of personal data processed by the Operator is ensured through the implementation of legal, organizational and technical measures necessary to fully comply with the requirements of current legislation in the field of personal data protection.</p>
     <p>The operator ensures the safety of personal data and takes all possible measures to exclude access to the personal data of unauthorized persons.</p>
     <p>The User's personal data will never, under any circumstances, be transferred to third parties, except in cases related to the implementation of current legislation.</p>
-    <p>In case of identification of inaccuracies in personal data, the User can update them independently by sending a notification to the Operator to the Operator's email address info@leosmagin.com marked "Updating of personal data".</p>
-    <p>The period of processing of personal data is unlimited. The User can withdraw his consent to the processing of personal data at any time by sending a notification to the Operator via e-mail to the Operator's e-mail address info@leosmagin.com marked "Withdrawal of consent to the processing of personal data".</p>
+    <p>In case of identification of inaccuracies in personal data, the User can update them independently by sending a notification to the Operator to the Operator's email address protattoo@mail.ru marked "Updating of personal data".</p>
+    <p>The period of processing of personal data is unlimited. The User can withdraw his consent to the processing of personal data at any time by sending a notification to the Operator via e-mail to the Operator's e-mail address protattoo@mail.ru marked "Withdrawal of consent to the processing of personal data".</p>
     <h2>7. Cross-border transfer of personal data</h2>
     <p>Prior to the start of the cross-border transfer of personal data, the operator is obliged to make sure that the foreign state to whose territory the transfer of personal data is supposed to be carried out provides reliable protection of the rights of personal data subjects.</p>
     <p>The cross-border transfer of personal data on the territory of foreign states that do not meet the above requirements may be carried out only if the personal data subject has written consent to the cross-border transfer of his personal data and/or the execution of the contract to which the personal data subject is a party.</p>
     <h2>8. Final provisions</h2>
-    <p>The User can get any clarifications on issues of interest concerning the processing of his personal data by contacting the Operator via e-mail info@leosmagin.com</p>
+    <p>The User can get any clarifications on issues of interest concerning the processing of his personal data by contacting the Operator via e-mail protattoo@mail.ru</p>
     <p>This document will reflect any changes to the Operator's personal data processing policy. The policy is valid indefinitely until it is replaced by a new version.</p>
     <p>The current version of the Policy is freely available on our website.</p>
   <? endif ?>

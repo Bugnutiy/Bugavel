@@ -72,10 +72,10 @@
       <div class="container-lg">
         <nav class="navbar navbar-expand-sm navbar-dark">
           <div class="navbar-brand" href="#">
-            <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= current($user)['lang'] !== 'RU' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">info@leosmagin.com</span>
+            <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= current($user)['lang'] !== 'RU' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">protattoo@mail.ru</span>
             <a href="https://www.youtube.com/channel/UCQj6BKoXZV6Adebuh4o9jOg/featured" class="bi bi-youtube"></a>
             <a href="https://www.instagram.com/hybridtattoomachine" class="bi bi-instagram"></a>
-            <a href="mailto:info@leosmagin.com" class="bi bi-envelope"></a>
+            <a href="mailto:protattoo@mail.ru" class="bi bi-envelope"></a>
           </div>
 
           <div class="small_logo d-md-none">
@@ -159,10 +159,10 @@
         <div class="container-lg">
           <nav class="navbar navbar-expand-sm navbar-dark">
             <div class="navbar-brand" href="#">
-              <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= current($user)['lang'] !== 'RU' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">leosmagin@gmail.com</span>
+              <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= current($user)['lang'] !== 'RU' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">protattoo@mail.ru</span>
               <a href="https://www.youtube.com/channel/UCQj6BKoXZV6Adebuh4o9jOg/featured" class="bi bi-youtube"></a>
               <a href="https://www.instagram.com/hybridtattoomachine" class="bi bi-instagram"></a>
-              <a href="mailto:info@leosmagin.com" class="bi bi-envelope"></a>
+              <a href="mailto:protattoo@mail.ru" class="bi bi-envelope"></a>
             </div>
 
             <div class="small_logo d-md-none">
@@ -208,7 +208,10 @@
                             <?= current($user)['lang'] == 'RU' ? 'Итого:' : 'Total:' ?>
                           </div>
                           <div class="col-auto"><b>
-                              <?= current($user)['country'] == 'RU' ? number_format($cart_total['total_price'], 0, ',', ' ') . ' руб.' : '$' . number_format($cart_total['total_price_en']) ?></b>
+                              <? //= current($user)['country'] == 'RU' ? number_format($cart_total['total_price'], 0, ',', ' ') . ' руб.' : '$' . number_format($cart_total['total_price_en']) 
+                              ?></b>
+                            <?= current($user)['country'] == 'RU' ? number_format($cart_total['total_price'], 0, ',', ' ') . ' руб.' : number_format($cart_total['total_price_en']).' eur' ?></b>
+
                           </div>
                         </div>
                         <div class="row justify-content-between">
@@ -333,7 +336,7 @@
         <div class="col-12 col-sm-4 col-xl-4 persona text-end my-3">
           <p class="mb-3"><?= current($user)['lang'] !== 'RU' ? 'Leonid Smagin' : 'Смагин Леонид Павлович' ?>
           <p>
-            <a href="mailto:info@leosmagin.com" class="e-mail">info@leosmagin.com</a>
+            <a href="mailto:protattoo@mail.ru" class="e-mail">protattoo@mail.ru</a>
           <div class="contacts mt-3">
             <a href="#" class="bi bi-youtube"></a>
             <a href="#" class="bi bi-instagram mx-2"></a>

@@ -103,6 +103,10 @@ return [
 		'controller' => 'admin',
 		'action' => 'ordersEdit',
 	],
+	'admin/coredb' => [
+		'controller' => 'admin',
+		'action' => 'coredb',
+	],
 	/////////////////////////////SBER////////////////////////////
 	// 'admin/sber' => [
 	// 	'controller' => 'admin',

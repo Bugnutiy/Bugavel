@@ -53,9 +53,9 @@
                 <? endif ?>
               <? else : ?>
                 <? if (current($product)['min_price_en'] == current($product)['max_price_en']) : ?>
-                  <p class="mb-0">$<span id="product_price"><?= number_format(current($product)['min_price_en'], 0, '.', ',') ?></span></p>
+                  <p class="mb-0"><span id="product_price"><?= number_format(current($product)['min_price_en'], 0, '.', ',') ?></span> eur</p>
                 <? else : ?>
-                  <p class="mb-0">$<span id="product_price"><?= number_format(current($product)['min_price_en'], 0, '.', ',') ?> - <?= number_format(current($product)['max_price_en'], 0, '.', ',') ?></span></p>
+                  <p class="mb-0"><span id="product_price"><?= number_format(current($product)['min_price_en'], 0, '.', ',') ?> - <?= number_format(current($product)['max_price_en'], 0, '.', ',') ?></span> eur</p>
                 <? endif ?>
               <? endif ?>
 

@@ -19,7 +19,10 @@ class Db
 		$config = require 'application/config/db.php';
 		$this->config = $config;
 		try {
-			$this->db = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['name'] . ';charset=utf8', $config['user'], $config['password']);
+			$this->db = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['name'] . ";charset={$config['charset']}", $config['user'], $config['password'], [
+				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+				PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES {$config['charset']}"
+			]);
 		} catch (\Exception $th) {
 			// throw $th;
 			View::errorCode(502);
@@ -28,10 +31,7 @@ class Db
 
 	public function query($sql, $params = [])
 	{
-		// dd($sql);
-		//if($sql!="SET NAMES 'utf8'")
-		//$this->query("SET NAMES 'utf8'");
-		//$query = $this->db->query($sql); //prepare заменил query
+
 		if (!empty($params)) {
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute($params);
@@ -41,7 +41,6 @@ class Db
 		}
 
 		return $stmt;
-		//return $query;
 	}
 
 	public function fetAll($sql, $params = [])
@@ -58,13 +57,7 @@ class Db
 		return $result->fetchColumn();
 	}
 
-	// public function quer($sql)
-	// {
-	// 	$stmt = $this->db->query($sql);
-	// 	//$query = $this->db->query($sql); //prepare заменил query
-	// 	return $stmt;
-	// 	//return $query;
-	// }
+
 	public function Exists($tname)
 	{
 		$dbname = $this->config['name'];
@@ -140,10 +133,11 @@ class Db
 	/**
 	 * @param string $tname Имя таблицы
 	 * @param string|NULL $sign Условие поиска, WHERE писать не нужно
-	 * @param array|NULL $params PDO:prepare params Параметры для поиска, без них не работает
+	 * @param array|NULL $params PDO:prepare params Параметры для поиска, без них не работает sign
 	 * @param array|NULL $page [Страница => количество записей на странице] [1=>10]
+	 * @param array|NULL $order ['поле'=>'ASC/DESC']
 	 */
-	public function fetAllLite($tname, $sign = '', $params = [], $page = [])
+	public function fetAllLite($tname, $sign = '', $params = [], $page = [], $order = [])
 	{
 		$limit = '';
 		if (!empty($page)) {
@@ -153,11 +147,18 @@ class Db
 			$start = --$page * $n;
 			$limit = " LIMIT $start,$n";
 		}
+		$orderstr = '';
+		if (!empty($order)) {
+			$field = key($order);
+			$asc = current($order);
+			$orderstr = " ORDER BY `$field` $asc";
+		}
 
-		if (empty($sign) and empty($params)) {
-			return $this->fetAll("SELECT * FROM `$tname`" . $limit);
-		} elseif (!empty($sign) and !empty($params)) {
-			return $this->fetAll("SELECT * FROM `$tname` WHERE ($sign)" . $limit, $params);
+		if (empty($params)) {
+			return $this->fetAll("SELECT * FROM `$tname`" . $limit . $orderstr);
+		} else
+		if (!empty($sign)) {
+			return $this->fetAll("SELECT * FROM `$tname` WHERE ($sign)" . $limit . $orderstr, $params);
 		} else return NULL;
 	}
 
@@ -181,8 +182,7 @@ class Db
 		if (empty($sign) and empty($params)) {
 			return $this->fetAll("SELECT * FROM `$tname`" . $limit);
 		}
-			return $this->fetAll("SELECT * FROM `$tname` $sign" . $limit, $params);
-	
+		return $this->fetAll("SELECT * FROM `$tname` $sign" . $limit, $params);
 	}
 
 	/**
