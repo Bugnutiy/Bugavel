@@ -1,16 +1,16 @@
 <?php
-// return [
-// 	'host' => 'h902111921.mysql',
-// 	'name' => 'h902111921_leosnew',
-// 	'user' => 'h902111921_u0',
-// 	'password' => 'yz:pnWU9',
-// 	'charset' => 'utf8mb4',//unicode_ci
-// ];
-
 return [
-	'host' => '127.0.0.1',
-	'name' => 'h902111921_leosnew',
-	'user' => 'root',
-	'password' => '',
+	'host' => 'h902111921.mysql',
+	'name' => 'h902111921_lovibaza',
+	'user' => 'h902111921_u0',
+	'password' => 'yz:pnWU9',
 	'charset' => 'utf8mb4',//unicode_ci
 ];
+
+// return [
+// 	'host' => '127.0.0.1',
+// 	'name' => 'h902111921_leosnew',
+// 	'user' => 'root',
+// 	'password' => '',
+// 	'charset' => 'utf8mb4',//unicode_ci
+// ];
