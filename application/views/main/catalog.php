@@ -17,10 +17,11 @@
     <? endif ?>
 
     <a class="big_logo_rounded row align-items-center" href="/">
-      <div class="col-12">
-        <img src="/public/images/logo/sun_logo.png" alt="">
-      </div>
+      <!-- <div class="col-12"> -->
+      <img src="/public/images/logo/sun_logo.png" alt="logo image">
+      <!-- </div> -->
     </a>
+    <a class="d-block text-center big_logo_text" href="/">ProLovi</a>
     <!-- Блок описания -->
     <? if (!empty($category) && strlen($category['description']) != 11) : ?>
       <div class="container-lg description_block g-4 mb-3">
@@ -125,8 +126,9 @@
 
                                     <div class="col align-self-center"><?= current($user)['lang'] !== 'RU' ? $property_node['name_en'] : $property_node['name'] ?></div>
                                     <div class="col-auto align-self-center">
-                                      <?//= current($user)['country'] !== 'RU' ? '$' . number_format($property_node['price_en']) : number_format($property_node['price'], 0, ',', ' ') . ' руб.' ?>
-                                      <?= current($user)['country'] !== 'RU' ? number_format($property_node['price_en']).' eur' : number_format($property_node['price'], 0, ',', ' ') . ' руб.' ?>
+                                      <? //= current($user)['country'] !== 'RU' ? '$' . number_format($property_node['price_en']) : number_format($property_node['price'], 0, ',', ' ') . ' руб.' 
+                                      ?>
+                                      <?= current($user)['country'] !== 'RU' ? number_format($property_node['price_en']) . ' eur' : number_format($property_node['price'], 0, ',', ' ') . ' руб.' ?>
 
                                     </div>
                                     <div class="col-auto my-2">

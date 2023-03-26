@@ -34,14 +34,15 @@
 
   .small_text_logo {
     color: #000;
-    
+
     .logo {
       display: inline-block;
-      color: #fff;
-      font-size: 1.8rem;
+      color: $c-light-main;
+      font-size: 1.5rem;
       text-decoration: none;
       line-height: 1;
-   
+      font-weight: 500;
+      font-family: 'Roboto', Arial, sans-serif;
     }
   }
 
@@ -77,11 +78,13 @@
     .bi {
       transition: color .2s ease-in-out;
       color: $c-light-main;
-      &:hover{
+
+      &:hover {
         color: $c-white;
       }
     }
-    .cart{
+
+    .cart {
       .quantity {
         font-size: 0.6em;
         position: absolute;
@@ -100,6 +103,7 @@
         left: 1.8em;
       }
     }
+
     .language {
       // font-size: 1.5em;
       text-align: center;

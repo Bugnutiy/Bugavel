@@ -1,14 +1,14 @@
 @use "sass:math";
 
 .index_header {
-  margin-bottom: -2em;
+  margin-bottom: -6em;
 
   @media (min-width: $sm) {
-    margin-bottom: -4em;
+    margin-bottom: -6em;
   }
 
   @media (min-width: $md) {
-    margin-bottom: -4em;
+    margin-bottom: -7em;
   }
 
   @media (min-width: $lg) {}
@@ -26,12 +26,12 @@
   color: $c-light-main;
 
   .carousel {
-    $xsh: 14em;
-    $smh: 20em;
-    $mdh: 20em;
+    $xsh: 20em;
+    $smh: 22em;
+    $mdh: 23em;
     $lgh: 25em;
     $xlh: 25em;
-    $xxlh: 35em;
+    $xxlh: 32em;
 
     .splide {
       .splide__slide {
@@ -131,15 +131,18 @@
         top: -$xsh;
 
         h1 {
-          font-size: 2em;
+          font-size: 1.5em;
+          font-weight: 400;
+
         }
 
         h2 {
-          font-size: 1.2em;
+          font-size: 1em;
         }
 
         h3 {
-          font-size: 1.5em;
+          font-size: 1.3em;
+          font-weight: 500;
         }
 
         .btn {
@@ -153,15 +156,18 @@
           top: -$smh;
 
           h1 {
-            font-size: 2em;
+            font-size: 1.8em;
+            font-weight: 400;
+  
           }
-
+  
           h2 {
-            font-size: 1.2em;
+            font-size: 1em;
           }
-
+  
           h3 {
-            font-size: 1.5em;
+            font-size: 1.4em;
+            font-weight: 500;
           }
 
           // .btn {
@@ -174,14 +180,17 @@
 
           h1 {
             font-size: 2em;
+            font-weight: 400;
+  
           }
-
+  
           h2 {
-            font-size: 1.2em;
+            font-size: 1em;
           }
-
+  
           h3 {
-            font-size: 1.5em;
+            font-size: 1.8em;
+            font-weight: 500;
           }
 
           // .btn {
@@ -192,17 +201,18 @@
           height: $lgh;
           top: -$lgh;
 
-          h1 {
-            font-size: 2em;
-          }
-
-          h2 {
-            font-size: 1.2em;
-          }
-
-          h3 {
-            font-size: 1.5em;
-          }
+          // h1 {
+          //   font-size: 1.5em;
+          // }
+  
+          // h2 {
+          //   font-size: 1em;
+          // }
+  
+          // h3 {
+          //   font-size: 1.3em;
+          //   font-weight: 500;
+          // }
 
           // .btn {
           // }
@@ -212,17 +222,18 @@
           height: $xlh;
           top: -$xlh;
 
-          h1 {
-            font-size: 2em;
-          }
-
-          h2 {
-            font-size: 1.2em;
-          }
-
-          h3 {
-            font-size: 1.5em;
-          }
+          // h1 {
+          //   font-size: 1.5em;
+          // }
+  
+          // h2 {
+          //   font-size: 1em;
+          // }
+  
+          // h3 {
+          //   font-size: 1.3em;
+          //   font-weight: 500;
+          // }
 
           // .btn {
           // }
@@ -232,17 +243,18 @@
           height: $xxlh;
           top: -$xxlh;
 
-          h1 {
-            font-size: 2em;
-          }
-
-          h2 {
-            font-size: 1.2em;
-          }
-
-          h3 {
-            font-size: 1.5em;
-          }
+          // h1 {
+          //   font-size: 1.5em;
+          // }
+  
+          // h2 {
+          //   font-size: 1em;
+          // }
+  
+          // h3 {
+          //   font-size: 1.3em;
+          //   font-weight: 500;
+          // }
 
           // .btn {
           // }
@@ -258,7 +270,7 @@
       div {
         border-radius: 10px;
         // box-shadow: 0px 0px 10px 5px #ddd;
-        font-size: 0.9em;
+        font-size: 0.85em;
 
       }
     }

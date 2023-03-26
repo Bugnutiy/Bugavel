@@ -14,8 +14,8 @@
             <section class="splide photo_scroller">
               <div class="splide__track">
                 <ul class="splide__list">
-                  <li class="splide__slide"><img src="/public/images/Carousel/HORS/IMG_20230325_204339.jpg" alt="DIESEL BEE"></li>
-                  <li class="splide__slide"><img src="/public/images/Carousel/HORS/IMG_20230325_204405.jpg" alt="DIESEL BEE"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/HORS/IMG_20230325_204405.jpg" alt="ХОРС"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/HORS/IMG_20230325_204339.jpg" alt="ХОРС"></li>
                 </ul>
               </div>
             </section>
@@ -29,10 +29,10 @@
                         <h1><?= current($user)['lang'] !== 'RU' ? 'NEW' : 'НОВИНКА' ?><span class="d-sm-none">!</span></h1>
                       </div>
                       <div class="col-auto col-sm-auto text-center">
-                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'HYBRID' : 'ГИБРИД' ?> V3</h1>
+                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'THE DEVICE' : 'АППАРАТ' ?></h1>
                       </div>
                       <div class="col-12 text-center">
-                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'DIESEL BEE' : 'DIESEL BEE' ?>&#8221;</h3>
+                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'ХОРС' : 'ХОРС' ?>&#8221;</h3>
                       </div>
                     </div>
                   </div>
@@ -64,13 +64,13 @@
                   <div class="col-12 col-sm-auto text-center">
                     <div class="row justify-content-center">
                       <div class="col-auto">
-                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'AGELESS' : 'НЕСТАРЕЮЩАЯ' ?></h1>
+                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'MAXIMUM' : 'МАКСИМАЛЬНО' ?></h1>
                       </div>
                       <div class="col-auto col-sm-auto text-center">
-                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'CLASSIC' : 'КЛАССИКА' ?></h1>
+                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'VERSATILE' : 'УНИВЕРСАЛЬНАЯ' ?></h1>
                       </div>
                       <div class="col-12 text-center">
-                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'DIRECT DRIVE' : 'DIRECT DRIVE' ?>&#8221;</h3>
+                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'GURU' : 'GURU' ?>&#8221;</h3>
                       </div>
                     </div>
                   </div>
@@ -105,12 +105,13 @@
                   <div class="col-12 col-sm-auto text-center">
                     <div class="row justify-content-center">
                       <div class="col-auto">
-                        <h1> <?= current($user)['lang'] !== 'RU' ? 'THE MOST POWERFULL' : 'МАКСИМАЛЬНАЯ МОЩНОСТЬ' ?></h1>
+                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'AGELESS' : 'НЕСТАРЕЮЩАЯ' ?></h1>
                       </div>
                       <div class="col-auto col-sm-auto text-center">
+                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'CLASSIC' : 'КЛАССИКА' ?></h1>
                       </div>
                       <div class="col-12 text-center">
-                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'GORILLA' : 'GORILLA' ?>&#8221;</h3>
+                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'LOVI' : 'LOVI' ?>&#8221;</h3>
                       </div>
                     </div>
                   </div>
@@ -134,21 +135,24 @@
 
 </header>
 <a class="big_logo_rounded row align-items-center" href="/">
-  <div class="col-12">
-    <img src="/public/images/logo/sun_logo.png" alt="logo image">
-  </div>
+  <!-- <div class="col-12"> -->
+  <img src="/public/images/logo/sun_logo.png" alt="logo image">
+  <!-- </div> -->
 </a>
+<a class="d-block text-center big_logo_text" href="/">ProLovi</a>
 <!-- Приветствие -->
 <div class="container-lg greeting ">
   <div class="row">
     <div class="col text-center text-black px-2">
       <div class=" px-3 pt-3 pb-4">
         <? if (current($user)['lang'] == "RU") : ?>
-          <p>Рад приветствовать вас на моем сайте! Я занимаюсь производством тату машинок с 2003 года. За 19 лет упорной работы я создавал классические аппараты, разработал и запатентовал уникальные гибридные машинки (HYBRID V1, GORILLA HYBRID V2 , HYBRAY, DIESEL BEE HYBRID V3). Благодаря сочетанию хлесткого удара индукции и стабильности ротора, они дают по настоящему наилучшую работу в нанесении татуировки на сегодняшний день.</p>
-          <p class="mb-0">Лучшие мастера России и мира уже выбрали нас как приоритетное оборудование для себя. Я люблю создавать по настоящему особенные и уникальные машинки для татуировки.</p>
+          <p>Мы рады вас приветствовать на нашем сайте! Наша компания занимается производством профессионального оборудования для перманентного макияжа. За 7 лет упорной работы мы выпустили 4 машинки — FANATIKA, LOVI, RAY, GURU, а также переходники и источники питания.</p>
+          <p class="mb-0">Множество мастеров России и других стран, уже выбрали нас как приоритетное оборудование для себя, потому-что наши машинки имеют уникальную, неповторимую работу с комфортным, незаметным заживлением и максимальными остатками. Благодарим вас за выбор нашей продукции, и от всей нашей команды желаем вам успехов и процветания! </p>
+          <!-- <p>Рад приветствовать вас на моем сайте! Я занимаюсь производством тату машинок с 2003 года. За 19 лет упорной работы я создавал классические аппараты, разработал и запатентовал уникальные гибридные машинки (HYBRID V1, GORILLA HYBRID V2 , HYBRAY, DIESEL BEE HYBRID V3). Благодаря сочетанию хлесткого удара индукции и стабильности ротора, они дают по настоящему наилучшую работу в нанесении татуировки на сегодняшний день.</p>
+          <p class="mb-0">Лучшие мастера России и мира уже выбрали нас как приоритетное оборудование для себя. Я люблю создавать по настоящему особенные и уникальные машинки для татуировки.</p> -->
         <? else : ?>
-          <p>I am glad to welcome you to my website! I have been producing tattoo machines since 2003 . For 19 years of hard work, I have created classic machines, developed and patented unique hybrid machines (HYBRID V1, GORILLA HYBRID V2, HYBRAY, DIESEL BEE HYBRID V3). Due to the combination of the whiplash of induction and the stability of the rotor, they provide the truly best work in tattooing for today.</p>
-          <p class="mb-0">The best masters of Russia and the world have already chosen us as a priority equipment for themselves. I love to create truly special and unique tattoo machines.</p>
+          <p>We are glad to welcome you to our website! Our company is engaged in the production of professional equipment for permanent makeup. For 7 years of hard work, we have produced 4 machines — FANATIKA, LOVI, RAY, GURU, and also adapters and power supplies.</p>
+          <p class="mb-0">A lot of craftsmen from Russia and other countries have already chosen us as a priority equipment for themselves, because our machines have a unique, unsurpassed work with comfortable, imperceptible healing and maximum residues. Thank you for choosing our products, and from our entire team we wish you success and prosperity!</p>
         <? endif ?>
 
       </div>

@@ -60,6 +60,10 @@ body {
   color: #32363a;
   font-size: 1rem;
 }
+body * {
+  font-family: "ROBOTO", Arial, Helvetica, sans-serif;
+  font-weight: 300;
+}
 
 .btn {
   border-radius: 40px 40px 40px 40px;
@@ -80,6 +84,17 @@ body {
 }
 .description_block > .row > .col p:last-child {
   margin-bottom: 0;
+}
+
+.big_logo_text {
+  text-decoration: none;
+  color: #212529;
+  font-weight: 500;
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 1.6rem;
+}
+.big_logo_text:hover {
+  color: #212529;
 }
 
 .big_logo_rounded {
@@ -137,10 +152,12 @@ body {
 }
 .index_menu .small_text_logo .logo {
   display: inline-block;
-  color: #fff;
-  font-size: 1.8rem;
+  color: #cecece;
+  font-size: 1.5rem;
   text-decoration: none;
   line-height: 1;
+  font-weight: 500;
+  font-family: "Roboto", Arial, sans-serif;
 }
 .index_menu .navbar-toggler span {
   transition: color 0.2s ease-in-out;
@@ -195,18 +212,18 @@ body {
 }
 
 .index_header {
-  margin-bottom: -2em;
+  margin-bottom: -6em;
   background-color: transparent;
   color: #cecece;
 }
 @media (min-width: 576px) {
   .index_header {
-    margin-bottom: -4em;
+    margin-bottom: -6em;
   }
 }
 @media (min-width: 768px) {
   .index_header {
-    margin-bottom: -4em;
+    margin-bottom: -7em;
   }
 }
 @media (min-width: 1200px) {
@@ -220,16 +237,16 @@ body {
   }
 }
 .index_header .carousel .splide .splide__slide {
-  height: 14em;
+  height: 20em;
 }
 @media (min-width: 576px) {
   .index_header .carousel .splide .splide__slide {
-    height: 20em;
+    height: 22em;
   }
 }
 @media (min-width: 768px) {
   .index_header .carousel .splide .splide__slide {
-    height: 20em;
+    height: 23em;
   }
 }
 @media (min-width: 992px) {
@@ -244,25 +261,25 @@ body {
 }
 @media (min-width: 1400px) {
   .index_header .carousel .splide .splide__slide {
-    height: 35em;
+    height: 32em;
   }
 }
 .index_header .carousel .splide .arrows_wrapper {
   height: 0px;
   position: relative;
-  top: 7em;
-  top: calc(7em - 8px);
+  top: 10em;
+  top: calc(10em - 8px);
 }
 @media (min-width: 576px) {
   .index_header .carousel .splide .arrows_wrapper {
-    top: 10em;
-    top: calc(10em - 16px);
+    top: 11em;
+    top: calc(11em - 16px);
   }
 }
 @media (min-width: 768px) {
   .index_header .carousel .splide .arrows_wrapper {
-    top: 10em;
-    top: calc(10em - 16px);
+    top: 11.5em;
+    top: calc(11.5em - 16px);
   }
 }
 @media (min-width: 992px) {
@@ -279,8 +296,8 @@ body {
 }
 @media (min-width: 1400px) {
   .index_header .carousel .splide .arrows_wrapper {
-    top: 17.5em;
-    top: calc(17.5em - 16px);
+    top: 16em;
+    top: calc(16em - 16px);
   }
 }
 .index_header .carousel .splide .arrows_wrapper .splide__arrows {
@@ -306,20 +323,22 @@ body {
 }
 .index_header .carousel .content,
 .index_header .carousel .content .container-lg > .row {
-  height: 14em;
-  top: -14em;
+  height: 20em;
+  top: -20em;
 }
 .index_header .carousel .content h1,
 .index_header .carousel .content .container-lg > .row h1 {
-  font-size: 2em;
+  font-size: 1.5em;
+  font-weight: 400;
 }
 .index_header .carousel .content h2,
 .index_header .carousel .content .container-lg > .row h2 {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 .index_header .carousel .content h3,
 .index_header .carousel .content .container-lg > .row h3 {
-  font-size: 1.5em;
+  font-size: 1.3em;
+  font-weight: 500;
 }
 .index_header .carousel .content .btn:hover,
 .index_header .carousel .content .container-lg > .row .btn:hover {
@@ -328,39 +347,43 @@ body {
 @media (min-width: 576px) {
   .index_header .carousel .content,
   .index_header .carousel .content .container-lg > .row {
-    height: 20em;
-    top: -20em;
+    height: 22em;
+    top: -22em;
   }
   .index_header .carousel .content h1,
   .index_header .carousel .content .container-lg > .row h1 {
-    font-size: 2em;
+    font-size: 1.8em;
+    font-weight: 400;
   }
   .index_header .carousel .content h2,
   .index_header .carousel .content .container-lg > .row h2 {
-    font-size: 1.2em;
+    font-size: 1em;
   }
   .index_header .carousel .content h3,
   .index_header .carousel .content .container-lg > .row h3 {
-    font-size: 1.5em;
+    font-size: 1.4em;
+    font-weight: 500;
   }
 }
 @media (min-width: 768px) {
   .index_header .carousel .content,
   .index_header .carousel .content .container-lg > .row {
-    height: 20em;
-    top: -20em;
+    height: 23em;
+    top: -23em;
   }
   .index_header .carousel .content h1,
   .index_header .carousel .content .container-lg > .row h1 {
     font-size: 2em;
+    font-weight: 400;
   }
   .index_header .carousel .content h2,
   .index_header .carousel .content .container-lg > .row h2 {
-    font-size: 1.2em;
+    font-size: 1em;
   }
   .index_header .carousel .content h3,
   .index_header .carousel .content .container-lg > .row h3 {
-    font-size: 1.5em;
+    font-size: 1.8em;
+    font-weight: 500;
   }
 }
 @media (min-width: 992px) {
@@ -369,18 +392,6 @@ body {
     height: 25em;
     top: -25em;
   }
-  .index_header .carousel .content h1,
-  .index_header .carousel .content .container-lg > .row h1 {
-    font-size: 2em;
-  }
-  .index_header .carousel .content h2,
-  .index_header .carousel .content .container-lg > .row h2 {
-    font-size: 1.2em;
-  }
-  .index_header .carousel .content h3,
-  .index_header .carousel .content .container-lg > .row h3 {
-    font-size: 1.5em;
-  }
 }
 @media (min-width: 1200px) {
   .index_header .carousel .content,
@@ -388,42 +399,18 @@ body {
     height: 25em;
     top: -25em;
   }
-  .index_header .carousel .content h1,
-  .index_header .carousel .content .container-lg > .row h1 {
-    font-size: 2em;
-  }
-  .index_header .carousel .content h2,
-  .index_header .carousel .content .container-lg > .row h2 {
-    font-size: 1.2em;
-  }
-  .index_header .carousel .content h3,
-  .index_header .carousel .content .container-lg > .row h3 {
-    font-size: 1.5em;
-  }
 }
 @media (min-width: 1400px) {
   .index_header .carousel .content,
   .index_header .carousel .content .container-lg > .row {
-    height: 35em;
-    top: -35em;
-  }
-  .index_header .carousel .content h1,
-  .index_header .carousel .content .container-lg > .row h1 {
-    font-size: 2em;
-  }
-  .index_header .carousel .content h2,
-  .index_header .carousel .content .container-lg > .row h2 {
-    font-size: 1.2em;
-  }
-  .index_header .carousel .content h3,
-  .index_header .carousel .content .container-lg > .row h3 {
-    font-size: 1.5em;
+    height: 32em;
+    top: -32em;
   }
 }
 
 .greeting .row .col div {
   border-radius: 10px;
-  font-size: 0.9em;
+  font-size: 0.85em;
 }
 
 .index_categories .header h1 {
@@ -489,22 +476,22 @@ footer p {
   }
 }
 .category_header {
-  margin-bottom: -2em;
+  margin-bottom: -6em;
   background: #32363a;
 }
 @media (min-width: 576px) {
   .category_header {
-    margin-bottom: -4em;
+    margin-bottom: -6em;
   }
 }
 @media (min-width: 768px) {
   .category_header {
-    margin-bottom: -4em;
+    margin-bottom: -7em;
   }
 }
 @media (min-width: 1400px) {
   .category_header {
-    margin-bottom: -6em;
+    margin-bottom: -7em;
   }
 }
 .category_header iframe {

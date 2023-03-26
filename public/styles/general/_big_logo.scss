@@ -58,7 +58,16 @@
 //     width: 30em;
 //   }
 // }
-
+.big_logo_text{
+  text-decoration: none;
+  color: $c-dark-bs;
+  font-weight: 500;
+  font-family: 'Roboto',Arial,sans-serif;
+  font-size: 1.6rem;
+  &:hover{
+    color: $c-dark-bs;
+  }
+}
 .big_logo_rounded {
   overflow: hidden;
   position: relative;

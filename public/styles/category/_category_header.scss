@@ -21,13 +21,13 @@
 }
 .category_header {
 
-  margin-bottom: -2em;
+  margin-bottom: -6em;
   @media (min-width: $sm) {
-    margin-bottom: -4em;
+    margin-bottom: -6em;
   }
 
   @media (min-width: $md) {
-    margin-bottom: -4em;
+    margin-bottom: -7em;
   }
 
   @media (min-width: $lg) {
@@ -37,7 +37,7 @@
   }
 
   @media (min-width: $xxl) {
-    margin-bottom: -6em;
+    margin-bottom: -7em;
   }
 background: $c-dark-main;
   $xsh: 14em;

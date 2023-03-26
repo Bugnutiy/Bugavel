@@ -13,6 +13,7 @@ use PHPMailer\PHPMailer\PHPMailer;
  */
 class Model
 {
+	public $mail_config;
 	/**
 	 * @var Db
 	 */
@@ -39,6 +40,8 @@ class Model
 		$this->sber = new Sber($this->db);
 		$this->user = new User($this->db);
 		$this->shop = new Shop($this->db);
+		$this->mail_config = current($this->db->fetAllLite('mail_config'));
+
 		// dd($_COOKIE);
 		// ddd($this->user);
 		// dd($_SERVER);
