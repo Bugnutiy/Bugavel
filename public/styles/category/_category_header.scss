@@ -1,8 +1,8 @@
 @use "sass:math";
 .empty_video{
-  margin-bottom: 3em;
+  margin-bottom: 7em;
   @media (min-width: $sm) {
-    margin-bottom: 5em;
+    margin-bottom: 8em;
   }
 
   @media (min-width: $md) {

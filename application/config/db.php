@@ -2,8 +2,8 @@
 // return [
 // 	'host' => 'h902111921.mysql',
 // 	'name' => 'h902111921_leosnew',
-// 	'user' => 'h902111921_leonw',
-// 	'password' => 'y2+tSZaE',
+// 	'user' => 'h902111921_u0',
+// 	'password' => 'yz:pnWU9',
 // 	'charset' => 'utf8mb4',//unicode_ci
 // ];
 

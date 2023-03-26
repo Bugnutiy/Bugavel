@@ -156,7 +156,7 @@ class MainController extends Controller
 		//debug($_SESSION);
 		// dd("Dd");
 		// dd($this->view->layout);
-		$this->view->render(['RU' => 'LeoSmagin - Главная страница', 'EN' => 'LeoSmagin - Main page']);
+		$this->view->render(['RU' => 'ProLovi - Главная страница', 'EN' => 'ProLovi - Main page']);
 	}
 
 	public function catalogAction()
@@ -196,15 +196,15 @@ class MainController extends Controller
 		// dd($_SERVER);
 		if (!empty($_GET['category'])) {
 			$this->view->render([
-				'RU' => 'LeoSmagin - ' . (empty($this->view->default_vars['categories'][$_GET['category']]) ? 'Каталог' : $this->view->default_vars['categories'][$_GET['category']]['name']),
+				'RU' => 'ProLovi - ' . (empty($this->view->default_vars['categories'][$_GET['category']]) ? 'Каталог' : $this->view->default_vars['categories'][$_GET['category']]['name']),
 
-				'EN' => 'LeoSmagin - ' . (empty($this->view->default_vars['categories'][$_GET['category']]) ? 'Catalog' : $this->view->default_vars['categories'][$_GET['category']]['name_en'])
+				'EN' => 'ProLovi - ' . (empty($this->view->default_vars['categories'][$_GET['category']]) ? 'Catalog' : $this->view->default_vars['categories'][$_GET['category']]['name_en'])
 			], $vars);
 			exit;
 		} else {
 			$this->view->render([
-				'RU' => 'LeoSmagin - Все товары',
-				'EN' => 'LeoSmagin - All goods',
+				'RU' => 'ProLovi - Все товары',
+				'EN' => 'ProLovi - All goods',
 			], $vars);
 		}
 	}
@@ -256,8 +256,8 @@ class MainController extends Controller
 
 		$this->view->render(
 			[
-				'RU' => 'LeoSmagin - ' . current($product)['name'],
-				'EN' => 'LeoSmagin - ' . current($product)['name_en']
+				'RU' => 'ProLovi - ' . current($product)['name'],
+				'EN' => 'ProLovi - ' . current($product)['name_en']
 			],
 			$vars
 		);
@@ -295,8 +295,8 @@ class MainController extends Controller
 		// dd($vars);
 		$this->view->render(
 			[
-				'RU' => 'Ваша корзина - LeoSmagin.com',
-				'EN' => 'Your Shopping Cart - LeoSmagin.com'
+				'RU' => 'Ваша корзина - ProLovi',
+				'EN' => 'Your Shopping Cart - ProLovi'
 			],
 			$vars
 		);
@@ -306,29 +306,29 @@ class MainController extends Controller
 	public function policyAction()
 	{
 		$this->view->render([
-			'RU' => 'Политика конфиденциальности и правила использования - LeoSmagin.com',
-			'EN' => 'Privacy Policy and Terms of Use - LeoSmagin.com',
+			'RU' => 'Политика конфиденциальности и правила использования - ProLovi',
+			'EN' => 'Privacy Policy and Terms of Use - ProLovi',
 		], []);
 	}
 	public function paymentAction()
 	{
 		$this->view->render([
-			'RU' => 'Способы оплаты - LeoSmagin.com',
-			'EN' => 'Payment methods - LeoSmagin.com',
+			'RU' => 'Способы оплаты - ProLovi',
+			'EN' => 'Payment methods - ProLovi',
 		], []);
 	}
 	public function contactsAction()
 	{
 		$this->view->render([
-			'RU' => 'Контакты - LeoSmagin.com',
-			'EN' => 'Contacts - LeoSmagin.com',
+			'RU' => 'Контакты - ProLovi',
+			'EN' => 'Contacts - ProLovi',
 		], []);
 	}
 	public function deliveryAction()
 	{
 		$this->view->render([
-			'RU' => 'Доставка - LeoSmagin.com',
-			'EN' => 'Delivery - LeoSmagin.com',
+			'RU' => 'Доставка - ProLovi',
+			'EN' => 'Delivery - ProLovi',
 		], []);
 	}
 }

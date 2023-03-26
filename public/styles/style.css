@@ -428,11 +428,14 @@ body * {
 }
 .index_categories .cards .card .card-title {
   font-family: Arial;
-  font-size: 1.3em;
+  font-size: 1em;
+}
+.index_categories .cards .card .card-title * {
+  font-weight: 500;
 }
 @media (max-width: 576px) {
   .index_categories .cards .card .card-title {
-    font-size: 1.2em;
+    font-size: 1em;
   }
 }
 .index_categories .cards .card .card-title a {
@@ -441,9 +444,6 @@ body * {
 .index_categories .cards .card .card-title a:hover {
   color: #9e9e9e;
   transition: all 0.3s ease;
-}
-.index_categories .cards .card .card-text a {
-  text-decoration: underline;
 }
 
 footer {
@@ -468,11 +468,11 @@ footer p {
 }
 
 .empty_video {
-  margin-bottom: 3em;
+  margin-bottom: 7em;
 }
 @media (min-width: 576px) {
   .empty_video {
-    margin-bottom: 5em;
+    margin-bottom: 8em;
   }
 }
 .category_header {

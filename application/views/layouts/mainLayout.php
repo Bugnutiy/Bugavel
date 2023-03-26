@@ -7,13 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="shortcut icon" href="/public/images/icons/cropped-гибббр1-270x270.jpg" type="image/x-icon" sizes="270x270" />
-  <!-- 
-  <link rel="icon" href="https://leosmagin.com/wp-content/uploads/2019/03/cropped-гибббр1-32x32.jpg" sizes="32x32">
-  <link rel="icon" href="https://leosmagin.com/wp-content/uploads/2019/03/cropped-гибббр1-192x192.jpg" sizes="192x192">
-  <link rel="apple-touch-icon" href="https://leosmagin.com/wp-content/uploads/2019/03/cropped-гибббр1-180x180.jpg">
-  <meta name="msapplication-TileImage"
-    content="https://leosmagin.com/wp-content/uploads/2019/03/cropped-гибббр1-270x270.jpg">
-   -->
+  
   <!-- Splide -->
   <link rel="stylesheet" href="/public/styles/vendor/splide-default.min.css" />
   <!-- Bootstrap -->
@@ -24,7 +18,7 @@
 
   <link rel="stylesheet" href="/public/styles/style.css" />
 
-  <!-- <title>LeoSmagin: Главная страница</title> -->
+  
   <title><?= current($user)['lang'] == 'RU' ? $title['RU'] : $title['EN'] ?></title>
 
   <script>
@@ -304,7 +298,7 @@
         <div class="col-12 col-sm-4 col-xl-4 my-3">
           <span>
             ©2020. All rights reserved.<br />
-            Designed by leosmagin.com.
+            Designed by ProLovi.ru
           </span>
         </div>
         <div class="col-12 col-sm-4 text-center references my-3">
@@ -334,7 +328,7 @@
         </div>
 
         <div class="col-12 col-sm-4 col-xl-4 persona text-end my-3">
-          <p class="mb-3"><?= current($user)['lang'] !== 'RU' ? 'Leonid Smagin' : 'Смагин Леонид Павлович' ?>
+          <p class="mb-3"><?= current($user)['lang'] !== 'RU' ? 'ProLovi Co.' : 'ProLovi Co.' ?>
           <p>
             <a href="mailto:info@prolovi.ru" class="e-mail">info@prolovi.ru</a>
           <div class="contacts mt-3">
