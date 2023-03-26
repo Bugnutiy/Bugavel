@@ -14,8 +14,8 @@
             <section class="splide photo_scroller">
               <div class="splide__track">
                 <ul class="splide__list">
-                  <li class="splide__slide"><img src="/public/images/Carousel/HORS/" alt="DIESEL BEE"></li>
-                  <li class="splide__slide"><img src="/public/images/Carousel/DIESEL BEE/IMG_20220823_180003-c.jpg" alt="DIESEL BEE"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/HORS/IMG_20230325_204339.jpg" alt="DIESEL BEE"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/HORS/IMG_20230325_204405.jpg" alt="DIESEL BEE"></li>
                 </ul>
               </div>
             </section>
@@ -52,9 +52,8 @@
             <section class="splide photo_scroller">
               <div class="splide__track">
                 <ul class="splide__list">
-                  <li class="splide__slide"><img src="/public/images/Carousel/ROTARY/ROTARY.jpg" alt="ROTARY"></li>
-                  <li class="splide__slide"><img src="/public/images/Carousel/ROTARY/DSC02498_DxO 05 min.jpg" alt="ROTARY"></li>
-                  <li class="splide__slide"><img src="/public/images/Carousel/ROTARY/IMG_20220823_180330 min.jpg" alt="ROTARY"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/GURU/DSC04312_Dx0.jpg" alt="GURU"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/GURU/DSC04334_Dx0.jpg" alt="GURU"></li>
                 </ul>
               </div>
             </section>
@@ -92,9 +91,10 @@
             <section class="splide photo_scroller">
               <div class="splide__track">
                 <ul class="splide__list">
-                  <li class="splide__slide"><img src="/public/images/Carousel/GORILLA/GORILLA1.jpg" alt="Gorilla image">
-                  <li class="splide__slide"><img src="/public/images/Carousel/GORILLA/IMG_20220221_234913_175-C.jpg" alt="Gorilla image">
-                  </li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/LOVI/IMG_20220216_170307_967.jpg" alt="Lovi"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/LOVI/IMG_20220217_212948_149.jpg" alt="Lovi"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/LOVI/IMG_20220216_170307_967 — копия.jpg" alt="Lovi1"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/LOVI/IMG_20220217_212948_149 — копия.jpg" alt="Lovi1"></li>
                 </ul>
               </div>
             </section>
@@ -133,9 +133,9 @@
   </div>
 
 </header>
-<a class="big_logo row align-items-center" href="/">
+<a class="big_logo_rounded row align-items-center" href="/">
   <div class="col-12">
-    <img src="/public/images/logo/logo.png" alt="logo image">
+    <img src="/public/images/logo/sun_logo.png" alt="logo image">
   </div>
 </a>
 <!-- Приветствие -->
@@ -164,7 +164,7 @@
     </div>
 
     <div class="cards row">
-      <? $categories = array_reverse($categories,1) ?>
+      <? $categories = array_reverse($categories, 1) ?>
       <? foreach ($categories as $cat_id => $cat_node) : ?>
         <div class="card col-6 col-sm-3 col-md-3 col-xl-2 mb-4">
           <div class="text-center">
@@ -205,7 +205,7 @@
       gap: 0,
       pagination: false,
       autoScroll: {
-        speed: 0.5,
+        speed: .5,
         pauseOnHover: 0,
       },
     }).mount(window.splide.Extensions);

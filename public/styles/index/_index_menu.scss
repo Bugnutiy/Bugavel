@@ -21,14 +21,27 @@
     }
   }
 
-  .small_logo {
+  // .small_logo {
+  //   .logo {
+  //     display: block;
+  //     height: 25px;
+  //     width: 140px;
+  //     background-color: $c-light-main;
+  //     mask-repeat: no-repeat;
+  //     mask-image: url("/public/images/logo/diesel_bee_curves.svg");
+  //   }
+  // }
+
+  .small_text_logo {
+    color: #000;
+    
     .logo {
-      display: block;
-      height: 25px;
-      width: 140px;
-      background-color: $c-light-main;
-      mask-repeat: no-repeat;
-      mask-image: url("/public/images/logo/diesel_bee_curves.svg");
+      display: inline-block;
+      color: #fff;
+      font-size: 1.8rem;
+      text-decoration: none;
+      line-height: 1;
+   
     }
   }
 

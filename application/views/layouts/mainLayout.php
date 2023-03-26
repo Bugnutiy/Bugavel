@@ -78,8 +78,8 @@
             <a href="mailto:protattoo@mail.ru" class="bi bi-envelope"></a>
           </div>
 
-          <div class="small_logo d-md-none">
-            <a class="logo mx-sm-3" href="/"></a>
+          <div class="small_text_logo d-md-none">
+            <a class="logo mx-sm-3" href="/">ProLovi</a>
           </div>
 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="IndexToggleMenu">
@@ -165,8 +165,8 @@
               <a href="mailto:protattoo@mail.ru" class="bi bi-envelope"></a>
             </div>
 
-            <div class="small_logo d-md-none">
-              <a class="logo mx-sm-3" href="/"></a>
+            <div class="small_text_logo d-md-none">
+              <a class="logo mx-sm-3" href="/">ProLovi</a>
             </div>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="IndexToggleMenu">

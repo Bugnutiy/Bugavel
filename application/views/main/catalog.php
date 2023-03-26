@@ -13,12 +13,12 @@
       </header>
     <? endif ?>
     <? if (empty($category['videos'])) : ?>
-      <div class="mb-5"></div>
+      <div class=" empty_video"></div>
     <? endif ?>
 
-    <a class="big_logo row align-items-center" href="/">
+    <a class="big_logo_rounded row align-items-center" href="/">
       <div class="col-12">
-        <img src="/public/images/logo/logo.png" alt="">
+        <img src="/public/images/logo/sun_logo.png" alt="">
       </div>
     </a>
     <!-- Блок описания -->

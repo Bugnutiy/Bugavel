@@ -82,52 +82,35 @@ body {
   margin-bottom: 0;
 }
 
-.big_logo {
+.big_logo_rounded {
+  overflow: hidden;
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  left: 0;
-  right: 0;
   text-align: center;
   border-radius: 50%;
-  background: #fafafa;
   background: #fff;
   box-shadow: 0px 5px 5px 0px rgba(51, 51, 51, 0.3137254902);
   margin-top: 1em;
-  margin-bottom: 1em;
   height: 10em;
-  width: 80%;
+  width: 10em;
 }
-.big_logo img {
-  position: relative;
-  width: auto;
-  max-height: 6.5em;
-  max-width: 80%;
-  top: 4px;
+.big_logo_rounded img {
+  width: 100%;
   opacity: 100%;
 }
 @media (min-width: 576px) {
-  .big_logo {
+  .big_logo_rounded {
     height: 11em;
-    width: 20em;
-  }
-  .big_logo img {
-    max-height: 8em;
+    width: 11em;
   }
 }
 @media (min-width: 768px) {
-  .big_logo {
-    height: 13em;
-    width: 21em;
+  .big_logo_rounded {
+    height: 12em;
+    width: 12em;
   }
 }
-@media (min-width: 1400px) {
-  .big_logo {
-    height: 16em;
-    width: 30em;
-  }
-}
-
 .vh-wrapper {
   min-height: 90vh;
 }
@@ -149,15 +132,15 @@ body {
 .index_menu .navbar-brand .bi:hover {
   color: #fff;
 }
-.index_menu .small_logo .logo {
-  display: block;
-  height: 25px;
-  width: 140px;
-  background-color: #cecece;
-  -webkit-mask-repeat: no-repeat;
-          mask-repeat: no-repeat;
-  -webkit-mask-image: url("/public/images/logo/diesel_bee_curves.svg");
-          mask-image: url("/public/images/logo/diesel_bee_curves.svg");
+.index_menu .small_text_logo {
+  color: #000;
+}
+.index_menu .small_text_logo .logo {
+  display: inline-block;
+  color: #fff;
+  font-size: 1.8rem;
+  text-decoration: none;
+  line-height: 1;
 }
 .index_menu .navbar-toggler span {
   transition: color 0.2s ease-in-out;
@@ -226,9 +209,14 @@ body {
     margin-bottom: -4em;
   }
 }
+@media (min-width: 1200px) {
+  .index_header {
+    margin-bottom: -7em;
+  }
+}
 @media (min-width: 1400px) {
   .index_header {
-    margin-bottom: -6em;
+    margin-bottom: -7em;
   }
 }
 .index_header .carousel .splide .splide__slide {
@@ -339,96 +327,96 @@ body {
 }
 @media (min-width: 576px) {
   .index_header .carousel .content,
-.index_header .carousel .content .container-lg > .row {
+  .index_header .carousel .content .container-lg > .row {
     height: 20em;
     top: -20em;
   }
   .index_header .carousel .content h1,
-.index_header .carousel .content .container-lg > .row h1 {
+  .index_header .carousel .content .container-lg > .row h1 {
     font-size: 2em;
   }
   .index_header .carousel .content h2,
-.index_header .carousel .content .container-lg > .row h2 {
+  .index_header .carousel .content .container-lg > .row h2 {
     font-size: 1.2em;
   }
   .index_header .carousel .content h3,
-.index_header .carousel .content .container-lg > .row h3 {
+  .index_header .carousel .content .container-lg > .row h3 {
     font-size: 1.5em;
   }
 }
 @media (min-width: 768px) {
   .index_header .carousel .content,
-.index_header .carousel .content .container-lg > .row {
+  .index_header .carousel .content .container-lg > .row {
     height: 20em;
     top: -20em;
   }
   .index_header .carousel .content h1,
-.index_header .carousel .content .container-lg > .row h1 {
+  .index_header .carousel .content .container-lg > .row h1 {
     font-size: 2em;
   }
   .index_header .carousel .content h2,
-.index_header .carousel .content .container-lg > .row h2 {
+  .index_header .carousel .content .container-lg > .row h2 {
     font-size: 1.2em;
   }
   .index_header .carousel .content h3,
-.index_header .carousel .content .container-lg > .row h3 {
+  .index_header .carousel .content .container-lg > .row h3 {
     font-size: 1.5em;
   }
 }
 @media (min-width: 992px) {
   .index_header .carousel .content,
-.index_header .carousel .content .container-lg > .row {
+  .index_header .carousel .content .container-lg > .row {
     height: 25em;
     top: -25em;
   }
   .index_header .carousel .content h1,
-.index_header .carousel .content .container-lg > .row h1 {
+  .index_header .carousel .content .container-lg > .row h1 {
     font-size: 2em;
   }
   .index_header .carousel .content h2,
-.index_header .carousel .content .container-lg > .row h2 {
+  .index_header .carousel .content .container-lg > .row h2 {
     font-size: 1.2em;
   }
   .index_header .carousel .content h3,
-.index_header .carousel .content .container-lg > .row h3 {
+  .index_header .carousel .content .container-lg > .row h3 {
     font-size: 1.5em;
   }
 }
 @media (min-width: 1200px) {
   .index_header .carousel .content,
-.index_header .carousel .content .container-lg > .row {
+  .index_header .carousel .content .container-lg > .row {
     height: 25em;
     top: -25em;
   }
   .index_header .carousel .content h1,
-.index_header .carousel .content .container-lg > .row h1 {
+  .index_header .carousel .content .container-lg > .row h1 {
     font-size: 2em;
   }
   .index_header .carousel .content h2,
-.index_header .carousel .content .container-lg > .row h2 {
+  .index_header .carousel .content .container-lg > .row h2 {
     font-size: 1.2em;
   }
   .index_header .carousel .content h3,
-.index_header .carousel .content .container-lg > .row h3 {
+  .index_header .carousel .content .container-lg > .row h3 {
     font-size: 1.5em;
   }
 }
 @media (min-width: 1400px) {
   .index_header .carousel .content,
-.index_header .carousel .content .container-lg > .row {
+  .index_header .carousel .content .container-lg > .row {
     height: 35em;
     top: -35em;
   }
   .index_header .carousel .content h1,
-.index_header .carousel .content .container-lg > .row h1 {
+  .index_header .carousel .content .container-lg > .row h1 {
     font-size: 2em;
   }
   .index_header .carousel .content h2,
-.index_header .carousel .content .container-lg > .row h2 {
+  .index_header .carousel .content .container-lg > .row h2 {
     font-size: 1.2em;
   }
   .index_header .carousel .content h3,
-.index_header .carousel .content .container-lg > .row h3 {
+  .index_header .carousel .content .container-lg > .row h3 {
     font-size: 1.5em;
   }
 }
@@ -492,6 +480,14 @@ footer p {
   font-family: "Raleway-Regular";
 }
 
+.empty_video {
+  margin-bottom: 3em;
+}
+@media (min-width: 576px) {
+  .empty_video {
+    margin-bottom: 5em;
+  }
+}
 .category_header {
   margin-bottom: -2em;
   background: #32363a;

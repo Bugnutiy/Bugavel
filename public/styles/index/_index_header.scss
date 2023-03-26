@@ -13,10 +13,13 @@
 
   @media (min-width: $lg) {}
 
-  @media (min-width: $xl) {}
+  @media (min-width: $xl) {
+    margin-bottom: -7em;
+
+  }
 
   @media (min-width: $xxl) {
-    margin-bottom: -6em;
+    margin-bottom: -7em;
   }
 
   background-color: transparent;
