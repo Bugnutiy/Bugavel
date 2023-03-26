@@ -72,10 +72,10 @@
       <div class="container-lg">
         <nav class="navbar navbar-expand-sm navbar-dark">
           <div class="navbar-brand" href="#">
-            <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= current($user)['lang'] !== 'RU' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">protattoo@mail.ru</span>
-            <a href="https://www.youtube.com/channel/UCQj6BKoXZV6Adebuh4o9jOg/featured" class="bi bi-youtube"></a>
-            <a href="https://www.instagram.com/hybridtattoomachine" class="bi bi-instagram"></a>
-            <a href="mailto:protattoo@mail.ru" class="bi bi-envelope"></a>
+            <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= current($user)['lang'] !== 'RU' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">info@prolovi.ru</span>
+            <a href="https://www.youtube.com/channel/UCjYv11kqrpvplyzvLqXp6GA/videos" class="bi bi-youtube"></a>
+            <a href="https://www.instagram.com/prolovi.ru/?igshid=YmMyMTA2M2Y%3D" class="bi bi-instagram"></a>
+            <a href="mailto:info@prolovi.ru" class="bi bi-envelope"></a>
           </div>
 
           <div class="small_text_logo d-md-none">
@@ -159,10 +159,10 @@
         <div class="container-lg">
           <nav class="navbar navbar-expand-sm navbar-dark">
             <div class="navbar-brand" href="#">
-              <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= current($user)['lang'] !== 'RU' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">protattoo@mail.ru</span>
-              <a href="https://www.youtube.com/channel/UCQj6BKoXZV6Adebuh4o9jOg/featured" class="bi bi-youtube"></a>
-              <a href="https://www.instagram.com/hybridtattoomachine" class="bi bi-instagram"></a>
-              <a href="mailto:protattoo@mail.ru" class="bi bi-envelope"></a>
+              <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= current($user)['lang'] !== 'RU' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">info@prolovi.ru</span>
+              <a href="https://www.youtube.com/channel/UCjYv11kqrpvplyzvLqXp6GA/videos" class="bi bi-youtube"></a>
+              <a href="https://www.instagram.com/prolovi.ru/?igshid=YmMyMTA2M2Y%3D" class="bi bi-instagram"></a>
+              <a href="mailto:info@prolovi.ru" class="bi bi-envelope"></a>
             </div>
 
             <div class="small_text_logo d-md-none">
@@ -336,11 +336,11 @@
         <div class="col-12 col-sm-4 col-xl-4 persona text-end my-3">
           <p class="mb-3"><?= current($user)['lang'] !== 'RU' ? 'Leonid Smagin' : 'Смагин Леонид Павлович' ?>
           <p>
-            <a href="mailto:protattoo@mail.ru" class="e-mail">protattoo@mail.ru</a>
+            <a href="mailto:info@prolovi.ru" class="e-mail">info@prolovi.ru</a>
           <div class="contacts mt-3">
-            <a href="#" class="bi bi-youtube"></a>
-            <a href="#" class="bi bi-instagram mx-2"></a>
-            <a href="#" class="bi bi-envelope"></a>
+            <a href="https://www.youtube.com/channel/UCjYv11kqrpvplyzvLqXp6GA/videos" class="bi bi-youtube"></a>
+            <a href="https://www.instagram.com/prolovi.ru/?igshid=YmMyMTA2M2Y%3D" class="bi bi-instagram mx-2"></a>
+            <a href="mailto:info@prolovi.ru" class="bi bi-envelope"></a>
           </div>
         </div>
       </div>

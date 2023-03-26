@@ -124,7 +124,7 @@ class Model
 		require_once 'application/lib/mailer/src/Exception.php';
 		$result='';
 		$status='';
-		$mail_config = current($this->db->fetAllLite('mail_config'));
+		$mail_config = $this->mail_config;
 		$mail = new PHPMailer();
 		try {
 			$mail->isSMTP();
@@ -136,12 +136,7 @@ class Model
 			};
 
 			// Настройки вашей почты
-			// $mail->Host       = 'mail.nic.ru'; // SMTP сервера вашей почты
-			// $mail->Username   = 'protattoo@mail.ru'; // Логин на почте
-			// $mail->Password   = 'DMZb2PuM2WF'; // Пароль на почте
-			// $mail->SMTPSecure = 'ssl';
-			// $mail->Port       = 465;
-			// $mail->setFrom('protattoo@mail.ru', $name); // Адрес самой почты и имя отправителя
+		
 
 			$mail->Host       = $mail_config['host']; // SMTP сервера вашей почты
 			$mail->Username   = $mail_config['username']; // Логин на почте

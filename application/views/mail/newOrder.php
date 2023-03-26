@@ -10,7 +10,7 @@
 
   <? endif ?>
   <p>После обработки, с вами свяжется оператор для уточнения метода и стоимости доставки</p>
-  <p>Если вы получили это письмо по ошибке, пожалуйста, напишите об этом на protattoo@mail.ru, или ответьте на это письмо</p>
+  <p>Если вы получили это письмо по ошибке, пожалуйста, напишите об этом на info@prolovi.ru, или ответьте на это письмо</p>
 
 <? else : ?>
   <h1>Hello, <?= $user['first_name'] ?> <?= $user['second_name'] ?>!</h1>
@@ -24,5 +24,5 @@
 
   <? endif ?>
   <p>After processing, the operator will contact you to clarify the method and cost of delivery</p>
-  <p>If you received this email by mistake, please write about it at protattoo@mail.ru, or reply to this email</p>
+  <p>If you received this email by mistake, please write about it at info@prolovi.ru, or reply to this email</p>
 <? endif ?>
