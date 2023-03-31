@@ -53,8 +53,9 @@ class User
         if (empty($exist)) {
 
             $ip = $this->getUserIp();
+            // dd($ip);
             if ($ip == '127.0.0.1')
-                $ip = '130.31.40.42';
+                $ip = '85.193.67.25';
             //$ip = $_SERVER['REMOTE_ADDR'];
             $geo = json_decode(@file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip), 1);
             // dd($geo);
@@ -63,6 +64,9 @@ class User
             // ddd($geo);
             $country = $geo['geoplugin_countryCode'];
             // dd($country);
+            if (in_array($country, require('application/config/rub_countries.php')))
+                $country = 'RU';
+
             $q = "INSERT INTO `users` (`session_id`, `country`, `lang`, `role`) VALUES (:sess, :country, :lang, :roles)";
             $this->db->query($q, [
                 ':sess' => session_id(),
