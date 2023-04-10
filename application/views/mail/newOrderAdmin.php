@@ -68,7 +68,8 @@
           <tr>
             <td><?= $products[$cart_node['product_id']]['name_en'] ?></td>
             <td><?= $cart_node['quantity'] ?></td>
-            <!-- <td><?//= $properties[$cart_node['property_id']]['price_en'] ?> USD</td> -->
+            <!-- <td><? //= $properties[$cart_node['property_id']]['price_en'] 
+                      ?> USD</td> -->
             <td><?= $properties[$cart_node['property_id']]['price_en'] ?> eur</td>
 
           </tr>
@@ -80,15 +81,20 @@
 <? if ($order['currency'] == 'RU') : ?>
   <p><b>Сумма заказа: <?= json_decode($order['cost'], 1)['RUB'] ?> руб.</b></p>
 <? else : ?>
-  <!-- <p><b>Сумма заказа: <?//= json_decode($order['cost'], 1)['USD'] ?> USD.</b></p> -->
+  <!-- <p><b>Сумма заказа: <? //= json_decode($order['cost'], 1)['USD'] 
+                            ?> USD.</b></p> -->
   <p><b>Сумма заказа: <?= json_decode($order['cost'], 1)['USD'] ?> eur.</b></p>
 
 <? endif ?>
 
-<p>Адрес доставки: </p>
-<p>Страна: <?= $countries[$order['billing_country']] ?></p>
-<p>Адрес: <?= $order['address'] ?></p>
-<p><?= $order['apartment'] ?></p>
-<p>Город/Нас. пункт: <?= $order['city'] ?></p>
-<p>Штат/Область/Регион: <?= $order['region'] ?></p>
-<p>Почтовый индекс/zip код: <?= $order['zip_code'] ?></p>
+<!-- <p>Адрес доставки: </p> -->
+<!-- <p>Страна: <?//= $countries[$order['billing_country']] ?></p> -->
+<p>Адрес СДЭК: <?= $order['address'] ?></p>
+<!-- <p><?//= $order['apartment'] ?></p> -->
+<!-- <p>Город/Нас. пункт: <?//= $order['city'] ?></p> -->
+<!-- <p>Штат/Область/Регион: <?//= $order['region'] ?></p> -->
+<!-- <p>Почтовый индекс/zip код: <?//= $order['zip_code'] ?></p> -->
+<? if (!empty($order['additions'])) : ?>
+  <p>Примечания к заказу:</p>
+  <p><?= $order['additions']; ?></p>
+<? endif ?>

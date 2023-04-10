@@ -1138,7 +1138,7 @@
           </div>
 
           <!-- Country -->
-          <div class="mb-3 country">
+          <!-- <div class="mb-3 country">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
             <? if (current($user)['lang'] == 'EN') : ?>
@@ -1657,31 +1657,31 @@
                 });
               });
             </script>
-          </div>
+          </div> -->
           <!-- Address -->
           <div class="mb-3">
-            <label for="order_address" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Адрес' : 'Street Address' ?></label>
-            <input type="text" required class="form-control" name="address" id="order_address" placeholder="<?= current($user)['lang'] == 'RU' ? 'Номер дома и название улицы' : 'House number and street name' ?>" value="<?= current($user)['address'] ?>">
-            <input type="text" class="form-control" name="apartment" id="order_apartment" placeholder="<?= current($user)['lang'] == 'RU' ? 'Крыло, подъезд, этаж и т.д. (необязательно)' : 'Apartment, suite, unit, etc. (optional)' ?>" value="<?= current($user)['apartment'] ?>">
+            <label for="order_address" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Адрес пункта выдачи СДЭК' : 'Full address' ?></label>
+            <input type="text" required class="form-control" name="address" id="order_address" placeholder="<?= current($user)['lang'] == 'RU' ? 'Город, улица, дом пункта СДЭК' : 'Country, Region, City, Street...' ?>" value="<?= current($user)['address'] ?>">
+            <!-- <input type="text" class="form-control" name="apartment" id="order_apartment" placeholder="<?= current($user)['lang'] == 'RU' ? 'Крыло, подъезд, этаж и т.д. (необязательно)' : 'Apartment, suite, unit, etc. (optional)' ?>" value="<?= current($user)['apartment'] ?>"> -->
           </div>
 
           <!-- City -->
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label for="order_city" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Адрес' : 'Street Address' ?></label>
             <input type="text" class="form-control" name="city" id="order_city" placeholder="<?= current($user)['lang'] == 'RU' ? 'Город / Населенный пункт' : 'Town / City' ?>" required value="<?= current($user)['city'] ?>">
 
-          </div>
+          </div> -->
           <!-- Region/State -->
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label for="order_region" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Регион / Область' : 'Region / State / District' ?></label>
             <input type="text" class="form-control" name="region" id="order_region" required placeholder="<?= current($user)['lang'] == 'RU' ? 'Регион / Область' : 'Region / State / District' ?>" value="<?= current($user)['region'] ?>">
-          </div>
+          </div> -->
 
           <!-- Postcode / ZIP (optional) -->
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label for="order_zip_code" class="form-label"><?= current($user)['lang'] == 'RU' ? 'Почтовый индекс (необязательно)' : 'Postcode / ZIP (optional)' ?></label>
             <input type="text" class="form-control" name="zip_code" id="order_zip_code" placeholder="<?= current($user)['lang'] == 'RU' ? 'Почтовый индекс (необязательно)' : 'Postcode / ZIP (optional)' ?>" value="<?= current($user)['zip_code'] ?>">
-          </div>
+          </div> -->
           <!-- Additions -->
           <div class="mb-3">
             <label for="order_additions" class="form-label"><?= current($user)['lang'] == 'RU' ? 'Примечание к заказу (необязательно)' : 'Order notes (optional)' ?></label>
