@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="shortcut icon" href="/public/images/icons/cropped-гибббр1-270x270.jpg" type="image/x-icon" sizes="270x270" />
+  <link rel="shortcut icon" href="/public/images/icons/icon.png" type="image/x-icon" sizes="270x270" />
   
   <!-- Splide -->
   <link rel="stylesheet" href="/public/styles/vendor/splide-default.min.css" />
