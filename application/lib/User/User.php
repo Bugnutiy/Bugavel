@@ -54,7 +54,7 @@ class User
 
             $ip = $this->getUserIp();
             // dd($ip);
-            if ($ip == '127.0.0.1')
+            if (1)
                 $ip = '85.193.67.25';
             //$ip = $_SERVER['REMOTE_ADDR'];
             $geo = json_decode(@file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip), 1);
