@@ -1,26 +1,26 @@
 <?php
 
 return
-    [
-        'all' => [
-            'index',
-            'catalog',
-            'product',
-            'cart',
-            'order',
-            'policy',
-            'contacts',
-            'payment',
-            'delivery',
-        ],
+	[
+		'all' => [
+			'index',
+			'catalog',
+			'product',
+			'cart',
+			'order',
+			'policy',
+			'contacts',
+			'payment',
+			'delivery',
+		],
 
-        'authorize' => [
-            //
-        ],
+		'authorize' => [
+			//
+		],
 
-        'guest' => [
-            //
-        ],
+		'guest' => [
+			//
+		],
 
-        'admin' => [],
-    ];
+		'admin' => [],
+	];

@@ -30,7 +30,8 @@
                   <? if ($node['currency'] == 'RU') : ?>
                     <?= json_decode($node['cost'], 1)['RUB'] ?> руб.
                   <? else : ?>
-                    <!-- <?//= '$' . json_decode($node['cost'], 1)['USD'] ?> -->
+                    <!-- <? //= '$' . json_decode($node['cost'], 1)['USD'] 
+                          ?> -->
                     <?= json_decode($node['cost'], 1)['USD'] ?> eur
                   <? endif ?>
                 </td>

@@ -1,33 +1,33 @@
 <?php
 
 return
-    [
-        'all' => [],
+  [
+    'all' => [],
 
-        'authorize' => [
-            //
-        ],
+    'authorize' => [
+      //
+    ],
 
-        'guest' => [
-            //
-        ],
+    'guest' => [
+      //
+    ],
 
-        'admin' => [
-            //
-            'test',
-            'main',
-            'categories',
-            'categoriesEdit',
-            'categoriesDelete',
-            'products',
-            'productsEdit',
-            'productsDelete',
-            'properties',
-            'propertiesEdit',
-            'propertiesDelete',
-            'orders',
-            'ordersEdit',
-            'sber',
-            'coredb',
-        ],
-    ];
+    'admin' => [
+      //
+      'test',
+      'main',
+      'categories',
+      'categoriesEdit',
+      'categoriesDelete',
+      'products',
+      'productsEdit',
+      'productsDelete',
+      'properties',
+      'propertiesEdit',
+      'propertiesDelete',
+      'orders',
+      'ordersEdit',
+      'sber',
+      'coredb',
+    ],
+  ];

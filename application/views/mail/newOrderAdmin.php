@@ -88,12 +88,17 @@
 <? endif ?>
 
 <!-- <p>Адрес доставки: </p> -->
-<!-- <p>Страна: <?//= $countries[$order['billing_country']] ?></p> -->
+<!-- <p>Страна: <? //= $countries[$order['billing_country']] 
+                ?></p> -->
 <p>Адрес СДЭК: <?= $order['address'] ?></p>
-<!-- <p><?//= $order['apartment'] ?></p> -->
-<!-- <p>Город/Нас. пункт: <?//= $order['city'] ?></p> -->
-<!-- <p>Штат/Область/Регион: <?//= $order['region'] ?></p> -->
-<!-- <p>Почтовый индекс/zip код: <?//= $order['zip_code'] ?></p> -->
+<!-- <p><? //= $order['apartment'] 
+        ?></p> -->
+<!-- <p>Город/Нас. пункт: <? //= $order['city'] 
+                          ?></p> -->
+<!-- <p>Штат/Область/Регион: <? //= $order['region'] 
+                              ?></p> -->
+<!-- <p>Почтовый индекс/zip код: <? //= $order['zip_code'] 
+                                  ?></p> -->
 <? if (!empty($order['additions'])) : ?>
   <p>Примечания к заказу:</p>
   <p><?= $order['additions']; ?></p>

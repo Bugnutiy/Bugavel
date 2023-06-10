@@ -5,7 +5,8 @@
   <? if ($order['currency'] == 'RU') : ?>
     <p><b>Сумма заказа: <?= json_decode($order['cost'], 1)['RUB'] ?> руб.</b></p>
   <? else : ?>
-    <!-- <p><b>Сумма заказа: <?//= json_decode($order['cost'], 1)['USD'] ?> USD.</b></p> -->
+    <!-- <p><b>Сумма заказа: <? //= json_decode($order['cost'], 1)['USD'] 
+                              ?> USD.</b></p> -->
     <p><b>Сумма заказа: <?= json_decode($order['cost'], 1)['USD'] ?> eur</b></p>
 
   <? endif ?>
@@ -19,7 +20,8 @@
   <? if ($order['currency'] == 'RU') : ?>
     <p><b>Order amount: <?= json_decode($order['cost'], 1)['RUB'] ?> rub.</b></p>
   <? else : ?>
-    <!-- <p><b>Order amount: <?//= json_decode($order['cost'], 1)['USD'] ?> USD.</b></p> -->
+    <!-- <p><b>Order amount: <? //= json_decode($order['cost'], 1)['USD'] 
+                              ?> USD.</b></p> -->
     <p><b>Order amount: <?= json_decode($order['cost'], 1)['USD'] ?> eur.</b></p>
 
   <? endif ?>

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="shortcut icon" href="/public/images/icons/icon.png" type="image/x-icon" sizes="270x270" />
-  
+
   <!-- Splide -->
   <link rel="stylesheet" href="/public/styles/vendor/splide-default.min.css" />
   <!-- Bootstrap -->
@@ -18,7 +18,7 @@
 
   <link rel="stylesheet" href="/public/styles/style.css" />
 
-  
+
   <title><?= current($user)['lang'] == 'RU' ? $title['RU'] : $title['EN'] ?></title>
 
   <script>
@@ -204,7 +204,7 @@
                           <div class="col-auto"><b>
                               <? //= current($user)['country'] == 'RU' ? number_format($cart_total['total_price'], 0, ',', ' ') . ' руб.' : '$' . number_format($cart_total['total_price_en']) 
                               ?></b>
-                            <?= current($user)['country'] == 'RU' ? number_format($cart_total['total_price'], 0, ',', ' ') . ' руб.' : number_format($cart_total['total_price_en']).' eur' ?></b>
+                            <?= current($user)['country'] == 'RU' ? number_format($cart_total['total_price'], 0, ',', ' ') . ' руб.' : number_format($cart_total['total_price_en']) . ' eur' ?></b>
 
                           </div>
                         </div>

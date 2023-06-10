@@ -1,23 +1,21 @@
 <?php
 
 return
-    [
-        'all' => [
-            'lang',
-            'contacts',
-            'news',
-            'confident',
-        ],
+  [
+    'all' => [
+      'lang',
+      'contacts',
+      'news',
+      'confident',
+    ],
 
-        'authorize' => [
-            //
-        ],
+    'authorize' => [
+      //
+    ],
 
-        'guest' => [
-            //
-        ],
+    'guest' => [
+      //
+    ],
 
-        'admin' => [
-            
-        ],
-    ];
+    'admin' => [],
+  ];

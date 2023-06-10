@@ -1,5 +1,5 @@
 <div class="container-lg">
-<!-- 'https://'.$_SERVER['SERVER_NAME'].'/'; -->
+  <!-- 'https://'.$_SERVER['SERVER_NAME'].'/'; -->
 
   <? if (current($user)['lang'] == 'RU') : ?>
     <h1>Политика в отношении обработки персональных данных</h1>

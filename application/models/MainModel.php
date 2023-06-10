@@ -4,7 +4,6 @@ namespace application\models;
 
 use application\core\Model;
 
-class MainModel extends Model{
-	
-	
+class MainModel extends Model
+{
 }

@@ -3,9 +3,8 @@
 <p>Sorry, you are not allowed to be here!</p>
 <p>Try logging in first</p>
 <script type="text/javascript">
-	function func()
-	{
-		window.location = '/';
-	}
-	setTimeout(func,2000);
+  function func() {
+    window.location = '/';
+  }
+  setTimeout(func, 2000);
 </script>
