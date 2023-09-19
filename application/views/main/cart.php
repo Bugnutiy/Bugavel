@@ -107,7 +107,7 @@ foreach ($cart as $cart_id => $cart_node) : ?>
         </span>
       </div>
       <div class="col-auto">
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#indexOrderModal">Оформить заказ</button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#indexOrderModal"><?= current($user)['lang'] == 'RU' ? 'Оформить заказ' : 'Place an order' ?></button>
       </div>
     </div>
 
