@@ -49,14 +49,13 @@ abstract class General
      * @param string|NULL $sign Условие поиска, WHERE писать не нужно
      * @param array|NULL $params PDO:prepare params Параметры для поиска, без них не работает sign
      * @param array|NULL $page [Страница => количество записей на странице] [1=>10]
-     * @param array|NULL $order ['поле'=>'ASC/DESC']
+	 * @param array|NULL $order ['поле'=>'ASC/DESC']
      * 
      * 
      * @return array Ассоциативный массив записей
      */
-    public function getAll($sign = '', $params = [], $page = [], $order = [])
+    public function getAll($sign = '', $params = [], $page = [], $order=[])
     {
-        // dd($order);
         return $this->db->fetAllLite($this->table, $sign, $params, $page, $order);
     }
     /**
@@ -187,10 +186,5 @@ abstract class General
             }
         }
         return $this->db->delete($this->table, '`id` = :id', ['id' => $id])->rowCount();
-    }
-
-    public function count($field = '*')
-    {
-        return $this->db->count($this->table, $field);
     }
 }

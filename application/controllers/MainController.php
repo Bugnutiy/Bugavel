@@ -112,8 +112,8 @@ class MainController extends Controller
 				require 'application/views/mail/newOrderAdmin.php';
 				$message = ob_get_clean();
 
-				// $this->model->sendMail('protattoo@mail.ru', 'Новый Заказ №' . current($oansw)['ID'], $message); //TODO
-				$this->model->sendMail('yura.mezentsev@mail.ru', 'Новый Заказ №' . current($oansw)['ID'], $message);
+				$this->model->sendMail('protattoo@mail.ru', 'Новый Заказ №' . current($oansw)['ID'], $message);
+				// $this->model->sendMail('yura.mezentsev@yandex.ru', 'Новый Заказ №' . current($oansw)['ID'], $message);
 			}
 			return $oansw;
 		} else {

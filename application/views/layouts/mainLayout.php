@@ -210,7 +210,7 @@
                           <div class="col-auto"><b>
                               <? //= current($user)['country'] == 'RU' ? number_format($cart_total['total_price'], 0, ',', ' ') . ' руб.' : '$' . number_format($cart_total['total_price_en']) 
                               ?></b>
-                            <?= current($user)['country'] == 'RU' ? number_format($cart_total['total_price'], 0, ',', ' ') . ' руб.' : number_format($cart_total['total_price_en']).' eur' ?></b>
+                            <?= current($user)['country'] == 'RU' ? number_format($cart_total['total_price'], 0, ',', ' ') . ' руб.' : number_format($cart_total['total_price_en']) . ' eur' ?></b>
 
                           </div>
                         </div>
@@ -401,6 +401,7 @@
 
     <!-- REGISTRATION -->
     <form action="?register=1" method="POST" enctype="multipart/form-data" class="modal fade" id="Register" tabindex="-1" role="dialog" aria-hidden="true">
+      <!-- MODAL -->
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -489,9 +490,14 @@
 
             <!-- Instagram -->
             <div class="mb-3">
-              <label for="instagram" class="form-label"><?= current($user)['lang'] == 'RU' ? 'Аккаунт инстаграм (необязательно)' : 'Instagram account (optional)' ?></label>
-              <input type="text" class="form-control" name="instagram" id="instagram" placeholder="<?= current($user)['lang'] == 'RU' ? 'Введите вашу электронную почту' : 'Type your e-mail here' ?>">
-            </div>
+            <label for="order_instagram" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Инстаграм' : 'Instagram' ?></label>
+            <input type="text" required class="form-control" name="instagram" id="order_instagram" placeholder="instagram" value="<?= current($user)['instagram'] ?>">
+
+            <!-- Modal trigger button -->
+            <a href="" type="link" class="link-secondary small link-sm" data-bs-toggle="modal" data-bs-target="#insta-help">
+              <?= current($user)['lang'] == 'RU' ? 'у меня нет инстаграма' : 'I don\'t have instagram' ?>
+            </a>
+          </div>
 
             <!-- Country -->
             <div class="mb-3 country">
@@ -1139,8 +1145,13 @@
 
           <!-- Instagram -->
           <div class="mb-3">
-            <label for="order_instagram" class="form-label"><?= current($user)['lang'] == 'RU' ? 'Аккаунт инстаграм (необязательно)' : 'Instagram account (optional)' ?></label>
-            <input type="text" class="form-control" name="instagram" id="order_instagram" placeholder="instagram" value="<?= current($user)['instagram'] ?>">
+            <label for="order_instagram" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Инстаграм' : 'Instagram' ?></label>
+            <input type="text" required class="form-control" name="instagram" id="order_instagram" placeholder="instagram" value="<?= current($user)['instagram'] ?>">
+
+            <!-- Modal trigger button -->
+            <a href="" type="link" class="link-secondary small link-sm" data-bs-toggle="modal" data-bs-target="#insta-help">
+              <?= current($user)['lang'] == 'RU' ? 'у меня нет инстаграма' : 'I don\'t have instagram' ?>
+            </a>
           </div>
 
           <!-- Country -->
@@ -1700,7 +1711,7 @@
             <input type="checkbox" class="form-check-input" id="exampleCheck1" required="1" checked="1">
             <label class="form-check-label" for="exampleCheck1">
               <? if (current($user)['lang'] == 'RU') : ?>
-                Я солгасен с <a href="/about/policy">политикой конфиденциальности и правилами пользования </a>сайтом
+                Я солгасен с <a href="/about/policy">политикой конфиденциальности и правилами пользования</a> сайтом
               <? else : ?>
                 I agree with the <a href="/about/policy">privacy policy and terms of use</a> of the site
               <? endif ?>
@@ -1713,6 +1724,35 @@
       </div>
     </div>
   </form>
+
+
+
+  <!-- Modal Body -->
+  <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+  <div class="modal fade" id="insta-help" tabindex="-1" role="dialog" aria-labelledby="insta-help-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="insta-help-title"><?= current($user)['lang'] == 'RU' ? 'У меня нет инстаграма!' : 'I don\'t have instagram!' ?></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <?= current($user)['lang'] == 'RU' ? '<p>Вместо инстаграма вы можете указать любой другой удобный способ связи.</p><p>Например, вы можете заполнить поле так:</p><p>telegram: @mytgram</p>' : '<p>Instead of Instagram, you can specify any convenient method of communication. </p><p>For example, you can fill in the field like this:</p><p>telegram: @mytgram</p>' ?>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> <?= current($user)['lang'] == 'RU' ? 'Закрыть' : 'Close' ?>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Optional: Place to the bottom of scripts -->
+  <script>
+    const myModal = new bootstrap.Modal(document.getElementById('insta-help'), options)
+  </script>
+
   <script>
     // dd("hello");
     var tooltipTriggerList = [].slice.call(

@@ -6,7 +6,6 @@
     </p>
   <? endif ?>
 </div>
-
 <?
 $subtotal_cost = 0;
 foreach ($cart as $cart_id => $cart_node) : ?>
@@ -23,8 +22,9 @@ foreach ($cart as $cart_id => $cart_node) : ?>
                   </div>
                   <div class="col body align-self-center">
                     <div class="row justify-content-around">
+
                       <div class="col-auto align-self-center">
-                        <h2 class="name m-0"><a href="/catalog/product?id=<?= $cart_node['product_id'] ?>">Hybrid black/gold</a></h2>
+                        <h2 class="name m-0"><a href="/catalog/product?id=<?= $cart_node['product_id'] ?>"><?= $products[$cart_node['product_id']]['name'] ?></a></h2>
                         <? if (!empty($properties[$cart_node['property_id']]['classname']) and current($user)['lang'] == 'RU') : ?>
                           <span class="small">
                             <?= $properties[$cart_node['property_id']]['classname'] ?>: <?= $properties[$cart_node['property_id']]['name'] ?>
@@ -36,6 +36,7 @@ foreach ($cart as $cart_id => $cart_node) : ?>
                           </span>
                         <? endif ?>
                       </div>
+                      <div class="w-100 mb-2"></div>
                       <div class="col-auto align-self-center text-center">
                         <div class="input-group quantity">
                           <div class="btn btn-outline-secondary" onclick="decrease('<?= $cart_id ?>')">-</div>
@@ -43,8 +44,8 @@ foreach ($cart as $cart_id => $cart_node) : ?>
                           <div class="btn btn-outline-secondary" onclick="increase('<?= $cart_id ?>')">+</div>
                         </div>
                         <span id="stock<?= $cart_id ?>" class="small text-<?= $properties[$cart_node['property_id']]['quantity'] > 0 ? 'success' : 'danger' ?>"><?= $properties[$cart_node['property_id']]['quantity'] ?><?= current($user)['lang'] == 'RU' ? ' шт. в наличии' : ' pcs in stock' ?></span>
-
                       </div>
+
                       <div class="col-auto align-self-center">
                         <span class="amount" id="cost_q<?= $cart_id ?>">
                           <? if (current($user)['country'] == 'RU') : ?>
@@ -106,7 +107,7 @@ foreach ($cart as $cart_id => $cart_node) : ?>
         </span>
       </div>
       <div class="col-auto">
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#indexOrderModal">Оформить заказ</button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#indexOrderModal"><?= current($user)['lang'] == 'RU' ? 'Оформить заказ' : 'Place an order' ?></button>
       </div>
     </div>
 
@@ -180,7 +181,8 @@ foreach ($cart as $cart_id => $cart_node) : ?>
         <? if (current($user)['country'] == 'RU') : ?>
           total_elem.innerText = '<?= current($user)['lang'] == 'RU' ? 'Предварительный итог: ' : 'Subtotal: ' ?>' + number_format(total, 0, ',', ' ') + ' руб.';
         <? else : ?>
-          // total_elem.innerText = '<?//= current($user)['lang'] == 'RU' ? 'Предварительный итог: $' : 'Subtotal: $' ?>' + number_format(total);
+          // total_elem.innerText = '<? //= current($user)['lang'] == 'RU' ? 'Предварительный итог: $' : 'Subtotal: $' 
+                                      ?>' + number_format(total);
           total_elem.innerText = '<?= current($user)['lang'] == 'RU' ? 'Предварительный итог: ' : 'Subtotal: ' ?>' + number_format(total) + ' eur';
 
         <? endif ?>

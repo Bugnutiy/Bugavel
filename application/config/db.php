@@ -9,8 +9,8 @@
 
 return [
 	'host' => '127.0.0.1',
-	'name' => 'h902111921_leosnew',
-	'user' => 'root',
-	'password' => 'root',
+	'name' => 'leosmagin',
+	'user' => 'leosmagin',
+	'password' => 'leosmagin',
 	'charset' => 'utf8mb4',//unicode_ci
 ];
