@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/public/bootstrap/icons/bootstrap-icons.css" />
   <script src="/public/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://forma.tinkoff.ru/static/onlineScript.js"></script>
 
   <link rel="stylesheet" href="/public/styles/style.css" />
 

@@ -1,0 +1,2 @@
+В БД products добавить пункт installment BOOLEAN по умолчанию 0 
+Таблица тинькоф

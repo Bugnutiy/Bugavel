@@ -36,14 +36,14 @@
         </div>
         <!-- Body -->
         <div class="col-12 col-md-8">
-          <div class="row">
+          <div class="row justify-content-around">
             <!-- Header -->
             <div class="col-12 text-center name">
               <h1 class="mb-3"><?= current($user)['lang'] == 'RU' ? current($product)['name'] : current($product)['name_en'] ?></h1>
             </div>
 
             <!-- Price -->
-            <div class="col-12 mb-3 price">
+            <div class="col-auto mb-3 price text-center">
 
               <? if (current($user)['country'] == 'RU') : ?>
                 <? if (current($product)['min_price'] == current($product)['max_price']) : ?>
@@ -68,7 +68,7 @@
 
             <!-- Options -->
             <? if (count($property_flag) > 1) : ?>
-              <div class="col-12 mb-3 options">
+              <div class="col-auto mb-3 options">
                 <?
                 $properties_by_classname = [];
                 foreach ($property_flag as $id => $node) {
@@ -98,8 +98,8 @@
               <input type="hidden" name="property_id" value="<?= key($property_flag) ?>">
             <? endif ?>
             <!-- Количество -->
-            <div class="col-12 quantity">
-              <div class="row justify-content-around">
+            <div class="col-auto quantity">
+              <div class="row justify-content-center">
                 <div class="col-auto ">
                   <div class="input-group ">
                     <a class="px-1 btn left btn-outline-secondary input-group-text" onclick="decrease()">-</a>
@@ -110,7 +110,17 @@
                 <!-- Button -->
                 <div class="col-auto">
                   <button type="submit" class="btn btn-warning cart_btn px-3"><?= current($user)['lang'] == 'RU' ? 'В корзину' : 'Add to cart' ?></button>
+
                 </div>
+
+                <? if (current($product)['installment']) : ?>
+                  <div class="col-auto mt-4">
+
+
+                    <tinkoff-create-button size="M" subtext="" shopId="ec01ca95-44d3-4c47-94c6-a21173532f68" showcaseId="3089d659-23d9-4505-be32-58806d4de5ae" ui-data="productType=installment&view=newTab" payment-data="demoFlow=sms&orderNumber='0'&items.0.name=Hasta&items.0.price=50000&items.0.quantity=1&sum=50000&promoCode=installment_0_0_6_6,5"></tinkoff-create-button>
+                  </div>
+
+                <? endif ?>
               </div>
             </div>
           </div>
@@ -165,13 +175,14 @@
 <script>
   var properties = <?= json_encode($avaliable_properties) ?>;
   var selected = 0;
+  var stock = 0;
 
   function select(property_id) {
     if (property_id == 0) {
       return 0;
     }
     var stockElem = document.getElementById('stock');
-    var stock = properties[property_id]['quantity'];
+    stock = properties[property_id]['quantity'];
 
     var priceElem = document.getElementById('product_price');
     var quantityElem = document.getElementById('quantity_field');
@@ -205,8 +216,10 @@
 
   function increase() {
     quantElem = document.getElementById('quantity_field');
-    quantElem.value++;
-    cost(quantElem);
+    if (quantElem.value < stock) {
+      quantElem.value++;
+      cost(quantElem);
+    }
   }
 
   function decrease() {

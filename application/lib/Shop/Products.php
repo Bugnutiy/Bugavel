@@ -283,7 +283,7 @@ class Products extends General
 
 
       foreach ($exists_properties as $property_id => $property_node) {
-        ddd($property_node['price_en']);
+        // ddd($property_node['price_en']);
         if ($property_node['price'] > $max_price)
           $max_price = $property_node['price'];
         if ($property_node['price_en'] > $max_price_en)
@@ -298,7 +298,7 @@ class Products extends General
           $k_en++;
         }
       }
-      ddd($max_price_en);
+      // ddd($max_price_en);
       $min_price = $max_price;
       // if (current($exists_properties)['price_en'])
       $min_price_en = $max_price_en;

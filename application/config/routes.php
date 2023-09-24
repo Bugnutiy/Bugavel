@@ -119,4 +119,21 @@ return [
   // 	'action' => 'categories',
   // ],
 
+  /***********************************tinkoff********************************************/
+
+  'tinkoff/success' => [
+    'controller' => 'tinkoff',
+    'action' => 'success',
+  ],
+
+  'tinkoff/fail' => [
+    'controller' => 'tinkoff',
+    'action' => 'fail',
+  ],
+
+  'tinkoff/notifications' => [
+    'controller' => 'tinkoff',
+    'action' => 'notifications',
+  ],
+
 ];
