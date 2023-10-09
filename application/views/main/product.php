@@ -96,6 +96,7 @@
               </div>
             <? else : ?>
               <input type="hidden" name="property_id" value="<?= key($property_flag) ?>">
+
             <? endif ?>
             <!-- Количество -->
             <div class="col-auto quantity">
@@ -114,10 +115,9 @@
                 </div>
 
                 <? if (current($product)['installment']) : ?>
-                  <div class="col-auto mt-4">
+                  <div class="col-auto col-sm-12 mt-4 text-center">
 
-
-                    <tinkoff-create-button size="M" subtext="" shopId="ec01ca95-44d3-4c47-94c6-a21173532f68" showcaseId="3089d659-23d9-4505-be32-58806d4de5ae" ui-data="productType=installment&view=newTab" payment-data="demoFlow=sms&orderNumber='0'&items.0.name=Hasta&items.0.price=50000&items.0.quantity=1&sum=50000&promoCode=installment_0_0_6_6,5"></tinkoff-create-button>
+                    <tinkoff-create-button size="M" subtext="" shopId="ec01ca95-44d3-4c47-94c6-a21173532f68" showcaseId="3089d659-23d9-4505-be32-58806d4de5ae" ui-data="productType=installment&view=newTab" payment-data="orderNumber='<?= md5(time()) ?>'&items.0.name=<?= current($product)['name'] ?>&items.0.price=<?= current($property_flag)['price'] ?>&items.0.quantity=1&sum=<?= current($property_flag)['price'] ?>&promoCode=installment_0_0_6_6,5"></tinkoff-create-button>
                   </div>
 
                 <? endif ?>

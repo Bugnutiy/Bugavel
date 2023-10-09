@@ -7,7 +7,7 @@ use application\lib\Sber\Sber;
 use application\lib\User\User;
 use application\lib\Shop\Shop;
 use PHPMailer\PHPMailer\PHPMailer;
-use application\lib\tinkoff\Credit\Credit;
+// use application\lib\tinkoff\Credit\Credit;
 
 /**
  * Родитель всех моделей, в нём подключаются библиотеки, используемые везде
@@ -46,7 +46,7 @@ class Model
     $this->sber = new Sber($this->db);
     $this->user = new User($this->db);
     $this->shop = new Shop($this->db);
-    $this->credit = new Credit($this->db);
+    // $this->credit = new Credit($this->db);
     $this->mail_config = current($this->db->fetAllLite('mail_config'));
 
     // dd($_COOKIE);
