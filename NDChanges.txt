@@ -1,2 +1,8 @@
 В БД products добавить пункт installment BOOLEAN по умолчанию 0 
 Таблица тинькоф
+
+ALTER TABLE `products_properties` ADD `installment` BOOLEAN NOT NULL DEFAULT FALSE AFTER `quantity`, ADD `preorder` BOOLEAN NOT NULL DEFAULT FALSE AFTER `installment`; 
+
+ ALTER TABLE `products`
+  DROP `installment`,
+  DROP `preorder`;

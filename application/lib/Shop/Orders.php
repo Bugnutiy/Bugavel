@@ -68,7 +68,7 @@ class Orders extends General
     $cost = 0;
     $cost_en = 0;
     foreach ($cart as $cart_id => $cart_node) {
-      if ($properties[$cart_node['property_id']]['quantity'] >= $cart_node['quantity']) {
+      if (($properties[$cart_node['property_id']]['quantity'] >= $cart_node['quantity']) or ($properties[$cart_node['property_id']]['preorder'])) {
         $cost += $properties[$cart_node['property_id']]['price'] * $cart_node['quantity'];
         $cost_en += $properties[$cart_node['property_id']]['price_en'] * $cart_node['quantity'];
       } else {

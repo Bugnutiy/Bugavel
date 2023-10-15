@@ -1703,7 +1703,7 @@
           </div>
           <br>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?= current($user)['lang'] == 'RU' ? 'Отмена' : 'Cancle' ?></button>
-          <button type="success" class="btn btn-primary"><?= current($user)['lang'] == 'RU' ? 'Оформить заказ' : 'Place order' ?></button>
+          <button type="success" class="btn btn-primary"><?= current($user)['lang'] == 'RU' ? 'Оформить заказ' : 'Place an order' ?></button>
         </div>
       </div>
     </div>

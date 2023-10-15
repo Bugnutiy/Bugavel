@@ -80,8 +80,8 @@ class Products extends General
     $err = [];
     // dd($arr);
     if (empty($arr)) return $err[] = 'Запрос оказался пуст';
-    if (empty($arr['installment'])) $arr['installment'] = 0;
-    if (empty($arr['preorder'])) $arr['preorder'] = 0;
+    // if (empty($arr['installment'])) $arr['installment'] = 0;
+    // if (empty($arr['preorder'])) $arr['preorder'] = 0;
 
     if (isset($arr['images'])) {
       $arr['images'] = json_encode($arr['images']);

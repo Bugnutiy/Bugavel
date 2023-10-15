@@ -49,6 +49,15 @@
         <input class="form-control" type="text" name="name_en" placeholder="property" aria-label="Имя" aria-describedby="name" value="<?= isset($property) ? current($property)['name_en'] : '' ?>">
       </div>
 
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="installment" id="installment" value="1" <?= isset($property) * current($property)['installment'] ? 'checked' : '' ?>>
+        <label class="form-check-label" for="installment">Рассрочка</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="preorder" id="preorder" value="1" <?= isset($property) * current($property)['preorder'] ? 'checked' : '' ?>>
+        <label class="form-check-label" for="preorder">Предзаказ</label>
+      </div>
+
       <div class="input-group mb-3">
 
         <span class="input-group-text">Цена товара</span>

@@ -252,7 +252,7 @@ class MainController extends Controller
       'product' => $product,
       'category' => current($category),
       'properties' => $properties,
-      'avaliable_properties' => current($product)['preorder'] ? $properties : $avaliable_properties,
+      'avaliable_properties' =>  $properties,
     ]);
 
     $this->view->render(

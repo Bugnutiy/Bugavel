@@ -45,7 +45,7 @@ class Cart extends General
       return $err;
     }
     // dd($property);
-    if ($quantity > current($property)['quantity'] and !current($product)['preorder']) {
+    if ($quantity > current($property)['quantity'] and !current($property)['preorder']) {
       $err[] = [
         'EN' => "The required quantity of goods is missing from the warehouse",
         'RU' => "На складе отсутствует необходимое количество товара"

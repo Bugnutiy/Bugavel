@@ -182,7 +182,7 @@ class Model
       }
     } catch (\Exception $e) {
       $result = "error";
-      $status = "Сообщение не было отправлено. Причина ошибки: {$mail->ErrorInfo}";
+      $status = $mail->ErrorInfo;
     }
 
     return ["result" => $result, "status" => $status];

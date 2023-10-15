@@ -53,15 +53,24 @@
 
           <? $i = 0;
           foreach ($products as $product_id => $product_node) : ?>
-            <? if ($product_node['quantity'] or $product_node['preorder']) : ?>
+
+            <?
+            $flag_preorder = 0;
+            $flag_installment = 0;
+            foreach ($product_node['properties'] as $property_id => $property_node) {
+              if ($property_node['preorder']) $flag_preorder = 1;
+              if ($property_node['installment']) $flag_installment = 1;
+            }
+            ?>
+            <? if ($product_node['quantity'] or $flag_preorder) : ?>
               <?
               // dd($product_node);
               $property_flag = [];
               foreach ($product_node['properties'] as $property_id => $property_node) {
                 if (current($user)['country'] == 'RU') {
-                  if (($property_node['quantity'] or $product_node['preorder']) && $property_node['price']) $property_flag[$property_id] = $property_node;
+                  if (($property_node['quantity'] or $property_node['preorder']) && $property_node['price']) $property_flag[$property_id] = $property_node;
                 } else {
-                  if (($property_node['quantity'] or $product_node['preorder']) && $property_node['price_en']) $property_flag[$property_id] = $property_node;
+                  if (($property_node['quantity'] or $property_node['preorder']) && $property_node['price_en']) $property_flag[$property_id] = $property_node;
                 }
               }
               ?>
@@ -152,11 +161,13 @@
 
 
                       <? else : ?>
-                        <a href="<?= $href_tmp . "addcart=" . key($property_flag) ?>" class="btn btn-outline-success text-success  text-center">
-                          <span class="bi bi-cart-plus"></span>
-                        </a>
+                        <? if (!$flag_installment) : ?>
+                          <a href="<?= $href_tmp . "addcart=" . key($property_flag) ?>" class="btn btn-outline-success text-success  text-center">
+                            <span class="bi bi-cart-plus"></span>
+                          </a>
+                        <? endif ?>
                       <? endif ?>
-                      <a href="/catalog/product?id=<?= $product_id ?>" class="btn btn-outline-primary text-primary  ms-2 text-center">
+                      <a href="/catalog/product?id=<?= $product_id ?>" class="btn btn-outline-primary text-primary  <? $flag_installment ? '' : 'ms-2' ?> text-center">
                         <span class="bi bi-eye"></span>
                       </a>
                     </div>
