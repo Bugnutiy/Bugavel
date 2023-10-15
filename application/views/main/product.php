@@ -10,12 +10,12 @@
           $product[key($product)]['quantity'] = 0;
           foreach ($properties as $property_id => $property_node) {
             if (current($user)['country'] == 'RU') {
-              if ($property_node['quantity'] && $property_node['price']) {
+              if (($property_node['quantity'] or current($product)['preorder']) && $property_node['price']) {
                 $property_flag[$property_id] = $property_node;
                 $product[key($product)]['quantity'] += $property_node['quantity'];
               }
             } else {
-              if ($property_node['quantity'] && $property_node['price_en']) {
+              if (($property_node['quantity'] or current($product)['preorder']) && $property_node['price_en']) {
                 $property_flag[$property_id] = $property_node;
                 $product[key($product)]['quantity'] += $property_node['quantity'];
               }
@@ -113,11 +113,13 @@
                   <button type="submit" class="btn btn-warning cart_btn px-3"><?= current($user)['lang'] == 'RU' ? 'В корзину' : 'Add to cart' ?></button>
 
                 </div>
-
+                <? //ddd($property_flag); 
+                ?>
+                <!-- Tinkoff Button -->
                 <? if (current($product)['installment']) : ?>
                   <div class="col-auto col-sm-12 mt-4 text-center">
 
-                    <tinkoff-create-button size="M" subtext="" shopId="ec01ca95-44d3-4c47-94c6-a21173532f68" showcaseId="3089d659-23d9-4505-be32-58806d4de5ae" ui-data="productType=installment&view=newTab" payment-data="orderNumber='<?= md5(time()) ?>'&items.0.name=<?= current($product)['name'] ?>&items.0.price=<?= current($property_flag)['price'] ?>&items.0.quantity=1&sum=<?= current($property_flag)['price'] ?>&promoCode=installment_0_0_6_6,5"></tinkoff-create-button>
+                    <tinkoff-create-button size="M" subtext="" shopId="ec01ca95-44d3-4c47-94c6-a21173532f68" showcaseId="3089d659-23d9-4505-be32-58806d4de5ae" ui-data="productType=installment&view=self" payment-data="demoFlow=sms&orderNumber=<?= uniqid(key($user) . '_') ?>&items.0.name=<?= current($product)['name'] ?>&items.0.price=<?= current($property_flag)['price'] ?>&items.0.vendorCode=[<?= key($property_flag) ?>]&items.0.quantity=1&sum=<?= current($property_flag)['price'] ?>&promoCode=installment_0_0_6_6,5"></tinkoff-create-button>
                   </div>
 
                 <? endif ?>
@@ -182,7 +184,7 @@
       return 0;
     }
     var stockElem = document.getElementById('stock');
-    stock = properties[property_id]['quantity'];
+    stock = <?= current($product)['preorder'] ? 1 : "properties[property_id]['quantity']" ?>;
 
     var priceElem = document.getElementById('product_price');
     var quantityElem = document.getElementById('quantity_field');

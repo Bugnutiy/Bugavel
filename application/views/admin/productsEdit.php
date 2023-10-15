@@ -51,8 +51,14 @@
           <? endforeach ?>
         </select>
       </div>
-
-
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="installment" id="installment" value="1" <?= isset($product) * current($product)['installment'] ? 'checked' : '' ?>>
+        <label class="form-check-label" for="installment">Рассрочка</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="preorder" id="preorder" value="1" <?= isset($product) * current($product)['preorder'] ? 'checked' : '' ?>>
+        <label class="form-check-label" for="preorder">Предзаказ</label>
+      </div>
 
       <input type="hidden" name="description">
       <div class="card mb-2">

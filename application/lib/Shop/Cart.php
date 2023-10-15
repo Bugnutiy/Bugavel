@@ -31,8 +31,12 @@ class Cart extends General
    */
   public function addToCart($property_id, $user_id, $quantity = 1)
   {
+    // dd(2);
     $err = [];
     $property = $this->products->properties->getById($property_id);
+    // dd($property);
+    $product = $this->products->getById(current($property)['product_id']);
+    // dd($product);
     if (empty($property)) {
       $err[] = [
         'EN' => "Product not found",
@@ -41,7 +45,7 @@ class Cart extends General
       return $err;
     }
     // dd($property);
-    if ($quantity > current($property)['quantity']) {
+    if ($quantity > current($property)['quantity'] and !current($product)['preorder']) {
       $err[] = [
         'EN' => "The required quantity of goods is missing from the warehouse",
         'RU' => "На складе отсутствует необходимое количество товара"

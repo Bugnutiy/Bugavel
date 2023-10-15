@@ -53,14 +53,15 @@
 
           <? $i = 0;
           foreach ($products as $product_id => $product_node) : ?>
-            <? if ($product_node['quantity']) : ?>
+            <? if ($product_node['quantity'] or $product_node['preorder']) : ?>
               <?
+              // dd($product_node);
               $property_flag = [];
               foreach ($product_node['properties'] as $property_id => $property_node) {
                 if (current($user)['country'] == 'RU') {
-                  if ($property_node['quantity'] && $property_node['price']) $property_flag[$property_id] = $property_node;
+                  if (($property_node['quantity'] or $product_node['preorder']) && $property_node['price']) $property_flag[$property_id] = $property_node;
                 } else {
-                  if ($property_node['quantity'] && $property_node['price_en']) $property_flag[$property_id] = $property_node;
+                  if (($property_node['quantity'] or $product_node['preorder']) && $property_node['price_en']) $property_flag[$property_id] = $property_node;
                 }
               }
               ?>

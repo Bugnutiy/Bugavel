@@ -187,7 +187,7 @@ class MainController extends Controller
       $products = $this->model->shop->products->getAll();
     }
     foreach ($products as $product_id => $value) {
-      $products[$product_id]['properties'] = $this->model->shop->products_properties->getByProductId($product_id, 1);
+      $products[$product_id]['properties'] = $this->model->shop->products_properties->getByProductId($product_id);
     }
     $vars = array_merge($vars, [
       'products' => $products,
@@ -212,6 +212,7 @@ class MainController extends Controller
   {
     $vars = [];
     $alerts = [];
+    // dd($_POST);
     if (!empty($_POST['property_id']) && !empty($_POST['quantity'])) {
       // dd($_POST);
       $err = $this->model->shop->cart->addToCart($_POST['property_id'], $this->model->user->getUserId(), $_POST['quantity']);
@@ -246,12 +247,12 @@ class MainController extends Controller
 
     $avaliable_properties = $this->model->shop->products_properties->getByProductId($_GET['id'], 1);
     if (empty($properties)) View::redirect('/');
-
+    // dd(current($product)['preorder']);
     $vars = array_merge($vars, [
       'product' => $product,
       'category' => current($category),
       'properties' => $properties,
-      'avaliable_properties' => $avaliable_properties,
+      'avaliable_properties' => current($product)['preorder'] ? $properties : $avaliable_properties,
     ]);
 
     $this->view->render(

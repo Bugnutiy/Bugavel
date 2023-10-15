@@ -4,12 +4,13 @@ namespace application\controllers;
 
 use application\core\Controller;
 use PDO;
+use application\controllers\MainController;
 // use application\lib\Db;
 // use application\models\AdminModel;
 /**
  * Class AdminController
  */
-class TinkoffController extends Controller
+class TinkoffController extends MainController
 {
 
   function __construct($route)
@@ -21,7 +22,11 @@ class TinkoffController extends Controller
   {
     http_response_code(200);
     // $this->dbAddAll('success');
-    $this->view->redirect('/');
+    // $this->view->redirect('/');
+    $vars = [
+      '' => 'b',
+    ];
+    $this->view->render(['RU' => 'ProLovi - Рассрочка', 'EN' => 'ProLovi - Installment'], $vars);
   }
 
   public function failAction()
@@ -35,7 +40,7 @@ class TinkoffController extends Controller
   {
     http_response_code(200);
     $this->dbAddAll('notifications');
-    $this->view->redirect('/');
+    // $this->view->redirect('/');
   }
 
   private function dbAddAll(string $name)

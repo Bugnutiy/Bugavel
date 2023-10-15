@@ -405,11 +405,11 @@
           <div class="modal-body">
             <div class="row">
               <div class="mb-3 col-12 col-sm">
-                <label for="first_name" class="form-label required">First name</label>
+                <label for="first_name" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Имя' : 'First name' ?></label>
                 <input type="text" required class="form-control" name="first_name" id="first_name" placeholder="<?= current($user)['lang'] == 'RU' ? 'Имя' : 'First name' ?>">
               </div>
               <div class="mb-3 col-12 col-sm">
-                <label for="second_name" class="form-label required">Second name</label>
+                <label for="second_name" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Фамилия' : 'Second name' ?></label>
 
                 <input type="text" required class="form-control" name="second_name" id="second_name" placeholder="<?= current($user)['lang'] == 'RU' ? 'Фамилия' : 'Second name' ?>">
               </div>
@@ -1061,11 +1061,11 @@
         <div class="modal-body">
           <div class="row">
             <div class="mb-3 col-12 col-sm">
-              <label for="order_first_name" class="form-label required">First name</label>
+              <label for="order_first_name" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Имя' : 'First name' ?></label>
               <input type="text" required class="form-control" name="first_name" id="order_first_name" placeholder="<?= current($user)['lang'] == 'RU' ? 'Имя' : 'First name' ?>" value="<?= current($user)['first_name'] ?>">
             </div>
             <div class="mb-3 col-12 col-sm">
-              <label for="order_second_name" class="form-label required">Second name</label>
+              <label for="order_second_name" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Фамилия' : 'Second name' ?></label>
 
               <input type="text" required class="form-control" name="second_name" id="order_second_name" placeholder="<?= current($user)['lang'] == 'RU' ? 'Фамилия' : 'Second name' ?>" value="<?= current($user)['second_name'] ?>">
             </div>
@@ -1082,7 +1082,7 @@
             <link rel="stylesheet" href="/public/intltel/css/intlTelInput.min.css">
 
             <label for="order_phone" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Номер телефона' : 'Phone number' ?></label>
-            <input type="tel" class="form-control" name="phone" id="order_phone" required value="<?= current($user)['phone'] ?>">
+            <input type="tel" class="form-control" name="phone" id="order_phone" required value="<?= empty(current($user)['phone']) ? '+7' : current($user)['phone'] ?>">
             <span id="order_valid-msg" class="d-none text-success">✓ Valid</span>
             <span id="order_error-msg" class="d-none text-danger"></span>
 
