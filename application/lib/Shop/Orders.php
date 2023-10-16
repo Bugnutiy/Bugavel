@@ -154,4 +154,8 @@ class Orders extends General
       return $err;
     }
   }
+  public function MakeOrderTinkoff($user, $order = [])
+  {
+    
+  }
 }

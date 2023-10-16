@@ -11,7 +11,7 @@
     </div>
   </div>
 
-<form action="?order=1" method="POST" enctype="multipart/form-data" class="modal fade" id="tinkoffOrderModal" tabindex="-1" role="dialog" aria-hidden="true">
+<form action="?tinkoff_order=1" method="POST" enctype="multipart/form-data" class="modal fade" id="tinkoffOrderModal" tabindex="-1" role="dialog" aria-hidden="true">
   <!-- <input type="hidden" name=> TODO to do to_do -->
     <div class="modal-dialog" role="document">
       <div class="modal-content">
