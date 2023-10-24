@@ -6,3 +6,7 @@ ALTER TABLE `products_properties` ADD `installment` BOOLEAN NOT NULL DEFAULT FAL
  ALTER TABLE `products`
   DROP `installment`,
   DROP `preorder`;
+  
+
+  tinkoff_id orders text NULL NULL
+  set 1 into tinkoff_id first 

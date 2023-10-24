@@ -319,6 +319,9 @@ class AdminController extends Controller
     if (!empty($_POST)) {
       // dd($_POST);
       // $_POST['product_id']=$_GET[]
+      if (empty($_POST['preorder'])) $_POST['preorder'] = 0;
+      if (empty($_POST['installment'])) $_POST['installment'] = 0;
+
       $err = $this->model->shop->products_properties->Update($_POST);
       // dd($err);
       // dd($err);

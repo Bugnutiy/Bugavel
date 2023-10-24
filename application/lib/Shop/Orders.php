@@ -51,6 +51,7 @@ class Orders extends General
   public function MakeOrder($user, $order = [])
   {
     $cart = $this->db->fetAllLite('cart', '`user_id` = :user_id', ['user_id' => key($user)]);
+    ddd($order); //todo
     $properties = $this->db->fetAllLite('products_properties');
     $products = $this->db->fetAllLite('products');
     if (empty($cart)) {
@@ -94,6 +95,8 @@ class Orders extends General
     // dd($user);
     $order['currency'] = current($user)['country'];
     // dd($order);
+    // dd($order); //todo
+
     if (empty($this->Update($order))) {
       // dd($this->db->LastInsertId());
       $dbid = $this->db->LastInsertId();
@@ -117,6 +120,7 @@ class Orders extends General
     }
     return $err;
   }
+
   public function CancelOrder($id)
   {
     $exist = $this->db->fetAllLite('orders', '`id` = :id', ['id' => $id]);
@@ -154,8 +158,68 @@ class Orders extends General
       return $err;
     }
   }
-  public function MakeOrderTinkoff($user, $order = [])
+  public function MakeOrderTinkoff($tinkoffData)
   {
-    
+
+    $user_id = substr($tinkoffData['id'], 0, strpos($tinkoffData['id'], '_'));
+    $property_id = current(json_decode(current($tinkoffData['items'])['vendorCode'], 1));
+    $property = $this->db->fetAllLite('products_properties', 'id = :id', [':id' => $property_id]);
+    $product = $this->db->fetAllLite('products', 'id = :id', [':id' => current($property)['product_id']]);
+    $user = $this->db->fetAllLite('users', 'id = :id', [':id' => $user_id]);
+    // ddd($product);
+
+    $cart[$user_id] = [
+      'user_id' => $user_id,
+      'product_id' => current($property)['product_id'],
+      'property_id' => $property_id,
+      'quantity' => 1,
+    ];
+
+    // ddd($property);
+    $order['tinkoff_id'] = $tinkoffData['id'];
+    $order['cart'] = json_encode($cart);
+    $order['user_id'] = $user_id;
+    $order['lang'] = current($user)['lang'];
+    $order['first_name'] = $tinkoffData['first_name'];
+    $order['second_name'] = $tinkoffData['last_name'];
+    $order['phone'] = $tinkoffData['phone'];
+    $order['email'] = $tinkoffData['email'];
+
+
+    $cost = $tinkoffData['order_amount'];
+    // ddd($cost);
+    $cost_en = 0; //todo
+    $order['cost'] = json_encode([
+      'RUB' => $cost,
+      'USD' => $cost_en
+    ]);
+
+    $order['currency'] = 'RU';
+    // dd($order);
+
+    // dd($this->Update($order));
+    if (empty($this->Update($order))) {
+      // dd($this->db->LastInsertId());
+      $dbid = $this->db->LastInsertId();
+      $err[] = [
+        'type' => 'success',
+        'EN' => 'The order has been placed successfully! Expect a response to your email',
+        'RU' => 'Заказ успешно размещен! Ожидайте ответа на вашу электронную почту',
+        'ID' => $dbid
+      ];
+      // foreach ($cart as $id => $value) {
+      //   $properties[$value['property_id']]['quantity'] -= $value['quantity'];
+      //   $this->db->update('products_properties', $properties[$value['property_id']], '`id` = :id', ['id' => $value['property_id']]);
+      //   $this->db->Delete('cart', '`id` = :id', ['id' => $id]);
+      // }
+    } else {
+      $err[] = [
+        'type' => 'danger',
+        'EN' => 'An error has occurred! Please try again!',
+        'RU' => 'Произошла ошибка! Пожалуйста, попробуйте ещё раз!'
+      ];
+    }
+    // dd($err);
+    return $err;
   }
 }

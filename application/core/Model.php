@@ -150,7 +150,7 @@ class Model
       $mail->Password   = $mail_config['password']; // Пароль на почте
       $mail->SMTPSecure = $mail_config['SMTPSecure'];
       $mail->Port       = $mail_config['port'];
-      $mail->setFrom($mail_config['from_email'], $mail_config['from_name']); // Адрес самой почты и имя отправителя
+      $mail->setFrom($mail_config['username'], $mail_config['from_name']); // Адрес самой почты и имя отправителя
 
       // Получатель письма
       $mail->addAddress($address);

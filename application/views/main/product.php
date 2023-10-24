@@ -118,7 +118,7 @@
                 <!-- Tinkoff Button -->
                 <? if ($property_node['installment']) : ?>
                   <div class="col-auto col-sm-12 mt-4 text-center">
-
+                    <!-- demoFlow=sms& -->
                     <tinkoff-create-button size="M" subtext="" shopId="ec01ca95-44d3-4c47-94c6-a21173532f68" showcaseId="3089d659-23d9-4505-be32-58806d4de5ae" ui-data="productType=installment&view=self" payment-data="demoFlow=sms&orderNumber=<?= uniqid(key($user) . '_') ?>&items.0.name=<?= current($product)['name'] ?>&items.0.price=<?= current($property_flag)['price'] ?>&items.0.vendorCode=[<?= key($property_flag) ?>]&items.0.quantity=1&sum=<?= current($property_flag)['price'] ?>&promoCode=installment_0_0_6_6,5"></tinkoff-create-button>
                   </div>
 

@@ -72,12 +72,15 @@ class MainController extends Controller
         "user" => $this->model->user->getUser(),
       ]);
     }
-
-    $blocked = $this->model->db->fetAllLite('status')[1];
+    $blocked = current($this->model->db->fetAllLite('status'));
     if ($blocked['block'] && !isset($_SESSION['admin'])) {
-      $this->view->layout = 'default';
-      $this->view->render('');
-      exit;
+      if ($route['controller'] != 'tinkoff') {
+        $this->view->layout = 'default';
+        $this->view->render('');
+        exit;
+        // dd(1);
+      }
+      // dd(2);
     }
   }
   protected function makeOrder()
