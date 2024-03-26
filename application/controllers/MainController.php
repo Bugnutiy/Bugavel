@@ -24,15 +24,16 @@ class MainController extends Controller
     if (isset($_GET['lang'])) {
       $lang = &$_GET['lang'];
       if ($lang == "RU") {
-        if (isset($_SESSION['admin'])) {
-          $this->model->user->update($this->model->user->getUserId(), ['country' => 'RU']);
-        }
+        // if (isset($_SESSION['admin'])) {
+        $this->model->user->update($this->model->user->getUserId(), ['country' => 'RU']);
+        // }
         $this->model->user->update($this->model->user->getUserId(), ['lang' => 'RU']);
       } elseif ($lang == "EN") {
         $this->model->user->update($this->model->user->getUserId(), ['lang' => 'EN']);
-        if (isset($_SESSION['admin'])) {
-          $this->model->user->update($this->model->user->getUserId(), ['country' => 'EN']);
-        }
+        // if (isset($_SESSION['admin'])) {
+        $this->model->user->update($this->model->user->getUserId(), ['country' => 'EN']);
+        // }
+
       }
     }
     $this->view->layout = 'mainLayout';
