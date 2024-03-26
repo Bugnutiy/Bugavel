@@ -209,7 +209,8 @@ class Orders extends General
       ];
       // foreach ($cart as $id => $value) {
       //   $properties[$value['property_id']]['quantity'] -= $value['quantity'];
-      //   $this->db->update('products_properties', $properties[$value['property_id']], '`id` = :id', ['id' => $value['property_id']]);
+      $property[$property_id]['quantity'] -= 1;
+      $this->db->update('products_properties', $property[$property_id], '`id` = :id', ['id' => $property_id]);
       //   $this->db->Delete('cart', '`id` = :id', ['id' => $id]);
       // }
     } else {
