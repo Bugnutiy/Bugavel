@@ -37,8 +37,18 @@
                 </div>
                 <input required class="form-control" type="text" name="name_en" placeholder="Категория" aria-label="Имя" aria-describedby="name" value="<?= isset($category) ? current($category)['name_en'] : '' ?>">
             </div>
+            
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="display_order">Приоритет отображения</span>
+                </div>
+                <input class="form-control" type="number" name="display_order" placeholder="Приоритет отображения" aria-label="Приоритет" aria-describedby="display_order" value="<?= isset($category) ? current($category)['display_order'] : '' ?>">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="display_order">Чем больше, тем ближе к началу</span>
+                </div>            
+            </div>
 
-            <div class="input- mb-2">
+            <div class="input mb-2">
                 <div class="mb-3">
                   <label for="product_video" class="form-label">Видео</label>
                   <textarea class="form-control" name="videos" id="product_video" rows="3" placeholder="html-код или iframe для вставки видео"><?= isset($category) ? current($category)['videos'] : '' ?></textarea>
