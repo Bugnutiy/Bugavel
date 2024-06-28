@@ -1,4 +1,4 @@
-php_value display_errors 0
+php_value display_errors 1
 
 AddDefaultCharset utf-8
 

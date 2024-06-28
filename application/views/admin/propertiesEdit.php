@@ -71,12 +71,6 @@
 
       </div>
 
-      <script>
-        function sale() {
-          console.log("Sale");
-        }
-      </script>
-
       <div class="input-group mb-3">
 
         <span class="input-group-text">Скидка, %</span>
@@ -96,8 +90,10 @@
         <input type="number" class="form-control" placeholder="Количество" name="quantity" required value="<?= isset($property) ? current($property)['quantity'] : '' ?>">
       </div>
       <div class="input-group mb-3">
-        <label for="show_empty_check" class="mr-5">Показывать страницу "товар закончился"</label>
-        <input calss="form-control ml-5" type="checkbox" name="show_empty" id=show_empty_check <?= isset($property) && $property[show_empty] ? "checked" : "" ?>>
+        <label for="show_empty_check" class="me-2">Показывать страницу "товар закончился"</label>
+        <input type="hidden" value="0" name="show_empty">
+
+        <input calss="form-control ml-5" type="checkbox" name="show_empty" value="1" id=show_empty_check <?= isset($property) && current($property)['show_empty'] ? "checked" : "" ?>>
       </div>
       <button type="submit" class="btn btn-primary mb-5">Подтвердить</button>
     </div>
@@ -105,3 +101,9 @@
   </div>
 
 </form>
+
+<script>
+  function sale() {
+    console.log("Sale");
+  }
+</script>

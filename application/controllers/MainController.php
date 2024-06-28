@@ -188,7 +188,7 @@ class MainController extends Controller
 			$products = $this->model->shop->products->getAll();
 		}
 		foreach ($products as $product_id => $value) {
-			$products[$product_id]['properties'] = $this->model->shop->products_properties->getByProductId($product_id, 1);
+			$products[$product_id]['properties'] = $this->model->shop->products_properties->getByProductId($product_id, 0);
 		}
 		$vars = array_merge($vars, [
 			'products' => $products,

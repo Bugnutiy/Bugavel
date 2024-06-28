@@ -50,16 +50,20 @@
 
         <div class="row cards justify-content-center vertical_cards">
 
-          <? $i = 0;
+          <?
+          $i = 0;
+
           foreach ($products as $product_id => $product_node) : ?>
-            <? if ($product_node['quantity']) : ?>
+            <?
+            if (!empty($product_node['properties'])) : ?>
+
               <?
               $property_flag = [];
               foreach ($product_node['properties'] as $property_id => $property_node) {
                 if (current($user)['country'] == 'RU') {
-                  if ($property_node['quantity'] && $property_node['price']) $property_flag[$property_id] = $property_node;
+                  if ($property_node['quantity'] && $property_node['price'] || $property_node['show_empty']) $property_flag[$property_id] = $property_node;
                 } else {
-                  if ($property_node['quantity'] && $property_node['price_en']) $property_flag[$property_id] = $property_node;
+                  if ($property_node['quantity'] && $property_node['price_en'] || $property_node['show_empty']) $property_flag[$property_id] = $property_node;
                 }
               }
               ?>
@@ -125,8 +129,9 @@
 
                                     <div class="col align-self-center"><?= current($user)['lang'] !== 'RU' ? $property_node['name_en'] : $property_node['name'] ?></div>
                                     <div class="col-auto align-self-center">
-                                      <?//= current($user)['country'] !== 'RU' ? '$' . number_format($property_node['price_en']) : number_format($property_node['price'], 0, ',', ' ') . ' руб.' ?>
-                                      <?= current($user)['country'] !== 'RU' ? number_format($property_node['price_en']).' eur' : number_format($property_node['price'], 0, ',', ' ') . ' руб.' ?>
+                                      <? //= current($user)['country'] !== 'RU' ? '$' . number_format($property_node['price_en']) : number_format($property_node['price'], 0, ',', ' ') . ' руб.' 
+                                      ?>
+                                      <?= current($user)['country'] !== 'RU' ? number_format($property_node['price_en']) . ' eur' : number_format($property_node['price'], 0, ',', ' ') . ' руб.' ?>
 
                                     </div>
                                     <div class="col-auto my-2">

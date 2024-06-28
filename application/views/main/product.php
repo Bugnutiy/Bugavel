@@ -58,11 +58,10 @@
                   <p class="mb-0"><span id="product_price"><?= number_format(current($product)['min_price_en'], 0, '.', ',') ?> - <?= number_format(current($product)['max_price_en'], 0, '.', ',') ?></span> eur</p>
                 <? endif ?>
               <? endif ?>
-
               <? if (current($user)['lang'] == 'RU') : ?>
-                <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock"><?= current($product)['quantity'] ?> шт. в наличии</span>
+                <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock"><?= current($product)['quantity'] ? current($product)['quantity'] + " шт. в наличии" : "товар закончился" ?></span>
               <? else : ?>
-                <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock"><?= current($product)['quantity'] ?> <?= current($product)['quantity'] > 1 ? 'pieces' : 'piece' ?> in stock</span>
+                <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock"><?= current($product)['quantity'] ? current($product)['quantity'] + current($product)['quantity'] > 1 ? 'pieces in stock' : 'piece in stock' : "out of stock" ?> </span>
               <? endif ?>
             </div>
 
