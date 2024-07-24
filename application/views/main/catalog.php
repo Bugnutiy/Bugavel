@@ -90,10 +90,38 @@
                                             ($product_node['min_price_en'] == $product_node['max_price_en'] ? '$' . number_format($product_node['min_price_en']) : (current($user)['lang'] == 'RU' ? 'от $' : 'from $') . number_format($product_node['min_price_en']))
                                             : ($product_node['min_price'] == $product_node['max_price'] ? number_format($product_node['min_price'], 0, ',', ' ') . ' руб.' : (current($user)['lang'] == 'RU' ? 'от ' : 'from ') . number_format($product_node['min_price'], 0, ',', ' ') . ' руб.')
                                           */ ?></p> -->
-                    <p class="card-text"><?= current($user)['country'] !== 'RU' ?
+                    <?
+                    // ddd(current($product_node['properties']))
+                    ?>
+                    <!-- <p class="card-text"><?/*= current($user)['country'] !== 'RU' ?
                                             ($product_node['min_price_en'] == $product_node['max_price_en'] ? number_format($product_node['min_price_en']) . ' eur' : (current($user)['lang'] == 'RU' ? 'от ' : 'from ') . number_format($product_node['min_price_en']) . ' eur')
                                             : ($product_node['min_price'] == $product_node['max_price'] ? number_format($product_node['min_price'], 0, ',', ' ') . ' руб.' : (current($user)['lang'] == 'RU' ? 'от ' : 'from ') . number_format($product_node['min_price'], 0, ',', ' ') . ' руб.')
-                                          ?></p>
+                                          */ ?></p> -->
+                    <? if (current($user)['country'] == 'RU') : ?>
+                      <? $property = current($product_node['properties']);
+                      if ($property['price_prev']) : ?>
+                        <p class="card-text old mb-0">
+                          <span class="old-price">
+                            <?= number_format($property['price_prev'], 0, ',', ' ') ?> <?= current($user)['lang'] == 'RU' ? 'руб' : 'rubles' ?>
+                          </span>
+                        </p>
+                      <? endif ?>
+                      <p class="card-text <?= $property['price_prev'] ? 'new-price mb-1' : '' ?>">
+                        <?= number_format($property['price'], 0, ',', ' ') ?> <?= current($user)['lang'] == 'RU' ? 'руб' : 'rubles' ?>
+                      </p>
+                    <? else : ?>
+                      <? $property = current($product_node['properties']);
+                      if ($property['price_prev_en']) : ?>
+                        <p class="card-text old mb-0">
+                          <span class="old-price">
+                            <?= number_format($property['price_prev_en'], 0, ',', ' ') ?> eur
+                          </span>
+                        </p>
+                      <? endif ?>
+                      <p class="card-text <?= $property['price_prev_en'] ? 'new-price mb-1' : '' ?>">
+                        <?= number_format($property['price_en'], 0, ',', ' ') ?> eur
+                      </p>
+                    <? endif ?>
                   </div>
                   <div class="row justify-content-center">
                     <?

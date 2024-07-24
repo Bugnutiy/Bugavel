@@ -54,9 +54,9 @@
         <span class="input-group-text">Цена товара</span>
 
         <span class="input-group-text">Руб</span>
-        <input type="number" class="form-control" placeholder="RU" name="price" value="<?= isset($property) ? current($property)['price'] : '' ?>">
+        <input type="number" class="form-control" placeholder="RU" id="price" name="price" value="<?= isset($property) ? current($property)['price'] : '' ?>">
         <span class="input-group-text">$</span>
-        <input type="number" class="form-control" placeholder="EN" name="price_en" value="<?= isset($property) ? current($property)['price_en'] : '' ?>">
+        <input type="number" class="form-control" placeholder="EN" id="price_en" name="price_en" value="<?= isset($property) ? current($property)['price_en'] : '' ?>">
 
       </div>
 
@@ -65,9 +65,9 @@
         <span class="input-group-text">Цена без скидки</span>
 
         <span class="input-group-text">Руб</span>
-        <input type="number" class="form-control" placeholder="RU" name="price_prev" value="<?= isset($property) ? current($property)['price_prev'] : '' ?>">
+        <input type="number" class="form-control" placeholder="RU" id="price_prev" name="price_prev" value="<?= isset($property) ? current($property)['price_prev'] : '' ?>">
         <span class="input-group-text">$</span>
-        <input type="number" class="form-control" placeholder="EN" name="price_prev_en" value="<?= isset($property) ? current($property)['price_prev_en'] : '' ?>">
+        <input type="number" class="form-control" placeholder="EN" id="price_prev_en" name="price_prev_en" value="<?= isset($property) ? current($property)['price_prev_en'] : '' ?>">
 
       </div>
 
@@ -76,10 +76,10 @@
         <span class="input-group-text">Скидка, %</span>
 
         <span class="input-group-text">Руc</span>
-        <input type="number" class="form-control" placeholder="RU" name="sale" value="<?= isset($property) ? current($property)['sale'] : '' ?>">
+        <input type="number" class="form-control" placeholder="RU" id="sale" name="sale" value="<?= isset($property) ? current($property)['sale'] : '' ?>">
         <span class="input-group-text">$</span>
-        <input type="number" class="form-control" placeholder="EN" name="sale_en" value="<?= isset($property) ? current($property)['sale_en'] : '' ?>">
-        <a class="btn btn-secondary" onclick="sale">AUTO</a>
+        <input type="number" class="form-control" placeholder="EN" id="sale_en" name="sale_en" value="<?= isset($property) ? current($property)['sale_en'] : '' ?>">
+        <a class="btn btn-secondary" onclick="saleF()">AUTO</a>
 
       </div>
 
@@ -103,7 +103,68 @@
 </form>
 
 <script>
-  function sale() {
+  function saleF() {
     console.log("Sale");
+    price = parseInt(document.getElementById("price").value);
+    if (!price) {
+      price = 0;
+    }
+    price_en = parseInt(document.getElementById("price_en").value);
+    if (!price_en) {
+      price_en = 0;
+    }
+    price_prev = parseInt(document.getElementById("price_prev").value);
+    if (!price_prev) {
+      price_prev = 0;
+    }
+    price_prev_en = parseInt(document.getElementById("price_prev_en").value);
+    if (!price_prev_en) {
+      price_prev_en = 0;
+    }
+    sale = parseInt(document.getElementById("sale").value);
+    if (!sale) {
+      sale = 0;
+    }
+    sale_en = parseInt(document.getElementById("sale_en").value);
+    if (!sale_en) {
+      sale_en = 0;
+    }
+    console.log({
+      price,
+      price_en,
+      price_prev,
+      price_prev_en,
+      sale,
+      sale_en
+    });
+    //авторассчёт цены
+    if (price == 0 && price_prev != 0 && sale != 0) {
+      price = parseInt(price_prev - price_prev * sale / 100);
+      document.getElementById("price").value = price;
+    }
+    if (price_en == 0 && price_prev_en != 0 && sale_en != 0) {
+      price_en = parseInt(price_prev_en - price_prev_en * sale_en / 100);
+      document.getElementById("price_en").value = price_en;
+    }
+
+    //авторассчёт скидки
+    if (sale == 0 && price != 0 && price_prev != 0) {
+      sale = parseInt((price_prev - price) * 100 / price_prev);
+      document.getElementById("sale").value = sale;
+    }
+    if (sale_en == 0 && price_en != 0 && price_prev_en != 0) {
+      sale_en = parseInt((price_prev_en - price_en) * 100 / price_prev_en);
+      document.getElementById("sale_en").value = sale_en;
+    }
+
+    //авторассчёт цены без скидки
+    if (price_prev == 0 && price != 0 && sale != 0) {
+      price_prev = parseInt(price / (1 - sale / 100));
+      document.getElementById("price_prev").value = price_prev;
+    }
+    if (price_prev_en == 0 && price_en != 0 && sale_en != 0) {
+      price_prev_en = parseInt(price_en / (1 - sale_en / 100));
+      document.getElementById("price_prev_en").value = price_prev_en;
+    }
   }
 </script>

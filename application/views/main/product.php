@@ -1,3 +1,6 @@
+<?php
+// dd($properties);
+?>
 <form class="container-lg description_block g-4 product_actions my-3" method="POST" enctype="multipart/form-data">
   <div class="row ">
     <div class="col">
@@ -7,7 +10,7 @@
         <div class="col-12 g-0 images col-md-4 ">
           <?
           $property_flag = [];
-          $product[key($product)]['quantity'] = 0;
+          // $product[key($product)]['quantity'] = 0;
           foreach ($properties as $property_id => $property_node) {
             if (current($user)['country'] == 'RU') {
               if ($property_node['quantity'] && $property_node['price']) {
@@ -46,23 +49,41 @@
             <div class="col-12 mb-3 price">
 
               <? if (current($user)['country'] == 'RU') : ?>
-                <? if (current($product)['min_price'] == current($product)['max_price']) : ?>
-                  <p class="mb-0"><span id="product_price"><?= number_format(current($product)['min_price'], 0, ',', ' ') ?></span> руб.</p>
-                <? else : ?>
-                  <p class="mb-0"><span id="product_price"><?= number_format(current($product)['min_price'], 0, ',', ' ') ?> - <?= number_format(current($product)['max_price'], 0, ',', ' ')  ?></span> руб.</p>
+                <? if ($property_node['price_prev']) : ?>
+                  <p class="mb-0 old">
+                    <span class="old-price"><span><?= $property_node['price_prev'] ?> руб.</span></span>
+                    <? if ($property_node['sale']) : ?>
+                      <span class="sale"><span>-<?= $property_node['sale'] ?>%</span></span>
+                    <? endif ?>
+                  </p>
                 <? endif ?>
+
+                <p class="mb-0">
+                  <span id="product_price" class="<?= $property_node['price_prev'] ? 'new_price' : '' ?>"><?= number_format(current($property_node)['price'], 0, ',', ' ') ?> руб. </span>
+
+                </p>
               <? else : ?>
-                <? if (current($product)['min_price_en'] == current($product)['max_price_en']) : ?>
-                  <p class="mb-0"><span id="product_price"><?= number_format(current($product)['min_price_en'], 0, '.', ',') ?></span> eur</p>
-                <? else : ?>
-                  <p class="mb-0"><span id="product_price"><?= number_format(current($product)['min_price_en'], 0, '.', ',') ?> - <?= number_format(current($product)['max_price_en'], 0, '.', ',') ?></span> eur</p>
+                <? if ($property_node['price_prev_en']) : ?>
+                  <p class="mb-0 old">
+                    <span class="old-price"><span><?= $property_node['price_prev_en'] ?> eur.</span></span>
+                    <? if ($property_node['sale']) : ?>
+                      <span class="sale"><span>-<?= $property_node['sale'] ?>%</span></span>
+                    <? endif ?>
+                  </p>
                 <? endif ?>
+
+                <p class="mb-0">
+                  <span id="product_price" class="<?= $property_node['price_prev'] ? 'new_price' : '' ?>"><?= number_format(current($property_node)['price'], 0, ',', ' ') ?> руб. </span>
+
+                </p>
               <? endif ?>
+
               <? if (current($user)['lang'] == 'RU') : ?>
                 <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock"><?= current($product)['quantity'] ? current($product)['quantity'] + " шт. в наличии" : "товар закончился" ?></span>
               <? else : ?>
-                <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock"><?= current($product)['quantity'] ? current($product)['quantity'] + current($product)['quantity'] > 1 ? 'pieces in stock' : 'piece in stock' : "out of stock" ?> </span>
+                <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock"><?= current($product)['quantity'] ? (current($product)['quantity'] + current($product)['quantity'] > 1 ? 'pieces in stock' : 'piece in stock') : "out of stock" ?> </span>
               <? endif ?>
+
             </div>
 
             <!-- Options -->
@@ -162,15 +183,16 @@
 </script>
 
 <script>
-  var properties = <?= json_encode($avaliable_properties) ?>;
+  var properties = <?= json_encode($properties) ?>;
   var selected = 0;
+  var stock = 0;
 
   function select(property_id) {
     if (property_id == 0) {
       return 0;
     }
     var stockElem = document.getElementById('stock');
-    var stock = properties[property_id]['quantity'];
+    stock = properties[property_id]['quantity'];
 
     var priceElem = document.getElementById('product_price');
     var quantityElem = document.getElementById('quantity_field');
@@ -178,7 +200,7 @@
     // dd(quantityElem.value);
     var price = properties[property_id]['price<?= current($user)['country'] == 'RU' ? '' : '_en' ?>'] * quantityElem.value;
 
-    priceElem.innerHTML = price.format(0, 3, '<?= current($user)['country'] == 'RU' ? ' ' : ',' ?>');
+    priceElem.innerHTML = price.format(0, 3, '<?= current($user)['country'] == 'RU' ? ' ' : ',' ?>') + "<?= current($user)['country'] == 'RU' ? ' руб.' : ' eur.' ?>";
 
     var string = <?= current($user)['lang'] == 'RU' ?
                     "stock+' шт. в наличии'" : ("stock>1?stock+' pieces in stock':stock+' piece in stock'") ?>;
@@ -204,7 +226,8 @@
 
   function increase() {
     quantElem = document.getElementById('quantity_field');
-    quantElem.value++;
+    if (quantElem.value < stock)
+      quantElem.value++;
     cost(quantElem);
   }
 
