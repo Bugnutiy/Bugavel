@@ -69,7 +69,7 @@
               ?>
 
               <? if (!empty($property_flag)) : ?>
-                <div class="card col-6 col-md-3 col-lg-2 mb-3">
+                <div class="card col-6 col-md-3 col-lg-2 mb-4">
                   <div class="slider_wrapper_1">
                     <div class="slider_wrapper_2">
                       <section class="splide goods_slider" aria-label="Splide Basic HTML Example">
