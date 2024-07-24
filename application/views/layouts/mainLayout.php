@@ -22,7 +22,7 @@
   <script src="/public/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-  <link rel="stylesheet" href="/public/styles/style.css" />
+  <link rel="stylesheet" href="/public/styles/style.css?v=1.1" />
 
   <!-- <title>LeoSmagin: Главная страница</title> -->
   <title><?= current($user)['lang'] == 'RU' ? $title['RU'] : $title['EN'] ?></title>
