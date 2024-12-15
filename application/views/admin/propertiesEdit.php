@@ -49,10 +49,9 @@
         <input class="form-control" type="text" name="name_en" placeholder="property" aria-label="Имя" aria-describedby="name" value="<?= isset($property) ? current($property)['name_en'] : '' ?>">
       </div>
 
+      <label class="input-group-text">Цена товара</label>
+
       <div class="input-group mb-3">
-
-        <span class="input-group-text">Цена товара</span>
-
         <span class="input-group-text">Руб</span>
         <input type="number" class="form-control" placeholder="RU" id="price" name="price" value="<?= isset($property) ? current($property)['price'] : '' ?>">
         <span class="input-group-text">$</span>
@@ -60,9 +59,10 @@
 
       </div>
 
+      <label class="input-group-text">Цена без скидки</label>
+
       <div class="input-group mb-3">
 
-        <span class="input-group-text">Цена без скидки</span>
 
         <span class="input-group-text">Руб</span>
         <input type="number" class="form-control" placeholder="RU" id="price_prev" name="price_prev" value="<?= isset($property) ? current($property)['price_prev'] : '' ?>">
@@ -70,11 +70,9 @@
         <input type="number" class="form-control" placeholder="EN" id="price_prev_en" name="price_prev_en" value="<?= isset($property) ? current($property)['price_prev_en'] : '' ?>">
 
       </div>
-
+      
+      <label class="input-group-text">Скидка, %</label>
       <div class="input-group mb-3">
-
-        <span class="input-group-text">Скидка, %</span>
-
         <span class="input-group-text">Руc</span>
         <input type="number" class="form-control" placeholder="RU" id="sale" name="sale" value="<?= isset($property) ? current($property)['sale'] : '' ?>">
         <span class="input-group-text">$</span>

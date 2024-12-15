@@ -66,8 +66,8 @@
                 <? if ($property_node['price_prev_en']) : ?>
                   <p class="mb-0 old">
                     <span class="old-price"><span><?= $property_node['price_prev_en'] ?> eur.</span></span>
-                    <? if ($property_node['sale']) : ?>
-                      <span class="sale"><span>-<?= $property_node['sale'] ?>%</span></span>
+                    <? if ($property_node['sale_en']) : ?>
+                      <span class="sale"><span>-<?= $property_node['sale_en'] ?>%</span></span>
                     <? endif ?>
                   </p>
                 <? endif ?>
