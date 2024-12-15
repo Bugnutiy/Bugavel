@@ -1,5 +1,0 @@
-
-RewriteEngine on
-
-RewriteRule ^(log\-modulkassa\.php)$ - [F,L,NC]
-RewriteRule ^(log\-sber\.php)$ - [F,L,NC]
