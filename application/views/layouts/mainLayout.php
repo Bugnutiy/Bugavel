@@ -24,7 +24,7 @@
   <script src="/public/scripts/splide.min.js"></script>
   <script src="/public/scripts/splide.autoscroll.min.js"></script>
 
-  <link rel="stylesheet" href="/public/styles/style.css?v=1.1" />
+  <link rel="stylesheet" href="/public/styles/style.css?v=1.2" />
 
   <!-- <title>LeoSmagin: Главная страница</title> -->
   <title><?= current($user)['lang'] == 'RU' ? $title['RU'] : $title['EN'] ?></title>
