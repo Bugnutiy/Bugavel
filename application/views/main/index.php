@@ -14,11 +14,13 @@
     <div class="col text-center text-black px-2">
       <div class=" px-3 pt-3 pb-4">
         <? if (current($user)['lang'] == "RU") : ?>
-          <p>Рад приветствовать вас на моем сайте! Я занимаюсь производством тату машинок с 2003 года. За 19 лет упорной работы я создавал классические аппараты, разработал и запатентовал уникальные гибридные машинки (HYBRID V1, GORILLA HYBRID V2 , HYBRAY, DIESEL BEE HYBRID V3). Благодаря сочетанию хлесткого удара индукции и стабильности ротора, они дают по настоящему наилучшую работу в нанесении татуировки на сегодняшний день.</p>
-          <p class="mb-0">Лучшие мастера России и мира уже выбрали нас как приоритетное оборудование для себя. Я люблю создавать по настоящему особенные и уникальные машинки для татуировки.</p>
+          <p>Добро пожаловать! Меня зовут Смагин Леонид, и я рад Вам представить проект STRONG & BOLD , созданный в сотрудничестве с талантливой татуировщицей Ефименко Натальей. Мы объединили мое стремление к качеству и стильному дизайну с творческой энергией Натальи, чтобы создать нечто уникальное — коллекцию оригинальных джинсов из Selvedge denim.</p>
+          <p>Каждая пара джинсов — это не просто одежда, а произведение искусства. Используя премиальный деним и вдохновляясь суб-культурой, мы сделали джинсы, которые выделяются индивидуальностью, долговечностью и вниманием к деталям. </p>
+          <p class="mb-0">Эти джинсы — для тех, кто ценит эксклюзивность и готов подчеркнуть свой стиль.</p>
         <? else : ?>
-          <p>I am glad to welcome you to my website! I have been producing tattoo machines since 2003 . For 19 years of hard work, I have created classic machines, developed and patented unique hybrid machines (HYBRID V1, GORILLA HYBRID V2, HYBRAY, DIESEL BEE HYBRID V3). Due to the combination of the whiplash of induction and the stability of the rotor, they provide the truly best work in tattooing for today.</p>
-          <p class="mb-0">The best masters of Russia and the world have already chosen us as a priority equipment for themselves. I love to create truly special and unique tattoo machines.</p>
+          <p>Welcome! My name is Leonid Smagin, and I am glad to present you the project STRONG & BOLD, created in collaboration with the talented tattoo artist Natalia Efimenko. We combined my passion for quality and stylish design with Natalia's creative energy to create something unique — a collection of original jeans from Selvedge denim.</p>
+          <p>Each pair of jeans is not just a piece of clothing, but a work of art. Using premium denim and inspired by sub-culture, we have created jeans that stand out for their individuality, durability and attention to detail. </p>
+          <p class="mb-0">These jeans are for those who value exclusivity and are ready to emphasize their style.</p>
         <? endif ?>
 
       </div>
