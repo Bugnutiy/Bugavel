@@ -153,8 +153,7 @@
 </div>
 
 <? ob_start() ?>
-<script src="/public/scripts/splide.min.js"></script>
-<script src="/public/scripts/splide.autoscroll.min.js"></script>
+
 <script>
   var Sliders = document.getElementsByClassName('product_photo')
   // dd(Scrollers);
@@ -211,6 +210,7 @@
     selected = Object.keys(properties)[0];
     // dd(selected);
     select(selected);
+    dd(stock);
   }
 
   function cost(input) {
@@ -223,17 +223,16 @@
       priceElem.innerHTML = price.format(0, 3, '<?= current($user)['country'] == 'RU' ? ' ' : ',' ?>');
     }
   }
+  quantElem = document.getElementById('quantity_field');
 
   function increase() {
-    quantElem = document.getElementById('quantity_field');
-    if (quantElem.value < stock)
+    if (Number(quantElem.value) < Number(stock))
       quantElem.value++;
     cost(quantElem);
   }
 
   function decrease() {
-    quantElem = document.getElementById('quantity_field');
-    if (quantElem.value > 1) {
+    if (Number(quantElem.value) > 1) {
       quantElem.value--;
       cost(quantElem);
     }
@@ -245,4 +244,10 @@
     return new bootstrap.Alert(element)
   })
 </script> -->
-<? $script = ob_get_clean() ?>
+<?
+$script;
+if (empty($script))
+  $script = ob_get_clean();
+else
+  $script = $script.ob_get_clean();
+?>

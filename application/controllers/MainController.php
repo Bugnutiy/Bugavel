@@ -154,10 +154,42 @@ class MainController extends Controller
 
   public function indexAction()
   {
+    $err = [];
+    $vars = [];
+    if (!empty($_GET['addcart'])) {
+      // dd($this->model->shop->cart->addToCart($_GET['addcart'], $this->model->user->getUserId()));
+
+      $err = array_merge($err, $this->model->shop->cart->addToCart($_GET['addcart'], $this->model->user->getUserId()));
+      if (empty($err)) {
+        $cart_total = $this->model->shop->cart->getTotal($this->model->user->getUserId());
+        $alert[] = [
+          'type' => 'success',
+          'RU' => 'Товар добавлен <a href="/cart" class="alert-link">в корзину</a>',
+          'EN' => 'The product has been added to <a href="/cart" class="alert-link">the cart</a>'
+        ];
+        $vars = array_merge($vars, [
+          'alerts' => $alert,
+          'cart_total' => $cart_total,
+        ]);
+      } else $vars = array_merge($vars, ['err' => $err]);
+    }
+    $products = [];
+    if (!empty($_GET['category'])) {
+      $products = $this->model->shop->products->getByCategoryId($_GET['category']);
+    } else {
+      $products = $this->model->shop->products->getAll();
+    }
+    foreach ($products as $product_id => $value) {
+      $products[$product_id]['properties'] = $this->model->shop->products_properties->getByProductId($product_id, 0);
+    }
+    // dd($products);
+    $vars = array_merge($vars, [
+      'products' => $products,
+    ]);
     //debug($_SESSION);
     // dd("Dd");
     // dd($this->view->layout);
-    $this->view->render(['RU' => 'LeoSmagin - Главная страница', 'EN' => 'LeoSmagin - Main page']);
+    $this->view->render(['RU' => 'LeoSmagin - Главная страница', 'EN' => 'LeoSmagin - Main page'],$vars);
   }
 
   public function catalogAction()

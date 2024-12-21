@@ -1,136 +1,6 @@
 <!-- Хэдер -->
 <header class="index_header">
-  <div class="carousel">
-    <section class="splide index_wrapper_slider">
-      <div class="container-lg  arrows_wrapper">
-        <div class="splide__arrows">
-
-        </div>
-      </div>
-      <div class="splide__track">
-        <ul class="splide__list">
-
-          <li class="splide__slide">
-            <section class="splide photo_scroller">
-              <div class="splide__track">
-                <ul class="splide__list">
-                  <li class="splide__slide"><img src="/public/images/Carousel/DIESEL BEE/BEE1.jpg" alt="DIESEL BEE"></li>
-                  <li class="splide__slide"><img src="/public/images/Carousel/DIESEL BEE/IMG_20220823_180003-c.jpg" alt="DIESEL BEE"></li>
-                </ul>
-              </div>
-            </section>
-            <div class="content">
-              <div class="container-lg">
-                <div class="row row-1 justify-content-center align-content-center ">
-
-                  <div class="col-12 col-sm-auto text-center">
-                    <div class="row justify-content-center">
-                      <div class="col-auto">
-                        <h1><?= current($user)['lang'] !== 'RU' ? 'NEW' : 'НОВИНКА' ?><span class="d-sm-none">!</span></h1>
-                      </div>
-                      <div class="col-auto col-sm-auto text-center">
-                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'HYBRID' : 'ГИБРИД' ?> V3</h1>
-                      </div>
-                      <div class="col-12 text-center">
-                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'DIESEL BEE' : 'DIESEL BEE' ?>&#8221;</h3>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-12 text-center mt-1">
-                    <a href="/catalog?category=10" class="btn btn-outline-light">
-                      <?= current($user)['lang'] !== 'RU' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
-                    </a>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li class="splide__slide">
-            <section class="splide photo_scroller">
-              <div class="splide__track">
-                <ul class="splide__list">
-                  <li class="splide__slide"><img src="/public/images/Carousel/ROTARY/ROTARY.jpg" alt="ROTARY"></li>
-                  <li class="splide__slide"><img src="/public/images/Carousel/ROTARY/DSC02498_DxO 05 min.jpg" alt="ROTARY"></li>
-                  <li class="splide__slide"><img src="/public/images/Carousel/ROTARY/IMG_20220823_180330 min.jpg" alt="ROTARY"></li>
-                </ul>
-              </div>
-            </section>
-            <div class="content">
-              <div class="container-lg">
-                <div class="row justify-content-center align-content-center">
-
-                  <div class="col-12 col-sm-auto text-center">
-                    <div class="row justify-content-center">
-                      <div class="col-auto">
-                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'AGELESS' : 'НЕСТАРЕЮЩАЯ' ?></h1>
-                      </div>
-                      <div class="col-auto col-sm-auto text-center">
-                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'CLASSIC' : 'КЛАССИКА' ?></h1>
-                      </div>
-                      <div class="col-12 text-center">
-                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'DIRECT DRIVE' : 'DIRECT DRIVE' ?>&#8221;</h3>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-12 text-center mt-1">
-                    <a href="/catalog?category=4" class="btn btn-outline-light">
-                      <?= current($user)['lang'] !== 'RU' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
-                    </a>
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-          </li>
-
-          <li class="splide__slide">
-            <section class="splide photo_scroller">
-              <div class="splide__track">
-                <ul class="splide__list">
-                  <li class="splide__slide"><img src="/public/images/Carousel/GORILLA/GORILLA1.jpg" alt="Gorilla image">
-                  <li class="splide__slide"><img src="/public/images/Carousel/GORILLA/IMG_20220221_234913_175-C.jpg" alt="Gorilla image">
-                  </li>
-                </ul>
-              </div>
-            </section>
-            <div class="content">
-              <div class="container-lg">
-                <div class="row justify-content-center align-content-center">
-
-                  <div class="col-12 col-sm-auto text-center">
-                    <div class="row justify-content-center">
-                      <div class="col-auto">
-                        <h1> <?= current($user)['lang'] !== 'RU' ? 'THE MOST POWERFULL' : 'МАКСИМАЛЬНАЯ МОЩНОСТЬ' ?></h1>
-                      </div>
-                      <div class="col-auto col-sm-auto text-center">
-                      </div>
-                      <div class="col-12 text-center">
-                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'GORILLA' : 'GORILLA' ?>&#8221;</h3>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-12 text-center mt-1">
-                    <a href="/catalog?category=6" class="btn btn-outline-light">
-                      <?= current($user)['lang'] !== 'RU' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
-                    </a>
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-  </div>
+  <? require("parts/index_carousel.php"); ?>
 
 </header>
 <a class="big_logo row align-items-center" href="/">
@@ -157,14 +27,14 @@
 </div>
 
 <!-- Категории -->
-<div class="index_categories mt-3">
+<!-- <div class="index_categories mt-3">
   <div class="container-lg">
     <div class="header row align-items-center justify-content-center">
       <h1 class="col-auto my-2"><?= current($user)['lang'] !== 'RU' ? 'Categories' : 'Категории' ?></h1>
     </div>
 
     <div class="cards row">
-      <? $categories = array_reverse($categories,1) ?>
+      <? $categories = array_reverse($categories, 1) ?>
       <? foreach ($categories as $cat_id => $cat_node) : ?>
         <div class="card col-6 col-sm-3 col-md-3 col-xl-2 mb-4">
           <div class="text-center">
@@ -178,65 +48,10 @@
 
     </div>
   </div>
-</div>
+</div> -->
 
+
+<? require("parts/products_cards.php") ?>
 
 
 <!-- Скрипты -->
-<?php ob_start() ?>
-<script src="/public/scripts/splide.min.js"></script>
-<script src="/public/scripts/splide.autoscroll.min.js"></script>
-<script>
-  var Scrollers = document.getElementsByClassName("photo_scroller");
-  // dd(Scrollers);
-  for (var i = 0; i < Scrollers.length; i++) {
-    // dd("Scrollers:")
-    // dd(Scrollers[i]);
-    new Splide(Scrollers[i], {
-      arrows: false,
-      type: "loop",
-      // height: "30em",
-      rewind: true,
-      // rewindByDrag: 0,
-      drag: false,
-      perPage: true,
-      // width: "100%",
-      padding: 0,
-      gap: 0,
-      pagination: false,
-      autoScroll: {
-        speed: 0.5,
-        pauseOnHover: 0,
-      },
-    }).mount(window.splide.Extensions);
-  }
-
-  var Sliders = document.getElementsByClassName('index_wrapper_slider')
-  // dd(Scrollers);
-  for (var i = 0; i < Sliders.length; i++) {
-    // dd('Sliders:');
-    // dd(Sliders[i]);
-    new Splide(Sliders[i], {
-      arrows: true,
-      type: "loop",
-      // height: "30em",
-      rewind: true,
-      // rewindByDrag: 0,
-      drag: true,
-      perPage: 1,
-      // width: "auto",
-      pagination: false,
-      // focus: 2,
-      autoplay: 1,
-      // interval: 4000,
-      interval: 6000,
-
-      speed: 300,
-      // autoScroll: false,
-    }).mount();
-  }
-
-  // Carous = document.getElementById("text_index_slider");
-  // console.log(Carous);
-</script>
-<?php $script = ob_get_clean(); ?>

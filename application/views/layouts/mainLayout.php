@@ -21,6 +21,8 @@
   <link rel="stylesheet" href="/public/bootstrap/icons/bootstrap-icons.css" />
   <script src="/public/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="/public/scripts/splide.min.js"></script>
+  <script src="/public/scripts/splide.autoscroll.min.js"></script>
 
   <link rel="stylesheet" href="/public/styles/style.css?v=1.1" />
 
@@ -490,14 +492,14 @@
 
             <!-- Instagram -->
             <div class="mb-3">
-            <label for="order_instagram" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Инстаграм' : 'Instagram' ?></label>
-            <input type="text" required class="form-control" name="instagram" id="order_instagram" placeholder="instagram" value="<?= current($user)['instagram'] ?>">
+              <label for="order_instagram" class="form-label required"><?= current($user)['lang'] == 'RU' ? 'Инстаграм' : 'Instagram' ?></label>
+              <input type="text" required class="form-control" name="instagram" id="order_instagram" placeholder="instagram" value="<?= current($user)['instagram'] ?>">
 
-            <!-- Modal trigger button -->
-            <a href="" type="link" class="link-secondary small link-sm" data-bs-toggle="modal" data-bs-target="#insta-help">
-              <?= current($user)['lang'] == 'RU' ? 'у меня нет инстаграма' : 'I don\'t have instagram' ?>
-            </a>
-          </div>
+              <!-- Modal trigger button -->
+              <a href="" type="link" class="link-secondary small link-sm" data-bs-toggle="modal" data-bs-target="#insta-help">
+                <?= current($user)['lang'] == 'RU' ? 'у меня нет инстаграма' : 'I don\'t have instagram' ?>
+              </a>
+            </div>
 
             <!-- Country -->
             <div class="mb-3 country">
@@ -1750,7 +1752,7 @@
 
   <!-- Optional: Place to the bottom of scripts -->
   <script>
-    const myModal = new bootstrap.Modal(document.getElementById('insta-help'), options)
+    const myModal = new bootstrap.Modal(document.getElementById('insta-help'))
   </script>
 
   <script>
@@ -1774,10 +1776,9 @@
       }
     }
   </script>
-
   <?php
   if (isset($script)) {
-    if (is_string($script)) echo $script;
+    echo $script;
   }
   ?>
 </body>
