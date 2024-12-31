@@ -92,7 +92,7 @@
                 <? endif ?>
                 <!-- Количество товара -->
                 <? if (current($user)['lang'] == 'RU') : ?>
-                  <span class="col-12 text-sm-center small mb-3 text-<?= $property_node['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock">
+                  <span class="col-12 text-center small mb-3 text-<?= $property_node['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock">
                     <?
                     if ($property_node['quantity'] > 0)
                       echo (string)$property_node['quantity'] . " шт. в наличии";
@@ -101,7 +101,7 @@
                     ?>
                   </span>
                 <? else : ?>
-                  <span class="col-12 text-sm-center small mb-3 text-<?= $property_node['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock">
+                  <span class="col-12 text-center small mb-3 text-<?= $property_node['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock">
                     <?
                     if ($property_node['quantity'] > 0) {
                       echo $property_node['quantity'];
