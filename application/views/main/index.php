@@ -1,5 +1,6 @@
 <!-- Хэдер -->
 <header class="index_header">
+  <!-- Карусель -->
   <? require("parts/index_carousel.php"); ?>
 
 </header>
@@ -9,7 +10,7 @@
   </div>
 </a>
 <!-- Приветствие -->
-<div class="container-lg greeting ">
+<div class="container-lg greeting d-none d-md-block">
   <div class="row">
     <div class="col text-center text-black px-2">
       <div class=" px-3 pt-3 pb-4">

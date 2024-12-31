@@ -29,10 +29,14 @@
     $lgh: 25em;
     $xlh: 25em;
     $xxlh: 35em;
+    // aspect-ratio: 1/1;
 
     .splide {
+      // aspect-ratio: 1/1;
+
       .splide__slide {
-        height: $xsh;
+
+        height: 100vw;
 
         @media (min-width: $sm) {
           height: $smh;
@@ -58,8 +62,9 @@
       .arrows_wrapper {
         height: 0px;
         position: relative;
-        top: math.div($xsh, 2);
-        top: calc(math.div($xsh, 2) - 8px);
+        // top: math.div($xsh, 2);
+        // top: calc(math.div($xsh, 2) - 8px);
+        top:50vw;
 
         @media (min-width: $sm) {
           top: math.div($smh, 2);
@@ -108,7 +113,9 @@
     }
 
     .photo_scroller {
+
       .splide__slide {
+
         img {
           height: 100%;
         }
@@ -124,8 +131,8 @@
 
       &,
       .container-lg>.row {
-        height: $xsh;
-        top: -$xsh;
+        height: 100vw;
+        top: -100vw;
 
         h1 {
           font-size: 2em;

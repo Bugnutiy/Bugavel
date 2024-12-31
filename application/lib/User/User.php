@@ -32,25 +32,40 @@ class User
   protected function getUserIp()
   {
     $keys = [
+      'REMOTE_ADDR',
       'HTTP_CLIENT_IP',
+      'HTTP_COMING_FROM',
+      'HTTP_FORWARDED',
+      'HTTP_FORWARDED_FOR',
+      'HTTP_FROM',
+      'HTTP_PROXY_CONNECTION',
+      'HTTP_VIA',
+      'HTTP_X_COMING_FROM',
+      'HTTP_X_FORWARDED',
       'HTTP_X_FORWARDED_FOR',
-      'REMOTE_ADDR'
+      'HTTP_X_REAL_IP',
     ];
+
     foreach ($keys as $key) {
+
       if (!empty($_SERVER[$key])) {
         // ddd($key);
-        // dd($_SERVER[$key]);
+        // ddd($_SERVER[$key]);
         $addr = explode(',', $_SERVER[$key]);
         $ip = trim(end($addr));
         if (filter_var($ip, FILTER_VALIDATE_IP)) {
+          // dd($ip);
           return $ip;
         }
       }
     }
+    // dd('ret');
+    return '127.0.0.1';
   }
   protected function Session()
   {
-    // dd(1);
+    $ru_countries = require 'application/config/ru_countries.php';
+
     $exist = $this->db->fetAll("SELECT * FROM `users` WHERE `session_id`= :session_id", ['session_id' => session_id()]);
     if (empty($exist)) {
       ///////////////////////////////////////LANGS///////////////////////////////////////
@@ -73,31 +88,37 @@ class User
           arsort($langs, SORT_NUMERIC);
         }
       }
-      // foreach ($langs as $lang => $val) {
-      //   if (strpos($lang, 'ru') === 0) {
-      //     dd('ru');
-      //   } else {
-      //     dd('en');
-      //   } 
-      // }
+      // ddd($langs);
+      $ulang = 'EN';
+      foreach ($langs as $lang => $val) {
+        // ddd($lang);
+        if (strpos($lang, 'ru') === 0) {
+          $ulang = 'RU';
+        }
+      }
+      // dd($ulang);
       ////////////////////////////////////////////////////////////////////
       $ip = $this->getUserIp();
       if ($ip == '127.0.0.1')
-        $ip = '31.131.75.123';
-      dd($_SERVER);
+        $ip = '2.79.32.33';
+      // dd($_SERVER);
       //$ip = $_SERVER['REMOTE_ADDR'];
       $geo = json_decode(@file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip), 1);
-      dd($geo);
+      // dd($geo);
       if (empty($geo))
         $geo['geoplugin_countryCode'] = 'EN';
       // ddd($geo);
       $country = $geo['geoplugin_countryCode'];
+      // ddd($country);
+      if (in_array($country, $ru_countries)) {
+        $country = 'RU';
+      }
       // dd($country);
       $q = "INSERT INTO `users` (`session_id`, `country`, `lang`, `role`) VALUES (:sess, :country, :lang, :roles)";
       $this->db->query($q, [
         ':sess' => session_id(),
         ':country' => $country,
-        ':lang' => $country,
+        ':lang' => $ulang,
         ':roles' => 'guest',
       ]);
       $exist = $this->db->fetAll("SELECT * FROM `users` WHERE `session_id`= :sess", ['sess' => session_id()]);

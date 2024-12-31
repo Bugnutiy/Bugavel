@@ -40,9 +40,10 @@
                     <section class="splide goods_slider" aria-label="Splide Basic HTML Example">
                       <div class="splide__track">
                         <div class="splide__list">
-                          <? $images = json_decode($product_node['images_min'], 1);
+                          <a href="/catalog/product?id=<?= $product_id ?>" class="splide__slide"><img src="/<?= current(json_decode($product_node['images_min'], 1)) ?>" alt="<?= current($user)['lang'] !== 'RU' ? "Product image" : "Изображение товара" ?>"></a>
+                          <? $images = json_decode($product_node['images'], 1);
                           foreach ($images as $src) : ?>
-                            <a href="/catalog/product?id=<?= $product_id ?>" class="splide__slide"><img src="/<?= $src ?>" alt="<?= current($user)['lang'] !== 'RU' ? "Product image" : "Изображение товара" ?>"></a>
+                            <a href="/catalog/product?id=<?= $product_id ?>" class="splide__slide"><img data-splide-lazy="/<?= $src ?>" alt="<?= current($user)['lang'] !== 'RU' ? "Product image" : "Изображение товара" ?>" loading="lazy"></a>
                           <? endforeach ?>
                         </div>
                       </div>
@@ -332,7 +333,7 @@ ob_start()
       autoplay: 0,
       // interval: 4000,
       interval: 3000,
-
+      lazyLoad: true,
       speed: 300,
       // autoScroll: false,
     }).mount();
