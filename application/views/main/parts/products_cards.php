@@ -37,13 +37,13 @@
               <div class="cards">
                 <div class="slider_wrapper_1">
                   <div class="slider_wrapper_2">
-                    <section class="splide goods_slider" aria-label="Splide Basic HTML Example">
+                    <section class="splide goods_slider" aria-label="Carousel">
                       <div class="splide__track">
                         <div class="splide__list">
                           <a href="/catalog/product?id=<?= $product_id ?>" class="splide__slide"><img src="/<?= current(json_decode($product_node['images_min'], 1)) ?>" alt="<?= current($user)['lang'] !== 'RU' ? "Product image" : "Изображение товара" ?>"></a>
                           <? $images = json_decode($product_node['images'], 1);
                           foreach ($images as $src) : ?>
-                            <a href="/catalog/product?id=<?= $product_id ?>" class="splide__slide"><img data-splide-lazy="/<?= $src ?>" alt="<?= current($user)['lang'] !== 'RU' ? "Product image" : "Изображение товара" ?>" loading="lazy"></a>
+                            <a href="/catalog/product?id=<?= $product_id ?>" class="splide__slide"><img  src="data:image/png;base64,..." data-splide-lazy="/<?= $src ?>" alt="<?= current($user)['lang'] !== 'RU' ? "Product image" : "Изображение товара" ?>" loading="lazy"></a>
                           <? endforeach ?>
                         </div>
                       </div>

@@ -57,6 +57,8 @@
             <div class="splide__track">
               <ul class="splide__list">
                 <li class="splide__slide"><img src="/public/images/Carousel/2/IMG_20241215_162234.jpg" alt="BJJJEANS"></li>
+                <li class="splide__slide"><img src="/public/images/Carousel/2/IMG_20241215_162234.jpg" alt="BJJJEANS"></li>
+                <li class="splide__slide"><img src="/public/images/Carousel/2/IMG_20241215_162234.jpg" alt="BJJJEANS"></li>
               </ul>
             </div>
           </section>
@@ -94,9 +96,9 @@
           <section class="splide photo_scroller">
             <div class="splide__track">
               <ul class="splide__list">
-                <li class="splide__slide"><img src="/public/images/Carousel/3/IMG_20241215_162421.jpg" alt="Gorilla image"></li>
-                <li class="splide__slide"><img src="/public/images/Carousel/3/IMG_20241215_162421.jpg" alt="Gorilla image"></li>
-                <li class="splide__slide"><img src="/public/images/Carousel/3/IMG_20241215_162421.jpg" alt="Gorilla image"></li>
+                <li class="splide__slide"><img src="/public/images/Carousel/3/IMG_20241215_162421.jpg" alt="image"></li>
+                <li class="splide__slide"><img src="/public/images/Carousel/3/IMG_20241215_162421.jpg" alt="image"></li>
+                <li class="splide__slide"><img src="/public/images/Carousel/3/IMG_20241215_162421.jpg" alt="image"></li>
               </ul>
             </div>
           </section>
@@ -180,7 +182,7 @@ ob_start() ?>
       autoplay: 1,
       // interval: 4000,
       interval: 6000,
-
+      lazyLoad: true,
       speed: 300,
       // autoScroll: false,
     }).mount();

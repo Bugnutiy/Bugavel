@@ -32,7 +32,7 @@
                 <? $images = json_decode(current($product)['images']);
                 foreach ($images as $src) : ?>
                   <li class="splide__slide">
-                    <img data-splide-lazy="/<?= $src ?>" alt="">
+                    <img src="data:image/png;base64,..." data-splide-lazy="/<?= $src ?>" alt="image">
                   </li>
                 <? endforeach ?>
               </ul>
