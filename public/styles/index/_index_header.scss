@@ -36,7 +36,7 @@
 
       .splide__slide {
 
-        height: 100vw;
+        height: 70vh;
 
         @media (min-width: $sm) {
           height: $smh;
@@ -131,8 +131,8 @@
 
       &,
       .container-lg>.row {
-        height: 100vw;
-        top: -100vw;
+        height: 70vh;
+        top: -70vh;
 
         h1 {
           font-size: 2em;

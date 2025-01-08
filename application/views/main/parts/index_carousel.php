@@ -158,7 +158,7 @@ ob_start() ?>
       gap: 0,
       pagination: false,
       autoScroll: {
-        speed: 0.2,
+        speed: 0.5,
       },
     }).mount(window.splide.Extensions);
   }
