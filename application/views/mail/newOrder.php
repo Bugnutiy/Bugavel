@@ -11,7 +11,7 @@
 
   <? endif ?>
   <p>После обработки, с вами свяжется оператор для уточнения метода и стоимости доставки</p>
-  <p>Если вы получили это письмо по ошибке, пожалуйста, напишите об этом на prolovi007@mail.ru, или ответьте на это письмо</p>
+  <p>Если вы получили это письмо по ошибке, пожалуйста, напишите об этом на prolovi.ru@mail.ru, или ответьте на это письмо</p>
 
 <? else : ?>
   <h1>Hello, <?= $user['first_name'] ?> <?= $user['second_name'] ?>!</h1>
@@ -26,5 +26,5 @@
 
   <? endif ?>
   <p>After processing, the operator will contact you to clarify the method and cost of delivery</p>
-  <p>If you received this email by mistake, please write about it at prolovi007@mail.ru, or reply to this email</p>
+  <p>If you received this email by mistake, please write about it at prolovi.ru@mail.ru, or reply to this email</p>
 <? endif ?>

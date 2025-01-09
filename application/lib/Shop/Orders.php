@@ -51,7 +51,7 @@ class Orders extends General
   public function MakeOrder($user, $order = [])
   {
     $cart = $this->db->fetAllLite('cart', '`user_id` = :user_id', ['user_id' => key($user)]);
-    ddd($order); //todo
+    //ddd($order); //todo
     $properties = $this->db->fetAllLite('products_properties');
     $products = $this->db->fetAllLite('products');
     if (empty($cart)) {
