@@ -24,7 +24,7 @@
   <script src="/public/scripts/splide.min.js"></script>
   <script src="/public/scripts/splide.autoscroll.min.js"></script>
 
-  <link rel="stylesheet" href="/public/styles/style.css?v=1.4" />
+  <link rel="stylesheet" href="/public/styles/style.css?v=1.5" />
 
   <!-- <title>LeoSmagin: Главная страница</title> -->
   <title><?= current($user)['lang'] == 'RU' ? $title['RU'] : $title['EN'] ?></title>
@@ -72,23 +72,25 @@
     <!-- index_menu -->
     <div class="index_menu">
       <div class="container-lg">
-        <nav class="navbar navbar-expand-sm navbar-dark">
-          <div class="navbar-brand" href="#">
+        <nav class="navbar navbar-expand-sm navbar-dark row">
+          <div class="navbar-brand col-3 col-sm-auto" href="#">
             <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= current($user)['lang'] !== 'RU' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">protattoo@mail.ru</span>
             <a href="https://www.youtube.com/channel/UCQj6BKoXZV6Adebuh4o9jOg/featured" class="bi bi-youtube"></a>
             <a href="https://www.instagram.com/hybridtattoomachine" class="bi bi-instagram"></a>
             <a href="mailto:protattoo@mail.ru" class="bi bi-envelope"></a>
           </div>
 
-          <div class="small_logo d-md-none">
+          <div class="small_logo col d-md-none">
             <a class="logo mx-sm-3" href="/"></a>
           </div>
+          <div class="col-3 col-sm-auto text-end">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="IndexToggleMenu">
+              <span class="bi bi-list"></span>
+            </button>
+          </div>
 
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="IndexToggleMenu">
-            <span class="bi bi-list"></span>
-          </button>
 
-          <div class="collapse navbar-collapse" id="mainMenu">
+          <div class="collapse navbar-collapse col-auto" id="mainMenu">
             <ul class="navbar-nav me-auto">
               <li class="nav-item <?= $route['action'] == 'index' ? 'active' : '' ?>">
                 <a class="nav-link <?= $route['action'] == 'index' ? 'disabled' : '' ?>" href="/"><?= current($user)['lang'] !== 'RU' ? 'Home' : 'Главная' ?></a>
@@ -108,19 +110,51 @@
             <div class="right d-flex my-2 my-lg-0 row justify-content-md-end justify-content-between">
               <div class="dropdown cart col-auto">
                 <a class="bi bi-cart" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <div class="quantity">9+</div>
+                  <? if (!empty($cart_total)) : ?>
+                    <div class="quantity"><?= $cart_total['total_quantity'] > 9 ? '9+' : $cart_total['total_quantity'] ?></div>
+                  <? endif ?>
                 </a>
 
-                <div class="dropdown-menu dropdown-menu-dark dropdown-menu-sm-end" aria-labelledby="triggerId">
-                  <a class="dropdown-item" href="#">Action</a>
-
-                  <h6 class="dropdown-header"><?= current($user)['lang'] == 'RU' ? 'Корзина' : 'Your cart' ?></h6>
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item disabled" href="#">Disabled action</a>
-                  <h6 class="dropdown-header">Section header</h6>
-                  <a class="dropdown-item" href="#">Action</a>
+                <div class="dropdown-menu dropdown-menu-dark dropdown-menu-sm-end" aria-labelledby="triggerId" style="min-width: 15em">
+                  <span class="dropdown-item-text small"><?= current($user)['lang'] == 'RU' ? 'Корзина' : 'Your cart' ?></span>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">After divider action</a>
+                  <? if (!empty($cart_total)) : ?>
+                    <div class="dropdown-item-text">
+                      <div class="row justify-content-between">
+                        <div class="col-auto">
+                          <?= current($user)['lang'] == 'RU' ? 'Итого:' : 'Total:' ?>
+                        </div>
+                        <div class="col-auto"><b>
+                            <? //= current($user)['country'] == 'RU' ? number_format($cart_total['total_price'], 0, ',', ' ') . ' руб.' : '$' . number_format($cart_total['total_price_en']) 
+                            ?></b>
+                          <?= current($user)['country'] == 'RU' ? number_format($cart_total['total_price'], 0, ',', ' ') . ' руб.' : number_format($cart_total['total_price_en']) . ' eur' ?></b>
+
+                        </div>
+                      </div>
+                      <div class="row justify-content-between">
+                        <div class="col-auto">
+                          <small><?= current($user)['lang'] == 'RU' ? 'Товаров:' : 'Total items:' ?></small>
+                        </div>
+                        <div class="col-auto"><small>
+                            <b><?= $cart_total['total_quantity'] . (current($user)['lang'] == 'RU' ? ' шт.' : ' pcs') ?></b>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-center pb-2" href="#" data-bs-toggle="modal" data-bs-target="#indexOrderModal">
+                      <?= current($user)['lang'] == 'RU' ? 'Оформить заказ' : 'Place an order' ?>
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-center pb-2" href="/cart">
+                      <?= current($user)['lang'] == 'RU' ? 'Открыть корзину' : 'Open cart' ?>
+                    </a>
+                  <? else : ?>
+                    <div class="dropdown-item-text">
+                      <?= current($user)['lang'] == 'RU' ? 'Ваша корзина пуста' : 'Your cart is empty' ?>
+                    </div>
+                  <? endif ?>
                 </div>
               </div>
 
@@ -159,23 +193,25 @@
     <div class="fixed-top">
       <div class="index_menu">
         <div class="container-lg">
-          <nav class="navbar navbar-expand-sm navbar-dark">
-            <div class="navbar-brand" href="#">
+          <nav class="navbar navbar-expand-sm navbar-dark row">
+            <div class="navbar-brand col-3 col-sm-auto" href="#">
               <span class="mail d-none d-md-inline-block me-sm-4" data-bs-toggle="tooltip" id="menu-mail" data-bs-placement="bottom" title="<?= current($user)['lang'] !== 'RU' ? 'Copy to clipboard' : 'Скопировать' ?>" onclick="emailCpy(this)">protattoo@mail.ru</span>
               <a href="https://www.youtube.com/channel/UCQj6BKoXZV6Adebuh4o9jOg/featured" class="bi bi-youtube"></a>
               <a href="https://www.instagram.com/hybridtattoomachine" class="bi bi-instagram"></a>
               <a href="mailto:protattoo@mail.ru" class="bi bi-envelope"></a>
             </div>
 
-            <div class="small_logo d-md-none">
+            <div class="small_logo col d-md-none">
               <a class="logo mx-sm-3" href="/"></a>
             </div>
+            <div class="col-3 col-sm-auto text-end">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="IndexToggleMenu">
+                <span class="bi bi-list"></span>
+              </button>
+            </div>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="IndexToggleMenu">
-              <span class="bi bi-list"></span>
-            </button>
 
-            <div class="collapse navbar-collapse" id="mainMenu">
+            <div class="collapse navbar-collapse col-auto" id="mainMenu">
               <ul class="navbar-nav me-auto">
                 <li class="nav-item <?= $route['action'] == 'index' ? 'active' : '' ?>">
                   <a class="nav-link <?= $route['action'] == 'index' ? 'disabled' : '' ?>" href="/"><?= current($user)['lang'] !== 'RU' ? 'Home' : 'Главная' ?></a>
