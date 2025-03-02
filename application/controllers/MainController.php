@@ -154,42 +154,10 @@ class MainController extends Controller
 
   public function indexAction()
   {
-    $err = [];
-    $vars = [];
-    if (!empty($_GET['addcart'])) {
-      // dd($this->model->shop->cart->addToCart($_GET['addcart'], $this->model->user->getUserId()));
-
-      $err = array_merge($err, $this->model->shop->cart->addToCart($_GET['addcart'], $this->model->user->getUserId()));
-      if (empty($err)) {
-        $cart_total = $this->model->shop->cart->getTotal($this->model->user->getUserId());
-        $alert[] = [
-          'type' => 'success',
-          'RU' => 'Товар добавлен <a href="/cart" class="alert-link">в корзину</a>',
-          'EN' => 'The product has been added to <a href="/cart" class="alert-link">the cart</a>'
-        ];
-        $vars = array_merge($vars, [
-          'alerts' => $alert,
-          'cart_total' => $cart_total,
-        ]);
-      } else $vars = array_merge($vars, ['err' => $err]);
-    }
-    $products = [];
-    if (!empty($_GET['category'])) {
-      $products = $this->model->shop->products->getByCategoryId($_GET['category']);
-    } else {
-      $products = $this->model->shop->products->getAll();
-    }
-    foreach ($products as $product_id => $value) {
-      $products[$product_id]['properties'] = $this->model->shop->products_properties->getByProductId($product_id, 0);
-    }
-    // dd($products);
-    $vars = array_merge($vars, [
-      'products' => $products,
-    ]);
     //debug($_SESSION);
     // dd("Dd");
     // dd($this->view->layout);
-    $this->view->render(['RU' => 'Strong & Bold - Главная страница', 'EN' => 'Strong & Bold - Main page'],$vars);
+    $this->view->render(['RU' => 'LeoSmagin - Главная страница', 'EN' => 'LeoSmagin - Main page']);
   }
 
   public function catalogAction()
@@ -230,15 +198,15 @@ class MainController extends Controller
     // dd($_SERVER);
     if (!empty($_GET['category'])) {
       $this->view->render([
-        'RU' => 'Strong & Bold - ' . (empty($this->view->default_vars['categories'][$_GET['category']]) ? 'Каталог' : $this->view->default_vars['categories'][$_GET['category']]['name']),
+        'RU' => 'LeoSmagin - ' . (empty($this->view->default_vars['categories'][$_GET['category']]) ? 'Каталог' : $this->view->default_vars['categories'][$_GET['category']]['name']),
 
-        'EN' => 'Strong & Bold - ' . (empty($this->view->default_vars['categories'][$_GET['category']]) ? 'Catalog' : $this->view->default_vars['categories'][$_GET['category']]['name_en'])
+        'EN' => 'LeoSmagin - ' . (empty($this->view->default_vars['categories'][$_GET['category']]) ? 'Catalog' : $this->view->default_vars['categories'][$_GET['category']]['name_en'])
       ], $vars);
       exit;
     } else {
       $this->view->render([
-        'RU' => 'Strong & Bold - Все товары',
-        'EN' => 'Strong & Bold - All goods',
+        'RU' => 'LeoSmagin - Все товары',
+        'EN' => 'LeoSmagin - All goods',
       ], $vars);
     }
   }
@@ -292,8 +260,8 @@ class MainController extends Controller
 
     $this->view->render(
       [
-        'RU' => 'Strong & Bold - ' . current($product)['name'],
-        'EN' => 'Strong & Bold - ' . current($product)['name_en']
+        'RU' => 'LeoSmagin - ' . current($product)['name'],
+        'EN' => 'LeoSmagin - ' . current($product)['name_en']
       ],
       $vars
     );
@@ -331,8 +299,8 @@ class MainController extends Controller
     // dd($vars);
     $this->view->render(
       [
-        'RU' => 'Ваша корзина - Strong & Bold.com',
-        'EN' => 'Your Shopping Cart - Strong & Bold.com'
+        'RU' => 'Ваша корзина - LeoSmagin.com',
+        'EN' => 'Your Shopping Cart - LeoSmagin.com'
       ],
       $vars
     );
@@ -342,29 +310,29 @@ class MainController extends Controller
   public function policyAction()
   {
     $this->view->render([
-      'RU' => 'Политика конфиденциальности и правила использования - Strong & Bold.com',
-      'EN' => 'Privacy Policy and Terms of Use - Strong & Bold.com',
+      'RU' => 'Политика конфиденциальности и правила использования - LeoSmagin.com',
+      'EN' => 'Privacy Policy and Terms of Use - LeoSmagin.com',
     ], []);
   }
   public function paymentAction()
   {
     $this->view->render([
-      'RU' => 'Способы оплаты - Strong & Bold.com',
-      'EN' => 'Payment methods - Strong & Bold.com',
+      'RU' => 'Способы оплаты - LeoSmagin.com',
+      'EN' => 'Payment methods - LeoSmagin.com',
     ], []);
   }
   public function contactsAction()
   {
     $this->view->render([
-      'RU' => 'Контакты - Strong & Bold.com',
-      'EN' => 'Contacts - Strong & Bold.com',
+      'RU' => 'Контакты - LeoSmagin.com',
+      'EN' => 'Contacts - LeoSmagin.com',
     ], []);
   }
   public function deliveryAction()
   {
     $this->view->render([
-      'RU' => 'Доставка - Strong & Bold.com',
-      'EN' => 'Delivery - Strong & Bold.com',
+      'RU' => 'Доставка - LeoSmagin.com',
+      'EN' => 'Delivery - LeoSmagin.com',
     ], []);
   }
 }

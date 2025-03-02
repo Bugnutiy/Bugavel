@@ -8,7 +8,7 @@
   }
 
   .navbar-brand {
-    margin-right: 0;
+
     .mail,
     .bi {
       color: $c-light-main;
@@ -24,15 +24,11 @@
   .small_logo {
     .logo {
       display: block;
-      height: 50px;
+      height: 25px;
       width: 140px;
       background-color: $c-light-main;
       mask-repeat: no-repeat;
-      mask-size: contain;
-      mask-position: center;
-      mask-image: url("/public/images/logo/str\ bld.png");
-      margin-left: auto;
-      margin-right: auto;
+      mask-image: url("/public/images/logo/diesel_bee_curves.svg");
     }
   }
 
@@ -68,13 +64,11 @@
     .bi {
       transition: color .2s ease-in-out;
       color: $c-light-main;
-
-      &:hover {
+      &:hover{
         color: $c-white;
       }
     }
-
-    .cart {
+    .cart{
       .quantity {
         font-size: 0.6em;
         position: absolute;
@@ -93,7 +87,6 @@
         left: 1.8em;
       }
     }
-
     .language {
       // font-size: 1.5em;
       text-align: center;

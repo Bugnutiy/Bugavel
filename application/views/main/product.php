@@ -7,32 +7,30 @@
       <div class="row mb-3 my-md-3">
 
         <!-- Photos -->
-        <div class="col-12 col-sm-4 g-0 images col-md-4 ">
+        <div class="col-12 g-0 images col-md-4 ">
           <?
-          // $property_flag = [];
-          // // $product[key($product)]['quantity'] = 0;
-          // foreach ($properties as $property_id => $property_node) {
-          //   if (current($user)['country'] == 'RU') {
-          //     if ($property_node['quantity'] && $property_node['price']) {
-          //       $property_flag[$property_id] = $property_node;
-          //       $product[key($product)]['quantity'] += $property_node['quantity'];
-          //     }
-          //   } else {
-          //     if ($property_node['quantity'] && $property_node['price_en']) {
-          //       $property_flag[$property_id] = $property_node;
-          //       $product[key($product)]['quantity'] += $property_node['quantity'];
-          //     }
-          //   }
-          // } 
-          $property_node = current($properties);
-          ?>
+          $property_flag = [];
+          // $product[key($product)]['quantity'] = 0;
+          foreach ($properties as $property_id => $property_node) {
+            if (current($user)['country'] == 'RU') {
+              if ($property_node['quantity'] && $property_node['price']) {
+                $property_flag[$property_id] = $property_node;
+                $product[key($product)]['quantity'] += $property_node['quantity'];
+              }
+            } else {
+              if ($property_node['quantity'] && $property_node['price_en']) {
+                $property_flag[$property_id] = $property_node;
+                $product[key($product)]['quantity'] += $property_node['quantity'];
+              }
+            }
+          } ?>
           <section id="main-carousel" class="splide product_photo" aria-label="Gallery">
             <div class="splide__track">
               <ul class="splide__list">
                 <? $images = json_decode(current($product)['images']);
                 foreach ($images as $src) : ?>
                   <li class="splide__slide">
-                    <img src="data:image/png;base64,..." data-splide-lazy="/<?= $src ?>" alt="image">
+                    <img src="/<?= $src ?>" alt="">
                   </li>
                 <? endforeach ?>
               </ul>
@@ -40,7 +38,7 @@
           </section>
         </div>
         <!-- Body -->
-        <div class="col-12 col-sm-8 col-md-8">
+        <div class="col-12 col-md-8">
           <div class="row">
             <!-- Header -->
             <div class="col-12 text-center name">
@@ -49,96 +47,62 @@
 
             <!-- Price -->
             <div class="col-12 mb-3 price">
-              <? if ((current($user)['lang'] == 'RU' && $property_node['price_prev']) || (current($user)['lang'] == 'EN' && $property_node['price_prev_en'])): ?>
-                <div class="row justify-content-between justify-content-sm-around">
-                <? else: ?>
-                  <div class="row justify-content-center justify-content-sm-around">
-                <? endif ?>
 
-                <? if (current($user)['country'] == 'RU') : ?>
-                  <!-- RU PRICE -->
-                  <? if ($property_node['price_prev']) : ?>
-                    <p class="mb-0 old col-auto">
-                      <span class="old_wrapper"><span class="old-price" id="old-price"><?= $property_node['price_prev'] ?></span> руб.</span>
-                      <? if ($property_node['sale']) : ?>
-                        <span class="sale"><span id="sale-val">-<?= $property_node['sale'] ?>%</span></span>
-                      <? endif ?>
-                    </p>
-                  <? endif ?>
-
-                  <p class="mb-0 col-auto">
-                    <? //dd($property_node) 
-                    ?>
-                    <span id="product_price" class="<?= $property_node['price_prev'] ? 'new_price' : '' ?>"><?= number_format(($property_node)['price'], 0, ',', ' ') ?> руб. </span>
-
-                  </p>
-                  <!-- EN PRICE -->
-                <? else : ?>
-                  <? if ($property_node['price_prev_en']) : ?>
-                    <p class="mb-0 old col-auto">
-                      <span class="old_wrapper"><span class="old-price" id="old-price"><?= $property_node['price_prev_en'] ?></span> eur.</span>
-                      <? if ($property_node['sale_en']) : ?>
-                        <span class="sale"><span id="sale-val">-<?= $property_node['sale_en'] ?>%</span></span>
-                      <? endif ?>
-                    </p>
-                  <? endif ?>
-
-                  <p class="mb-0 col-auto">
-                    <? //dd($property_node) 
-                    ?>
-                    <span id="product_price" class="<?= $property_node['price_prev_en'] ? 'new_price' : '' ?>"><?= number_format(($property_node)['price_en'], 0, ',', ' ') ?> eur. </span>
-
+              <? if (current($user)['country'] == 'RU') : ?>
+                <? if ($property_node['price_prev']) : ?>
+                  <p class="mb-0 old">
+                    <span class="old-price"><span><?= $property_node['price_prev'] ?> руб.</span></span>
+                    <? if ($property_node['sale']) : ?>
+                      <span class="sale"><span>-<?= $property_node['sale'] ?>%</span></span>
+                    <? endif ?>
                   </p>
                 <? endif ?>
-                <!-- Количество товара -->
-                <? if (current($user)['lang'] == 'RU') : ?>
-                  <span class="col-12 text-center small mb-3 text-<?= $property_node['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock">
-                    <?
-                    if ($property_node['quantity'] > 0)
-                      echo (string)$property_node['quantity'] . " шт. в наличии";
-                    else
-                      echo "товар закончился";
-                    ?>
-                  </span>
-                <? else : ?>
-                  <span class="col-12 text-center small mb-3 text-<?= $property_node['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock">
-                    <?
-                    if ($property_node['quantity'] > 0) {
-                      echo $property_node['quantity'];
-                      if ($property_node['quantity'] > 1)
-                        echo " pieces in stock";
-                      else
-                        echo " piece in stock";
-                    } else
-                      echo "out of stock";
-                    // ? ((string)$property_node['quantity'] . $property_node['quantity'] > 1 ? 'pieces in stock' : 'piece in stock') : "out of stock"
-                    ?>
-                  </span>
+
+                <p class="mb-0">
+                  <span id="product_price" class="<?= $property_node['price_prev'] ? 'new_price' : '' ?>"><?= number_format(current($property_node)['price'], 0, ',', ' ') ?> руб. </span>
+
+                </p>
+              <? else : ?>
+                <? if ($property_node['price_prev_en']) : ?>
+                  <p class="mb-0 old">
+                    <span class="old-price"><span><?= $property_node['price_prev_en'] ?> eur.</span></span>
+                    <? if ($property_node['sale_en']) : ?>
+                      <span class="sale"><span>-<?= $property_node['sale_en'] ?>%</span></span>
+                    <? endif ?>
+                  </p>
                 <? endif ?>
-                </div>
+
+                <p class="mb-0">
+                  <span id="product_price" class="<?= $property_node['price_prev'] ? 'new_price' : '' ?>"><?= number_format(current($property_node)['price'], 0, ',', ' ') ?> руб. </span>
+
+                </p>
+              <? endif ?>
+
+              <? if (current($user)['lang'] == 'RU') : ?>
+                <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock"><?= current($product)['quantity'] ? current($product)['quantity'] + " шт. в наличии" : "товар закончился" ?></span>
+              <? else : ?>
+                <span class="small mb-3 text-<?= current($product)['quantity'] > 0 ? 'success' : 'danger' ?>" id="stock"><?= current($product)['quantity'] ? (current($product)['quantity'] + current($product)['quantity'] > 1 ? 'pieces in stock' : 'piece in stock') : "out of stock" ?> </span>
+              <? endif ?>
+
             </div>
 
             <!-- Options -->
-            <? //dd(key($property_node)) 
-            ?>
-            <? if (count($properties) > 1) : ?>
+            <? if (count($property_flag) > 1) : ?>
               <div class="col-12 mb-3 options">
                 <?
                 $properties_by_classname = [];
-                foreach ($properties as $id => $node) {
+                foreach ($property_flag as $id => $node) {
                   $properties_by_classname[$node['classname_en']][$id] = $node;
                 }
                 foreach ($properties_by_classname as $class_nodes) : ?>
-                  <div class="row justify-content-center">
+                  <div class="row">
                     <div class="col-auto pe-0 align-self-center"><b><?= current($user)['lang'] == 'RU' ? current($class_nodes)['classname'] : current($class_nodes)['classname_en'] ?></b></div>
-                    <div class="col-auto">
+                    <div class="col">
 
                       <select class="form-select text-truncate" aria-label="Select option" name='property_id' required onchange="select(value)">
                         <option hidden value="" selected disabled><?= current($user)['lang'] == 'RU' ? 'Выбрать' : 'Select' ?></option>
-                        <?
-                        $i = 0;
-                        foreach ($class_nodes as $property_id => $node) : ?>
-                          <option value="<?= $property_id ?>" <?= $node['quantity'] < 1 ? 'disabled' : '' ?> <?= $i++ == 0 ? 'selected' : '' ?>>
+                        <? foreach ($class_nodes as $property_id => $node) : ?>
+                          <option value="<?= $property_id ?>" <?= $node['quantity'] < 1 ? 'disabled' : '' ?>>
                             <?= current($user)['lang'] == 'RU' ? $node['name'] : $node['name_en'] ?>
                             <?= $node['quantity'] < 1 ? (current($user)['lang'] == 'RU' ? '(Нет в наличии)' : '(Out of stock)') : '' ?>
                           </option>
@@ -151,7 +115,7 @@
 
               </div>
             <? else : ?>
-              <input type="hidden" name="property_id" value="<?= key($properties) ?>">
+              <input type="hidden" name="property_id" value="<?= key($property_flag) ?>">
             <? endif ?>
             <!-- Количество -->
             <div class="col-12 quantity">
@@ -159,7 +123,7 @@
                 <div class="col-auto ">
                   <div class="input-group ">
                     <a class="px-1 btn left btn-outline-secondary input-group-text" onclick="decrease()">-</a>
-                    <input type="number" min="1" max="<?= $property_node['quantity'] ?>" step="1" class="form-control px-0 text-center" value="1" id="quantity_field" name="quantity" onchange="cost(this)">
+                    <input type="number" min="1" max="1" step="1" class="form-control px-0 text-center" value="1" id="quantity_field" name="quantity" onchange="cost(this)">
                     <a class=" px-1 btn right btn-outline-secondary input-group-text" onclick="increase()">+</a>
                   </div>
                 </div>
@@ -189,7 +153,8 @@
 </div>
 
 <? ob_start() ?>
-
+<script src="/public/scripts/splide.min.js"></script>
+<script src="/public/scripts/splide.autoscroll.min.js"></script>
 <script>
   var Sliders = document.getElementsByClassName('product_photo')
   // dd(Scrollers);
@@ -210,7 +175,7 @@
       // autoplay: 1,
       // interval: 4000,
       interval: 3000,
-      lazyLoad: true,
+
       speed: 300,
       // autoScroll: false,
     }).mount();
@@ -219,8 +184,8 @@
 
 <script>
   var properties = <?= json_encode($properties) ?>;
-  var selected = <?= key($properties); ?>;
-  var stock = <?= $property_node['quantity'] ?>;
+  var selected = 0;
+  var stock = 0;
 
   function select(property_id) {
     if (property_id == 0) {
@@ -246,7 +211,6 @@
     selected = Object.keys(properties)[0];
     // dd(selected);
     select(selected);
-    // dd(stock);
   }
 
   function cost(input) {
@@ -259,16 +223,17 @@
       priceElem.innerHTML = price.format(0, 3, '<?= current($user)['country'] == 'RU' ? ' ' : ',' ?>');
     }
   }
-  quantElem = document.getElementById('quantity_field');
 
   function increase() {
-    if (Number(quantElem.value) < Number(stock))
+    quantElem = document.getElementById('quantity_field');
+    if (quantElem.value < stock)
       quantElem.value++;
     cost(quantElem);
   }
 
   function decrease() {
-    if (Number(quantElem.value) > 1) {
+    quantElem = document.getElementById('quantity_field');
+    if (quantElem.value > 1) {
       quantElem.value--;
       cost(quantElem);
     }
@@ -280,10 +245,4 @@
     return new bootstrap.Alert(element)
   })
 </script> -->
-<?
-$script;
-if (empty($script))
-  $script = ob_get_clean();
-else
-  $script = $script . ob_get_clean();
-?>
+<? $script = ob_get_clean() ?>

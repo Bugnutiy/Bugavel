@@ -1,7 +1,136 @@
 <!-- Хэдер -->
 <header class="index_header">
-  <!-- Карусель -->
-  <? require("parts/index_carousel.php"); ?>
+  <div class="carousel">
+    <section class="splide index_wrapper_slider">
+      <div class="container-lg  arrows_wrapper">
+        <div class="splide__arrows">
+
+        </div>
+      </div>
+      <div class="splide__track">
+        <ul class="splide__list">
+
+          <li class="splide__slide">
+            <section class="splide photo_scroller">
+              <div class="splide__track">
+                <ul class="splide__list">
+                  <li class="splide__slide"><img src="/public/images/Carousel/DIESEL BEE/BEE1.jpg" alt="DIESEL BEE"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/DIESEL BEE/IMG_20220823_180003-c.jpg" alt="DIESEL BEE"></li>
+                </ul>
+              </div>
+            </section>
+            <div class="content">
+              <div class="container-lg">
+                <div class="row row-1 justify-content-center align-content-center ">
+
+                  <div class="col-12 col-sm-auto text-center">
+                    <div class="row justify-content-center">
+                      <div class="col-auto">
+                        <h1><?= current($user)['lang'] !== 'RU' ? 'NEW' : 'НОВИНКА' ?><span class="d-sm-none">!</span></h1>
+                      </div>
+                      <div class="col-auto col-sm-auto text-center">
+                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'HYBRID' : 'ГИБРИД' ?> V3</h1>
+                      </div>
+                      <div class="col-12 text-center">
+                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'DIESEL BEE' : 'DIESEL BEE' ?>&#8221;</h3>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 text-center mt-1">
+                    <a href="/catalog?category=10" class="btn btn-outline-light">
+                      <?= current($user)['lang'] !== 'RU' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="splide__slide">
+            <section class="splide photo_scroller">
+              <div class="splide__track">
+                <ul class="splide__list">
+                  <li class="splide__slide"><img src="/public/images/Carousel/ROTARY/ROTARY.jpg" alt="ROTARY"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/ROTARY/DSC02498_DxO 05 min.jpg" alt="ROTARY"></li>
+                  <li class="splide__slide"><img src="/public/images/Carousel/ROTARY/IMG_20220823_180330 min.jpg" alt="ROTARY"></li>
+                </ul>
+              </div>
+            </section>
+            <div class="content">
+              <div class="container-lg">
+                <div class="row justify-content-center align-content-center">
+
+                  <div class="col-12 col-sm-auto text-center">
+                    <div class="row justify-content-center">
+                      <div class="col-auto">
+                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'AGELESS' : 'НЕСТАРЕЮЩАЯ' ?></h1>
+                      </div>
+                      <div class="col-auto col-sm-auto text-center">
+                        <h1 class="my-0"><?= current($user)['lang'] !== 'RU' ? 'CLASSIC' : 'КЛАССИКА' ?></h1>
+                      </div>
+                      <div class="col-12 text-center">
+                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'DIRECT DRIVE' : 'DIRECT DRIVE' ?>&#8221;</h3>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 text-center mt-1">
+                    <a href="/catalog?category=4" class="btn btn-outline-light">
+                      <?= current($user)['lang'] !== 'RU' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
+                    </a>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </li>
+
+          <li class="splide__slide">
+            <section class="splide photo_scroller">
+              <div class="splide__track">
+                <ul class="splide__list">
+                  <li class="splide__slide"><img src="/public/images/Carousel/GORILLA/GORILLA1.jpg" alt="Gorilla image">
+                  <li class="splide__slide"><img src="/public/images/Carousel/GORILLA/IMG_20220221_234913_175-C.jpg" alt="Gorilla image">
+                  </li>
+                </ul>
+              </div>
+            </section>
+            <div class="content">
+              <div class="container-lg">
+                <div class="row justify-content-center align-content-center">
+
+                  <div class="col-12 col-sm-auto text-center">
+                    <div class="row justify-content-center">
+                      <div class="col-auto">
+                        <h1> <?= current($user)['lang'] !== 'RU' ? 'THE MOST POWERFULL' : 'МАКСИМАЛЬНАЯ МОЩНОСТЬ' ?></h1>
+                      </div>
+                      <div class="col-auto col-sm-auto text-center">
+                      </div>
+                      <div class="col-12 text-center">
+                        <h3>&#8222;<?= current($user)['lang'] !== 'RU' ? 'GORILLA' : 'GORILLA' ?>&#8221;</h3>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 text-center mt-1">
+                    <a href="/catalog?category=6" class="btn btn-outline-light">
+                      <?= current($user)['lang'] !== 'RU' ? 'LEARN MORE' : 'УЗНАТЬ БОЛЬШЕ' ?>
+                    </a>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
 
 </header>
 <a class="big_logo row align-items-center" href="/">
@@ -10,18 +139,16 @@
   </div>
 </a>
 <!-- Приветствие -->
-<div class="container-lg greeting d-none d-md-block">
+<div class="container-lg greeting ">
   <div class="row">
     <div class="col text-center text-black px-2">
       <div class=" px-3 pt-3 pb-4">
         <? if (current($user)['lang'] == "RU") : ?>
-          <p>Добро пожаловать! Меня зовут Смагин Леонид, и я рад Вам представить проект STRONG & BOLD , созданный в сотрудничестве с талантливой татуировщицей Ефименко Натальей. Мы объединили мое стремление к качеству и стильному дизайну с творческой энергией Натальи, чтобы создать нечто уникальное — коллекцию оригинальных джинсов из Selvedge denim.</p>
-          <p>Каждая пара джинсов — это не просто одежда, а произведение искусства. Используя премиальный деним и вдохновляясь суб-культурой, мы сделали джинсы, которые выделяются индивидуальностью, долговечностью и вниманием к деталям. </p>
-          <p class="mb-0">Эти джинсы — для тех, кто ценит эксклюзивность и готов подчеркнуть свой стиль.</p>
+          <p>Рад приветствовать вас на моем сайте! Я занимаюсь производством тату машинок с 2003 года. За 19 лет упорной работы я создавал классические аппараты, разработал и запатентовал уникальные гибридные машинки (HYBRID V1, GORILLA HYBRID V2 , HYBRAY, DIESEL BEE HYBRID V3). Благодаря сочетанию хлесткого удара индукции и стабильности ротора, они дают по настоящему наилучшую работу в нанесении татуировки на сегодняшний день.</p>
+          <p class="mb-0">Лучшие мастера России и мира уже выбрали нас как приоритетное оборудование для себя. Я люблю создавать по настоящему особенные и уникальные машинки для татуировки.</p>
         <? else : ?>
-          <p>Welcome! My name is Leonid Smagin, and I am glad to present you the project STRONG & BOLD, created in collaboration with the talented tattoo artist Natalia Efimenko. We combined my passion for quality and stylish design with Natalia's creative energy to create something unique — a collection of original jeans from Selvedge denim.</p>
-          <p>Each pair of jeans is not just a piece of clothing, but a work of art. Using premium denim and inspired by sub-culture, we have created jeans that stand out for their individuality, durability and attention to detail. </p>
-          <p class="mb-0">These jeans are for those who value exclusivity and are ready to emphasize their style.</p>
+          <p>I am glad to welcome you to my website! I have been producing tattoo machines since 2003 . For 19 years of hard work, I have created classic machines, developed and patented unique hybrid machines (HYBRID V1, GORILLA HYBRID V2, HYBRAY, DIESEL BEE HYBRID V3). Due to the combination of the whiplash of induction and the stability of the rotor, they provide the truly best work in tattooing for today.</p>
+          <p class="mb-0">The best masters of Russia and the world have already chosen us as a priority equipment for themselves. I love to create truly special and unique tattoo machines.</p>
         <? endif ?>
 
       </div>
@@ -30,14 +157,14 @@
 </div>
 
 <!-- Категории -->
-<!-- <div class="index_categories mt-3">
+<div class="index_categories mt-3">
   <div class="container-lg">
     <div class="header row align-items-center justify-content-center">
       <h1 class="col-auto my-2"><?= current($user)['lang'] !== 'RU' ? 'Categories' : 'Категории' ?></h1>
     </div>
 
     <div class="cards row">
-      <? $categories = array_reverse($categories, 1) ?>
+      <? $categories = array_reverse($categories,1) ?>
       <? foreach ($categories as $cat_id => $cat_node) : ?>
         <div class="card col-6 col-sm-3 col-md-3 col-xl-2 mb-4">
           <div class="text-center">
@@ -51,10 +178,65 @@
 
     </div>
   </div>
-</div> -->
+</div>
 
-
-<? require("parts/products_cards.php") ?>
 
 
 <!-- Скрипты -->
+<?php ob_start() ?>
+<script src="/public/scripts/splide.min.js"></script>
+<script src="/public/scripts/splide.autoscroll.min.js"></script>
+<script>
+  var Scrollers = document.getElementsByClassName("photo_scroller");
+  // dd(Scrollers);
+  for (var i = 0; i < Scrollers.length; i++) {
+    // dd("Scrollers:")
+    // dd(Scrollers[i]);
+    new Splide(Scrollers[i], {
+      arrows: false,
+      type: "loop",
+      // height: "30em",
+      rewind: true,
+      // rewindByDrag: 0,
+      drag: false,
+      perPage: true,
+      // width: "100%",
+      padding: 0,
+      gap: 0,
+      pagination: false,
+      autoScroll: {
+        speed: 0.5,
+        pauseOnHover: 0,
+      },
+    }).mount(window.splide.Extensions);
+  }
+
+  var Sliders = document.getElementsByClassName('index_wrapper_slider')
+  // dd(Scrollers);
+  for (var i = 0; i < Sliders.length; i++) {
+    // dd('Sliders:');
+    // dd(Sliders[i]);
+    new Splide(Sliders[i], {
+      arrows: true,
+      type: "loop",
+      // height: "30em",
+      rewind: true,
+      // rewindByDrag: 0,
+      drag: true,
+      perPage: 1,
+      // width: "auto",
+      pagination: false,
+      // focus: 2,
+      autoplay: 1,
+      // interval: 4000,
+      interval: 6000,
+
+      speed: 300,
+      // autoScroll: false,
+    }).mount();
+  }
+
+  // Carous = document.getElementById("text_index_slider");
+  // console.log(Carous);
+</script>
+<?php $script = ob_get_clean(); ?>
