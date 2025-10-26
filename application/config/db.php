@@ -9,7 +9,7 @@ return [
 
 // return [
 // 	'host' => '127.0.0.1',
-// 	'name' => 'leosnew',
+// 	'name' => 'h902111921_leosnew',
 // 	'user' => 'root',
 // 	'password' => 'root',
 // 	'charset' => 'utf8mb4',//unicode_ci
